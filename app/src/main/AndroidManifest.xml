@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pagetoko"></activity>
+        <activity android:name=".info_toko"></activity>
+        <activity android:name=".review_toko" />
+        <activity android:name=".view_products" />
+        <activity android:name=".pagetoko" />
         <activity android:name=".lelang" />
         <activity android:name=".popup_event" />
         <activity android:name=".approve_toko" />
