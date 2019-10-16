@@ -18,7 +18,7 @@ public class TransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction);
 
         btnBack = findViewById(R.id.buttonBack);
-       // btnBeli = findViewById(R.id.buttonBeli);
+        btnBeli = findViewById(R.id.buttonBeli);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
