@@ -1,9 +1,7 @@
 package com.example.easymarket;
 
-import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -23,7 +21,7 @@ public class ChatRoom extends AppCompatActivity {
 
         satu=findViewById(R.id.textView2);
         dua=findViewById(R.id.textView3);
-        tiga=findViewById(R.id.textView4);
+        tiga=findViewById(R.id.tvnamapemilik);
         send=findViewById(R.id.btnSend);
         pesan=findViewById(R.id.editText);
 

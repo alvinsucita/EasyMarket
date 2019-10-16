@@ -36,7 +36,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvpemilik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="167dp"

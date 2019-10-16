@@ -23,13 +23,13 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/ivpemilik"
                     android:layout_width="match_parent"
                     android:layout_height="174dp"
                     app:srcCompat="@android:drawable/btn_star_big_on" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tvnamapemilik"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:text="TextView" />

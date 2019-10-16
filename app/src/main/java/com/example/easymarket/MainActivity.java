@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         iv = findViewById(R.id.imageViewTes);
-        iv2 = findViewById(R.id.imageView2);
+        iv2 = findViewById(R.id.ivpemilik);
         iv3 = findViewById(R.id.imageView3);
         registerForContextMenu(iv);
         registerForContextMenu(iv2);

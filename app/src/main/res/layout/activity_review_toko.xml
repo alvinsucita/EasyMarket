@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#BAFF4007"
+    app:cardBackgroundColor="#BAFF4007"
     tools:context=".view_products">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -29,7 +32,7 @@
             android:layout_marginStart="21dp"
             android:layout_marginTop="6dp"
             android:layout_toEndOf="@+id/ivupic"
-            android:text="Nama User"
+            android:text="sumoBo"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         <TextView

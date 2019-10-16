@@ -8,7 +8,7 @@
     tools:context=".TransactionActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivtoko"
         android:layout_width="222dp"
         android:layout_height="180dp"
         android:layout_marginStart="92dp"
@@ -18,24 +18,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvnamatoko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="72dp"
         android:text="NAMA"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvpemilik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="152dp"
         android:text="ALAMAT"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <TextView
         android:id="@+id/textView3"
@@ -45,17 +45,17 @@
         android:layout_marginTop="236dp"
         android:text="PEMBAYARAN"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvnamapemilik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginTop="328dp"
         android:text="PENGIRIMAN"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <EditText
         android:id="@+id/editTextNama"
@@ -67,7 +67,7 @@
         android:hint="Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <EditText
         android:id="@+id/editTextAlamat"
@@ -79,7 +79,7 @@
         android:hint="Alamat"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <Spinner
         android:id="@+id/spinnerPembayaran"
@@ -88,7 +88,7 @@
         android:layout_marginTop="224dp"
         android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <Spinner
         android:id="@+id/spinnerPnegiriman"
@@ -97,7 +97,7 @@
         android:layout_marginTop="316dp"
         android:layout_marginEnd="36dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <Button
         android:id="@+id/buttonBeli"
@@ -107,7 +107,7 @@
         android:layout_marginTop="388dp"
         android:text="BELI"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
     <Button
         android:id="@+id/buttonBack"
@@ -117,6 +117,6 @@
         android:layout_marginTop="388dp"
         android:text="BACK."
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

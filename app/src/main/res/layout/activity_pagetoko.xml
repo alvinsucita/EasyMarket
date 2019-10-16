@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BAFF4007"
     tools:context=".pagetoko">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivtoko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
@@ -18,77 +19,84 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvnamatoko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
-        android:text="Nama Toko"
+        android:layout_marginEnd="88dp"
+        android:text="randommystery"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintStart_toEndOf="@+id/ivtoko"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="152dp"
-        android:layout_marginRight="152dp"
         android:text="Rating"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ivtoko"
+        app:layout_constraintTop_toBottomOf="@+id/tvnamatoko" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btnchat"
         android:layout_width="33dp"
         android:layout_height="30dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="160dp"
-        android:layout_marginRight="160dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ivtoko"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:srcCompat="@android:drawable/sym_action_chat" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnshare"
         android:layout_width="35dp"
         android:layout_height="30dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginRight="124dp"
+        android:layout_marginEnd="116dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btnchat"
+        app:layout_constraintTop_toTopOf="@+id/btnchat"
         app:srcCompat="@android:drawable/ic_menu_share" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/tabtoko"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko">
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabproduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabreview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Review" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Info" />
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="415dp"
-        android:layout_height="470dp"
+        android:id="@+id/rvtoko"
+        android:layout_width="411dp"
+        android:layout_height="479dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tabtoko" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

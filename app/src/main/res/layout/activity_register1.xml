@@ -115,7 +115,7 @@
         app:layout_constraintVertical_bias="0.8" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivtoko"
         android:layout_width="40dp"
         android:layout_height="15dp"
         android:layout_marginTop="7dp"
@@ -128,7 +128,7 @@
         app:srcCompat="@drawable/downpoint" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivpemilik"
         android:layout_width="40dp"
         android:layout_height="15dp"
         android:layout_marginBottom="50dp"
@@ -136,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.673"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko"
         app:layout_constraintVertical_bias="0.389"
         app:srcCompat="@drawable/downpoint" />
 
