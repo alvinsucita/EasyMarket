@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".approve_toko" />
+        <activity android:name=".EventPage"></activity>
+        <activity android:name=".ApproveToko" />
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
         <activity android:name=".Home">
@@ -25,14 +26,14 @@
         <activity android:name=".lelang" />
         <activity android:name=".Login" />
         <activity android:name=".Mock1" />
-        <activity android:name=".pagetoko"/>
-        <activity android:name=".popup_event" />
+        <activity android:name=".pagetoko" />
+        <activity android:name=".PopupEvent" />
         <activity android:name=".Register1" />
         <activity android:name=".Register2" />
         <activity android:name=".review_toko" />
         <activity android:name=".view_products" />
-        <activity android:name=".visit_stat" />
-        <activity android:name=".WishList"/>
+        <activity android:name=".VisitStat" />
+        <activity android:name=".WishList" />
     </application>
 
 </manifest>
