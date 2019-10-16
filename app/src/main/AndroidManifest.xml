@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EventPage"></activity>
+        <activity android:name=".TransactionActivity"></activity>
+        <activity android:name=".PreviewActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".EventPage" />
         <activity android:name=".ApproveToko" />
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
