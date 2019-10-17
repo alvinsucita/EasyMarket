@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class VisitStat extends AppCompatActivity {
+public class ManageUsers extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visit_stat);
+        setContentView(R.layout.activity_manage_user);
     }
 }
