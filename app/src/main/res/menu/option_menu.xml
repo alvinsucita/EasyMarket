@@ -6,6 +6,10 @@
         android:id="@+id/itemLogin"
         android:title="Login" />
     <item
+        android:id="@+id/itemEvent"
+        android:title="Event"
+        android:visible="false" />
+    <item
         android:id="@+id/itemWishlist"
         android:title="Wishlist"
         android:visible="false" />

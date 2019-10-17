@@ -50,14 +50,17 @@ public class Home extends AppCompatActivity {
         menu.getItem(1).setVisible(false);
         menu.getItem(2).setVisible(false);
         menu.getItem(3).setVisible(false);
+        menu.getItem(4).setVisible(false);
         Intent i = getIntent();
         if(i.hasExtra("passuser")){
             userlogin=i.getStringExtra("passuser");
-            menu.getItem(2).setTitle("Hello, "+userlogin+" !");
-            menu.getItem(2).setVisible(true);
+            menu.getItem(3).setTitle("Hello, "+userlogin+" !");
+            menu.getItem(3).setVisible(true);
+
             menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(true);
-            menu.getItem(3).setVisible(true);
+            menu.getItem(2).setVisible(true);
+            menu.getItem(4).setVisible(true);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -70,6 +73,10 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemLogout){
             Intent i = new Intent(Home.this,Home.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemEvent){
+            Intent i = new Intent(Home.this,EventPage.class);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemWishlist){
