@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TransactionActivity"></activity>
+        <activity android:name=".TambahBarang"></activity>
+        <activity android:name=".EditInfoToko" />
+        <activity android:name=".HomeToko" />
+        <activity android:name=".TempProduct" />
+        <activity android:name=".TransactionActivity" />
         <activity android:name=".PreviewActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".EventPage" />
@@ -34,7 +38,6 @@
         <activity android:name=".Register1" />
         <activity android:name=".Register2" />
         <activity android:name=".review_toko" />
-        <activity android:name=".view_products" />
         <activity android:name=".VisitStat" />
         <activity android:name=".WishList" />
     </application>

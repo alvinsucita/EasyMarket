@@ -12,17 +12,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class info_toko extends AppCompatActivity {
+public class TempProduct extends AppCompatActivity {
 
-    TextView deskripsi, alamat;
+    TextView pnama, pharga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_toko);
+        setContentView(R.layout.activity_temp_product);
 
-        deskripsi = findViewById(R.id.tvdeskripsi);
-        alamat = findViewById(R.id.tvalamat);
+        pnama = findViewById(R.id.tvpname);
+        pharga = findViewById(R.id.tvpprice);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -30,37 +30,23 @@ public class info_toko extends AppCompatActivity {
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setStroke(5, Color.BLACK);
         drawable.setCornerRadius(15);
-        deskripsi.setBackground(drawable);
-        alamat.setBackground(drawable);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home){
-            this.finish();
-        }
-        return super.onOptionsItemSelected(item);
+        pnama.setBackground(drawable);
+        pharga.setBackground(drawable);
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.temp_tabtoko,menu);
+        getMenuInflater().inflate(R.menu.temp_tabproduct,menu);
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.page){
-            Intent i = new Intent(info_toko.this,pagetoko.class);
-            startActivity(i);
-        }
-        else if(item.getItemId()==R.id.product){
-            Intent i = new Intent(info_toko.this,TempProduct.class);
+        if(item.getItemId()==R.id.detail){
+            Intent i = new Intent(TempProduct.this,InfoBarang.class);
             startActivity(i);
         }else if(item.getItemId() == R.id.review){
-            Intent i = new Intent(info_toko.this,review_toko.class);
+            Intent i = new Intent(TempProduct.this,pagetoko.class);
             startActivity(i);
         }
         return true;

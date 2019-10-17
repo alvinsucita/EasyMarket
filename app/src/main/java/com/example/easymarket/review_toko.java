@@ -19,6 +19,10 @@ public class review_toko extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_toko);
+
+        namauser = findViewById(R.id.tvuname);
+        review = findViewById(R.id.tvureview);
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         GradientDrawable drawable = new GradientDrawable();
@@ -26,7 +30,6 @@ public class review_toko extends AppCompatActivity {
         drawable.setStroke(5, Color.BLACK);
         drawable.setCornerRadius(15);
         namauser.setBackground(drawable);
-        ratinguser.setBackground(drawable);
         review.setBackground(drawable);
     }
 
@@ -47,8 +50,12 @@ public class review_toko extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.product){
+        if(item.getItemId()==R.id.page){
             Intent i = new Intent(review_toko.this,pagetoko.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.product){
+            Intent i = new Intent(review_toko.this,TempProduct.class);
             startActivity(i);
         }else if(item.getItemId() == R.id.info){
             Intent i = new Intent(review_toko.this,info_toko.class);

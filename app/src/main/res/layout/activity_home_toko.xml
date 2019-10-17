@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BAFF4007"
-    tools:context=".pagetoko">
+    tools:context=".HomeToko">
 
     <ImageView
-        android:id="@+id/ivtoko"
+        android:id="@+id/ivhtoko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
@@ -19,7 +19,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvnamatoko"
+        android:id="@+id/tvhnamatoko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
@@ -28,78 +28,57 @@
         android:text="randommystery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.777"
-        app:layout_constraintStart_toEndOf="@+id/ivtoko"
+        app:layout_constraintStart_toEndOf="@+id/ivhtoko"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="152dp"
-        android:text="Rating"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/ivtoko"
-        app:layout_constraintTop_toBottomOf="@+id/tvnamatoko" />
-
-    <ImageButton
-        android:id="@+id/btnchat"
-        android:layout_width="33dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="160dp"
-        android:onClick="movetoChat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/ivtoko"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:srcCompat="@android:drawable/sym_action_chat" />
-
-    <ImageButton
-        android:id="@+id/btnshare"
-        android:layout_width="35dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="116dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnchat"
-        app:layout_constraintTop_toTopOf="@+id/btnchat"
-        app:srcCompat="@android:drawable/ic_menu_share" />
-
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabtoko"
+        android:id="@+id/tabhtoko"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivtoko">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivhtoko">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabproduct"
+            android:id="@+id/tabhproduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabreview"
+            android:id="@+id/tabhreview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Review" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabinfo"
+            android:id="@+id/tabhinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Info" />
     </com.google.android.material.tabs.TabLayout>
 
+    <Button
+        android:id="@+id/btntambah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:onClick="tambah"
+        android:text="Tambah Barang"
+        app:layout_constraintStart_toStartOf="@+id/tabhtoko"
+        app:layout_constraintTop_toBottomOf="@+id/tabhtoko" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvtoko"
-        android:layout_width="411dp"
-        android:layout_height="479dp"
+        android:id="@+id/rvhtoko"
+        android:layout_width="match_parent"
+        android:layout_height="429dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabtoko" />
+        app:layout_constraintTop_toBottomOf="@+id/btntambah"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

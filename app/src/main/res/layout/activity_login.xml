@@ -56,18 +56,18 @@
         app:layout_constraintVertical_bias="0.179" />
 
     <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="110dp"
-        android:layout_height="58dp"
-        android:onClick="login"
-        android:text="Login"
+        android:id="@+id/btnLoginUser"
+        android:layout_width="109dp"
+        android:layout_height="75dp"
+        android:onClick="loginUser"
+        android:text="Login as User"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.673" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -83,4 +83,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLoginToko"
+        android:layout_width="109dp"
+        android:layout_height="75dp"
+        android:onClick="loginToko"
+        android:text="Login as Toko"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.824"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.673" />
 </androidx.constraintlayout.widget.ConstraintLayout>

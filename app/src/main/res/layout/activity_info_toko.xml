@@ -8,56 +8,47 @@
     tools:context=".info_toko">
 
     <TextView
-        android:id="@+id/tvpemilik"
+        android:id="@+id/tvshowdesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="31dp"
-        android:text="Pemilik Toko :"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-    <ImageView
-        android:id="@+id/ivpemilik"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvpemilik"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="23dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tvnamapemilik"
-        android:layout_width="118dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivpemilik"
-        android:layout_alignStart="@+id/ivpemilik"
-        android:layout_alignEnd="@+id/ivpemilik"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="5dp"
-        android:text="LukitoUchiha"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="43dp"
+        android:text="Deskripsi :"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/tvdeskripsi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvnamapemilik"
+        android:layout_below="@+id/tvshowdesc"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Deskripsi Toko" />
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="11dp"
+        android:background="@android:color/white"
+        android:text="Ada barang ada harga. PM aja gan." />
+
+    <TextView
+        android:id="@+id/tvshowalamat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvdeskripsi"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="49dp"
+        android:text="Alamat :"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/tvalamat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvdeskripsi"
+        android:layout_below="@+id/tvshowalamat"
         android:layout_alignParentStart="true"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="49dp"
-        android:text="Alamat Toko" />
+        android:layout_marginTop="14dp"
+        android:background="@android:color/white"
+        android:text="Jl. Dharmawangsa 136a" />
+
 </RelativeLayout>

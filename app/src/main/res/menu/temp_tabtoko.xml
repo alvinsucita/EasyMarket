@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/page"
+        android:title="Store Page" />
+    <item
         android:id="@+id/product"
         android:title="Product" />
     <item

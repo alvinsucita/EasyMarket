@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAFF4007"
+    tools:context=".TambahBarang">
+
+    <ImageView
+        android:id="@+id/ivaddpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="37dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnaddpic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnaddpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="72dp"
+        android:backgroundTint="@android:color/white"
+        android:text="Tambah Foto"
+        app:layout_constraintBottom_toTopOf="@+id/tvshowaddname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivaddpic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvshowaddname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="22dp"
+        android:text="Nama Produk :"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/etaddname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnaddpic" />
+
+    <EditText
+        android:id="@+id/etaddname"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="29dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="Nama Produk"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/tvshowaddprice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddname" />
+
+    <TextView
+        android:id="@+id/tvshowaddprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="18dp"
+        android:text="Harga Produk"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/etaddprice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etaddname" />
+
+    <EditText
+        android:id="@+id/etaddprice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="Rp "
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/tvshowadddesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddprice" />
+
+    <TextView
+        android:id="@+id/tvshowadddesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="14dp"
+        android:text="Deskripsi :"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/etadddesc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etaddprice" />
+
+    <EditText
+        android:id="@+id/etadddesc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="47dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/btnaddproduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowadddesc" />
+
+    <Button
+        android:id="@+id/btnaddproduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="92dp"
+        android:backgroundTint="@android:color/white"
+        android:text="Tambah Produk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etadddesc" />
+</androidx.constraintlayout.widget.ConstraintLayout>

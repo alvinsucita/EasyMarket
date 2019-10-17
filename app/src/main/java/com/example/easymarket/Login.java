@@ -1,7 +1,5 @@
 package com.example.easymarket;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,13 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Login extends AppCompatActivity {
     TextView toregis;
     EditText user,pass;
-    Button login;
+    Button loginuser, logintoko;
     String struser,strpass,userterdaftar="",passterdaftar="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +25,15 @@ public class Login extends AppCompatActivity {
         toregis=findViewById(R.id.tvToRegis);
         user=findViewById(R.id.etUsername);
         pass=findViewById(R.id.etPassword);
-        login=findViewById(R.id.btnLogin);
+        loginuser=findViewById(R.id.btnLoginUser);
+        logintoko=findViewById(R.id.btnLoginToko);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(Color.WHITE);
         drawable.setShape(GradientDrawable.OVAL);
         drawable.setStroke(5, Color.BLACK);
-        login.setBackground(drawable);
+        loginuser.setBackground(drawable);
+        logintoko.setBackground(drawable);
 
         GradientDrawable drawable2 = new GradientDrawable();
         drawable2.setColor(Color.WHITE);
@@ -77,7 +74,7 @@ public class Login extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void login(View view) {
+    public void loginUser(View view) {
         struser=user.getText().toString();
         strpass=pass.getText().toString();
         if(struser.equals("") || strpass.equals("")){
@@ -85,6 +82,22 @@ public class Login extends AppCompatActivity {
         }
         else if(struser.equals(userterdaftar) && strpass.equals(passterdaftar) || struser.equals("a") && strpass.equals("a")){
             Intent i = new Intent(Login.this,Home.class);
+            i.putExtra("passuser",userterdaftar);
+            startActivity(i);
+        }
+        else{
+            Toast.makeText(this, "Username atau Password Salah ! ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void loginToko(View view) {
+        struser=user.getText().toString();
+        strpass=pass.getText().toString();
+        if(struser.equals("") || strpass.equals("")){
+            Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
+        }
+        else if(struser.equals(userterdaftar) && strpass.equals(passterdaftar) || struser.equals("a") && strpass.equals("a")){
+            Intent i = new Intent(Login.this,HomeToko.class);
             i.putExtra("passuser",userterdaftar);
             startActivity(i);
         }
