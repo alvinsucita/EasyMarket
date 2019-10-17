@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ public class TambahBarang extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.WHITE);
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setStroke(5, Color.BLACK);
         drawable.setCornerRadius(15);
@@ -41,11 +43,17 @@ public class TambahBarang extends AppCompatActivity {
         prductdesc.setBackground(drawable);
 
         GradientDrawable drawable2 = new GradientDrawable();
+        drawable.setColor(Color.WHITE);
         drawable2.setShape(GradientDrawable.OVAL);
         drawable2.setStroke(5, Color.BLACK);
-        drawable2.setCornerRadius(15);
         addpic.setBackground(drawable2);
         addproduct.setBackground(drawable2);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.temp_usertoko,menu);
+        return true;
     }
 
     @Override
@@ -55,17 +63,6 @@ public class TambahBarang extends AppCompatActivity {
         if (id == android.R.id.home){
             this.finish();
         }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.temp_usertoko,menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.viewpage){
             Intent i = new Intent(TambahBarang.this,pagetoko.class);
             startActivity(i);
@@ -85,6 +82,7 @@ public class TambahBarang extends AppCompatActivity {
             Intent i = new Intent(TambahBarang.this, Login.class);
             startActivity(i);
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
+
 }

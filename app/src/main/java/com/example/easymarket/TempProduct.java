@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -26,7 +27,9 @@ public class TempProduct extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.WHITE);
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setStroke(5, Color.BLACK);
         drawable.setCornerRadius(15);
@@ -35,20 +38,26 @@ public class TempProduct extends AppCompatActivity {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.temp_tabproduct,menu);
+        return true;
     }
 
     @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home){
+            this.finish();
+        }
         if(item.getItemId()==R.id.detail){
             Intent i = new Intent(TempProduct.this,InfoBarang.class);
             startActivity(i);
-        }else if(item.getItemId() == R.id.review){
+        }else if(item.getItemId() == R.id.toko){
             Intent i = new Intent(TempProduct.this,pagetoko.class);
             startActivity(i);
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
+
 }

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,12 +26,20 @@ public class review_toko extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.WHITE);
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setStroke(5, Color.BLACK);
         drawable.setCornerRadius(15);
         namauser.setBackground(drawable);
         review.setBackground(drawable);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.temp_tabtoko,menu);
+        return true;
     }
 
     @Override
@@ -40,16 +49,6 @@ public class review_toko extends AppCompatActivity {
         if (id == android.R.id.home){
             this.finish();
         }
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.temp_tabtoko,menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.page){
             Intent i = new Intent(review_toko.this,pagetoko.class);
             startActivity(i);
@@ -61,6 +60,7 @@ public class review_toko extends AppCompatActivity {
             Intent i = new Intent(review_toko.this,info_toko.class);
             startActivity(i);
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
+
 }

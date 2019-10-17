@@ -17,7 +17,6 @@
         <activity android:name=".PreviewActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".EventPage" />
-        <activity android:name=".ApproveToko" />
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
         <activity android:name=".Home">
@@ -38,7 +37,7 @@
         <activity android:name=".Register1" />
         <activity android:name=".Register2" />
         <activity android:name=".review_toko" />
-        <activity android:name=".VisitStat" />
+        <activity android:name=".ManageUsers" />
         <activity android:name=".WishList" />
     </application>
 
