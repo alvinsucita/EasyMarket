@@ -21,7 +21,7 @@ public class ChatRoom extends AppCompatActivity {
 
         satu=findViewById(R.id.textView2);
         dua=findViewById(R.id.textView3);
-        tiga=findViewById(R.id.tvnamapemilik);
+        tiga=findViewById(R.id.textView4);
         send=findViewById(R.id.btnSend);
         pesan=findViewById(R.id.editText);
 
