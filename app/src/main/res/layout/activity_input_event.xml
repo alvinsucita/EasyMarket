@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAFF4007"
+    tools:context=".InputEvent">
+
+    <ImageView
+        android:id="@+id/ivaddpicevent"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09"
+        app:srcCompat="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnaddpicevent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="72dp"
+        android:backgroundTint="@android:color/white"
+        android:text="Tambah Image"
+        app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivaddpicevent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvshowaddeventname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="22dp"
+        android:text="Nama Event :"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/etaddeventname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnaddpicevent" />
+
+    <EditText
+        android:id="@+id/etaddeventname"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="29dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="Nama Event"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventtype"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventname" />
+
+    <TextView
+        android:id="@+id/tvshowaddeventtype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="18dp"
+        android:text="Harga Produk"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/etaddeventtype"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etaddeventname" />
+
+    <EditText
+        android:id="@+id/etaddeventtype"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="Tipe"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventdesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventtype" />
+
+    <TextView
+        android:id="@+id/tvshowaddeventdesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="14dp"
+        android:text="Deskripsi :"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/etaddeventdesc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etaddeventtype" />
+
+    <EditText
+        android:id="@+id/etaddeventdesc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="47dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Deskripsi"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/btnaddevent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventdesc" />
+
+    <Button
+        android:id="@+id/btnaddevent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="92dp"
+        android:backgroundTint="@android:color/white"
+        android:text="Tambah Produk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etaddeventdesc" />
+</androidx.constraintlayout.widget.ConstraintLayout>

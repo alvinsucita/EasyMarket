@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CekPerjalananActivity"/>
+        <activity android:name=".EditUser"></activity>
+        <activity android:name=".ManageTickets" />
+        <activity android:name=".InputEvent" />
+        <activity android:name=".CekPerjalananActivity" />
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
         <activity android:name=".EditInfoToko" />
@@ -41,4 +44,5 @@
         <activity android:name=".TransactionActivity" />
         <activity android:name=".WishList" />
     </application>
+
 </manifest>
