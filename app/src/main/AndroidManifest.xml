@@ -9,18 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CekPerjalananActivity"></activity>
-        <activity android:name=".RefundActivity" />
-        <activity android:name=".TambahBarang" />
-        <activity android:name=".EditInfoToko" />
-        <activity android:name=".HomeToko" />
-        <activity android:name=".TempProduct" />
-        <activity android:name=".TransactionActivity" />
-        <activity android:name=".PreviewActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".EventPage" />
+        <activity android:name=".CekPerjalananActivity"/>
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
+        <activity android:name=".EditInfoToko" />
+        <activity android:name=".EventPage" />
         <activity android:name=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,19 +21,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HomeToko" />
         <activity android:name=".info_toko" />
         <activity android:name=".InfoBarang" />
         <activity android:name=".InfoComment" />
         <activity android:name=".lelang" />
         <activity android:name=".Login" />
-        <activity android:name=".Mock1" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ManageUsers" />
         <activity android:name=".pagetoko" />
+        <activity android:name=".PreviewActivity" />
         <activity android:name=".PopupEvent" />
+        <activity android:name=".RefundActivity" />
         <activity android:name=".Register1" />
         <activity android:name=".Register2" />
         <activity android:name=".review_toko" />
-        <activity android:name=".ManageUsers" />
+        <activity android:name=".TambahBarang" />
+        <activity android:name=".TempProduct" />
+        <activity android:name=".TransactionActivity" />
         <activity android:name=".WishList" />
     </application>
-
 </manifest>
