@@ -37,7 +37,7 @@ public class EditInfoToko extends AppCompatActivity {
         alamat.setBackground(drawable);
 
         GradientDrawable drawable2 = new GradientDrawable();
-        drawable.setColor(Color.WHITE);
+        drawable2.setColor(Color.WHITE);
         drawable2.setShape(GradientDrawable.OVAL);
         drawable2.setStroke(5, Color.BLACK);
         edit.setBackground(drawable2);

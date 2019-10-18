@@ -42,7 +42,7 @@ public class HomeToko extends AppCompatActivity {
         GradientDrawable drawable2 = new GradientDrawable();
         drawable2.setColor(Color.WHITE);
         drawable2.setShape(GradientDrawable.OVAL);
-        drawable2.setStroke(5, Color.BLACK);
+        drawable2.setStroke(10, Color.BLACK);
         btambah.setBackground(drawable2);
     }
 

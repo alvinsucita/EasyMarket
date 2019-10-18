@@ -43,7 +43,7 @@ public class TambahBarang extends AppCompatActivity {
         prductdesc.setBackground(drawable);
 
         GradientDrawable drawable2 = new GradientDrawable();
-        drawable.setColor(Color.WHITE);
+        drawable2.setColor(Color.WHITE);
         drawable2.setShape(GradientDrawable.OVAL);
         drawable2.setStroke(5, Color.BLACK);
         addpic.setBackground(drawable2);

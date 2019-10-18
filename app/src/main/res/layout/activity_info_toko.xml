@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/tvdeskripsi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="286dp"
+        android:layout_height="38dp"
         android:layout_below="@+id/tvshowdesc"
         android:layout_alignParentStart="true"
         android:layout_marginStart="39dp"
@@ -42,8 +42,8 @@
 
     <TextView
         android:id="@+id/tvalamat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="282dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/tvshowalamat"
         android:layout_alignParentStart="true"
         android:layout_marginStart="40dp"
