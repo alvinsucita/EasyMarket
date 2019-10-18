@@ -70,7 +70,7 @@ public class InfoBarang extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id== android.R.id.home){
+        if(id == android.R.id.home){
             this.finish();
         }
         else if(id==R.id.menuComment){
@@ -82,6 +82,14 @@ public class InfoBarang extends AppCompatActivity {
 
     public void toChat(View view) {
         Intent i = new Intent(InfoBarang.this,ChatRoom.class);
+        startActivity(i);
+    }
+    public void preview(View view) {
+        Intent i = new Intent(InfoBarang.this,PreviewActivity.class);
+        startActivity(i);
+    }
+    public void beli(View view) {
+        Intent i = new Intent(InfoBarang.this,TransactionActivity.class);
         startActivity(i);
     }
 }

@@ -9,6 +9,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.TextureView;
 import android.view.View;
@@ -48,31 +49,26 @@ public class HomeToko extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.temp_usertoko,menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu,menu);
+
+        menu.getItem(0).setVisible(false);
+        menu.getItem(1).setVisible(false);
+        menu.getItem(2).setVisible(false);
+        menu.getItem(3).setVisible(false);
+        menu.getItem(4).setVisible(false);
+        menu.getItem(5).setVisible(true);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home){
-            this.finish();
+        if(item.getItemId()==R.id.itemLogin){
+            Intent i = new Intent(HomeToko.this,Login.class);
+            startActivity(i);
         }
-        if(item.getItemId()==R.id.viewpage){
-            Intent i = new Intent(HomeToko.this,pagetoko.class);
-            startActivity(i);
-        }else if(item.getItemId()==R.id.viewproduct){
-            Intent i = new Intent(HomeToko.this,TempProduct.class);
-            startActivity(i);
-        }else if(item.getItemId() == R.id.viewreview){
-            Intent i = new Intent(HomeToko.this,review_toko.class);
-            startActivity(i);
-        }else if(item.getItemId() == R.id.viewinfo) {
-            Intent i = new Intent(HomeToko.this, EditInfoToko.class);
-            startActivity(i);
-        }else if(item.getItemId() == R.id.logout) {
-            Intent i = new Intent(HomeToko.this, Login.class);
+        else if(item.getItemId()==R.id.itemLogout){
+            Intent i = new Intent(HomeToko.this,Home.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 
 public class RefundActivity extends AppCompatActivity {
@@ -22,6 +23,18 @@ public class RefundActivity extends AppCompatActivity {
         drawable.setStroke(5, Color.BLACK);
         drawable.setCornerRadius(15);
         btnSubmit.setBackground(drawable);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

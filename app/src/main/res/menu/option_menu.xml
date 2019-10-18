@@ -19,6 +19,10 @@
         android:visible="false"
         app:showAsAction="always" />
     <item
+        android:id="@+id/itemLelang"
+        android:title="Lelang"
+        android:visible="false"/>
+    <item
         android:id="@+id/itemLogout"
         android:title="Logout"
         android:visible="false" />

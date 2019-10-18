@@ -134,16 +134,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.28" />
 
-<!--    <View-->
-<!--        android:layout_width="@id/tvHargaBarang"-->
-<!--        android:layout_height="0.5dp"-->
-<!--        android:background="@android:color/darker_gray"-->
-<!--        app:layout_constraintHorizontal_bias="0.053"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/tvHargaBarang"-->
-<!--        app:layout_constraintEnd_toEndOf="@id/tvHargaBarang"-->
-<!--        app:layout_constraintStart_toStartOf="@id/tvHargaBarang"-->
-<!--        app:layout_constraintTop_toTopOf="@id/tvHargaBarang"-->
-<!--        app:layout_constraintVertical_bias=""/>-->
+<!--
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintBottom_toBottomOf="@id/tvHargaBarang"
+        app:layout_constraintEnd_toEndOf="@id/tvHargaBarang"
+        app:layout_constraintStart_toStartOf="@id/tvHargaBarang"
+        app:layout_constraintTop_toTopOf="@id/tvHargaBarang"
+        app:layout_constraintVertical_bias=""/>
+-->
 
     <ImageView
         android:id="@+id/ivFoto2"

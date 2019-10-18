@@ -39,6 +39,9 @@ public class Home extends AppCompatActivity {
         drawable2.setShape(GradientDrawable.OVAL);
         drawable2.setStroke(5, Color.BLACK);
         nextpage.setBackground(drawable2);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
@@ -51,6 +54,7 @@ public class Home extends AppCompatActivity {
         menu.getItem(2).setVisible(false);
         menu.getItem(3).setVisible(false);
         menu.getItem(4).setVisible(false);
+        menu.getItem(5).setVisible(false);
         Intent i = getIntent();
         if(i.hasExtra("passuser")){
             userlogin=i.getStringExtra("passuser");
@@ -61,6 +65,7 @@ public class Home extends AppCompatActivity {
             menu.getItem(1).setVisible(true);
             menu.getItem(2).setVisible(true);
             menu.getItem(4).setVisible(true);
+            menu.getItem(5).setVisible(true);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -81,6 +86,10 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemWishlist){
             Intent i = new Intent(Home.this,WishList.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemLelang){
+            Intent i = new Intent(Home.this,lelang.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

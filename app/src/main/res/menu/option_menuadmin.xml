@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/addevent"
+        android:title="Add Event" />
+    <item
+        android:id="@+id/manageuser"
+        android:title="Manage User" />
+    <item
+        android:id="@+id/managetickets"
+        android:title="Manage Tickets" />
+    <item
+        android:id="@+id/kedb"
+        android:title="Buka DB di Browser" />
+</menu>

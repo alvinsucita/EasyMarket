@@ -2,10 +2,12 @@ package com.example.easymarket;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -85,4 +87,9 @@ public class DetailAlamat extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void beli(View v){
+        Intent i = new Intent(DetailAlamat.this,TransactionActivity.class);
+        startActivity(i);
+    }
+
 }

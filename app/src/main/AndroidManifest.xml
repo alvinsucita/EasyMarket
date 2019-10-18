@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditUser"></activity>
+        <activity android:name=".HomeAdmin"></activity>
+        <activity android:name=".EditUser" />
         <activity android:name=".ManageTickets" />
         <activity android:name=".InputEvent" />
         <activity android:name=".CekPerjalananActivity" />
