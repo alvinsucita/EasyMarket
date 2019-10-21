@@ -55,6 +55,9 @@ public class Home extends AppCompatActivity {
         menu.getItem(3).setVisible(false);
         menu.getItem(4).setVisible(false);
         menu.getItem(5).setVisible(false);
+        menu.getItem(6).setVisible(false);
+        menu.getItem(7).setVisible(false);
+        menu.getItem(8).setVisible(false);
         Intent i = getIntent();
         if(i.hasExtra("passuser")){
             userlogin=i.getStringExtra("passuser");
@@ -66,6 +69,9 @@ public class Home extends AppCompatActivity {
             menu.getItem(2).setVisible(true);
             menu.getItem(4).setVisible(true);
             menu.getItem(5).setVisible(true);
+            menu.getItem(6).setVisible(true);
+            menu.getItem(7).setVisible(false);
+            menu.getItem(8).setVisible(true);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -90,6 +96,14 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemLelang){
             Intent i = new Intent(Home.this,lelang.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemCekPengiriman){
+            Intent i = new Intent(Home.this,CekPerjalananActivity.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemRefund){
+            Intent i = new Intent(Home.this,RefundActivity.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

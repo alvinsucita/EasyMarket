@@ -57,7 +57,10 @@ public class HomeToko extends AppCompatActivity {
         menu.getItem(2).setVisible(false);
         menu.getItem(3).setVisible(false);
         menu.getItem(4).setVisible(false);
-        menu.getItem(5).setVisible(true);
+        menu.getItem(5).setVisible(false);
+        menu.getItem(6).setVisible(false);
+        menu.getItem(7).setVisible(true);
+        menu.getItem(8).setVisible(true);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -69,6 +72,10 @@ public class HomeToko extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemLogout){
             Intent i = new Intent(HomeToko.this,Home.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemEditToko){
+            Intent i = new Intent(HomeToko.this,EditInfoToko.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

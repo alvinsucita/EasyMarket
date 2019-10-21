@@ -23,6 +23,18 @@
         android:title="Lelang"
         android:visible="false"/>
     <item
+        android:id="@+id/itemCekPengiriman"
+        android:visible="false"
+        android:title="Cek Pengiriman" />
+    <item
+        android:id="@+id/itemRefund"
+        android:visible="false"
+        android:title="Refund" />
+    <item
+        android:id="@+id/itemEditToko"
+        android:visible="false"
+        android:title="EditToko" />
+    <item
         android:id="@+id/itemLogout"
         android:title="Logout"
         android:visible="false" />
