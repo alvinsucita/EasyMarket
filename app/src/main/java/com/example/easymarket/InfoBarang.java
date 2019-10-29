@@ -13,10 +13,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class InfoBarang extends AppCompatActivity {
 
-    TextView isi;
+    TextView isi,namabarang,hargabarang,likes,dilihat,dibeli;
     Button share,chat,add;
+    ArrayList<User> listUser = new ArrayList<>();
+    ArrayList<Barang> listBarang = new ArrayList<>();
+    ArrayList<Toko> listToko = new ArrayList<>();
+    String aktif="0";
+    int indeks=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,17 @@ public class InfoBarang extends AppCompatActivity {
         add=findViewById(R.id.btnAddToWishlist);
         chat=findViewById(R.id.btnPersonalChat);
         isi=findViewById(R.id.tvIsiDeskripsi);
+        namabarang=findViewById(R.id.tvNamaBarang);
+        hargabarang=findViewById(R.id.tvHargaBarang);
+        likes=findViewById(R.id.tvLikesBarang);
+        dilihat=findViewById(R.id.tvBarangDilihat);
+        dibeli=findViewById(R.id.tvBarangTerjual);
+        isi.setText("");
+        namabarang.setText("");
+        hargabarang.setText("");
+        likes.setText("");
+        dilihat.setText("");
+        dibeli.setText("");
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,6 +72,22 @@ public class InfoBarang extends AppCompatActivity {
         drawable4.setStroke(5, Color.BLACK);
         drawable4.setCornerRadius(15);
         isi.setBackground(drawable4);
+
+        Intent i = getIntent();
+        listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
+        listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
+        listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+        indeks=i.getIntExtra("barangyangdipilih",indeks);
+        if(i.hasExtra("adayanglogin")){
+            aktif=i.getStringExtra("adayanglogin");
+        }
+        listBarang.get(indeks).dilihat+=1;
+        isi.setText(listBarang.get(indeks).deskripsi+"");
+        namabarang.setText(listBarang.get(indeks).namabarang+"");
+        hargabarang.setText("Rp. "+listBarang.get(indeks).harga+",00-");
+        likes.setText("Likes : "+listBarang.get(indeks).likes);
+        dilihat.setText("Dilihat : "+listBarang.get(indeks).dilihat+" kali");
+        dibeli.setText("Terjual : "+listBarang.get(indeks).dibeli+" kali");
     }
 
     @Override
@@ -71,7 +105,14 @@ public class InfoBarang extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == android.R.id.home){
-            this.finish();
+            Intent i = new Intent(InfoBarang.this,Home.class);
+            i.putExtra("listUser", listUser);
+            i.putExtra("listToko", listToko);
+            i.putExtra("listBarang", listBarang);
+            if(aktif.equals("1")){
+                i.putExtra("adayanglogin","1");
+            }
+            startActivity(i);
         }
         else if(id==R.id.menuComment){
             Intent i = new Intent(InfoBarang.this,InfoComment.class);
@@ -91,5 +132,10 @@ public class InfoBarang extends AppCompatActivity {
     public void beli(View view) {
         Intent i = new Intent(InfoBarang.this,TransactionActivity.class);
         startActivity(i);
+    }
+
+    public void tambahlikes(View view) {
+        listBarang.get(indeks).likes+=1;
+        likes.setText("Likes : "+listBarang.get(indeks).likes);
     }
 }

@@ -11,19 +11,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.util.ArrayList;
 
 public class Register2 extends AppCompatActivity {
-
     Button register;
-    EditText username,email,password,conpassword;
-    String strusername,stremail,strpassword,strconpassword;
+    EditText email,password,conpassword;
+    String stremail,strpassword,strconpassword;
+    ArrayList<User> listUser = new ArrayList<>();
+    ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<Barang> listBarang = new ArrayList<>();
+    String tiperegister="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
         register=findViewById(R.id.btnRegister);
 
-        username=findViewById(R.id.etUsername);
         email=findViewById(R.id.etEmail);
         password=findViewById(R.id.etPassword);
         conpassword=findViewById(R.id.etKonfirmasiPassword);
@@ -33,13 +36,6 @@ public class Register2 extends AppCompatActivity {
         drawable.setShape(GradientDrawable.OVAL);
         drawable.setStroke(5, Color.BLACK);
         register.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setColor(Color.WHITE);
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setStroke(5, Color.BLACK);
-        drawable2.setCornerRadius(15);
-        username.setBackground(drawable2);
 
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setColor(Color.WHITE);
@@ -62,17 +58,23 @@ public class Register2 extends AppCompatActivity {
         drawable5.setCornerRadius(15);
         conpassword.setBackground(drawable5);
 
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Intent i = getIntent();
+        if(i.hasExtra("listUser")){
+            listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
+            listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
+            listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+            tiperegister=i.getStringExtra("tiperegister");
+        }
     }
 
     public void register(View view) {
-        strusername=username.getText().toString();
         stremail=email.getText().toString();
         strpassword=password.getText().toString();
         strconpassword=conpassword.getText().toString();
-        if(strusername.equals("") || stremail.equals("")|| strpassword.equals("") || strconpassword.equals("")){
+        if(stremail.equals("")|| strpassword.equals("") || strconpassword.equals("")){
             Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -81,8 +83,35 @@ public class Register2 extends AppCompatActivity {
             }
             else{
                 Intent i = new Intent(Register2.this,Login.class);
-                i.putExtra("passuser",strusername);
-                i.putExtra("passpass",strpassword);
+                if(tiperegister.equals("toko")){
+                    for (int j = 0; j < listToko.size(); j++) {
+                        if(email.getText().toString().equals(listToko.get(j).email)) {
+                            Toast.makeText(this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                        else if(!email.getText().toString().equals(listToko.get(j).email) && j==listToko.size()-1){
+                            listToko.get(listToko.size()-1).email=stremail;
+                            listToko.get(listToko.size()-1).password=strpassword;
+                            break;
+                        }
+                    }
+                }
+                else if(tiperegister.equals("user")) {
+                    for (int j = 0; j < listUser.size(); j++) {
+                        if(email.getText().toString().equals(listUser.get(j).email)) {
+                            Toast.makeText(this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                        else if(!email.getText().toString().equals(listUser.get(j).email) && j==listUser.size()-1){
+                            listUser.get(listUser.size()-1).email=stremail;
+                            listUser.get(listUser.size()-1).password=strpassword;
+                            break;
+                        }
+                    }
+                }
+                i.putExtra("listUser",listUser);
+                i.putExtra("listToko",listToko);
+                i.putExtra("listBarang", listBarang);
                 startActivity(i);
             }
         }
@@ -92,7 +121,21 @@ public class Register2 extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id== android.R.id.home){
-            this.finish();
+            Intent i= new Intent(Register2.this,Register1.class);
+            if(tiperegister.equals("toko")){
+                listToko.remove(listToko.size()-1);
+                i.putExtra("listUser",listUser);
+                i.putExtra("listToko",listToko);
+                i.putExtra("listBarang", listBarang);
+                startActivity(i);
+            }
+            else if(tiperegister.equals("user")){
+                listUser.remove(listUser.size()-1);
+                i.putExtra("listUser",listUser);
+                i.putExtra("listToko",listToko);
+                i.putExtra("listBarang", listBarang);
+                startActivity(i);
+            }
         }
         return super.onOptionsItemSelected(item);
     }

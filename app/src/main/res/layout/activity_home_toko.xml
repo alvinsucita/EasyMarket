@@ -8,15 +8,15 @@
     tools:context=".HomeToko">
 
     <ImageView
-        android:id="@+id/ivhtoko"
+        android:id="@+id/ivtoko"
         android:layout_width="120dp"
         android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073"
+        app:layout_constraintVertical_bias="0.026"
         app:srcCompat="@android:color/white" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_marginTop="68dp"
         android:background="@android:color/white"
         android:text="randommystery"
-        app:layout_constraintStart_toEndOf="@+id/ivhtoko"
+        app:layout_constraintStart_toEndOf="@+id/ivtoko"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivhtoko">
+        app:layout_constraintTop_toBottomOf="@+id/ivtoko">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabhproduct"

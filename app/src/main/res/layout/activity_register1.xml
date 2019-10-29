@@ -46,6 +46,7 @@
         android:hint="Nama"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,7 +113,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.877" />
 
     <ImageView
         android:id="@+id/ivtoko"
@@ -139,5 +140,38 @@
         app:layout_constraintTop_toBottomOf="@+id/ivtoko"
         app:layout_constraintVertical_bias="0.389"
         app:srcCompat="@drawable/downpoint" />
+
+    <RadioGroup
+        android:id="@+id/jenisuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spDaerahAsal"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RadioButton
+            android:id="@+id/rbToko"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
+            android:onClick="pilihtoko"
+            android:paddingRight="10dp"
+            android:text="Toko"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbUser"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:onClick="pilihuser"
+            android:text="User"
+            android:textSize="16sp" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
