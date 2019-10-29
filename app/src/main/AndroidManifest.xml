@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeAdmin"></activity>
+        <activity android:name=".MasterKas"></activity>
+        <activity android:name=".MasterChangelog" />
+        <activity android:name=".MasterLelang" />
+        <activity android:name=".MasterTrans" />
+        <activity android:name=".HomeAdmin" />
         <activity android:name=".EditUser" />
         <activity android:name=".ManageTickets" />
         <activity android:name=".InputEvent" />

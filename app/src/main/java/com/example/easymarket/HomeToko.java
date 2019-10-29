@@ -85,6 +85,5 @@ public class HomeToko extends AppCompatActivity {
         Intent i = new Intent(HomeToko.this,TambahBarang.class);
         startActivity(i);
     }
-
-
 }
+
