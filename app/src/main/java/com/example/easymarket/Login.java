@@ -91,6 +91,10 @@ public class Login extends AppCompatActivity {
         if(stremail.equals("") || strpass.equals("")){
             Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
         }
+        else if(stremail.equals("admin") || strpass.equals("admin")){
+            Intent a = new Intent(Login.this, HomeAdmin.class);
+            startActivity(a);
+        }
         else{
             for (int i = 0; i < listUser.size(); i++) {
                 if(stremail.equals(listUser.get(i).email)&& strpass.equals(listUser.get(i).password)){
