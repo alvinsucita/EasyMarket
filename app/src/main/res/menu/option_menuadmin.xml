@@ -6,12 +6,21 @@
         android:id="@+id/addevent"
         android:title="Add Event" />
     <item
+        android:id="@+id/changelog"
+        android:title="Add Changelog" />
+    <item
         android:id="@+id/manageuser"
         android:title="Manage User" />
     <item
         android:id="@+id/managetickets"
         android:title="Manage Tickets" />
     <item
-        android:id="@+id/kedb"
-        android:title="Buka DB di Browser" />
+        android:id="@+id/managelelang"
+        android:title="Manage Lelang" />
+    <item
+        android:id="@+id/managetrans"
+        android:title="Manage Transaksi" />
+    <item
+        android:id="@+id/managekas"
+        android:title="Manage Kas" />
 </menu>

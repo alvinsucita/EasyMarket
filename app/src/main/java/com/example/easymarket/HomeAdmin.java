@@ -15,8 +15,6 @@ public class HomeAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -32,6 +30,10 @@ public class HomeAdmin extends AppCompatActivity {
             Intent i = new Intent(HomeAdmin.this,InputEvent.class);
             startActivity(i);
         }
+        else if(item.getItemId()==R.id.changelog){
+            Intent i = new Intent(HomeAdmin.this,MasterChangelog.class);
+            startActivity(i);
+        }
         else if(item.getItemId()==R.id.manageuser){
             Intent i = new Intent(HomeAdmin.this,ManageUsers.class);
             startActivity(i);
@@ -40,7 +42,17 @@ public class HomeAdmin extends AppCompatActivity {
             Intent i = new Intent(HomeAdmin.this,ManageTickets.class);
             startActivity(i);
         }
-        else if(item.getItemId()==R.id.kedb){
+        else if(item.getItemId()==R.id.managelelang){
+            Intent i = new Intent(HomeAdmin.this,MasterLelang.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.managetrans){
+            Intent i = new Intent(HomeAdmin.this,MasterTrans.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.managekas){
+            Intent i = new Intent(HomeAdmin.this,MasterKas.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
