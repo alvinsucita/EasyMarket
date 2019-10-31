@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 public class info_toko extends AppCompatActivity {
@@ -23,7 +21,7 @@ public class info_toko extends AppCompatActivity {
         setContentView(R.layout.activity_info_toko);
 
         deskripsi = findViewById(R.id.tvdeskripsi);
-        alamat = findViewById(R.id.tvalamat);
+        alamat = findViewById(R.id.tvBarang1);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

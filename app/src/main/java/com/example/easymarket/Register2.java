@@ -20,6 +20,7 @@ public class Register2 extends AppCompatActivity {
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
+    ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     String tiperegister="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class Register2 extends AppCompatActivity {
         if(i.hasExtra("listUser")){
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
+            listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
             tiperegister=i.getStringExtra("tiperegister");
         }
@@ -111,6 +113,7 @@ public class Register2 extends AppCompatActivity {
                 }
                 i.putExtra("listUser",listUser);
                 i.putExtra("listToko",listToko);
+                i.putExtra("listWishlist", listWishlist);
                 i.putExtra("listBarang", listBarang);
                 startActivity(i);
             }
@@ -126,12 +129,14 @@ public class Register2 extends AppCompatActivity {
                 listToko.remove(listToko.size()-1);
                 i.putExtra("listUser",listUser);
                 i.putExtra("listToko",listToko);
+                i.putExtra("listWishlist", listWishlist);
                 i.putExtra("listBarang", listBarang);
                 startActivity(i);
             }
             else if(tiperegister.equals("user")){
                 listUser.remove(listUser.size()-1);
                 i.putExtra("listUser",listUser);
+                i.putExtra("listWishlist", listWishlist);
                 i.putExtra("listToko",listToko);
                 i.putExtra("listBarang", listBarang);
                 startActivity(i);

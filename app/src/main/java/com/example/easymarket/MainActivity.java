@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         iv = findViewById(R.id.imageViewTes);
         iv2 = findViewById(R.id.ivpemilik);
-        iv3 = findViewById(R.id.imageView3);
+        iv3 = findViewById(R.id.ivBarang1);
         registerForContextMenu(iv);
         registerForContextMenu(iv2);
         registerForContextMenu(iv3);

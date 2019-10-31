@@ -27,6 +27,7 @@ public class Register1 extends AppCompatActivity {
     ArrayList<String> spinnerArray2 =  new ArrayList<>();
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
+    ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
     String tiperegister="";
     @Override
@@ -126,6 +127,7 @@ public class Register1 extends AppCompatActivity {
         if(i.hasExtra("listUser")){
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
+            listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
         }
     }
@@ -145,6 +147,7 @@ public class Register1 extends AppCompatActivity {
                         listUser.add(new User("", strnama, "","Pria" ,strdaerah,strumur,"0"));
                         Intent a = new Intent(Register1.this, Register2.class);
                         a.putExtra("listUser", listUser);
+                        a.putExtra("listWishlist", listWishlist);
                         a.putExtra("tiperegister",tiperegister);
                         a.putExtra("listToko", listToko);
                         a.putExtra("listBarang", listBarang);
@@ -157,6 +160,7 @@ public class Register1 extends AppCompatActivity {
                                 Intent a = new Intent(Register1.this, Register2.class);
                                 a.putExtra("listUser", listUser);
                                 a.putExtra("tiperegister",tiperegister);
+                                a.putExtra("listWishlist", listWishlist);
                                 a.putExtra("listToko", listToko);
                                 a.putExtra("listBarang", listBarang);
                                 startActivity(a);
@@ -180,6 +184,7 @@ public class Register1 extends AppCompatActivity {
                         a.putExtra("listUser", listUser);
                         a.putExtra("tiperegister",tiperegister);
                         a.putExtra("listToko", listToko);
+                        a.putExtra("listWishlist", listWishlist);
                         a.putExtra("listBarang", listBarang);
                         startActivity(a);
                     }
@@ -193,6 +198,7 @@ public class Register1 extends AppCompatActivity {
                                 listUser.add(new User("", strnama, "","Wanita" ,strdaerah,strumur,"0"));
                                 Intent a = new Intent(Register1.this, Register2.class);
                                 a.putExtra("listUser", listUser);
+                                a.putExtra("listWishlist", listWishlist);
                                 a.putExtra("tiperegister",tiperegister);
                                 a.putExtra("listToko", listToko);
                                 a.putExtra("listBarang", listBarang);
@@ -215,6 +221,7 @@ public class Register1 extends AppCompatActivity {
                     Intent a = new Intent(Register1.this, Register2.class);
                     a.putExtra("listUser", listUser);
                     a.putExtra("listBarang", listBarang);
+                    a.putExtra("listWishlist", listWishlist);
                     a.putExtra("tiperegister",tiperegister);
                     a.putExtra("listToko", listToko);
                     startActivity(a);
@@ -231,6 +238,7 @@ public class Register1 extends AppCompatActivity {
                             a.putExtra("listUser", listUser);
                             a.putExtra("listBarang", listBarang);
                             a.putExtra("tiperegister",tiperegister);
+                            a.putExtra("listWishlist", listWishlist);
                             a.putExtra("listToko", listToko);
                             startActivity(a);
                             break;

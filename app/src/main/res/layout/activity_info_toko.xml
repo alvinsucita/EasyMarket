@@ -41,7 +41,7 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/tvalamat"
+        android:id="@+id/tvBarang1"
         android:layout_width="282dp"
         android:layout_height="50dp"
         android:layout_below="@+id/tvshowalamat"

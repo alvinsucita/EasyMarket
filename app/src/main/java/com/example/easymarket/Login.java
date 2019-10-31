@@ -24,6 +24,7 @@ public class Login extends AppCompatActivity {
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
+    ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class Login extends AppCompatActivity {
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+            listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
         }
     }
 
@@ -69,6 +71,7 @@ public class Login extends AppCompatActivity {
         i.putExtra("listUser", listUser);
         i.putExtra("listToko", listToko);
         i.putExtra("listBarang", listBarang);
+        i.putExtra("listWishlist", listWishlist);
         startActivity(i);
     }
 
@@ -96,6 +99,7 @@ public class Login extends AppCompatActivity {
                     a.putExtra("listUser", listUser);
                     a.putExtra("listToko", listToko);
                     a.putExtra("listBarang", listBarang);
+                    a.putExtra("listWishlist", listWishlist);
                     a.putExtra("adayanglogin","1");
                     startActivity(a);
                     break;
@@ -107,6 +111,7 @@ public class Login extends AppCompatActivity {
                     Intent a = new Intent(Login.this, Home.class);
                     a.putExtra("listUser", listUser);
                     a.putExtra("listToko", listToko);
+                    a.putExtra("listWishlist", listWishlist);
                     a.putExtra("listBarang", listBarang);
                     startActivity(a);
                     break;

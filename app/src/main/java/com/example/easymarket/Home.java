@@ -26,6 +26,7 @@ public class Home extends AppCompatActivity {
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     String aktif="0";
     ImageView barang1,barang2,barang3,barang4,barang5,barang6;
     int page=0;
@@ -80,6 +81,7 @@ public class Home extends AppCompatActivity {
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+            listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
             for (int j = 0; j < listUser.size(); j++) {
                 if(listUser.get(j).aktif.equals("1")){
                     userlogin=listUser.get(j).nama;
@@ -153,6 +155,7 @@ public class Home extends AppCompatActivity {
             i.putExtra("listUser", listUser);
             i.putExtra("listToko", listToko);
             i.putExtra("listBarang", listBarang);
+            i.putExtra("listWishlist", listWishlist);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemLogout){
@@ -163,6 +166,7 @@ public class Home extends AppCompatActivity {
                     i.putExtra("listUser", listUser);
                     i.putExtra("listToko", listToko);
                     i.putExtra("listBarang", listBarang);
+                    i.putExtra("listWishlist", listWishlist);
                     startActivity(i);
                 }
             }
@@ -173,6 +177,11 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemWishlist){
             Intent i = new Intent(Home.this,WishList.class);
+            i.putExtra("listUser", listUser);
+            i.putExtra("listWishlist", listWishlist);
+            i.putExtra("listToko", listToko);
+            i.putExtra("listBarang", listBarang);
+            i.putExtra("adayanglogin",aktif);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemLelang){
@@ -195,6 +204,7 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(Home.this,InfoBarang.class);
             i.putExtra("listUser", listUser);
             i.putExtra("listToko", listToko);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("listBarang", listBarang);
             i.putExtra("adayanglogin",aktif);
             i.putExtra("barangyangdipilih",page*6+1-1);
@@ -206,6 +216,7 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(Home.this,InfoBarang.class);
             i.putExtra("listUser", listUser);
             i.putExtra("listToko", listToko);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("listBarang", listBarang);
             i.putExtra("adayanglogin",aktif);
             i.putExtra("barangyangdipilih",page*6+2-1);
@@ -218,6 +229,7 @@ public class Home extends AppCompatActivity {
             i.putExtra("listUser", listUser);
             i.putExtra("listToko", listToko);
             i.putExtra("listBarang", listBarang);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("adayanglogin",aktif);
             i.putExtra("barangyangdipilih",page*6+3-1);
             startActivity(i);
@@ -227,6 +239,7 @@ public class Home extends AppCompatActivity {
         if(listBarang.size()>=page*6+4){
             Intent i = new Intent(Home.this,InfoBarang.class);
             i.putExtra("listUser", listUser);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("listToko", listToko);
             i.putExtra("listBarang", listBarang);
             i.putExtra("adayanglogin",aktif);
@@ -238,6 +251,7 @@ public class Home extends AppCompatActivity {
         if(listBarang.size()>=page*6+5){
             Intent i = new Intent(Home.this,InfoBarang.class);
             i.putExtra("listUser", listUser);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("listToko", listToko);
             i.putExtra("listBarang", listBarang);
             i.putExtra("adayanglogin",aktif);
@@ -250,6 +264,7 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(Home.this,InfoBarang.class);
             i.putExtra("listUser", listUser);
             i.putExtra("listToko", listToko);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("listBarang", listBarang);
             i.putExtra("adayanglogin",aktif);
             i.putExtra("barangyangdipilih",page*6+6-1);
@@ -262,6 +277,7 @@ public class Home extends AppCompatActivity {
             i.putExtra("nextpage",page);
             i.putExtra("listUser", listUser);
             i.putExtra("listToko", listToko);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("listBarang", listBarang);
             if(aktif.equals("1")){
                 i.putExtra("adayanglogin","1");
@@ -275,6 +291,7 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(Home.this,Home.class);
             i.putExtra("previouspage",page);
             i.putExtra("listUser", listUser);
+            i.putExtra("listWishlist", listWishlist);
             i.putExtra("listToko", listToko);
             i.putExtra("listBarang", listBarang);
             if(aktif.equals("1")){
