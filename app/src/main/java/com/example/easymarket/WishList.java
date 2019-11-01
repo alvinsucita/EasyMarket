@@ -20,6 +20,7 @@ public class WishList extends AppCompatActivity {
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
+    ArrayList<ClassNota> listNota = new ArrayList<>();
     CheckBox pilih1,pilih2;
     TextView nama1,nama2,harga1,harga2,jumlah1,jumlah2,total;
     Button tambah1,tambah2,kurang1,kurang2,hapus1,hapus2,beli;
@@ -27,6 +28,7 @@ public class WishList extends AppCompatActivity {
     int jumlahtotal,jumlahbarang1=0,jumlahbarang2=0,hargabarang1=0,hargabarang2=0;
     int beli1=0,beli2=0;
     String userwish="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,8 +127,18 @@ public class WishList extends AppCompatActivity {
     }
 
     public void toDetailAlamat(View view) {
-        Intent i = new Intent(WishList.this,DetailAlamat.class);
-        startActivity(i);
+        if(beli1==1 && beli2==1){
+            Intent i = new Intent(WishList.this,DetailAlamat.class);
+            i.putExtra("subtotal",jumlahtotal);
+            //LEMPAR DATA KE DETAIL ALAMAT
+            startActivity(i);
+        }
+        else if(beli1==1){
+
+        }
+        else if(beli2==1){
+
+        }
     }
 
     public void tambah1(View view) {
@@ -167,9 +179,6 @@ public class WishList extends AppCompatActivity {
 
     public void hapus1(View view) {
         if(nama2.getText().toString().equals("kosong")){
-            for (int i = 0; i < listWishlist.size(); i++) {
-
-            }
             pilih1.setVisibility(View.INVISIBLE);
             gambar1.setVisibility(View.INVISIBLE);
             nama1.setVisibility(View.INVISIBLE);
@@ -181,11 +190,37 @@ public class WishList extends AppCompatActivity {
             beli1=0;
             jumlahtotal=jumlahtotal-hargabarang1*jumlahbarang1;
             total.setText("Total : Rp. "+jumlahtotal);
+            for (int i = 0; i < listWishlist.size(); i++) {
+                if(listWishlist.get(i).namabarang.equals(nama1.getText().toString())&&listWishlist.get(i).yangbeli.equals(userwish)){
+                    listWishlist.remove(i);
+                }
+            }
         }
         else{
+            for (int i = 0; i < listWishlist.size(); i++) {
+                if(listWishlist.get(i).namabarang.equals(nama1.getText().toString())&&listWishlist.get(i).yangbeli.equals(userwish)){
+                    listWishlist.remove(i);
+                }
+            }
+            beli1=beli2;
             nama1.setText(nama2.getText().toString());
             jumlah1.setText(jumlah2.getText().toString());
             harga1.setText(harga2.getText().toString());
+            hargabarang1=hargabarang2;
+            jumlahbarang1=jumlahbarang2;
+            hargabarang2=0;
+            beli2=0;
+            jumlahbarang2=0;
+            if(pilih2.isChecked()){
+                pilih1.setChecked(true);
+                jumlahtotal=0;
+                jumlahtotal=hargabarang1*jumlahbarang1+hargabarang2*jumlahbarang2;
+                total.setText("Total : Rp. "+jumlahtotal);
+            }
+            else{
+                jumlahtotal=0;
+                total.setText("Total : Rp. "+jumlahtotal);
+            }
             pilih2.setVisibility(View.INVISIBLE);
             gambar2.setVisibility(View.INVISIBLE);
             nama2.setVisibility(View.INVISIBLE);
@@ -234,6 +269,7 @@ public class WishList extends AppCompatActivity {
     }
 
     public void hapus2(View view) {
+        nama2.setText("kosong");
         pilih2.setVisibility(View.INVISIBLE);
         gambar2.setVisibility(View.INVISIBLE);
         nama2.setVisibility(View.INVISIBLE);
@@ -245,6 +281,13 @@ public class WishList extends AppCompatActivity {
         beli2=0;
         jumlahtotal=jumlahtotal-hargabarang2*jumlahbarang2;
         total.setText("Total : Rp. "+jumlahtotal);
+        for (int i = 0; i < listWishlist.size(); i++) {
+            if(listWishlist.get(i).namabarang.equals(nama1.getText().toString())&&listWishlist.get(i).yangbeli.equals(userwish)){
+                listWishlist.remove(i);
+            }
+        }
+        jumlahbarang2=0;
+        hargabarang2=0;
     }
 
     public void pilih1(View view) {
@@ -279,5 +322,6 @@ public class WishList extends AppCompatActivity {
             jumlahtotal=jumlahtotal+hargabarang2*jumlahbarang2;
             total.setText("Total : Rp. "+jumlahtotal);
         }
+
     }
 }
