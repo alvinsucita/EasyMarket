@@ -2,6 +2,9 @@ package com.example.easymarket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,41 +20,52 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+
 public class HomeToko extends AppCompatActivity {
-
-    TextView hnamatoko;
-    Button btambah;
-
+    BottomNavigationView bottomNavigationView;
+    ArrayList<User> listUser ;
+    ArrayList<Barang> listBarang;
+    ArrayList<Toko> listToko ;
+    ArrayList<ClassWishlist> listWishlist;
+    String yanglogin="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_toko);
 
-        hnamatoko = findViewById(R.id.tvhnamatoko);
-        btambah = findViewById(R.id.btntambah);
+        Intent i = getIntent();
+        listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
+        listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
+        listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+        listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
+        yanglogin=i.getStringExtra("yanglogin");
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(Color.WHITE);
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setStroke(5, Color.BLACK);
-        drawable.setCornerRadius(15);
-        hnamatoko.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setColor(Color.WHITE);
-        drawable2.setShape(GradientDrawable.OVAL);
-        drawable2.setStroke(10, Color.BLACK);
-        btambah.setBackground(drawable2);
+        changeFragment(new FragmentListBarang(),listBarang);
+        bottomNavigationView=findViewById(R.id.btmNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId( )== R.id.navListBarang){
+                    changeFragment(new FragmentListBarang(),listBarang);
+                }
+                else if(menuItem.getItemId( )== R.id.navTambah){
+                    changeFragment(new FragmentTambahBarang(),listBarang);
+                }
+                else if(menuItem.getItemId( )== R.id.navInbox){
+                    changeFragment(new FragmentInbox(),listBarang);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu,menu);
-
         menu.getItem(0).setVisible(false);
         menu.getItem(1).setVisible(false);
         menu.getItem(2).setVisible(false);
@@ -59,31 +73,32 @@ public class HomeToko extends AppCompatActivity {
         menu.getItem(4).setVisible(false);
         menu.getItem(5).setVisible(false);
         menu.getItem(6).setVisible(false);
-        menu.getItem(7).setVisible(true);
+        menu.getItem(7).setVisible(false);
         menu.getItem(8).setVisible(true);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.itemLogin){
+        if(item.getItemId()==R.id.itemLogout){
             Intent i = new Intent(HomeToko.this,Login.class);
-            startActivity(i);
-        }
-        else if(item.getItemId()==R.id.itemLogout){
-            Intent i = new Intent(HomeToko.this,Home.class);
-            startActivity(i);
-        }
-        else if(item.getItemId()==R.id.itemEditToko){
-            Intent i = new Intent(HomeToko.this,EditInfoToko.class);
+            i.putExtra("listUser", listUser);
+            i.putExtra("listToko", listToko);
+            i.putExtra("listBarang", listBarang);
+            i.putExtra("listWishlist", listWishlist);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void tambah(View view){
-        Intent i = new Intent(HomeToko.this,TambahBarang.class);
-        startActivity(i);
+    public void changeFragment(Fragment f,ArrayList<Barang>listBarang){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("listBarang",listBarang);
+        f.setArguments(bundle);
+        ft.replace(R.id.fragmentContainer, f);
+        ft.commit();
     }
 }
 

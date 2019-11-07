@@ -130,7 +130,6 @@ public class WishList extends AppCompatActivity {
         if(beli1==1 && beli2==1){
             Intent i = new Intent(WishList.this,DetailAlamat.class);
             i.putExtra("subtotal",jumlahtotal);
-            //LEMPAR DATA KE DETAIL ALAMAT
             startActivity(i);
         }
         else if(beli1==1){

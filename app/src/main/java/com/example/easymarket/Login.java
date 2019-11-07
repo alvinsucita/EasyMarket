@@ -111,11 +111,12 @@ public class Login extends AppCompatActivity {
             for (int i = 0; i < listToko.size(); i++) {
                 if(stremail.equals(listToko.get(i).email)&& strpass.equals(listToko.get(i).password)){
                     listToko.get(i).aktif="1";
-                    Intent a = new Intent(Login.this, Home.class);
+                    Intent a = new Intent(Login.this, HomeToko.class);
                     a.putExtra("listUser", listUser);
                     a.putExtra("listToko", listToko);
                     a.putExtra("listWishlist", listWishlist);
                     a.putExtra("listBarang", listBarang);
+                    a.putExtra("yanglogin",listToko.get(i).nama);
                     startActivity(a);
                     break;
                 }

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MasterKas"></activity>
+        <activity android:name=".MasterKas" />
         <activity android:name=".MasterChangelog" />
         <activity android:name=".MasterLelang" />
         <activity android:name=".MasterTrans" />
@@ -20,7 +20,6 @@
         <activity android:name=".CekPerjalananActivity" />
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
-        <activity android:name=".EditInfoToko" />
         <activity android:name=".EventPage" />
         <activity android:name=".Home">
             <intent-filter>
@@ -30,22 +29,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeToko" />
-        <activity android:name=".info_toko" />
         <activity android:name=".InfoBarang" />
         <activity android:name=".InfoComment" />
         <activity android:name=".lelang" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ManageUsers" />
-        <activity android:name=".pagetoko" />
         <activity android:name=".PreviewActivity" />
         <activity android:name=".PopupEvent" />
         <activity android:name=".RefundActivity" />
         <activity android:name=".Register1" />
         <activity android:name=".Register2" />
-        <activity android:name=".review_toko" />
-        <activity android:name=".TambahBarang" />
-        <activity android:name=".TempProduct" />
         <activity android:name=".TransactionActivity" />
         <activity android:name=".WishList" />
     </application>

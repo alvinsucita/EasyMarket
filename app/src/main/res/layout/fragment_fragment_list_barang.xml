@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAFF4007"
+    android:orientation="vertical"
+    tools:context=".FragmentListBarang">
+
+    <TextView
+        android:id="@+id/tvListBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:text="List Barang"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:src="@android:color/white" />
+
+    <Spinner
+        android:id="@+id/spListBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tvNamaBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Nama Barang : "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvHargaBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Harga Barang : "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvKategoriBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Kategori Barang : "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvDeskripsiBarang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Deskripsi Barang : "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvStok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Stok Barang : "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvDilihat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Barang dilihat : "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvTerjual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Barang terjual : "
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvLikes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:text="Likes : "
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Request Lelang Barang" />
+</LinearLayout>

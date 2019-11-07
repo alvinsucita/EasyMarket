@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navListBarang"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="List Barang" />
+
+    <item
+        android:id="@+id/navTambah"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Tambah Barang" />
+
+    <item
+        android:id="@+id/navInbox"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Inbox" />
+
+</menu>
