@@ -23,4 +23,7 @@
     <item
         android:id="@+id/managekas"
         android:title="Manage Kas" />
+    <item
+        android:id="@+id/logoutadmin"
+        android:title="Logout" />
 </menu>

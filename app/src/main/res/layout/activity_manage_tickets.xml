@@ -8,7 +8,7 @@
     tools:context=".ManageTickets">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lvusers"
+        android:id="@+id/lvtickets"
         android:layout_width="match_parent"
         android:layout_height="480dp"
         android:layout_marginBottom="90dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvmanageuser"
+        android:id="@+id/tvmanageticket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -25,7 +25,7 @@
         android:text="Manage Tickets"
         android:textColor="@android:color/white"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/lvusers"
+        app:layout_constraintBottom_toTopOf="@+id/lvtickets"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

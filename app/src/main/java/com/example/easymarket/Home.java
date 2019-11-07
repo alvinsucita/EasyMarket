@@ -148,14 +148,19 @@ public class Home extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public Intent putextra(Intent i){
+        i.putExtra("listUser", listUser);
+        i.putExtra("listWishlist", listWishlist);
+        i.putExtra("listToko", listToko);
+        i.putExtra("listBarang", listBarang);
+        return i;
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.itemLogin){
             Intent i = new Intent(Home.this,Login.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("listWishlist", listWishlist);
+            i = putextra(i);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemLogout){
@@ -163,29 +168,25 @@ public class Home extends AppCompatActivity {
             for (int j = 0; j < listUser.size(); j++) {
                 if(listUser.get(j).aktif.equals("1")){
                     listUser.get(j).aktif="0";
-                    i.putExtra("listUser", listUser);
-                    i.putExtra("listToko", listToko);
-                    i.putExtra("listBarang", listBarang);
-                    i.putExtra("listWishlist", listWishlist);
+                    i = putextra(i);
                     startActivity(i);
                 }
             }
         }
         else if(item.getItemId()==R.id.itemEvent){
             Intent i = new Intent(Home.this,EventPage.class);
+            i = putextra(i);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemWishlist){
             Intent i = new Intent(Home.this,WishList.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
+            i = putextra(i);
             i.putExtra("adayanglogin",aktif);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemLelang){
             Intent i = new Intent(Home.this,lelang.class);
+            i = putextra(i);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemCekPengiriman){
