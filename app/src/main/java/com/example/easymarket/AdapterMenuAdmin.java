@@ -25,7 +25,20 @@ public class AdapterMenuAdmin extends ArrayAdapter {
         TextView nameTextField = (TextView) rowView.findViewById(R.id.layoutjudul);
         TextView infoTextField = (TextView) rowView.findViewById(R.id.layoutdesc);
         nameTextField.setText(judul[position]);
-        infoTextField.setText(desc[position]);
+        nameTextField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+//        nameTextField.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                return false;
+//            }
+//        });
+                //infoTextField.setText(desc[position]);
         return rowView;
     };
 }
