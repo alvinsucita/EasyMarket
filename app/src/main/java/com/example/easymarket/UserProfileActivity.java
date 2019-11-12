@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class UserProfileActivity extends AppCompatActivity {
 
 
-    EditText tvGender,tvNama,tvEmail,tvPass,tvAsalDaerah,tvUmur;
+    EditText tvGender,tvNama,tvEmail,tvPass,tvAsalDaerah,tvUmur,tvPassLama;
     Button btnBack,btnUpdate;
     ImageView img;
     ArrayList<User> listUser = new ArrayList<>();
@@ -32,6 +32,7 @@ public class UserProfileActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmailUserProfileActivity);
         tvEmail.setEnabled(false);
         tvPass = findViewById(R.id.tvPassUserProfileActivity);
+        tvPassLama = findViewById(R.id.tvPassUserProfileActivity);
         tvAsalDaerah = findViewById(R.id.tvDaerahAsalUserProfileActivity);
         tvAsalDaerah.setEnabled(false);
         btnBack = findViewById(R.id.btnBackUserProfileActivity);
@@ -82,15 +83,13 @@ public class UserProfileActivity extends AppCompatActivity {
     public void update(){
         for (int j = 0; j < listUser.size(); j++) {
             if(listUser.get(j).aktif.equals("1")){
-                listUser.get(j).setNama(tvNama.getText().toString());
-                listUser.get(j).setGender(tvGender.getText().toString());
-                listUser.get(j).setDaerahasal(tvAsalDaerah.getText().toString());
-                listUser.get(j).setUmur(tvUmur.getText().toString());
-                listUser.get(j).setEmail(tvEmail.getText().toString());
-                listUser.get(j).setPassword(tvPass.getText().toString());
+                if(listUser.get(j).getPassword().equals(tvPassLama.getText().toString())){
+                    listUser.get(j).setNama(tvNama.getText().toString());
+                    listUser.get(j).setPassword(tvPass.getText().toString());
+                }
             }
         }
-        Toast.makeText(this, "berhasil", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "berhasilUpdate", Toast.LENGTH_SHORT).show();
     }
 
 }

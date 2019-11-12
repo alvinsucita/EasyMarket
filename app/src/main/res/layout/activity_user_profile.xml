@@ -94,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="648dp"
         android:text="Update"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,9 +103,21 @@
         android:id="@+id/btnBackUserProfileActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="600dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginTop="648dp"
+        android:layout_marginEnd="104dp"
         android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/tvPassLamaUserProfileActivity"
+        android:layout_width="153dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="580dp"
+        android:layout_marginEnd="48dp"
+        android:ems="10"
+        android:hint="PasswordLama"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
