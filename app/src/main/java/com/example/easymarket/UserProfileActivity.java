@@ -25,14 +25,19 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         tvGender = findViewById(R.id.tvGenderUserProfileActivity);
+        tvGender.setEnabled(false);
         tvNama = findViewById(R.id.tvNamaUserProfileActivity);
         tvUmur = findViewById(R.id.tvUmurUserProfileActivity);
+        tvUmur.setEnabled(false);
         tvEmail = findViewById(R.id.tvEmailUserProfileActivity);
+        tvEmail.setEnabled(false);
         tvPass = findViewById(R.id.tvPassUserProfileActivity);
         tvAsalDaerah = findViewById(R.id.tvDaerahAsalUserProfileActivity);
+        tvAsalDaerah.setEnabled(false);
         btnBack = findViewById(R.id.btnBackUserProfileActivity);
         btnUpdate = findViewById(R.id.btnUpdateUserProfileActivity);
         img = findViewById(R.id.imgUserProfileActivity);
+
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {
