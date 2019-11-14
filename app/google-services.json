@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "769797525088-rg1dhnjh4nth6kfffgm38mit6ik824ha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.easymarket",
+            "certificate_hash": "91c5f28e77a0d90f8794ca1827b7064e10f367e3"
+          }
+        },
+        {
           "client_id": "769797525088-gcadghlgn6e4roafk901dqn95lphut49.apps.googleusercontent.com",
           "client_type": 3
         }
