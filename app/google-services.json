@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "769797525088",
+    "firebase_url": "https://easymarket-258401.firebaseio.com",
+    "project_id": "easymarket-258401",
+    "storage_bucket": "easymarket-258401.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769797525088:android:dcddf2289e6d2322bb7d05",
+        "android_client_info": {
+          "package_name": "com.example.easymarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769797525088-gcadghlgn6e4roafk901dqn95lphut49.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQdd2uc2CSGoDwZhRGb7rhU3hoV0Gtjuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769797525088-gcadghlgn6e4roafk901dqn95lphut49.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
