@@ -127,17 +127,8 @@ public class WishList extends AppCompatActivity {
     }
 
     public void toDetailAlamat(View view) {
-        if(beli1==1 && beli2==1){
-            Intent i = new Intent(WishList.this,DetailAlamat.class);
-            i.putExtra("subtotal",jumlahtotal);
-            startActivity(i);
-        }
-        else if(beli1==1){
-
-        }
-        else if(beli2==1){
-
-        }
+        Intent i = new Intent(WishList.this, DetailAlamat.class);
+        startActivity(i);
     }
 
     public void tambah1(View view) {

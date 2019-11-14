@@ -19,7 +19,6 @@ public class DetailAlamat extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_alamat);
-        labelalamat=findViewById(R.id.editText2);
         nama=findViewById(R.id.editText3);
         nohp=findViewById(R.id.editText4);
         kota=findViewById(R.id.editText5);
@@ -32,13 +31,6 @@ public class DetailAlamat extends AppCompatActivity {
         drawable.setShape(GradientDrawable.OVAL);
         drawable.setStroke(5, Color.BLACK);
         konfirmasi.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setColor(Color.WHITE);
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setStroke(5, Color.BLACK);
-        drawable2.setCornerRadius(15);
-        labelalamat.setBackground(drawable2);
 
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setColor(Color.WHITE);
@@ -87,9 +79,9 @@ public class DetailAlamat extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public void beli(View v){
-        Intent i = new Intent(DetailAlamat.this,TransactionActivity.class);
+
+    public void toDetailPengiriman(View view) {
+        Intent i = new Intent(DetailAlamat.this,DetailPengiriman.class);
         startActivity(i);
     }
-
 }

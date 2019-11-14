@@ -3,58 +3,80 @@ package com.example.easymarket;
 import java.io.Serializable;
 
 public class ClassNota implements Serializable {
-    String nama;
+    String idnota;
+    String tanggal;
+    String namatoko;
+    String namabarang;
+    String namauser;
     String nohp;
     String alamat;
     String kota;
     String kodepos;
     String pembayaran;
-    String pengiriman;
     String jenispengiriman;
+    int hargabarang;
     int jumlahbarang;
     int hargapengiriman;
     int subtotal;
     int total;
 
-    public ClassNota(String nama, String nohp, String alamat, String kota, String kodepos, String pembayaran, String pengiriman, String jenispengiriman, int jumlahbarang, int hargapengiriman, int subtotal, int total) {
-        this.nama = nama;
+    public ClassNota(String idnota, String tanggal, String namatoko, String namabarang, String namauser, String nohp, String alamat, String kota, String kodepos, String pembayaran, String jenispengiriman, int hargabarang, int jumlahbarang, int hargapengiriman, int subtotal, int total) {
+        this.idnota = idnota;
+        this.tanggal = tanggal;
+        this.namatoko = namatoko;
+        this.namabarang = namabarang;
+        this.namauser = namauser;
         this.nohp = nohp;
         this.alamat = alamat;
         this.kota = kota;
         this.kodepos = kodepos;
         this.pembayaran = pembayaran;
-        this.pengiriman = pengiriman;
         this.jenispengiriman = jenispengiriman;
+        this.hargabarang = hargabarang;
         this.jumlahbarang = jumlahbarang;
         this.hargapengiriman = hargapengiriman;
         this.subtotal = subtotal;
         this.total = total;
     }
 
-    @Override
-    public String toString() {
-        return "ClassNota{" +
-                "nama='" + nama + '\'' +
-                ", nohp='" + nohp + '\'' +
-                ", alamat='" + alamat + '\'' +
-                ", kota='" + kota + '\'' +
-                ", kodepos='" + kodepos + '\'' +
-                ", pembayaran='" + pembayaran + '\'' +
-                ", pengiriman='" + pengiriman + '\'' +
-                ", jenispengiriman='" + jenispengiriman + '\'' +
-                ", jumlahbarang=" + jumlahbarang +
-                ", hargapengiriman=" + hargapengiriman +
-                ", subtotal=" + subtotal +
-                ", total=" + total +
-                '}';
+    public String getIdnota() {
+        return idnota;
     }
 
-    public String getNama() {
-        return nama;
+    public void setIdnota(String idnota) {
+        this.idnota = idnota;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
+    }
+
+    public String getNamatoko() {
+        return namatoko;
+    }
+
+    public void setNamatoko(String namatoko) {
+        this.namatoko = namatoko;
+    }
+
+    public String getNamabarang() {
+        return namabarang;
+    }
+
+    public void setNamabarang(String namabarang) {
+        this.namabarang = namabarang;
+    }
+
+    public String getNamauser() {
+        return namauser;
+    }
+
+    public void setNamauser(String namauser) {
+        this.namauser = namauser;
     }
 
     public String getNohp() {
@@ -97,20 +119,20 @@ public class ClassNota implements Serializable {
         this.pembayaran = pembayaran;
     }
 
-    public String getPengiriman() {
-        return pengiriman;
-    }
-
-    public void setPengiriman(String pengiriman) {
-        this.pengiriman = pengiriman;
-    }
-
     public String getJenispengiriman() {
         return jenispengiriman;
     }
 
     public void setJenispengiriman(String jenispengiriman) {
         this.jenispengiriman = jenispengiriman;
+    }
+
+    public int getHargabarang() {
+        return hargabarang;
+    }
+
+    public void setHargabarang(int hargabarang) {
+        this.hargabarang = hargabarang;
     }
 
     public int getJumlahbarang() {

@@ -29,7 +29,6 @@
         android:id="@+id/editText3"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Nama Penerima"
@@ -40,8 +39,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tvdeskripsi"
+        app:layout_constraintVertical_bias="0.086" />
 
     <TextView
         android:id="@+id/tvdeskripsi"
@@ -57,23 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
-
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:hint="Label Alamat : hotel,rumah,kantor,apartment"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.131" />
 
     <EditText
         android:id="@+id/editText4"
@@ -137,8 +119,8 @@
         android:id="@+id/button3"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:onClick="toDetailPengiriman"
         android:text="Konfirmasi"
-        android:onClick="beli"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
