@@ -12,7 +12,6 @@
         android:layout_width="409dp"
         android:layout_height="515dp"
         android:layout_marginTop="1dp"
-        android:drawSelectorOnTop="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvmanageuser" />
 

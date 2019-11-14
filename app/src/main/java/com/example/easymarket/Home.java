@@ -159,7 +159,6 @@ public class Home extends AppCompatActivity {
         i.putExtra("listWishlist", listWishlist);
         i.putExtra("listToko", listToko);
         i.putExtra("listBarang", listBarang);
-        Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
         return i;
     }
 
