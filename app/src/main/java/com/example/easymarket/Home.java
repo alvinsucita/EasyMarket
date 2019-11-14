@@ -2,6 +2,7 @@ package com.example.easymarket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
+    RecyclerView rvHome;
+    AdapterHome adapter;
     EditText search;
     Button btnsearch,nextpage,backpage;
     String userlogin;
@@ -51,12 +54,7 @@ public class Home extends AppCompatActivity {
         btnsearch=findViewById(R.id.btnSearch);
         nextpage=findViewById(R.id.btnNextPage);
         backpage=findViewById(R.id.btnPrevious);
-        barang1=findViewById(R.id.ivBarang1);
-        barang2=findViewById(R.id.ivBarang2);
-        barang3=findViewById(R.id.ivBarang3);
-        barang4=findViewById(R.id.ivBarang4);
-        barang5=findViewById(R.id.ivBarang5);
-        barang6=findViewById(R.id.ivBarang6);
+        rvHome = findViewById(R.id.rvHome);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(Color.WHITE);
@@ -87,6 +85,14 @@ public class Home extends AppCompatActivity {
                     userlogin=listUser.get(j).nama;
                 }
             }
+
+            adapter = new AdapterHome(listBarang, new RVClickListener() {
+                @Override
+                public void recyclerViewListClick(View v, int pos) {
+                    // isi foto
+                }
+            });
+
         }
         if(i.hasExtra("adayanglogin")){
             aktif="1";
