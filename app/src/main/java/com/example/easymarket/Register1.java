@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class Register1 extends AppCompatActivity {
 
     Button next;
     Spinner umur,daerahasal;
+    RadioGroup gendergroup,registergroup;
     RadioButton pria,wanita,toko,user;
     EditText nama;
     ArrayList<String> spinnerArray =  new ArrayList<>();
@@ -42,6 +44,8 @@ public class Register1 extends AppCompatActivity {
         toko=findViewById(R.id.rbToko);
         user=findViewById(R.id.rbUser);
         nama = findViewById(R.id.etNama);
+        registergroup = findViewById(R.id.jenisuser);
+        gendergroup = findViewById(R.id.gender);
 
         for (int i = 18; i < 61; i++) {
             spinnerArray.add(i + "");
@@ -83,14 +87,7 @@ public class Register1 extends AppCompatActivity {
         drawable3.setStroke(5, Color.BLACK);
         drawable3.setCornerRadius(15);
         drawable3.setColor(Color.WHITE);
-        pria.setBackground(drawable3);
-
-        GradientDrawable drawable4 = new GradientDrawable();
-        drawable4.setShape(GradientDrawable.RECTANGLE);
-        drawable4.setStroke(5, Color.BLACK);
-        drawable4.setCornerRadius(15);
-        drawable4.setColor(Color.WHITE);
-        wanita.setBackground(drawable4);
+        gendergroup.setBackground(drawable3);
 
         GradientDrawable drawable5 = new GradientDrawable();
         drawable5.setShape(GradientDrawable.OVAL);
@@ -111,14 +108,7 @@ public class Register1 extends AppCompatActivity {
         drawable7.setStroke(5, Color.BLACK);
         drawable7.setCornerRadius(15);
         drawable7.setColor(Color.WHITE);
-        user.setBackground(drawable7);
-
-        GradientDrawable drawable8 = new GradientDrawable();
-        drawable8.setShape(GradientDrawable.RECTANGLE);
-        drawable8.setStroke(5, Color.BLACK);
-        drawable8.setCornerRadius(15);
-        drawable8.setColor(Color.WHITE);
-        toko.setBackground(drawable8);
+        registergroup.setBackground(drawable7);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -136,7 +126,7 @@ public class Register1 extends AppCompatActivity {
         if(nama.getText().toString().equals("") || user.isChecked()==false && toko.isChecked()==false ){
             Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_LONG).show();
         }
-        else{
+        else {
             if(tiperegister.equals("user")) {
                 if (pria.isChecked()) {
                     String strnama= nama.getText().toString();

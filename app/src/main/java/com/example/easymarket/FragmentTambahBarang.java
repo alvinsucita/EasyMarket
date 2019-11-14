@@ -73,9 +73,28 @@ public class FragmentTambahBarang extends Fragment {
                 String strdeskripsi = deskripsi.getText().toString();
                 String strstok = stok.getText().toString();
                 String strkategori = sp.getSelectedItem().toString();
+                String strid = "";
+                int ctr=0;
+                for (int i = 0; i < listBarang.size(); i++) {
+                    if(listBarang.get(i).kategori.equals(strkategori)){
+                        ctr++;
+                    }
+                }
+
+                if(ctr>=0&&ctr<9){
+                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"0000"+(ctr+1);
+                }else if(ctr>=9&&ctr<99){
+                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"000"+(ctr+1);
+                }else if(ctr>=99&&ctr<999){
+                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"00"+(ctr+1);
+                }else if(ctr>=999&&ctr<9999){
+                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"0"+(ctr+1);
+                }else if(ctr>=9999&&ctr<99999){
+                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+(ctr+1);
+                }
 
                 if(!strnama.equals("") && !strharga.equals("") && !strdeskripsi.equals("") && !strstok.equals("")){
-                    listBarang.add(new Barang(homeToko.yanglogin,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok)));
+                    listBarang.add(new Barang(strid,homeToko.yanglogin,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok)));
                     Toast.makeText(getContext(), "Barang berhasil ditambahkan", Toast.LENGTH_SHORT).show();
                     namabarang.setText("");
                     harga.setText("");

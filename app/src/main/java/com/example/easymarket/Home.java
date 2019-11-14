@@ -40,13 +40,13 @@ public class Home extends AppCompatActivity {
         listToko.add(new Toko("Hypershop","Jawa Timur","hyper@gmail.com","hyperx","0"));
         listToko.add(new Toko("Happy Store","Jawa Timur","happy@gmail.com","hapstore","0"));
         listToko.add(new Toko("Games X Shop","Jawa Timur","gamesx@gmail.com","gamshop","0"));
-        listBarang.add(new Barang("Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Fashion",11000,0,0,0,10));
-        listBarang.add(new Barang("Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Fashion",2800000,7,30,3,2));
-        listBarang.add(new Barang("Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Fashion",11000000,200,500,1,10));
-        listBarang.add(new Barang("Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Bayi",227000,5,70,30,30));
-        listBarang.add(new Barang("Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Elektronik",1950000,100,230,10,100));
-        listBarang.add(new Barang("Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Elektronik",65000,350,1000,70,50));
-        listBarang.add(new Barang("Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Elektronik",128000,50,120,30,0));
+        listBarang.add(new Barang("FA00001","Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Fashion",11000,0,0,0,10));
+        listBarang.add(new Barang("FA00002","Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Fashion",2800000,7,30,3,2));
+        listBarang.add(new Barang("FA00003","Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Fashion",11000000,200,500,1,10));
+        listBarang.add(new Barang("IB00001","Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Bayi",227000,5,70,30,30));
+        listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Gaming",1950000,100,230,10,100));
+        listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Gaming",65000,350,1000,70,50));
+        listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Gaming",128000,50,120,30,0));
         search=findViewById(R.id.etSearch);
         btnsearch=findViewById(R.id.btnSearch);
         nextpage=findViewById(R.id.btnNextPage);
@@ -301,5 +301,9 @@ public class Home extends AppCompatActivity {
             }
             startActivity(i);
         }
+    }
+
+    public void cari(View view) {
+
     }
 }
