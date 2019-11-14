@@ -161,7 +161,6 @@ public class Home extends AppCompatActivity {
         i.putExtra("listBarang", listBarang);
         return i;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.itemLogin){
