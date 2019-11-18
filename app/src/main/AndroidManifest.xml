@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".ProfileUtamaActivity" />
+        <activity android:name=".DetailPengiriman" />
+        <activity android:name=".UserProfileActivity" />
         <activity android:name=".MasterKas" />
         <activity android:name=".MasterChangelog" />
         <activity android:name=".MasterLelang" />
