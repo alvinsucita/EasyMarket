@@ -11,11 +11,14 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ProfileUtamaActivity extends AppCompatActivity {
 
 
     ImageView img;
     TextView tvNama,tvUmur,tvGender,tvEmail,tvDaerahAsal;
+    ArrayList<User> listUser;
 
 
     @Override
@@ -29,6 +32,19 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvUmurProfileUtamaActivity);
         tvGender = findViewById(R.id.tvGenderProfileUtamaActivity);
         tvDaerahAsal = findViewById(R.id.tvDaerahAsalUserProfileActivity);
+
+        // ambil data static list user dari homeActivity dimasukkan ke listUser
+        listUser = Home.listUser;
+        // masukinData User yang aktif
+        for (int i = 0; i < listUser.size(); i++) {
+            if(listUser.get(i).getAktif() == "1"){
+                tvNama.setText(listUser.get(i).getNama());
+                tvUmur.setText(listUser.get(i).getUmur());
+                tvEmail.setText(listUser.get(i).getEmail());
+                tvGender.setText(listUser.get(i).getGender());
+                tvDaerahAsal.setText(listUser.get(i).getDaerahasal());
+            }
+        }
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -23,7 +23,7 @@ public class Home extends AppCompatActivity {
     EditText search;
     Button btnsearch,nextpage,backpage;
     String userlogin;
-    ArrayList<User> listUser = new ArrayList<>();
+    public static ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
