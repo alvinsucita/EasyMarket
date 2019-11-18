@@ -2,6 +2,8 @@ package com.example.easymarket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -21,15 +23,14 @@ import java.util.ArrayList;
 public class Home extends AppCompatActivity {
 
     EditText search;
-    Button btnsearch,nextpage,backpage;
+    RecyclerView rv;
     String userlogin;
     public static ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<Barang> listBarangSearch = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     String aktif="0";
-    ImageView barang1,barang2,barang3,barang4,barang5,barang6;
-    int page=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,33 +49,16 @@ public class Home extends AppCompatActivity {
         listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Gaming",65000,350,1000,70,50));
         listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Gaming",128000,50,120,30,0));
         search=findViewById(R.id.etSearch);
-        btnsearch=findViewById(R.id.btnSearch);
-        nextpage=findViewById(R.id.btnNextPage);
-        backpage=findViewById(R.id.btnPrevious);
-        barang1=findViewById(R.id.ivBarang1);
-        barang2=findViewById(R.id.ivBarang2);
-        barang3=findViewById(R.id.ivBarang3);
-        barang4=findViewById(R.id.ivBarang4);
-        barang5=findViewById(R.id.ivBarang5);
-        barang6=findViewById(R.id.ivBarang6);
+        rv=findViewById(R.id.rvhome);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
+        rv.setAdapter(adapterMenuBarang);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(Color.WHITE);
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadius(15);
         search.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setColor(Color.WHITE);
-        drawable2.setShape(GradientDrawable.OVAL);
-        drawable2.setStroke(5, Color.BLACK);
-        nextpage.setBackground(drawable2);
-
-        GradientDrawable drawable3 = new GradientDrawable();
-        drawable3.setColor(Color.WHITE);
-        drawable3.setShape(GradientDrawable.OVAL);
-        drawable3.setStroke(5, Color.BLACK);
-        backpage.setBackground(drawable3);
 
         Intent i = getIntent();
         if(i.hasExtra("listUser")){
@@ -91,31 +75,10 @@ public class Home extends AppCompatActivity {
         if(i.hasExtra("adayanglogin")){
             aktif="1";
         }
-        if(i.hasExtra("nextpage")){
-            page=i.getIntExtra("nextpage",page)+1;
-        }
-        if(i.hasExtra("previouspage")){
-            page=i.getIntExtra("previouspage",page)-1;
+
+        if(i.hasExtra("barangfilter")){
         }
 
-        if(listBarang.size()>=page*6+1){
-            barang1.setBackgroundColor(Color.WHITE);
-        }
-        if(listBarang.size()>=page*6+2){
-            barang2.setBackgroundColor(Color.WHITE);
-        }
-        if(listBarang.size()>=page*6+3){
-            barang3.setBackgroundColor(Color.WHITE);
-        }
-        if(listBarang.size()>=page*6+4){
-            barang4.setBackgroundColor(Color.WHITE);
-        }
-        if(listBarang.size()>=page*6+5){
-            barang5.setBackgroundColor(Color.WHITE);
-        }
-        if(listBarang.size()>=page*6+6){
-            barang6.setBackgroundColor(Color.WHITE);
-        }
     }
 
     @Override
@@ -198,109 +161,8 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(Home.this,RefundActivity.class);
             startActivity(i);
         }
+
         return super.onOptionsItemSelected(item);
-    }
-
-    public void infoBarang1(View view) {
-        if(listBarang.size()>=page*6+1){
-            Intent i = new Intent(Home.this,InfoBarang.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("adayanglogin",aktif);
-            i.putExtra("barangyangdipilih",page*6+1-1);
-            startActivity(i);
-        }
-    }
-    public void infoBarang2(View view) {
-        if(listBarang.size()>=page*6+2){
-            Intent i = new Intent(Home.this,InfoBarang.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("adayanglogin",aktif);
-            i.putExtra("barangyangdipilih",page*6+2-1);
-            startActivity(i);
-        }
-    }
-    public void infoBarang3(View view) {
-        if(listBarang.size()>=page*6+3){
-            Intent i = new Intent(Home.this,InfoBarang.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("adayanglogin",aktif);
-            i.putExtra("barangyangdipilih",page*6+3-1);
-            startActivity(i);
-        }
-    }
-    public void infoBarang4(View view) {
-        if(listBarang.size()>=page*6+4){
-            Intent i = new Intent(Home.this,InfoBarang.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("adayanglogin",aktif);
-            i.putExtra("barangyangdipilih",page*6+4-1);
-            startActivity(i);
-        }
-    }
-    public void infoBarang5(View view) {
-        if(listBarang.size()>=page*6+5){
-            Intent i = new Intent(Home.this,InfoBarang.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("adayanglogin",aktif);
-            i.putExtra("barangyangdipilih",page*6+5-1);
-            startActivity(i);
-        }
-    }
-    public void infoBarang6(View view) {
-        if(listBarang.size()>=page*6+6){
-            Intent i = new Intent(Home.this,InfoBarang.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("adayanglogin",aktif);
-            i.putExtra("barangyangdipilih",page*6+6-1);
-            startActivity(i);
-        }
-    }
-    public void nextpage(View view) {
-        if(listBarang.size()>=(page+1)*6+1){
-            Intent i = new Intent(Home.this,Home.class);
-            i.putExtra("nextpage",page);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listBarang", listBarang);
-            if(aktif.equals("1")){
-                i.putExtra("adayanglogin","1");
-            }
-            startActivity(i);
-        }
-    }
-
-    public void previouspage(View view) {
-        if(page!=0){
-            Intent i = new Intent(Home.this,Home.class);
-            i.putExtra("previouspage",page);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
-            if(aktif.equals("1")){
-                i.putExtra("adayanglogin","1");
-            }
-            startActivity(i);
-        }
     }
 
     public void cari(View view) {
