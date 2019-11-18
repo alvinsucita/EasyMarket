@@ -2,10 +2,12 @@ package com.example.easymarket;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -73,5 +75,10 @@ public class DetailPengiriman extends AppCompatActivity {
             this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void konfirmasi(View view) {
+        Intent i = new Intent(DetailPengiriman.this,NotaActivity.class);
+        startActivity(i);
     }
 }
