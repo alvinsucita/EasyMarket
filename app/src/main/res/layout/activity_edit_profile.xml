@@ -21,10 +21,10 @@
 
     <ImageView
         android:id="@+id/imageEditProfile"
-        android:layout_width="202dp"
-        android:layout_height="202dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="132dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="124dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_star_big_on" />
@@ -34,17 +34,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="368dp"
+        android:layout_marginTop="316dp"
         android:text="Upload"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/tvNamaEditProfile"
-        android:layout_width="299dp"
-        android:layout_height="33dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="440dp"
+        android:layout_marginTop="404dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
@@ -53,37 +53,37 @@
 
     <EditText
         android:id="@+id/tvPasswordLamaEditProfile"
-        android:layout_width="302dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="488dp"
+        android:layout_marginTop="460dp"
         android:ems="10"
         android:hint="PasswordLama"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/tvPasswordBaruEditProfile"
-        android:layout_width="295dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="544dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="528dp"
         android:ems="10"
         android:hint="PasswordBaru"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/tvConfirmPasswordBaruEditProfile"
-        android:layout_width="289dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="592dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="588dp"
         android:ems="10"
         android:hint="ConfirmPassword"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

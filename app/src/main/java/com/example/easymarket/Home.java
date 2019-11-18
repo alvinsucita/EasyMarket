@@ -25,7 +25,7 @@ public class Home extends AppCompatActivity {
     EditText search;
     RecyclerView rv;
     String userlogin;
-    public static ArrayList<User> listUser = new ArrayList<>();
+    ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<Barang> listBarangSearch = new ArrayList<>();
@@ -139,6 +139,11 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemEvent){
             Intent i = new Intent(Home.this,EventPage.class);
+            i = putextra(i);
+            startActivity(i);
+        }
+        else if(item.getItemId() == R.id.itemNama){
+            Intent i = new Intent(Home.this,ProfileUtamaActivity.class);
             i = putextra(i);
             startActivity(i);
         }
