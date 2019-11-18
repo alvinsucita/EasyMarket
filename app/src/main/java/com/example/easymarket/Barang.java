@@ -3,6 +3,7 @@ package com.example.easymarket;
 import java.io.Serializable;
 
 public class Barang implements Serializable {
+    String idbarang;
     String namatoko;
     String namabarang;
     String deskripsi;
@@ -13,7 +14,8 @@ public class Barang implements Serializable {
     int dibeli;
     int stok;
 
-    public Barang(String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {
+    public Barang(String idbarang, String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {
+        this.idbarang = idbarang;
         this.namatoko = namatoko;
         this.namabarang = namabarang;
         this.deskripsi = deskripsi;
@@ -25,19 +27,12 @@ public class Barang implements Serializable {
         this.stok = stok;
     }
 
-    @Override
-    public String toString() {
-        return "Barang{" +
-                "namatoko='" + namatoko + '\'' +
-                ", namabarang='" + namabarang + '\'' +
-                ", deskripsi='" + deskripsi + '\'' +
-                ", kategori='" + kategori + '\'' +
-                ", harga=" + harga +
-                ", likes=" + likes +
-                ", dilihat=" + dilihat +
-                ", dibeli=" + dibeli +
-                ", stok=" + stok +
-                '}';
+    public String getIdbarang() {
+        return idbarang;
+    }
+
+    public void setIdbarang(String idbarang) {
+        this.idbarang = idbarang;
     }
 
     public String getNamatoko() {
