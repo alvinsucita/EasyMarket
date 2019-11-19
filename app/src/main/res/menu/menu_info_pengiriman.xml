@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_Terkirim"
+        android:icon="@drawable/terkirim"
+        android:title="Terkirim" />
+    <item
+        android:id="@+id/item_request"
+        android:icon="@drawable/request"
+        android:title="Request" />
+    <item
+        android:id="@+id/item_Belum_bayar"
+        android:icon="@drawable/belum_bayar"
+        android:title="BelumBayar" />
+    <item
+        android:id="@+id/item_batal"
+        android:icon="@drawable/batal"
+        android:title="Batal" />
+</menu>
