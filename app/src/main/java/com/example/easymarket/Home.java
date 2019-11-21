@@ -147,6 +147,11 @@ public class Home extends AppCompatActivity {
             i = putextra(i);
             startActivity(i);
         }
+        else if(item.getItemId() == R.id.itemNama){
+            Intent i = new Intent(Home.this,ProfileUtamaActivity.class);
+            i = putextra(i);
+            startActivity(i);
+        }
         else if(item.getItemId()==R.id.itemWishlist){
             Intent i = new Intent(Home.this,WishList.class);
             i = putextra(i);
@@ -164,6 +169,10 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemRefund){
             Intent i = new Intent(Home.this,RefundActivity.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemInfoPengiriman){
+            Intent i = new Intent(Home.this,InfoPengirimanActivity.class);
             startActivity(i);
         }
 
