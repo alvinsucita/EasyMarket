@@ -31,6 +31,7 @@ public class Register1 extends AppCompatActivity {
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String tiperegister="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +119,7 @@ public class Register1 extends AppCompatActivity {
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
             listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
+            listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
         }
     }
@@ -139,6 +141,7 @@ public class Register1 extends AppCompatActivity {
                         a.putExtra("listUser", listUser);
                         a.putExtra("listWishlist", listWishlist);
                         a.putExtra("tiperegister",tiperegister);
+                        a.putExtra("listRequestLelang", listRequestLelang);
                         a.putExtra("listToko", listToko);
                         a.putExtra("listBarang", listBarang);
                         startActivity(a);
@@ -151,6 +154,7 @@ public class Register1 extends AppCompatActivity {
                                 a.putExtra("listUser", listUser);
                                 a.putExtra("tiperegister",tiperegister);
                                 a.putExtra("listWishlist", listWishlist);
+                                a.putExtra("listRequestLelang", listRequestLelang);
                                 a.putExtra("listToko", listToko);
                                 a.putExtra("listBarang", listBarang);
                                 startActivity(a);
@@ -175,6 +179,7 @@ public class Register1 extends AppCompatActivity {
                         a.putExtra("tiperegister",tiperegister);
                         a.putExtra("listToko", listToko);
                         a.putExtra("listWishlist", listWishlist);
+                        a.putExtra("listRequestLelang", listRequestLelang);
                         a.putExtra("listBarang", listBarang);
                         startActivity(a);
                     }
@@ -192,6 +197,7 @@ public class Register1 extends AppCompatActivity {
                                 a.putExtra("tiperegister",tiperegister);
                                 a.putExtra("listToko", listToko);
                                 a.putExtra("listBarang", listBarang);
+                                a.putExtra("listRequestLelang", listRequestLelang);
                                 startActivity(a);
                                 break;
                             }
@@ -212,6 +218,7 @@ public class Register1 extends AppCompatActivity {
                     a.putExtra("listUser", listUser);
                     a.putExtra("listBarang", listBarang);
                     a.putExtra("listWishlist", listWishlist);
+                    a.putExtra("listRequestLelang", listRequestLelang);
                     a.putExtra("tiperegister",tiperegister);
                     a.putExtra("listToko", listToko);
                     startActivity(a);
@@ -228,6 +235,7 @@ public class Register1 extends AppCompatActivity {
                             a.putExtra("listUser", listUser);
                             a.putExtra("listBarang", listBarang);
                             a.putExtra("tiperegister",tiperegister);
+                            a.putExtra("listRequestLelang", listRequestLelang);
                             a.putExtra("listWishlist", listWishlist);
                             a.putExtra("listToko", listToko);
                             startActivity(a);

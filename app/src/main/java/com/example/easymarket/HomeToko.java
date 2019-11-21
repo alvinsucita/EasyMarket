@@ -30,6 +30,7 @@ public class HomeToko extends AppCompatActivity {
     ArrayList<Barang> listBarang;
     ArrayList<Toko> listToko ;
     ArrayList<ClassWishlist> listWishlist;
+    ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String yanglogin="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class HomeToko extends AppCompatActivity {
         listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
         listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
         listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
+        listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
         yanglogin=i.getStringExtra("yanglogin");
 
         changeFragment(new FragmentListBarang(),listBarang);
@@ -86,6 +88,7 @@ public class HomeToko extends AppCompatActivity {
             i.putExtra("listToko", listToko);
             i.putExtra("listBarang", listBarang);
             i.putExtra("listWishlist", listWishlist);
+            i.putExtra("listRequestLelang", listRequestLelang);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
+    ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +64,7 @@ public class Login extends AppCompatActivity {
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
             listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
+            listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
         }
     }
 
@@ -72,6 +74,7 @@ public class Login extends AppCompatActivity {
         i.putExtra("listToko", listToko);
         i.putExtra("listBarang", listBarang);
         i.putExtra("listWishlist", listWishlist);
+        i.putExtra("listRequestLelang", listRequestLelang);
         startActivity(i);
     }
 
@@ -96,6 +99,7 @@ public class Login extends AppCompatActivity {
             i.putExtra("listToko", listToko);
             i.putExtra("listBarang", listBarang);
             i.putExtra("listWishlist", listWishlist);
+            i.putExtra("listRequestLelang", listRequestLelang);
             startActivity(i);
         }
         else{
@@ -107,6 +111,7 @@ public class Login extends AppCompatActivity {
                     a.putExtra("listToko", listToko);
                     a.putExtra("listBarang", listBarang);
                     a.putExtra("listWishlist", listWishlist);
+                    a.putExtra("listRequestLelang", listRequestLelang);
                     a.putExtra("adayanglogin","1");
                     startActivity(a);
                     break;
@@ -120,6 +125,7 @@ public class Login extends AppCompatActivity {
                     a.putExtra("listToko", listToko);
                     a.putExtra("listWishlist", listWishlist);
                     a.putExtra("listBarang", listBarang);
+                    a.putExtra("listRequestLelang", listRequestLelang);
                     a.putExtra("yanglogin",listToko.get(i).nama);
                     startActivity(a);
                     break;

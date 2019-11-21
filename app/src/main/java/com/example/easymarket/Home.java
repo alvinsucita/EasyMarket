@@ -30,6 +30,7 @@ public class Home extends AppCompatActivity {
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<Barang> listBarangSearch = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
+    ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String aktif="0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +49,13 @@ public class Home extends AppCompatActivity {
         listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Gaming",1950000,100,230,10,100));
         listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Gaming",65000,350,1000,70,50));
         listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Gaming",128000,50,120,30,0));
+        listRequestLelang.add(new ClassRequestLelang("FA00003"));
         search=findViewById(R.id.etSearch);
         rv=findViewById(R.id.rvhome);
         rv.setLayoutManager(new LinearLayoutManager(this));
         AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
         rv.setAdapter(adapterMenuBarang);
+
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(Color.WHITE);
@@ -66,6 +69,7 @@ public class Home extends AppCompatActivity {
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
             listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
+            listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
             for (int j = 0; j < listUser.size(); j++) {
                 if(listUser.get(j).aktif.equals("1")){
                     userlogin=listUser.get(j).nama;
@@ -77,8 +81,8 @@ public class Home extends AppCompatActivity {
         }
 
         if(i.hasExtra("barangfilter")){
-        }
 
+        }
     }
 
     @Override
@@ -116,6 +120,7 @@ public class Home extends AppCompatActivity {
         i.putExtra("listWishlist", listWishlist);
         i.putExtra("listToko", listToko);
         i.putExtra("listBarang", listBarang);
+        i.putExtra("listRequestLelang", listRequestLelang);
         Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_SHORT).show();
         return i;
     }

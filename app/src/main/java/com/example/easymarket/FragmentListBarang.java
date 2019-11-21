@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class FragmentListBarang extends Fragment {
     Spinner sp;
     TextView nama,harga,kategori,likes,terjual,lihat,deskripsi,stok;
     Button request;
+    String strnama="",strkategori="",strdeskripsi="";
+    int intharga=0,intstok=0,intlihat=0,intterjual=0,intlikes=0;
 
     public FragmentListBarang() {
         // Required empty public constructor
@@ -71,8 +74,6 @@ public class FragmentListBarang extends Fragment {
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String strnama="",strkategori="",strdeskripsi="";
-                int intharga=0,intstok=0,intlihat=0,intterjual=0,intlikes=0;
                 strnama=sp.getSelectedItem().toString();
                 for (int i = 0; i < listBarang.size(); i++) {
                     if(listBarang.get(i).namabarang.equals(strnama)){
@@ -98,6 +99,30 @@ public class FragmentListBarang extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id="";
+                int ctr=0;
+                for (int i = 0; i < listBarang.size(); i++) {
+                    if(strnama.equals(listBarang.get(i).namabarang)){
+                        id=listBarang.get(i).idbarang;
+                    }
+                }
+                for (int i = 0; i < ((HomeToko) getActivity()).listRequestLelang.size(); i++) {
+                    if(id.equals(((HomeToko) getActivity()).listRequestLelang.get(i).idbarang)){
+                        ctr++;
+                    }
+                }
+                if(ctr==0){
+                    ((HomeToko) getActivity()).listRequestLelang.add(new ClassRequestLelang(id));
+                    Toast.makeText(getContext(), ((HomeToko) getActivity()).listRequestLelang.size()+"", Toast.LENGTH_SHORT).show();
+                }
+                else if(ctr>0){
+                    Toast.makeText(getContext(), "Barang sudah direquest", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
