@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#BAFF4007"
+    android:background="#4CD0D0"
     tools:context=".NotaPembayaranFragment">
 
 
@@ -27,6 +27,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginBottom="11dp"
         android:text="Metode Pembayaran :"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,6 +38,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
         android:text="Total Harga Barang :"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,6 +58,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="14dp"
         android:text="Total Ongkos Kirim :"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 

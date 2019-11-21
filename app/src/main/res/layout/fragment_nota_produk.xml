@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#BAFF4007"
+    android:background="#4CD0D0"
     tools:context=".NotaProdukFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvbarangnota"
-        android:layout_width="411dp"
-        android:layout_height="209dp"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
