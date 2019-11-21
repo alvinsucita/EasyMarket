@@ -31,7 +31,7 @@ public class HomeToko extends AppCompatActivity {
     ArrayList<Toko> listToko ;
     ArrayList<ClassWishlist> listWishlist;
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
-    String yanglogin="";
+    String tokologin="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,6 @@ public class HomeToko extends AppCompatActivity {
         listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
         listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
         listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
-        yanglogin=i.getStringExtra("yanglogin");
 
         changeFragment(new FragmentListBarang(),listBarang);
         bottomNavigationView=findViewById(R.id.btmNav);
@@ -62,6 +61,11 @@ public class HomeToko extends AppCompatActivity {
                 return true;
             }
         });
+        for (int j = 0; j < listToko.size(); j++) {
+            if(listToko.get(j).aktif.equals("1")){
+                tokologin=listToko.get(j).nama;
+            }
+        }
     }
 
     @Override

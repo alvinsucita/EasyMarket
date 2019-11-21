@@ -35,9 +35,6 @@
         android:visible="false"
         android:title="EditToko" />
     <item
-        android:id="@+id/itemInfoPengiriman"
-        android:title="InfoPengiriman" />
-    <item
         android:id="@+id/itemLogout"
         android:title="Logout"
         android:visible="false" />

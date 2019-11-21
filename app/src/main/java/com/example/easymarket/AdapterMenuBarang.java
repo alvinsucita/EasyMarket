@@ -34,9 +34,11 @@ public class AdapterMenuBarang extends RecyclerView.Adapter<AdapterMenuBarang.Li
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, final int position) {
+        String hargaasli = String.format("%,d", listBarang.get(position).harga);
         holder.nama.setText(listBarang.get(position).namabarang);
-        holder.harga.setText(listBarang.get(position).harga+"");
+        holder.harga.setText("Rp. "+hargaasli);
         holder.info.setText("Info");
+        holder.fotobarang.setBackgroundResource(listBarang.get(position).foto);
         holder.info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +66,6 @@ public class AdapterMenuBarang extends RecyclerView.Adapter<AdapterMenuBarang.Li
             nama=itemView.findViewById(R.id.tvNamaBarang);
             harga=itemView.findViewById(R.id.tvHarga);
             info=itemView.findViewById(R.id.btnInfoBarang);
-
         }
     }
 }
