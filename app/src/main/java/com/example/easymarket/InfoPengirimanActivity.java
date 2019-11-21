@@ -19,8 +19,8 @@ public class InfoPengirimanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_pengiriman);
 
-        fragment = new FragmentTerkirim();
-        openFragment(fragment);
+        //fragment = new FragmentTerkirim();
+        //openFragment(fragment);
         bottomView = findViewById(R.id.navInfoPengirimanActivity);
         bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
