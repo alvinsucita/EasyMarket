@@ -90,6 +90,7 @@ public class Login extends AppCompatActivity {
     public void login(View view) {
         stremail=email.getText().toString();
         strpass=pass.getText().toString();
+        int ctr=0,ctr2=0;
         if(stremail.equals("") || strpass.equals("")){
             Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
         }
@@ -105,31 +106,38 @@ public class Login extends AppCompatActivity {
         else{
             for (int i = 0; i < listUser.size(); i++) {
                 if(stremail.equals(listUser.get(i).email)&& strpass.equals(listUser.get(i).password)){
+                    ctr++;
                     listUser.get(i).aktif="1";
-                    Intent a = new Intent(Login.this, Home.class);
-                    a.putExtra("listUser", listUser);
-                    a.putExtra("listToko", listToko);
-                    a.putExtra("listBarang", listBarang);
-                    a.putExtra("listWishlist", listWishlist);
-                    a.putExtra("listRequestLelang", listRequestLelang);
-                    a.putExtra("adayanglogin","1");
-                    startActivity(a);
-                    break;
                 }
             }
+            if(ctr>0){
+                Intent a = new Intent(Login.this, Home.class);
+                a.putExtra("listUser", listUser);
+                a.putExtra("listToko", listToko);
+                a.putExtra("listBarang", listBarang);
+                a.putExtra("listWishlist", listWishlist);
+                a.putExtra("listRequestLelang", listRequestLelang);
+                a.putExtra("adayanglogin","1");
+                startActivity(a);
+            }
+
             for (int i = 0; i < listToko.size(); i++) {
                 if(stremail.equals(listToko.get(i).email)&& strpass.equals(listToko.get(i).password)){
                     listToko.get(i).aktif="1";
-                    Intent a = new Intent(Login.this, HomeToko.class);
-                    a.putExtra("listUser", listUser);
-                    a.putExtra("listToko", listToko);
-                    a.putExtra("listWishlist", listWishlist);
-                    a.putExtra("listBarang", listBarang);
-                    a.putExtra("listRequestLelang", listRequestLelang);
-                    a.putExtra("yanglogin",listToko.get(i).nama);
-                    startActivity(a);
-                    break;
+                    ctr2++;
                 }
+            }
+            if(ctr2>0){
+                Intent a = new Intent(Login.this, HomeToko.class);
+                a.putExtra("listUser", listUser);
+                a.putExtra("listToko", listToko);
+                a.putExtra("listWishlist", listWishlist);
+                a.putExtra("listBarang", listBarang);
+                a.putExtra("listRequestLelang", listRequestLelang);
+                startActivity(a);
+            }
+            else if(ctr==0 && ctr2==0){
+                Toast.makeText(this, "Email atau Password salah", Toast.LENGTH_SHORT).show();
             }
         }
     }

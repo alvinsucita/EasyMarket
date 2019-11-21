@@ -78,8 +78,13 @@ public class Register2 extends AppCompatActivity {
         stremail=email.getText().toString();
         strpassword=password.getText().toString();
         strconpassword=conpassword.getText().toString();
+        int panjangpassword=strpassword.length();
+
         if(stremail.equals("")|| strpassword.equals("") || strconpassword.equals("")){
             Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
+        }
+        else if(panjangpassword<8 || panjangpassword>16){
+            Toast.makeText(this, "Panjang password 8-16 karakter", Toast.LENGTH_SHORT).show();
         }
         else{
             if(!strpassword.equals(strconpassword)){
@@ -88,37 +93,49 @@ public class Register2 extends AppCompatActivity {
             else{
                 Intent i = new Intent(Register2.this,Login.class);
                 if(tiperegister.equals("toko")){
+                    int ctr=0;
                     for (int j = 0; j < listToko.size(); j++) {
-                        if(email.getText().toString().equals(listToko.get(j).email)) {
-                            Toast.makeText(this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        else if(!email.getText().toString().equals(listToko.get(j).email) && j==listToko.size()-1){
-                            listToko.get(listToko.size()-1).email=stremail;
-                            listToko.get(listToko.size()-1).password=strpassword;
-                            break;
+                        if(email.getText().toString().equals(listToko.get(j).email)){
+                            ctr++;
                         }
                     }
+                    if(ctr==0){
+                        listToko.get(listToko.size()-1).email=stremail;
+                        listToko.get(listToko.size()-1).password=strpassword;
+                        i.putExtra("listUser",listUser);
+                        i.putExtra("listToko",listToko);
+                        i.putExtra("listWishlist", listWishlist);
+                        i.putExtra("listBarang", listBarang);
+                        i.putExtra("listRequestLelang", listRequestLelang);
+                        startActivity(i);
+                        Toast.makeText(this, "Toko berhasil didaftarkan", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(ctr>0){
+                        Toast.makeText(this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else if(tiperegister.equals("user")) {
+                else if(tiperegister.equals("user")){
+                    int ctr=0;
                     for (int j = 0; j < listUser.size(); j++) {
                         if(email.getText().toString().equals(listUser.get(j).email)) {
-                            Toast.makeText(this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        else if(!email.getText().toString().equals(listUser.get(j).email) && j==listUser.size()-1){
-                            listUser.get(listUser.size()-1).email=stremail;
-                            listUser.get(listUser.size()-1).password=strpassword;
-                            break;
+                            ctr++;
                         }
                     }
+                    if(ctr==0){
+                        listUser.get(listUser.size()-1).email=stremail;
+                        listUser.get(listUser.size()-1).password=strpassword;
+                        i.putExtra("listUser",listUser);
+                        i.putExtra("listToko",listToko);
+                        i.putExtra("listWishlist", listWishlist);
+                        i.putExtra("listBarang", listBarang);
+                        i.putExtra("listRequestLelang", listRequestLelang);
+                        startActivity(i);
+                        Toast.makeText(this, "User berhasil didaftarkan", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(ctr>0){
+                        Toast.makeText(this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                i.putExtra("listUser",listUser);
-                i.putExtra("listToko",listToko);
-                i.putExtra("listWishlist", listWishlist);
-                i.putExtra("listBarang", listBarang);
-                i.putExtra("listRequestLelang", listRequestLelang);
-                startActivity(i);
             }
         }
     }

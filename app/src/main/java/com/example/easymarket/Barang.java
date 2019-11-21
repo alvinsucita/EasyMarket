@@ -13,8 +13,9 @@ public class Barang implements Serializable {
     int dilihat;
     int dibeli;
     int stok;
+    int foto;
 
-    public Barang(String idbarang, String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {
+    public Barang(String idbarang, String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok, int foto) {
         this.idbarang = idbarang;
         this.namatoko = namatoko;
         this.namabarang = namabarang;
@@ -25,6 +26,7 @@ public class Barang implements Serializable {
         this.dilihat = dilihat;
         this.dibeli = dibeli;
         this.stok = stok;
+        this.foto = foto;
     }
 
     public String getIdbarang() {
@@ -105,5 +107,13 @@ public class Barang implements Serializable {
 
     public void setStok(int stok) {
         this.stok = stok;
+    }
+
+    public int getFoto() {
+        return foto;
+    }
+
+    public void setFoto(int foto) {
+        this.foto = foto;
     }
 }

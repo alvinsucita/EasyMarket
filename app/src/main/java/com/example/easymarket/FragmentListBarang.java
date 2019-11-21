@@ -61,7 +61,7 @@ public class FragmentListBarang extends Fragment {
         request=view.findViewById(R.id.btnRequest);
         ArrayList<String> listspinner = new ArrayList<>();
         for (int i = 0; i < listBarang.size(); i++) {
-            if(listBarang.get(i).namatoko.equals(homeToko.yanglogin)){
+            if(listBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
                 listspinner.add(listBarang.get(i).namabarang);
             }
         }
