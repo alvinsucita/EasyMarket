@@ -60,12 +60,10 @@
         android:layout_marginStart="20dp"
         android:background="#FFAF42"
         android:text="Info"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBarangLelang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivBarangLelang"
-        app:layout_constraintTop_toBottomOf="@+id/tvHargaLelang"
-        app:layout_constraintVertical_bias="0.512" />
+        app:layout_constraintStart_toEndOf="@+id/ivBarangLelang" />
 
     <ImageView
         android:id="@+id/ivGarisLelang"

@@ -1,20 +1,48 @@
 package com.example.easymarket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 public class LelangActivity extends AppCompatActivity {
+
+    EditText search;
+    RecyclerView rv;
+    ArrayList<Barang> listBarang = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lelang);
+
+        Intent i = getIntent();
+        listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        search=findViewById(R.id.etSearchLelang);
+        rv=findViewById(R.id.rvlelang);
+
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        AdapterBarangLelang adapterBarangLelang = new AdapterBarangLelang(listBarang);
+        rv.setAdapter(adapterBarangLelang);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.WHITE);
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(15);
+        search.setBackground(drawable);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
