@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-public class lelang extends AppCompatActivity {
+public class LelangActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class lelang extends AppCompatActivity {
     }
 
     public void toChat(View view) {
-        Intent i = new Intent(lelang.this,ChatRoom.class);
+        Intent i = new Intent(LelangActivity.this,ChatRoom.class);
         startActivity(i);
     }
 }

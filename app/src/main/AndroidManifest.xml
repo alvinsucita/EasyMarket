@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InfoPengirimanActivity"></activity>
+        <activity android:name=".InfoBarangLelang"></activity>
+        <activity android:name=".LelangActivity" />
+        <activity android:name=".InfoPengirimanActivity" />
         <activity android:name=".NotaActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".ProfileUtamaActivity" />
@@ -37,7 +39,6 @@
         <activity android:name=".HomeToko" />
         <activity android:name=".InfoBarang" />
         <activity android:name=".InfoComment" />
-        <activity android:name=".lelang" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ManageUsers" />

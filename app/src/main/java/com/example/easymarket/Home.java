@@ -159,7 +159,7 @@ public class Home extends AppCompatActivity {
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemLelang){
-            Intent i = new Intent(Home.this,lelang.class);
+            Intent i = new Intent(Home.this,LelangActivity.class);
             i = putextra(i);
             startActivity(i);
         }
