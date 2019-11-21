@@ -166,6 +166,10 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(Home.this,RefundActivity.class);
             startActivity(i);
         }
+        else if(item.getItemId()==R.id.itemInfoPengiriman){
+            Intent i = new Intent(Home.this,InfoPengirimanActivity.class);
+            startActivity(i);
+        }
 
         return super.onOptionsItemSelected(item);
     }
