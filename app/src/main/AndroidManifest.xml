@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InfoPengirimanActivity"></activity>
+        <activity android:name=".Home"></activity>
+        <activity android:name=".InfoPengirimanActivity" />
         <activity android:name=".NotaActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".ProfileUtamaActivity" />
@@ -27,7 +28,7 @@
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
         <activity android:name=".EventPage" />
-        <activity android:name=".Home">
+        <activity android:name=".HalamanCover">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
