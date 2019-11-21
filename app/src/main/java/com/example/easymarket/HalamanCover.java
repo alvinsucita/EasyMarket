@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class HalamanCover extends AppCompatActivity {
@@ -21,6 +22,6 @@ public class HalamanCover extends AppCompatActivity {
                 Intent i = new Intent(HalamanCover.this,Home.class);
                 startActivity(i);
             }
-        }, 7000);
+        }, 4000);
     }
 }

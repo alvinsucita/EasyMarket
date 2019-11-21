@@ -35,26 +35,6 @@ public class Login extends AppCompatActivity {
         pass=findViewById(R.id.etPassword);
         login=findViewById(R.id.btnLogin);
 
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(Color.WHITE);
-        drawable.setShape(GradientDrawable.OVAL);
-        drawable.setStroke(5, Color.BLACK);
-        login.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setColor(Color.WHITE);
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setStroke(5, Color.BLACK);
-        drawable2.setCornerRadius(15);
-        email.setBackground(drawable2);
-
-        GradientDrawable drawable3 = new GradientDrawable();
-        drawable3.setColor(Color.WHITE);
-        drawable3.setShape(GradientDrawable.RECTANGLE);
-        drawable3.setStroke(5, Color.BLACK);
-        drawable3.setCornerRadius(15);
-        pass.setBackground(drawable3);
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
