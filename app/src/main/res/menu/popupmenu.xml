@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemPakaian"
+        android:title="Pakaian" />
+    <item
+        android:id="@+id/itemIbuAnak"
+        android:title="Ibu dan Anak" />
+    <item
+        android:id="@+id/itemElektronik"
+        android:title="Elektronik" />
+    <item
+        android:id="@+id/itemMakananMinuman"
+        android:title="Makanan dan Minuman" />
+    <item
+        android:id="@+id/itemGames"
+        android:title="Games" />
+    <item
+        android:id="@+id/itemKecantikan"
+        android:title="Kecantikan" />
+    <item
+        android:id="@+id/itemOlahraga"
+        android:title="Olahraga" />
+    <item
+        android:id="@+id/itemLainlain"
+        android:title="Lain-lain" />
+    <item
+        android:id="@+id/itemReset"
+        android:title="Reset" />
+</menu>

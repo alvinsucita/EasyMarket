@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import java.util.ArrayList;
 
-public class Register2 extends AppCompatActivity {
+public class Register extends AppCompatActivity {
     Button register;
     EditText email,password,conpassword;
     String stremail,strpassword,strconpassword;
@@ -21,43 +23,51 @@ public class Register2 extends AppCompatActivity {
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
+    RadioButton toko,user;
+    RadioGroup rgJenis;
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String tiperegister="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register2);
-        register=findViewById(R.id.btnRegister);
+        setContentView(R.layout.activity_register);
 
+        register=findViewById(R.id.btnRegister);
         email=findViewById(R.id.etEmail);
         password=findViewById(R.id.etPassword);
         conpassword=findViewById(R.id.etKonfirmasiPassword);
+        toko=findViewById(R.id.rbToko);
+        user=findViewById(R.id.rbUser);
+        rgJenis=findViewById(R.id.jenisuser);
 
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(Color.WHITE);
-        drawable.setShape(GradientDrawable.OVAL);
-        drawable.setStroke(5, Color.BLACK);
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.BLACK);
         register.setBackground(drawable);
 
         GradientDrawable drawable3 = new GradientDrawable();
-        drawable3.setColor(Color.WHITE);
         drawable3.setShape(GradientDrawable.RECTANGLE);
-        drawable3.setStroke(5, Color.BLACK);
-        drawable3.setCornerRadius(15);
-        email.setBackground(drawable3);
+        drawable3.setCornerRadius(100);
+        drawable3.setColor(Color.WHITE);
+        password.setBackground(drawable3);
 
         GradientDrawable drawable4 = new GradientDrawable();
-        drawable4.setColor(Color.WHITE);
         drawable4.setShape(GradientDrawable.RECTANGLE);
-        drawable4.setStroke(5, Color.BLACK);
-        drawable4.setCornerRadius(15);
-        password.setBackground(drawable4);
+        drawable4.setCornerRadius(100);
+        drawable4.setColor(Color.WHITE);
+        email.setBackground(drawable4);
+
+        GradientDrawable drawable7 = new GradientDrawable();
+        drawable7.setShape(GradientDrawable.RECTANGLE);
+        drawable7.setCornerRadius(100);
+        drawable7.setColor(Color.WHITE);
+        rgJenis.setBackground(drawable7);
 
         GradientDrawable drawable5 = new GradientDrawable();
-        drawable5.setColor(Color.WHITE);
         drawable5.setShape(GradientDrawable.RECTANGLE);
-        drawable5.setStroke(5, Color.BLACK);
-        drawable5.setCornerRadius(15);
+        drawable5.setCornerRadius(100);
+        drawable5.setColor(Color.WHITE);
         conpassword.setBackground(drawable5);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -70,7 +80,6 @@ public class Register2 extends AppCompatActivity {
             listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
             listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
-            tiperegister=i.getStringExtra("tiperegister");
         }
     }
 
@@ -80,7 +89,7 @@ public class Register2 extends AppCompatActivity {
         strconpassword=conpassword.getText().toString();
         int panjangpassword=strpassword.length();
 
-        if(stremail.equals("")|| strpassword.equals("") || strconpassword.equals("")){
+        if(stremail.equals("")|| strpassword.equals("") || strconpassword.equals("")||tiperegister.equals("")){
             Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
         }
         else if(panjangpassword<8 || panjangpassword>16){
@@ -91,7 +100,7 @@ public class Register2 extends AppCompatActivity {
                 Toast.makeText(this, "Password dan Konfirmasi Password Harus Sama ! ", Toast.LENGTH_SHORT).show();
             }
             else{
-                Intent i = new Intent(Register2.this,Login.class);
+                Intent i = new Intent(Register.this,Login.class);
                 if(tiperegister.equals("toko")){
                     int ctr=0;
                     for (int j = 0; j < listToko.size(); j++) {
@@ -100,14 +109,14 @@ public class Register2 extends AppCompatActivity {
                         }
                     }
                     if(ctr==0){
-                        listToko.get(listToko.size()-1).email=stremail;
-                        listToko.get(listToko.size()-1).password=strpassword;
-                        i.putExtra("listUser",listUser);
-                        i.putExtra("listToko",listToko);
-                        i.putExtra("listWishlist", listWishlist);
-                        i.putExtra("listBarang", listBarang);
-                        i.putExtra("listRequestLelang", listRequestLelang);
-                        startActivity(i);
+                        listToko.add(new Toko(stremail,"",stremail,strpassword,"0"));
+                        Intent a = new Intent(Register.this, Login.class);
+                        a.putExtra("listUser", listUser);
+                        a.putExtra("listBarang", listBarang);
+                        a.putExtra("listWishlist", listWishlist);
+                        a.putExtra("listRequestLelang", listRequestLelang);
+                        a.putExtra("listToko", listToko);
+                        startActivity(a);
                         Toast.makeText(this, "Toko berhasil didaftarkan", Toast.LENGTH_SHORT).show();
                     }
                     else if(ctr>0){
@@ -122,14 +131,14 @@ public class Register2 extends AppCompatActivity {
                         }
                     }
                     if(ctr==0){
-                        listUser.get(listUser.size()-1).email=stremail;
-                        listUser.get(listUser.size()-1).password=strpassword;
-                        i.putExtra("listUser",listUser);
-                        i.putExtra("listToko",listToko);
-                        i.putExtra("listWishlist", listWishlist);
-                        i.putExtra("listBarang", listBarang);
-                        i.putExtra("listRequestLelang", listRequestLelang);
-                        startActivity(i);
+                        listUser.add(new User(stremail,stremail,strpassword,"","","","0"));
+                        Intent a = new Intent(Register.this, Login.class);
+                        a.putExtra("listUser", listUser);
+                        a.putExtra("listBarang", listBarang);
+                        a.putExtra("listWishlist", listWishlist);
+                        a.putExtra("listRequestLelang", listRequestLelang);
+                        a.putExtra("listToko", listToko);
+                        startActivity(a);
                         Toast.makeText(this, "User berhasil didaftarkan", Toast.LENGTH_SHORT).show();
                     }
                     else if(ctr>0){
@@ -144,26 +153,26 @@ public class Register2 extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id== android.R.id.home){
-            Intent i= new Intent(Register2.this,Register1.class);
-            if(tiperegister.equals("toko")){
-                listToko.remove(listToko.size()-1);
-                i.putExtra("listUser",listUser);
-                i.putExtra("listToko",listToko);
-                i.putExtra("listWishlist", listWishlist);
-                i.putExtra("listRequestLelang", listRequestLelang);
-                i.putExtra("listBarang", listBarang);
-                startActivity(i);
-            }
-            else if(tiperegister.equals("user")){
-                listUser.remove(listUser.size()-1);
-                i.putExtra("listUser",listUser);
-                i.putExtra("listWishlist", listWishlist);
-                i.putExtra("listRequestLelang", listRequestLelang);
-                i.putExtra("listToko",listToko);
-                i.putExtra("listBarang", listBarang);
-                startActivity(i);
-            }
+            this.finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void pilihtoko(View view) {
+        tiperegister="toko";
+    }
+
+    public void pilihuser(View view) {
+        tiperegister="user";
+    }
+
+    public void toLogin(View view) {
+        Intent i = new Intent(Register.this, Login.class);
+        i.putExtra("listUser", listUser);
+        i.putExtra("listToko", listToko);
+        i.putExtra("listBarang", listBarang);
+        i.putExtra("listWishlist", listWishlist);
+        i.putExtra("listRequestLelang", listRequestLelang);
+        startActivity(i);
     }
 }

@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setShape(GradientDrawable.RECTANGLE);
         drawable3.setCornerRadius(100);
-        drawable3.setColor(Color.rgb(255,136,0));
+        drawable3.setColor(Color.BLACK);
         login.setBackground(drawable3);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void toRegis(View view) {
-        Intent i = new Intent(Login.this, Register1.class);
+        Intent i = new Intent(Login.this, Register.class);
         i.putExtra("listUser", listUser);
         i.putExtra("listToko", listToko);
         i.putExtra("listBarang", listBarang);

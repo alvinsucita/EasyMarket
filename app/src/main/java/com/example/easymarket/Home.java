@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,9 +33,11 @@ public class Home extends AppCompatActivity {
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<Barang> listBarangSearch = new ArrayList<>();
+    ArrayList<Barang> listBarangFilter = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String aktif="0";
+    Button filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,23 +48,32 @@ public class Home extends AppCompatActivity {
         listToko.add(new Toko("Hypershop","Jawa Timur","hyper@gmail.com","hyperx","0"));
         listToko.add(new Toko("Happy Store","Jawa Timur","happy@gmail.com","hapstore","0"));
         listToko.add(new Toko("Games X Shop","Jawa Timur","gamesx@gmail.com","gamshop","0"));
-        listBarang.add(new Barang("FA00001","Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Fashion",11000,0,0,0,10,R.drawable.sendalswallow));
-        listBarang.add(new Barang("FA00002","Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Fashion",2800000,7,30,3,2,R.drawable.adidasterrex));
-        listBarang.add(new Barang("FA00003","Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Fashion",11000000,200,500,1,10,R.drawable.balenciagatriples));
-        listBarang.add(new Barang("IB00001","Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Bayi",227000,5,70,30,30,R.drawable.enfamil));
-        listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Gaming",1950000,100,230,10,100,R.drawable.blackwidowchroma));
-        listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Gaming",65000,350,1000,70,50,R.drawable.logitech));
-        listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Gaming",128000,50,120,30,0,R.drawable.deathadder));
+        listBarang.add(new Barang("FA00001","Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Pakaian",11000,0,0,0,10,R.drawable.sendalswallow));
+        listBarang.add(new Barang("FA00002","Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Pakaian",2800000,7,30,3,2,R.drawable.adidasterrex));
+        listBarang.add(new Barang("FA00003","Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Pakaian",11000000,200,500,1,10,R.drawable.balenciagatriples));
+        listBarang.add(new Barang("IB00001","Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Anak",227000,5,70,30,30,R.drawable.enfamil));
+        listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Games",1950000,100,230,10,100,R.drawable.blackwidowchroma));
+        listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Games",65000,350,1000,70,50,R.drawable.logitech));
+        listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Games",128000,50,120,30,0,R.drawable.deathadder));
         listRequestLelang.add(new ClassRequestLelang("FA00003"));
         search=findViewById(R.id.etSearch);
+        filter=findViewById(R.id.btnFilter);
         rv=findViewById(R.id.rvhome);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(Color.WHITE);
         drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setStroke(8, Color.LTGRAY);
         drawable.setCornerRadius(100);
         search.setBackground(drawable);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setStroke(8, Color.LTGRAY);
+        drawable2.setColor(Color.WHITE);
+        filter.setBackground(drawable2);
 
         Intent i = getIntent();
         if(i.hasExtra("listUser")){
@@ -96,14 +108,26 @@ public class Home extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                listBarangSearch.clear();
-                for (int j = 0; j < listBarang.size(); j++) {
-                    if(listBarang.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
-                        listBarangSearch.add(listBarang.get(j));
+                if(listBarangFilter.size()>0){
+                    listBarangSearch.clear();
+                    for (int j = 0; j < listBarangFilter.size(); j++) {
+                        if(listBarangFilter.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
+                            listBarangSearch.add(listBarangFilter.get(j));
+                        }
                     }
+                    AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
+                    rv.setAdapter(adapterMenuBarang);
                 }
-                AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
-                rv.setAdapter(adapterMenuBarang);
+                else{
+                    listBarangSearch.clear();
+                    for (int j = 0; j < listBarang.size(); j++) {
+                        if(listBarang.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
+                            listBarangSearch.add(listBarang.get(j));
+                        }
+                    }
+                    AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
+                    rv.setAdapter(adapterMenuBarang);
+                }
             }
         });
 
@@ -148,6 +172,206 @@ public class Home extends AppCompatActivity {
         }
         return super.onCreateOptionsMenu(menu);
     }
+
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.popupmenu, popup.getMenu());
+        popup.show();
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId()==R.id.itemPakaian){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("pakaian")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("pakaian")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemIbuAnak){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("ibu")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("ibu")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemElektronik){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("elektronik")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("elektronik")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemMakananMinuman){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("makan")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("makan")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemGames){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("games")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("games")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemKecantikan){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("kecantikan")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("kecantikan")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemOlahraga){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("olahraga")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("olahraga")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemLainlain){
+                    if(listBarangSearch.size()>0){
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarangSearch.size(); j++) {
+                            if(listBarangSearch.get(j).kategori.toLowerCase().contains("lain")){
+                                listBarangFilter.add(listBarangSearch.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                    else{
+                        listBarangFilter.clear();
+                        for (int j = 0; j < listBarang.size(); j++) {
+                            if(listBarang.get(j).kategori.toLowerCase().contains("lain")){
+                                listBarangFilter.add(listBarang.get(j));
+                            }
+                        }
+                        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
+                        rv.setAdapter(adapterMenuBarang);
+                    }
+                }
+                else if(item.getItemId()==R.id.itemReset){
+                    AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
+                    rv.setAdapter(adapterMenuBarang);
+
+                    listBarangFilter.clear();
+                    listBarangSearch.clear();
+                    search.setText("");
+                }
+                return true;
+            }
+        });
+    }
+
+
 
     public Intent putextra(Intent i){
         i.putExtra("listUser", listUser);
@@ -204,7 +428,6 @@ public class Home extends AppCompatActivity {
             Intent i = new Intent(Home.this,RefundActivity.class);
             startActivity(i);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

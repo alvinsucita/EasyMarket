@@ -13,9 +13,11 @@
         android:id="@+id/tvToRegis2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
         android:onClick="toRegis"
         android:text="Register"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textAllCaps="false"
+        android:textColor="#3F51B5"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +30,7 @@
         android:id="@+id/tvToRegis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
         android:text="Belum Punya ID ?"
         android:textColor="@android:color/black"
         android:textSize="10sp"
@@ -43,6 +46,7 @@
         android:layout_width="300dp"
         android:layout_height="35dp"
         android:ems="10"
+        android:fontFamily="@font/cabin"
         android:hint="Email"
         android:inputType="textPersonName"
         android:paddingLeft="50dp"
@@ -60,6 +64,8 @@
         android:id="@+id/btnLogin"
         android:layout_width="300dp"
         android:layout_height="40dp"
+        android:background="@android:color/black"
+        android:fontFamily="@font/cabin"
         android:onClick="login"
         android:text="Login"
         android:textColor="@android:color/white"
@@ -77,6 +83,7 @@
         android:layout_height="35dp"
         android:background="@android:color/white"
         android:ems="10"
+        android:fontFamily="@font/cabin"
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="50dp"
@@ -89,44 +96,47 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivBackgroundJudul"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/holo_orange_dark" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvJudulLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/lemon"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
         android:text="Login"
         android:textColor="@android:color/white"
-        android:textSize="30dp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.105" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
+        app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364"
+        app:layout_constraintVertical_bias="0.361"
         app:srcCompat="@drawable/baseline_email_black_18dp" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/ivPassword"
         android:layout_width="18dp"
         android:layout_height="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,5 +146,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/baseline_vpn_key_black_18dp" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBackgroundJudul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivBackgroundJudul"
+        app:layout_constraintTop_toTopOf="@+id/ivBackgroundJudul"
+        app:layout_constraintVertical_bias="0.32"
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
