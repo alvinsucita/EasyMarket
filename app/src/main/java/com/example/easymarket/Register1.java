@@ -22,7 +22,6 @@ public class Register1 extends AppCompatActivity {
 
     Button next;
     Spinner umur,daerahasal;
-    RadioGroup gendergroup,registergroup;
     RadioButton pria,wanita,toko,user;
     EditText nama;
     ArrayList<String> spinnerArray =  new ArrayList<>();
@@ -33,6 +32,7 @@ public class Register1 extends AppCompatActivity {
     ArrayList<Toko> listToko = new ArrayList<>();
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String tiperegister="";
+    RadioGroup rgJenis,rgGender;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +45,8 @@ public class Register1 extends AppCompatActivity {
         toko=findViewById(R.id.rbToko);
         user=findViewById(R.id.rbUser);
         nama = findViewById(R.id.etNama);
+        rgJenis=findViewById(R.id.jenisuser);
+        rgGender=findViewById(R.id.gender);
 
         for (int i = 18; i < 61; i++) {
             spinnerArray.add(i + "");
@@ -58,6 +60,42 @@ public class Register1 extends AppCompatActivity {
         spinnerArray2.add("Madura");
         spinnerArray2.add("Banten");
 
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.WHITE);
+        rgJenis.setBackground(drawable);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setColor(Color.WHITE);
+        nama.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setColor(Color.WHITE);
+        umur.setBackground(drawable3);
+
+        GradientDrawable drawable4 = new GradientDrawable();
+        drawable4.setShape(GradientDrawable.RECTANGLE);
+        drawable4.setCornerRadius(100);
+        drawable4.setColor(Color.WHITE);
+        rgGender.setBackground(drawable4);
+
+        GradientDrawable drawable5 = new GradientDrawable();
+        drawable5.setShape(GradientDrawable.RECTANGLE);
+        drawable5.setCornerRadius(100);
+        drawable5.setColor(Color.WHITE);
+        daerahasal.setBackground(drawable5);
+
+        GradientDrawable drawable6 = new GradientDrawable();
+        drawable6.setShape(GradientDrawable.RECTANGLE);
+        drawable6.setCornerRadius(100);
+        drawable6.setColor(Color.rgb(255,136,0));
+        next.setBackground(drawable6);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner sItems = (Spinner) findViewById(R.id.spUmur);
@@ -66,34 +104,6 @@ public class Register1 extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner sItems2 = (Spinner) findViewById(R.id.spDaerahAsal);
         sItems2.setAdapter(adapter2);
-
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setStroke(5, Color.BLACK);
-        drawable.setCornerRadius(15);
-        drawable.setColor(Color.WHITE);
-        nama.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setStroke(5, Color.BLACK);
-        drawable2.setCornerRadius(15);
-        drawable2.setColor(Color.WHITE);
-        umur.setBackground(drawable2);
-
-        GradientDrawable drawable5 = new GradientDrawable();
-        drawable5.setShape(GradientDrawable.OVAL);
-        drawable5.setStroke(5, Color.BLACK);
-        drawable5.setCornerRadius(15);
-        drawable5.setColor(Color.WHITE);
-        next.setBackground(drawable5);
-
-        GradientDrawable drawable6 = new GradientDrawable();
-        drawable6.setShape(GradientDrawable.RECTANGLE);
-        drawable6.setStroke(5, Color.BLACK);
-        drawable6.setCornerRadius(15);
-        drawable6.setColor(Color.WHITE);
-        daerahasal.setBackground(drawable6);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

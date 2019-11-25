@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,24 +45,22 @@ public class Home extends AppCompatActivity {
         listToko.add(new Toko("Hypershop","Jawa Timur","hyper@gmail.com","hyperx","0"));
         listToko.add(new Toko("Happy Store","Jawa Timur","happy@gmail.com","hapstore","0"));
         listToko.add(new Toko("Games X Shop","Jawa Timur","gamesx@gmail.com","gamshop","0"));
-//        listBarang.add(new Barang("FA00001","Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Fashion",11000,0,0,0,10,R.drawable.sendalswallow));
-//        listBarang.add(new Barang("FA00002","Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Fashion",2800000,7,30,3,2,R.drawable.adidasterrex));
-//        listBarang.add(new Barang("FA00003","Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Fashion",11000000,200,500,1,10,R.drawable.balenciagatriples));
-//        listBarang.add(new Barang("IB00001","Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Bayi",227000,5,70,30,30,R.drawable.enfamil));
-//        listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Gaming",1950000,100,230,10,100,R.drawable.blackwidowchroma));
-//        listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Gaming",65000,350,1000,70,50,R.drawable.logitech));
-//        listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Gaming",128000,50,120,30,0,R.drawable.deathadder));
+        listBarang.add(new Barang("FA00001","Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Fashion",11000,0,0,0,10,R.drawable.sendalswallow));
+        listBarang.add(new Barang("FA00002","Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Fashion",2800000,7,30,3,2,R.drawable.adidasterrex));
+        listBarang.add(new Barang("FA00003","Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Fashion",11000000,200,500,1,10,R.drawable.balenciagatriples));
+        listBarang.add(new Barang("IB00001","Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Bayi",227000,5,70,30,30,R.drawable.enfamil));
+        listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Gaming",1950000,100,230,10,100,R.drawable.blackwidowchroma));
+        listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Gaming",65000,350,1000,70,50,R.drawable.logitech));
+        listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Gaming",128000,50,120,30,0,R.drawable.deathadder));
         listRequestLelang.add(new ClassRequestLelang("FA00003"));
         search=findViewById(R.id.etSearch);
         rv=findViewById(R.id.rvhome);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
-        rv.setAdapter(adapterMenuBarang);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(Color.WHITE);
         drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(15);
+        drawable.setCornerRadius(100);
         search.setBackground(drawable);
 
         Intent i = getIntent();
@@ -80,9 +80,43 @@ public class Home extends AppCompatActivity {
             aktif="1";
         }
 
-        if(i.hasExtra("barangfilter")){
+        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
+        rv.setAdapter(adapterMenuBarang);
 
-        }
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                listBarangSearch.clear();
+                for (int j = 0; j < listBarang.size(); j++) {
+                    if(listBarang.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
+                        listBarangSearch.add(listBarang.get(j));
+                    }
+                }
+                AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
+                rv.setAdapter(adapterMenuBarang);
+            }
+        });
+
+        adapterMenuBarang = new AdapterMenuBarang(listBarang, new RVClickListener() {
+            @Override
+            public void recyclerViewListBarangClick(View v, int posisi) {
+                int indeks = posisi;
+                Intent i = new Intent(Home.this,InfoBarang.class);
+                putextra(i);
+                i.putExtra("indeks",indeks);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -172,9 +206,5 @@ public class Home extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void cari(View view) {
-
     }
 }

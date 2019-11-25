@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,13 +12,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
-    TextView toregis;
     EditText email,pass;
     Button login;
     String stremail,strpass;
@@ -26,14 +30,30 @@ public class Login extends AppCompatActivity {
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         email=findViewById(R.id.etEmail);
-        toregis=findViewById(R.id.tvToRegis);
         pass=findViewById(R.id.etPassword);
         login=findViewById(R.id.btnLogin);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.WHITE);
+        email.setBackground(drawable);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setColor(Color.WHITE);
+        pass.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setColor(Color.rgb(255,136,0));
+        login.setBackground(drawable3);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

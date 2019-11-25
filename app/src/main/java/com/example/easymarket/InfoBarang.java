@@ -81,7 +81,7 @@ public class InfoBarang extends AppCompatActivity {
         listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
         listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
         listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
-        indeks=i.getIntExtra("barangyangdipilih",indeks);
+        indeks=i.getIntExtra("indeks",indeks);
         if(i.hasExtra("adayanglogin")){
             aktif=i.getStringExtra("adayanglogin");
         }
