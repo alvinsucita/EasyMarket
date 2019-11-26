@@ -51,29 +51,27 @@ public class InfoBarang extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(Color.WHITE);
-        drawable.setShape(GradientDrawable.OVAL);
-        drawable.setStroke(5, Color.BLACK);
-        add.setBackground(drawable);
-
         GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setStroke(8, Color.LTGRAY);
         drawable2.setColor(Color.WHITE);
-        drawable2.setShape(GradientDrawable.OVAL);
-        drawable2.setStroke(5, Color.BLACK);
-        share.setBackground(drawable2);
+        add.setBackground(drawable2);
 
         GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setStroke(8, Color.LTGRAY);
         drawable3.setColor(Color.WHITE);
-        drawable3.setShape(GradientDrawable.OVAL);
-        drawable3.setStroke(5, Color.BLACK);
-        chat.setBackground(drawable3);
+        share.setBackground(drawable3);
+
+
 
         GradientDrawable drawable4 = new GradientDrawable();
         drawable4.setColor(Color.WHITE);
         drawable4.setShape(GradientDrawable.RECTANGLE);
         drawable4.setStroke(5, Color.BLACK);
-        drawable4.setCornerRadius(15);
+        drawable4.setCornerRadius(100);
         isi.setBackground(drawable4);
 
         Intent i = getIntent();

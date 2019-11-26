@@ -125,20 +125,29 @@ public class Home extends AppCompatActivity {
                             listBarangSearch.add(listBarang.get(j));
                         }
                     }
+                    Toast.makeText(Home.this, "Search Woe "+listBarangSearch.size(), Toast.LENGTH_SHORT).show();
                     AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
                     rv.setAdapter(adapterMenuBarang);
                 }
             }
         });
 
-        adapterMenuBarang = new AdapterMenuBarang(listBarang, new RVClickListener() {
+        adapterMenuBarang = new AdapterMenuBarang(listBarangSearch, new RVClickListener() {
             @Override
             public void recyclerViewListBarangClick(View v, int posisi) {
-                int indeks = posisi;
-                Intent i = new Intent(Home.this,InfoBarang.class);
-                putextra(i);
-                i.putExtra("indeks",indeks);
-                startActivity(i);
+                if(!listBarangSearch.isEmpty()){
+                    Toast.makeText(Home.this, "Masuk Searc", Toast.LENGTH_SHORT).show();
+                }
+                else if(!listBarangFilter.isEmpty()){
+                    Toast.makeText(Home.this, "MasukFilter", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    int indeks = posisi;
+                    Intent i = new Intent(Home.this,InfoBarang.class);
+                    putextra(i);
+                    i.putExtra("indeks",indeks);
+                    startActivity(i);
+                }
             }
         });
     }

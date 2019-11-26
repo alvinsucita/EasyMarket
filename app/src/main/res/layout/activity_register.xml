@@ -8,21 +8,6 @@
     tools:context=".Register">
 
     <TextView
-        android:id="@+id/tvToLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/cabin"
-        android:text="Sudah Punya ID ?"
-        android:textColor="@android:color/black"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.439"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923" />
-
-    <TextView
         android:id="@+id/tvToLogin2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,6 +20,21 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvToLogin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.923" />
+
+    <TextView
+        android:id="@+id/tvToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cabin"
+        android:text="Sudah Punya ID ?"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.923" />
 
