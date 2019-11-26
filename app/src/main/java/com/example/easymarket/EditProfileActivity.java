@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,10 +20,9 @@ import java.util.ArrayList;
 public class EditProfileActivity extends AppCompatActivity {
 
     ImageView img;
-    EditText tvNama,tvPasswordLama,tvPasswordBaru,tvConfirmPassword;
-    Button btnUpload,btnUpdate;
+    EditText tvNama,tvPasswordBaru,tvConfirmPassword;
+    Button btnUpdate;
     String PasswordBaru = "";
-    String PasswordLama = "";
     String PasswordConfirmBaru = "";
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
@@ -32,12 +34,23 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         tvNama = findViewById(R.id.tvNamaEditProfile);
-        tvPasswordLama = findViewById(R.id.tvPasswordLamaEditProfile);
         tvPasswordBaru = findViewById(R.id.tvPasswordBaruEditProfile);
         tvConfirmPassword = findViewById(R.id.tvConfirmPasswordBaruEditProfile);
         btnUpdate = findViewById(R.id.btnUpdateEditProfile);
-        btnUpload = findViewById(R.id.btnUploadEditProfile);
 
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.WHITE);
+        tvNama.setBackground(drawable);
+        tvPasswordBaru.setBackground(drawable);
+        tvConfirmPassword.setBackground(drawable);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setColor(Color.BLACK);
+        btnUpdate.setBackground(drawable2);
 
         Intent j = getIntent();
         listUser= (ArrayList<User>) j.getSerializableExtra("listUser");
@@ -45,18 +58,13 @@ public class EditProfileActivity extends AppCompatActivity {
         listBarang= (ArrayList<Barang>) j.getSerializableExtra("listBarang");
         listWishlist= (ArrayList<ClassWishlist>) j.getSerializableExtra("listWishlist");
         // masukinData User yang aktif
+        // masukinData User yang aktif
         for (int i = 0; i < listUser.size(); i++) {
             if(listUser.get(i).getAktif().equals("1")){
                 tvNama.setText(listUser.get(i).getNama());
             }
         }
 
-        btnUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Upload();
-            }
-        });
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,11 +87,9 @@ public class EditProfileActivity extends AppCompatActivity {
             if(PasswordBaru.equals(PasswordConfirmBaru)){
                 for (int i = 0; i < listUser.size(); i++) {
                     if(listUser.get(i).getAktif().equals("1")){
-                        if(tvPasswordLama.getText().toString().equals(listUser.get(i).getPassword())){
-                            listUser.get(i).setNama(tvNama.getText().toString());
-                            listUser.get(i).setPassword(tvPasswordBaru.getText().toString());
-                            Toast.makeText(this, "Berhasil", Toast.LENGTH_SHORT).show();
-                        }else Toast.makeText(this, "Password Lama Salah", Toast.LENGTH_SHORT).show();
+                        listUser.get(i).setNama(tvNama.getText().toString());
+                        listUser.get(i).setPassword(tvPasswordBaru.getText().toString());
+                        Toast.makeText(this, "Berhasil", Toast.LENGTH_SHORT).show();
                     }
                 }
 
