@@ -38,6 +38,8 @@ public class Home extends AppCompatActivity {
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String aktif="0";
     Button filter;
+    Boolean adafilter=false;
+    Boolean adasearch=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +110,8 @@ public class Home extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                adasearch=true;
+                adafilter=false;
                 if(listBarangFilter.size()>0){
                     listBarangSearch.clear();
                     for (int j = 0; j < listBarangFilter.size(); j++) {
@@ -125,29 +129,79 @@ public class Home extends AppCompatActivity {
                             listBarangSearch.add(listBarang.get(j));
                         }
                     }
-                    Toast.makeText(Home.this, "Search Woe "+listBarangSearch.size(), Toast.LENGTH_SHORT).show();
                     AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
                     rv.setAdapter(adapterMenuBarang);
                 }
             }
         });
 
-        adapterMenuBarang = new AdapterMenuBarang(listBarangSearch, new RVClickListener() {
+        adapterMenuBarang = new AdapterMenuBarang(listBarang, new RVClickListener() {
             @Override
             public void recyclerViewListBarangClick(View v, int posisi) {
-                if(!listBarangSearch.isEmpty()){
-                    Toast.makeText(Home.this, "Masuk Searc", Toast.LENGTH_SHORT).show();
+                int indeks=0;
+
+                if(adasearch==true){
+                    if(!listBarangSearch.isEmpty()){
+                        if(listBarangFilter.isEmpty()){
+                            for (int j = 0; j < listBarang.size(); j++) {
+                                if (listBarangSearch.get(posisi).idbarang.equals(listBarang.get(j).idbarang)) {
+                                    indeks = j;
+                                }
+                            }
+                        }
+                        else{
+                            int temp=0;
+                            for (int j = 0; j < listBarangFilter.size(); j++) {
+                                if (listBarangSearch.get(posisi).idbarang.equals(listBarangFilter.get(j).idbarang)) {
+                                    temp=j;
+                                }
+                            }
+                            for (int j = 0; j < listBarang.size(); j++) {
+                                if(listBarangFilter.get(temp).idbarang.equals(listBarang.get(j).idbarang)){
+                                    indeks=j;
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        indeks = posisi;
+                    }
                 }
-                else if(!listBarangFilter.isEmpty()){
-                    Toast.makeText(Home.this, "MasukFilter", Toast.LENGTH_SHORT).show();
+                else if(adafilter==true){
+                    if(!listBarangFilter.isEmpty()){
+                        if(listBarangSearch.isEmpty()){
+                            for (int j = 0; j < listBarang.size(); j++) {
+                                if (listBarangFilter.get(posisi).idbarang.equals(listBarang.get(j).idbarang)) {
+                                    indeks = j;
+                                }
+                            }
+                        }
+                        else{
+                            int temp=0;
+                            for (int j = 0; j < listBarangSearch.size(); j++) {
+                                if (listBarangFilter.get(posisi).idbarang.equals(listBarangSearch.get(j).idbarang)) {
+                                    temp = j;
+                                }
+                            }
+                            for (int j = 0; j < listBarang.size(); j++) {
+                                if(listBarangSearch.get(temp).idbarang.equals(listBarang.get(j).idbarang)){
+                                    indeks=j;
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        indeks = posisi;
+                    }
                 }
                 else{
-                    int indeks = posisi;
-                    Intent i = new Intent(Home.this,InfoBarang.class);
-                    putextra(i);
-                    i.putExtra("indeks",indeks);
-                    startActivity(i);
+                    indeks = posisi;
                 }
+
+                Intent i = new Intent(Home.this,InfoBarang.class);
+                putextra(i);
+                i.putExtra("indeks",indeks);
+                startActivity(i);
             }
         });
     }
@@ -191,6 +245,8 @@ public class Home extends AppCompatActivity {
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                adasearch=false;
+                adafilter=true;
                 if(item.getItemId()==R.id.itemPakaian){
                     if(listBarangSearch.size()>0){
                         listBarangFilter.clear();
@@ -333,6 +389,8 @@ public class Home extends AppCompatActivity {
                         }
                         AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangFilter);
                         rv.setAdapter(adapterMenuBarang);
+                        adafilter=true;
+                        adasearch=false;
                     }
                     else{
                         listBarangFilter.clear();
