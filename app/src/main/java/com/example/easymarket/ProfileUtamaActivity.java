@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +22,8 @@ public class ProfileUtamaActivity extends AppCompatActivity {
 
 
     ImageView img;
-    TextView tvNama,tvUmur,tvGender,tvEmail,tvDaerahAsal;
+    TextView tvNama,tvUmur,tvGender,tvDaerahAsal, tvEmail;
+    Button simpan;
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
@@ -32,13 +36,24 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_utama);
 
         img = findViewById(R.id.imgViewProfileUtamaActivity);
-        tvNama = findViewById(R.id.tvNamProfilUtamaActivity);
-        tvUmur = findViewById(R.id.tvUmurProfileUtamaActivity);
-        tvEmail = findViewById(R.id.tvEmailProfileUserActivity);
-        tvGender = findViewById(R.id.tvGenderProfileUtamaActivity);
-        tvDaerahAsal = findViewById(R.id.tvDaerahAsalProfileUserActivity);
+        tvNama = findViewById(R.id.etNamProfilUtamaActivity);
+        tvUmur = findViewById(R.id.tvShowUmur);
+        tvGender = findViewById(R.id.tvShowGender);
+        tvDaerahAsal = findViewById(R.id.tvShowDaerah);
+        tvEmail = findViewById(R.id.tvShowEmail);
+        simpan = findViewById(R.id.btSimpanProfile);
 
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.WHITE);
+        tvNama.setBackground(drawable);
 
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setColor(Color.BLACK);
+        simpan.setBackground(drawable2);
 
         Intent j = getIntent();
         listUser= (ArrayList<User>) j.getSerializableExtra("listUser");
@@ -50,11 +65,11 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         // masukinData User yang aktif
         for (int i = 0; i < listUser.size(); i++) {
             if(listUser.get(i).getAktif().equals("1")){
-                tvNama.setText("Nama : "+listUser.get(i).getNama());
-                tvUmur.setText("Umur : "+listUser.get(i).getUmur()+" Thn");
-                tvEmail.setText("Email : "+listUser.get(i).getEmail());
-                tvGender.setText("Gender : "+listUser.get(i).getGender());
-                tvDaerahAsal.setText("Daerah : "+listUser.get(i).getDaerahasal());
+                tvNama.setText(listUser.get(i).getNama());
+                tvUmur.setText(listUser.get(i).getUmur()+" Thn");
+                tvGender.setText(listUser.get(i).getGender());
+                tvDaerahAsal.setText(listUser.get(i).getDaerahasal());
+                tvEmail.setText(listUser.get(i).getEmail());
             }
         }
 
