@@ -7,7 +7,7 @@
     tools:context=".Home">
 
     <TextView
-        android:id="@+id/ivBarang5"
+        android:id="@+id/tvAdminHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Admin Page (menu di option)"

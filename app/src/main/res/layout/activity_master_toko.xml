@@ -16,21 +16,21 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvmanagekas"
+        android:id="@+id/tvmanagetoko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="21dp"
-        android:text="Kas"
+        android:text="Manage Toko"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/lvkas"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnAddKas"
+        android:id="@+id/btnEditToko"
         android:layout_width="110dp"
         android:layout_height="58dp"
-        android:text="Add"
+        android:text="Edit"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,10 +40,10 @@
         app:layout_constraintVertical_bias="0.975" />
 
     <Button
-        android:id="@+id/btnEditKas"
+        android:id="@+id/btnRefreshToko"
         android:layout_width="110dp"
         android:layout_height="58dp"
-        android:text="Edit"
+        android:text="Refresh"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
