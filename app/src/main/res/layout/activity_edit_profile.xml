@@ -33,13 +33,13 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <EditText
-        android:id="@+id/tvNamaEditProfile"
+        android:id="@+id/etPassLama"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:ems="10"
         android:fontFamily="@font/cabin"
-        android:hint="Username"
+        android:hint="Password Lama"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPassLama" />
 
     <EditText
         android:id="@+id/tvPasswordBaruEditProfile"
@@ -60,8 +60,8 @@
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        app:layout_constraintStart_toStartOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintStart_toStartOf="@+id/tvPassBaru"
+        app:layout_constraintTop_toBottomOf="@+id/tvPassBaru" />
 
     <EditText
         android:id="@+id/tvConfirmPasswordBaruEditProfile"
@@ -70,7 +70,7 @@
         android:layout_marginTop="5dp"
         android:ems="10"
         android:fontFamily="@font/cabin"
-        android:hint="ConfirmPassword"
+        android:hint="Confirm Password"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -91,24 +91,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tvConfirmPasswordBaruEditProfile" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/tvPassLama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/cabin"
-        android:text="Username"
-        app:layout_constraintStart_toStartOf="@+id/tvNamaEditProfile"
+        android:text="Password Lama"
+        app:layout_constraintStart_toStartOf="@+id/etPassLama"
         app:layout_constraintTop_toBottomOf="@+id/imgKTP" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/tvPassBaru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/cabin"
         android:text="Password Baru"
-        app:layout_constraintStart_toStartOf="@+id/tvNamaEditProfile"
-        app:layout_constraintTop_toBottomOf="@+id/tvNamaEditProfile" />
+        app:layout_constraintStart_toStartOf="@+id/etPassLama"
+        app:layout_constraintTop_toBottomOf="@+id/etPassLama" />
 
     <TextView
         android:id="@+id/textView31"

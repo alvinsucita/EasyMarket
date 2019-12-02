@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        tvNama = findViewById(R.id.tvNamaEditProfile);
+        tvNama = findViewById(R.id.etPassLama);
         tvPasswordBaru = findViewById(R.id.tvPasswordBaruEditProfile);
         tvConfirmPassword = findViewById(R.id.tvConfirmPasswordBaruEditProfile);
         btnUpdate = findViewById(R.id.btnUpdateEditProfile);
@@ -57,8 +56,6 @@ public class EditProfileActivity extends AppCompatActivity {
         listToko= (ArrayList<Toko>) j.getSerializableExtra("listToko");
         listBarang= (ArrayList<Barang>) j.getSerializableExtra("listBarang");
         listWishlist= (ArrayList<ClassWishlist>) j.getSerializableExtra("listWishlist");
-        // masukinData User yang aktif
-        // masukinData User yang aktif
         for (int i = 0; i < listUser.size(); i++) {
             if(listUser.get(i).getAktif().equals("1")){
                 tvNama.setText(listUser.get(i).getNama());

@@ -16,7 +16,6 @@ public class HalamanCover extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_cover);
 
-
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

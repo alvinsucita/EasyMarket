@@ -98,15 +98,15 @@
         app:srcCompat="@drawable/baseline_supervisor_account_black_18dp" />
 
     <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="75dp"
+        android:id="@+id/ivLogo"
+        android:layout_width="100dp"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivBackgroundJudul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ivBackgroundJudul"
         app:layout_constraintTop_toTopOf="@+id/ivBackgroundJudul"
         app:layout_constraintVertical_bias="0.32"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/blacklogo" />
 
     <TextView
         android:id="@+id/tvJudulRegister"
@@ -204,7 +204,7 @@
         app:layout_constraintVertical_bias="0.292" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/ivEmail"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="15dp"
@@ -214,7 +214,7 @@
         app:srcCompat="@drawable/baseline_email_black_18dp" />
 
     <ImageView
-        android:id="@+id/imageView18"
+        android:id="@+id/ivPassword"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="15dp"
@@ -224,7 +224,7 @@
         app:srcCompat="@drawable/baseline_vpn_key_black_18dp" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/ivConpass"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="15dp"

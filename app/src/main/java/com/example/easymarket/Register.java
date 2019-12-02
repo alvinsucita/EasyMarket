@@ -70,9 +70,6 @@ public class Register extends AppCompatActivity {
         drawable5.setColor(Color.WHITE);
         conpassword.setBackground(drawable5);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         Intent i = getIntent();
         if(i.hasExtra("listUser")){
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");

@@ -60,23 +60,21 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         listToko= (ArrayList<Toko>) j.getSerializableExtra("listToko");
         listBarang= (ArrayList<Barang>) j.getSerializableExtra("listBarang");
         listWishlist= (ArrayList<ClassWishlist>) j.getSerializableExtra("listWishlist");
-        Toast.makeText(this, listUser.size()+"", Toast.LENGTH_SHORT).show();
 
-        // masukinData User yang aktif
         for (int i = 0; i < listUser.size(); i++) {
             if(listUser.get(i).getAktif().equals("1")){
+                int indexalamatemail = listUser.get(i).getEmail().indexOf("@");
+                String hiddenemail =listUser.get(i).getEmail().substring(0,2)+"******"+listUser.get(i).getEmail().substring(indexalamatemail,listUser.get(i).email.length());
                 tvNama.setText(listUser.get(i).getNama());
                 tvUmur.setText(listUser.get(i).getUmur()+" Thn");
                 tvGender.setText(listUser.get(i).getGender());
                 tvDaerahAsal.setText(listUser.get(i).getDaerahasal());
-                tvEmail.setText(listUser.get(i).getEmail());
+                tvEmail.setText(hiddenemail);
             }
         }
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
     }
 
