@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BAFF4007"
     tools:context=".InputEvent">
 
     <ImageView
@@ -17,8 +16,7 @@
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09"
-        app:srcCompat="@android:color/white" />
+        app:layout_constraintVertical_bias="0.09"/>
 
     <Button
         android:id="@+id/btnaddpicevent"
@@ -41,7 +39,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="22dp"
         android:text="Nama Event :"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/etaddeventname"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnaddpicevent" />
@@ -67,7 +64,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="18dp"
         android:text="Harga Produk"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/etaddeventtype"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etaddeventname" />
@@ -93,7 +89,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="14dp"
         android:text="Deskripsi :"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/etaddeventdesc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etaddeventtype" />

@@ -4,29 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BAFF4007"
     tools:context=".MasterChangelog">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lvchangelog"
         android:layout_width="match_parent"
         android:layout_height="480dp"
+        android:layout_marginTop="81dp"
         android:layout_marginBottom="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvmanagelog" />
 
     <TextView
         android:id="@+id/tvmanagelog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:text="Manage Changelog"
-        android:textColor="@android:color/white"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/lvlelang"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/lvchangelog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnAddLog"

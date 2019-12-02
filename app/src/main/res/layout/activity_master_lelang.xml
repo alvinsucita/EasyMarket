@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BAFF4007"
     tools:context=".MasterLelang">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,7 +22,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="21dp"
         android:text="Manage Lelang"
-        android:textColor="@android:color/white"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/lvlelang"
         app:layout_constraintStart_toStartOf="parent" />

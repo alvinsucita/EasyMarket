@@ -12,8 +12,11 @@
         android:id="@+id/manageuser"
         android:title="Manage User" />
     <item
+        android:id="@+id/managetoko"
+        android:title="Manage Toko" />
+    <item
         android:id="@+id/managetickets"
-        android:title="Manage Tickets" />
+        android:title="Manage Tickets (Pengaduan)" />
     <item
         android:id="@+id/managelelang"
         android:title="Manage Lelang" />
