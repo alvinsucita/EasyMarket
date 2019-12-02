@@ -36,10 +36,9 @@
         android:id="@+id/tvNamProfilUtamaActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
         android:fontFamily="@font/cabin"
         android:text="Nama"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/etNamProfilUtamaActivity"
         app:layout_constraintTop_toBottomOf="@+id/imgViewProfileUtamaActivity" />
 
     <EditText
@@ -53,7 +52,8 @@
         android:paddingLeft="10sp"
         android:paddingRight="10sp"
         android:text="Nama"
-        app:layout_constraintStart_toStartOf="@+id/tvNamProfilUtamaActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNamProfilUtamaActivity" />
 
     <TextView
@@ -124,8 +124,8 @@
 
     <Button
         android:id="@+id/btSimpanProfile"
-        android:layout_width="300sp"
-        android:layout_height="40sp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="15dp"
         android:fontFamily="@font/cabin"
         android:text="Simpan"

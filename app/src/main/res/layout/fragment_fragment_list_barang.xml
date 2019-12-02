@@ -1,113 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BAFF4007"
+    android:background="#F1F1F1"
     android:orientation="vertical"
     tools:context=".FragmentListBarang">
 
     <TextView
         android:id="@+id/tvListBarang"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
+        android:background="@android:color/black"
         android:text="List Barang"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_weight="1"
-        android:src="@android:color/white" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/btnRequest"
+        app:layout_constraintStart_toStartOf="@+id/btnRequest"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spListBarang"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvListBarang" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:src="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spListBarang" />
 
     <TextView
         android:id="@+id/tvNamaBarang"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
+        android:fontFamily="@font/cabin"
         android:text="Nama Barang : "
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/spListBarang"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/tvHargaBarang"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
+        android:fontFamily="@font/cabin"
         android:text="Harga Barang : "
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvNamaBarang"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaBarang" />
 
     <TextView
         android:id="@+id/tvKategoriBarang"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
-        android:text="Kategori Barang : "
-        android:textColor="@android:color/white" />
+        android:fontFamily="@font/cabin"
+        android:text="Kategori : "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvHargaBarang"
+        app:layout_constraintTop_toBottomOf="@+id/tvHargaBarang" />
 
     <TextView
         android:id="@+id/tvDeskripsiBarang"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
-        android:text="Deskripsi Barang : "
-        android:textColor="@android:color/white" />
+        android:fontFamily="@font/cabin"
+        android:text="Deskripsi : "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvKategoriBarang"
+        app:layout_constraintTop_toBottomOf="@+id/tvKategoriBarang" />
 
     <TextView
         android:id="@+id/tvStok"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
-        android:text="Stok Barang : "
-        android:textColor="@android:color/white" />
+        android:fontFamily="@font/cabin"
+        android:text="Stok : "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvDeskripsiBarang"
+        app:layout_constraintTop_toBottomOf="@+id/tvDeskripsiBarang" />
 
     <TextView
         android:id="@+id/tvDilihat"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
+        android:fontFamily="@font/cabin"
         android:text="Barang dilihat : "
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvStok"
+        app:layout_constraintTop_toBottomOf="@+id/tvStok" />
 
     <TextView
         android:id="@+id/tvTerjual"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
+        android:fontFamily="@font/cabin"
         android:text="Barang terjual : "
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvDilihat"
+        app:layout_constraintTop_toBottomOf="@+id/tvDilihat" />
 
     <TextView
         android:id="@+id/tvLikes"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"
+        android:fontFamily="@font/cabin"
         android:text="Likes : "
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvTerjual"
+        app:layout_constraintTop_toBottomOf="@+id/tvTerjual" />
 
     <Button
         android:id="@+id/btnRequest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:text="Request Lelang Barang" />
-</LinearLayout>
+        android:text="Request Lelang Barang"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/downpoint"
+        app:layout_constraintBottom_toBottomOf="@+id/spListBarang"
+        app:layout_constraintEnd_toEndOf="@+id/spListBarang"
+        app:layout_constraintTop_toTopOf="@+id/spListBarang" />
+</androidx.constraintlayout.widget.ConstraintLayout>

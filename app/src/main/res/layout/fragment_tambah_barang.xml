@@ -1,77 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BAFF4007"
+    android:background="#F1F1F1"
     android:orientation="vertical"
     tools:context=".FragmentTambahBarang">
 
     <TextView
         android:id="@+id/tvTambahBarang"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="50dp"
+        android:background="@android:color/black"
+        android:fontFamily="@font/cabin"
         android:text="Tambah Barang"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etNamaBarang"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="300dp"
+        android:layout_height="40sp"
+        android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:ems="10"
+        android:fontFamily="@font/cabin"
         android:hint="Nama Barang"
         android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textAlignment="viewStart"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     <Spinner
         android:id="@+id/spKategori"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
     <EditText
         android:id="@+id/etHargaBarang"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:ems="10"
+        android:fontFamily="@font/cabin"
         android:hint="Harga Barang"
         android:inputType="textPersonName"
-        android:textColor="@android:color/black" />
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/textView30"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
     <EditText
         android:id="@+id/etStokBarang"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:ems="10"
+        android:fontFamily="@font/cabin"
         android:hint="Stok Barang"
         android:inputType="textPersonName"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:id="@+id/etDeskripsi"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginBottom="30dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:hint="Deskripsi Barang"
-        android:inputType="textMultiLine|text"
-        android:textColor="@android:color/black" />
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="@+id/textView34"
+        app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Tambah" />
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Tambah"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Nama Barang :"
+        app:layout_constraintStart_toStartOf="@+id/etNamaBarang"
+        app:layout_constraintTop_toBottomOf="@+id/tvTambahBarang" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Kategori :"
+        app:layout_constraintStart_toStartOf="@+id/etNamaBarang"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaBarang" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Harga Barang :"
+        app:layout_constraintStart_toStartOf="@+id/spKategori"
+        app:layout_constraintTop_toBottomOf="@+id/spKategori" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Stok Barang :"
+        app:layout_constraintStart_toStartOf="@+id/etHargaBarang"
+        app:layout_constraintTop_toBottomOf="@+id/etHargaBarang" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Deskripsi :"
+        app:layout_constraintStart_toStartOf="@+id/etStokBarang"
+        app:layout_constraintTop_toBottomOf="@+id/etStokBarang" />
+
+    <EditText
+        android:id="@+id/etDeskripsi"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:gravity="start|top"
+        android:hint="Deskripsi"
+        android:inputType="textMultiLine"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintStart_toStartOf="@+id/textView35"
+        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/downpoint"
+        app:layout_constraintBottom_toBottomOf="@+id/spKategori"
+        app:layout_constraintEnd_toEndOf="@+id/spKategori"
+        app:layout_constraintTop_toTopOf="@+id/spKategori" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

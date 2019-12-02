@@ -1,6 +1,8 @@
 package com.example.easymarket;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -52,6 +54,34 @@ public class FragmentTambahBarang extends Fragment {
         deskripsi=view.findViewById(R.id.etDeskripsi);
         stok=view.findViewById(R.id.etStokBarang);
         add=view.findViewById(R.id.btnAdd);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.WHITE);
+        namabarang.setBackground(drawable);
+        harga.setBackground(drawable);
+        stok.setBackground(drawable);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setStroke(8, Color.LTGRAY);
+        drawable2.setColor(Color.WHITE);
+        sp.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setColor(Color.BLACK);
+        add.setBackground(drawable3);
+
+        GradientDrawable drawable4 = new GradientDrawable();
+        drawable4.setShape(GradientDrawable.RECTANGLE);
+        drawable4.setCornerRadius(100);
+        drawable4.setColor(Color.WHITE);
+        deskripsi.setBackground(drawable4);
+
         ArrayList<String> listspinner = new ArrayList<>();
         listspinner.add("Pakaian");
         listspinner.add("Ibu dan Anak");
