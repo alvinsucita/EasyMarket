@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,6 +73,22 @@ public class ProfileUtamaActivity extends AppCompatActivity {
                 tvEmail.setText(hiddenemail);
             }
         }
+
+        simpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < listUser.size(); i++) {
+                    if(listUser.get(i).getAktif().equals("1")){
+                        listUser.get(i).setNama(tvNama.getText().toString());
+                        if(listUser.get(i).getNama().equals(tvNama.getText().toString())){
+                            Toast.makeText(ProfileUtamaActivity.this, listUser.get(i).getNama(), Toast.LENGTH_SHORT).show();
+                        }else Toast.makeText(ProfileUtamaActivity.this, "gagal", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
