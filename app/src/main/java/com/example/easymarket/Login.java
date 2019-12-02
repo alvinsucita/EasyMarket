@@ -94,7 +94,7 @@ public class Login extends AppCompatActivity {
         if(stremail.equals("") || strpass.equals("")){
             Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
         }
-        else if(stremail.equals("admin") || strpass.equals("admin")){
+        else if(stremail.toLowerCase().equals("admin") || strpass.toLowerCase().equals("admin")){
             Intent i = new Intent(Login.this, HomeAdmin.class);
             i.putExtra("listUser", listUser);
             i.putExtra("listToko", listToko);

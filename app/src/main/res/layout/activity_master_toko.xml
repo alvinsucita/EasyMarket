@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageTickets">
+    tools:context=".MasterToko">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lvtickets"
+        android:id="@+id/lvkas"
         android:layout_width="match_parent"
         android:layout_height="480dp"
         android:layout_marginBottom="90dp"
@@ -16,21 +16,21 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tvmanageticket"
+        android:id="@+id/tvmanagetoko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="21dp"
-        android:text="Manage Tickets"
+        android:text="Manage Toko"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/lvtickets"
+        app:layout_constraintBottom_toTopOf="@+id/lvkas"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnCek"
+        android:id="@+id/btnEditToko"
         android:layout_width="110dp"
         android:layout_height="58dp"
-        android:text="Cek"
+        android:text="Edit"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.975" />
 
     <Button
-        android:id="@+id/btnRefresh"
+        android:id="@+id/btnRefreshToko"
         android:layout_width="110dp"
         android:layout_height="58dp"
         android:text="Refresh"
