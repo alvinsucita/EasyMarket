@@ -23,10 +23,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imgViewProfileUtamaActivity"
+        android:id="@+id/ivProfile"
         android:layout_width="196dp"
         android:layout_height="152dp"
         android:layout_marginTop="15dp"
+        android:onClick="gantiFoto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvJudul"
@@ -40,7 +41,7 @@
         android:fontFamily="@font/cabin"
         android:text="Nama"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgViewProfileUtamaActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
 
     <EditText
         android:id="@+id/etNamProfilUtamaActivity"

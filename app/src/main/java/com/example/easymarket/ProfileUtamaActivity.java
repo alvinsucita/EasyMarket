@@ -1,17 +1,20 @@
 package com.example.easymarket;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +24,7 @@ import java.util.ArrayList;
 public class ProfileUtamaActivity extends AppCompatActivity {
 
 
-    ImageView img;
+    ImageView img,profile;
     TextView tvNama,tvUmur,tvGender,tvDaerahAsal, tvEmail;
     Button simpan;
     ArrayList<User> listUser = new ArrayList<>();
@@ -35,13 +38,14 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_utama);
 
-        img = findViewById(R.id.imgViewProfileUtamaActivity);
+        img = findViewById(R.id.ivProfile);
         tvNama = findViewById(R.id.etNamProfilUtamaActivity);
         tvUmur = findViewById(R.id.tvShowUmur);
         tvGender = findViewById(R.id.tvShowGender);
         tvDaerahAsal = findViewById(R.id.tvShowDaerah);
         tvEmail = findViewById(R.id.tvShowEmail);
         simpan = findViewById(R.id.btSimpanProfile);
+        profile=findViewById(R.id.ivProfile);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
@@ -102,6 +106,19 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==1 && data!=null){
+            Uri selected = data.getData();
+            profile.setImageURI(selected);
+            Toast.makeText(this, selected.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void gantiFoto(View view) {
+        Intent change = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(change,1);
+    }
 }
