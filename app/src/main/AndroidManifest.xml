@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MasterToko"></activity>
+        <activity android:name=".HomeRootActivity"></activity>
+        <activity android:name=".MasterToko" />
         <activity android:name=".InfoBarangLelang" />
         <activity android:name=".LelangActivity" />
         <activity android:name=".InfoPengirimanActivity" />
