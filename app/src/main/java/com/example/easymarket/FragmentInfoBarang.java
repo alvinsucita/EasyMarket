@@ -66,7 +66,7 @@ public class FragmentInfoBarang extends Fragment {
         drawable4.setColor(Color.WHITE);
         drawable4.setShape(GradientDrawable.RECTANGLE);
         drawable4.setStroke(5, Color.BLACK);
-        drawable4.setCornerRadius(100);
+        drawable4.setCornerRadius(50);
         isi.setBackground(drawable4);
 
         btnLikes.setOnClickListener(new View.OnClickListener() {

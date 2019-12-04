@@ -62,16 +62,15 @@ public class InfoBarang extends AppCompatActivity {
         GradientDrawable drawable2 = new GradientDrawable();
         drawable2.setShape(GradientDrawable.RECTANGLE);
         drawable2.setCornerRadius(100);
-        drawable2.setStroke(8, Color.LTGRAY);
-        drawable2.setColor(Color.WHITE);
-        add.setBackground(drawable2);
+        drawable2.setColor(Color.BLACK);
+        share.setBackground(drawable2);
+        chat.setBackground(drawable2);
 
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setShape(GradientDrawable.RECTANGLE);
         drawable3.setCornerRadius(100);
-        drawable3.setStroke(8, Color.LTGRAY);
-        drawable3.setColor(Color.WHITE);
-        share.setBackground(drawable3);
+        drawable3.setColor(Color.BLACK);
+        add.setBackground(drawable3);
 
         Intent i = getIntent();
         listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
