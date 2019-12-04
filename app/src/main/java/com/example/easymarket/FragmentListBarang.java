@@ -103,7 +103,8 @@ public class FragmentListBarang extends Fragment {
                     }
                 }
                 nama.setText("Nama : "+strnama);
-                harga.setText("Harga : Rp."+intharga+"/pcs");
+                String hargaasli = String.format("%,d",intharga);
+                harga.setText("Harga : Rp."+hargaasli+"/pcs");
                 deskripsi.setText("Deskripsi : "+strdeskripsi);
                 kategori.setText("Kategori : "+strkategori);
                 likes.setText("Likes : "+intlikes+"");

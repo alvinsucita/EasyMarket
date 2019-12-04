@@ -8,7 +8,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -80,7 +83,6 @@ public class InfoBarang extends AppCompatActivity {
             aktif=i.getStringExtra("adayanglogin");
         }
         listBarang.get(indeks).dilihat+=1;
-        nama.setText(listBarang.get(indeks).namabarang+"");
         String hargaasli = String.format("%,d", listBarang.get(indeks).harga);
         nama.setText(listBarang.get(indeks).namabarang);
         hargabarang.setText("Rp. "+hargaasli);
@@ -182,7 +184,11 @@ public class InfoBarang extends AppCompatActivity {
     }
 
     public void share(View view) {
-            Toast.makeText(this, listWishlist.get(0).namabarang, Toast.LENGTH_SHORT).show();
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,listBarang.get(indeks).namabarang+"\n"+listBarang.get(indeks).harga );
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share"));
     }
 
     public void changeFragment(Fragment f, ArrayList<Barang>listBarang,ArrayList<User>listUser){
