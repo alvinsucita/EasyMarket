@@ -6,15 +6,15 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Home" />
     <item
+        android:id="@+id/itemLelang"
+        android:icon="@drawable/baseline_gavel_black_18dp"
+        android:title="Lelang" />
+    <item
         android:id="@+id/itemEvent"
-        android:icon="@drawable/ic_spa_black_24dp"
+        android:icon="@drawable/baseline_event_black_18dp"
         android:title="Event" />
     <item
         android:id="@+id/itemHistory"
-        android:icon="@drawable/history"
+        android:icon="@drawable/baseline_history_black_18dp"
         android:title="History" />
-    <item
-        android:id="@+id/itemLelang"
-        android:icon="@drawable/lelang"
-        android:title="Lelang" />
 </menu>

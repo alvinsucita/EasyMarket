@@ -8,100 +8,70 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
 public class InfoBarang extends AppCompatActivity {
-
     BottomNavigationView bottomNavBarang;
-    TextView isi,nama,hargabarang,likes,dilihat,dibeli;
+    TextView nama,hargabarang;
     Button share,chat,add;
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<ClassLikes>listLikes = new ArrayList<>();
     int jumlah= 0;
     String aktif="0";
     int indeks=0;
+    ImageView foto1,foto2,foto3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_barang);
 
-        share=findViewById(R.id.btnShare);
-        add=findViewById(R.id.btnAddToWishlist);
-        chat=findViewById(R.id.btnPersonalChat);
-        isi=findViewById(R.id.tvIsiDeskripsi);
         nama=findViewById(R.id.tvNamaBarang);
         hargabarang=findViewById(R.id.tvHargaBarang);
-        likes=findViewById(R.id.tvLikesBarang);
-        dilihat=findViewById(R.id.tvBarangDilihat);
-        dibeli=findViewById(R.id.tvBarangTerjual);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setCornerRadius(25);
-        drawable2.setColor(Color.BLACK);
-        share.setBackground(drawable2);
-        chat.setBackground(drawable2);
-
-        GradientDrawable drawable3 = new GradientDrawable();
-        drawable3.setShape(GradientDrawable.RECTANGLE);
-        drawable3.setCornerRadius(25);
-        drawable3.setColor(Color.BLACK);
-        add.setBackground(drawable3);
-
-        changeFragment(new FragmentInfoBarang(),listBarang);
-        bottomNavBarang=findViewById(R.id.bottomNavBarang);
-        bottomNavBarang.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if(menuItem.getItemId( )== R.id.infobarang ){
-                    changeFragment(new FragmentInfoBarang(),listBarang);
-                }
-                else if(menuItem.getItemId( )== R.id.commentbarang){
-                    changeFragment(new FragmentCommentBarang(),listBarang);
-                }
-                return true;
-            }
-        });
+        add=findViewById(R.id.btnAddToWishlist);
+        chat=findViewById(R.id.btnPersonalChat);
+        share=findViewById(R.id.btnShare);
+        foto1=findViewById(R.id.ivFoto1);
+        foto2=findViewById(R.id.ivFoto2);
+        foto3=findViewById(R.id.ivFoto3);
+        nama.setText("");
+        hargabarang.setText("");
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        GradientDrawable drawable2 = new GradientDrawable();
-//        drawable2.setShape(GradientDrawable.RECTANGLE);
-//        drawable2.setCornerRadius(100);
-//        drawable2.setStroke(8, Color.LTGRAY);
-//        drawable2.setColor(Color.WHITE);
-//        add.setBackground(drawable2);
-//
-//        GradientDrawable drawable3 = new GradientDrawable();
-//        drawable3.setShape(GradientDrawable.RECTANGLE);
-//        drawable3.setCornerRadius(100);
-//        drawable3.setStroke(8, Color.LTGRAY);
-//        drawable3.setColor(Color.WHITE);
-//        share.setBackground(drawable3);
-//
-//
-//
-//        GradientDrawable drawable4 = new GradientDrawable();
-//        drawable4.setColor(Color.WHITE);
-//        drawable4.setShape(GradientDrawable.RECTANGLE);
-//        drawable4.setStroke(5, Color.BLACK);
-//        drawable4.setCornerRadius(100);
-//        isi.setBackground(drawable4);
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setStroke(8, Color.LTGRAY);
+        drawable2.setColor(Color.WHITE);
+        add.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setStroke(8, Color.LTGRAY);
+        drawable3.setColor(Color.WHITE);
+        share.setBackground(drawable3);
 
         Intent i = getIntent();
         listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
@@ -113,22 +83,24 @@ public class InfoBarang extends AppCompatActivity {
             aktif=i.getStringExtra("adayanglogin");
         }
         listBarang.get(indeks).dilihat+=1;
-//        isi.setText(listBarang.get(indeks).deskripsi+"");
-//        nama.setText(listBarang.get(indeks).namabarang+"");
-//        hargabarang.setText("Rp. "+listBarang.get(indeks).harga+",00-");
-//        likes.setText("Likes : "+listBarang.get(indeks).likes);
-//        dilihat.setText("Dilihat : "+listBarang.get(indeks).dilihat+" kali");
-//        dibeli.setText("Terjual : "+listBarang.get(indeks).dibeli+" kali");
-    }
+        String hargaasli = String.format("%,d", listBarang.get(indeks).harga);
+        nama.setText(listBarang.get(indeks).namabarang);
+        hargabarang.setText("Rp. "+hargaasli);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option_menu2,menu);
-
-        menu.getItem(0).setVisible(true);
-        menu.getItem(1).setVisible(false);
-        return super.onCreateOptionsMenu(menu);
+        changeFragment(new FragmentInfoBarang(),listBarang,listUser);
+        bottomNavBarang=findViewById(R.id.bottomNavBarang);
+        bottomNavBarang.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId( )== R.id.infobarang){
+                    changeFragment(new FragmentInfoBarang(),listBarang,listUser);
+                }
+                else if(menuItem.getItemId( )== R.id.commentbarang){
+                    changeFragment(new FragmentCommentBarang(),listBarang,listUser);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -165,17 +137,6 @@ public class InfoBarang extends AppCompatActivity {
     public void beli(View view) {
         Intent i = new Intent(InfoBarang.this,TransactionActivity.class);
         startActivity(i);
-    }
-
-    public void tambahlikes(View view) {
-        if(aktif.equals("1")){
-            listBarang.get(indeks).likes+=1;
-            likes.setText("Likes : "+listBarang.get(indeks).likes);
-            Toast.makeText(this, "Anda menyukai barang ini", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(this, "Login terlebih dahulu", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public void addwishlist(View view) {
@@ -223,14 +184,19 @@ public class InfoBarang extends AppCompatActivity {
     }
 
     public void share(View view) {
-            Toast.makeText(this, listWishlist.get(0).namabarang, Toast.LENGTH_SHORT).show();
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT,listBarang.get(indeks).namabarang+"\n"+listBarang.get(indeks).harga );
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share"));
     }
 
-    public void changeFragment(Fragment f, ArrayList<Barang>listBarang){
+    public void changeFragment(Fragment f, ArrayList<Barang>listBarang,ArrayList<User>listUser){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putSerializable("listBarang",listBarang);
+        bundle.putSerializable("listUser",listUser);
         f.setArguments(bundle);
         ft.replace(R.id.containerBarang, f);
         ft.commit();

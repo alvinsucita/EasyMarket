@@ -19,7 +19,6 @@ public class HomeRootActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_root);
 
-        
         changeFragment(new FragmentHome());
         bottomNavigationView=findViewById(R.id.btmNavRootHome);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -40,7 +39,6 @@ public class HomeRootActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
     public void changeFragment(Fragment f){

@@ -124,7 +124,7 @@ public class FragmentTambahBarang extends Fragment {
                 }
 
                 if(!strnama.equals("") && !strharga.equals("") && !strdeskripsi.equals("") && !strstok.equals("")){
-                    listBarang.add(new Barang(strid,((HomeToko) getActivity()).tokologin,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok),0));
+                    listBarang.add(new Barang(strid,((HomeToko) getActivity()).tokologin,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok),0,0,0));
                     Toast.makeText(getContext(), "Barang berhasil ditambahkan", Toast.LENGTH_SHORT).show();
                     namabarang.setText("");
                     harga.setText("");

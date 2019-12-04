@@ -66,10 +66,6 @@ public class InfoComment extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.option_menu2,menu);
-
-        menu.getItem(1).setVisible(true);
-        menu.getItem(0).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -79,10 +75,6 @@ public class InfoComment extends AppCompatActivity {
 
         if(id== android.R.id.home){
             this.finish();
-        }
-        else if(id==R.id.menuInfo){
-            Intent i = new Intent(InfoComment.this,InfoBarang.class);
-            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

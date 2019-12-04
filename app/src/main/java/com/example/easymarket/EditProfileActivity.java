@@ -82,7 +82,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 for (int i = 0; i < listUser.size(); i++) {
                     if(listUser.get(i).getAktif().equals("1")){
                         listUser.get(i).setPassword(tvPasswordBaru.getText().toString());
-                        Toast.makeText(this, "Berhasil", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, listUser.get(i).getPassword().toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
