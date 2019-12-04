@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemHome"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home" />
+    <item
+        android:id="@+id/itemLelang"
+        android:icon="@drawable/baseline_gavel_black_18dp"
+        android:title="Lelang" />
+    <item
+        android:id="@+id/itemEvent"
+        android:icon="@drawable/baseline_event_black_18dp"
+        android:title="Event" />
+    <item
+        android:id="@+id/itemHistory"
+        android:icon="@drawable/baseline_history_black_18dp"
+        android:title="History" />
+</menu>

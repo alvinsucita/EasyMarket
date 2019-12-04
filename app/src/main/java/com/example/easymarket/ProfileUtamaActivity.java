@@ -38,14 +38,12 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_utama);
 
-        img = findViewById(R.id.ivProfile);
         tvNama = findViewById(R.id.etNamProfilUtamaActivity);
         tvUmur = findViewById(R.id.tvShowUmur);
         tvGender = findViewById(R.id.tvShowGender);
         tvDaerahAsal = findViewById(R.id.tvShowDaerah);
         tvEmail = findViewById(R.id.tvShowEmail);
         simpan = findViewById(R.id.btSimpanProfile);
-        profile=findViewById(R.id.ivProfile);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
@@ -76,6 +74,22 @@ public class ProfileUtamaActivity extends AppCompatActivity {
                 tvEmail.setText(hiddenemail);
             }
         }
+
+        simpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < listUser.size(); i++) {
+                    if(listUser.get(i).getAktif().equals("1")){
+                        listUser.get(i).setNama(tvNama.getText().toString());
+                        if(listUser.get(i).getNama().equals(tvNama.getText().toString())){
+                            Toast.makeText(ProfileUtamaActivity.this, listUser.get(i).getNama(), Toast.LENGTH_SHORT).show();
+                        }else Toast.makeText(ProfileUtamaActivity.this, "gagal", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

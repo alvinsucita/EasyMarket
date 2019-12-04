@@ -11,8 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,7 @@ public class InfoBarang extends AppCompatActivity {
     int jumlah= 0;
     String aktif="0";
     int indeks=0;
+    ImageView foto1,foto2,foto3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,9 @@ public class InfoBarang extends AppCompatActivity {
         likes=findViewById(R.id.tvLikesBarang);
         dilihat=findViewById(R.id.tvBarangDilihat);
         dibeli=findViewById(R.id.tvBarangTerjual);
+        foto1=findViewById(R.id.ivFoto1);
+        foto2=findViewById(R.id.ivFoto2);
+        foto3=findViewById(R.id.ivFoto3);
         isi.setText("");
         nama.setText("");
         hargabarang.setText("");
@@ -65,8 +72,6 @@ public class InfoBarang extends AppCompatActivity {
         drawable3.setColor(Color.WHITE);
         share.setBackground(drawable3);
 
-
-
         GradientDrawable drawable4 = new GradientDrawable();
         drawable4.setColor(Color.WHITE);
         drawable4.setShape(GradientDrawable.RECTANGLE);
@@ -90,6 +95,9 @@ public class InfoBarang extends AppCompatActivity {
         likes.setText("Likes : "+listBarang.get(indeks).likes);
         dilihat.setText("Dilihat : "+listBarang.get(indeks).dilihat+" kali");
         dibeli.setText("Terjual : "+listBarang.get(indeks).dibeli+" kali");
+        foto1.setBackgroundResource(listBarang.get(indeks).fotoutama);
+        foto2.setBackgroundResource(listBarang.get(indeks).fotokedua);
+        foto3.setBackgroundResource(listBarang.get(indeks).fotoketiga);
     }
 
     @Override

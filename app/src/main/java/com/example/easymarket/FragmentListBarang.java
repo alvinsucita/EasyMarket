@@ -1,6 +1,8 @@
 package com.example.easymarket;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -59,6 +61,20 @@ public class FragmentListBarang extends Fragment {
         terjual=view.findViewById(R.id.tvTerjual);
         likes=view.findViewById(R.id.tvLikes);
         request=view.findViewById(R.id.btnRequest);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setStroke(8, Color.LTGRAY);
+        drawable2.setColor(Color.WHITE);
+        sp.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setColor(Color.BLACK);
+        request.setBackground(drawable3);
+
         ArrayList<String> listspinner = new ArrayList<>();
         for (int i = 0; i < listBarang.size(); i++) {
             if(listBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
@@ -91,9 +107,9 @@ public class FragmentListBarang extends Fragment {
                 deskripsi.setText("Deskripsi : "+strdeskripsi);
                 kategori.setText("Kategori : "+strkategori);
                 likes.setText("Likes : "+intlikes+"");
-                lihat.setText("Dilihat : "+intlihat+"kali");
+                lihat.setText("Dilihat : "+intlihat+" kali");
                 stok.setText("Stok : "+intstok+"pcs");
-                terjual.setText("Barang Terjual : "+intterjual+"kali");
+                terjual.setText("Barang Terjual : "+intterjual+" kali");
             }
 
             @Override

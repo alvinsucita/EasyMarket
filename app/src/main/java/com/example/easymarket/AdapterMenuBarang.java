@@ -41,7 +41,7 @@ public class AdapterMenuBarang extends RecyclerView.Adapter<AdapterMenuBarang.Li
         holder.nama.setText(listBarang.get(position).namabarang);
         holder.harga.setText("Rp. "+hargaasli);
         Glide.with(holder.itemView.getContext())
-                .load(listBarang.get(position).foto)
+                .load(listBarang.get(position).fotoutama)
                 .override(200,200)
                 .into(holder.fotobarang);
     }

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class EditProfileActivity extends AppCompatActivity {
 
     ImageView img;
-    EditText tvNama,tvPasswordBaru,tvConfirmPassword;
+    EditText PassLama,tvPasswordBaru,tvConfirmPassword;
     Button btnUpdate;
     String PasswordBaru = "";
     String PasswordConfirmBaru = "";
@@ -32,7 +32,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        tvNama = findViewById(R.id.etPassLama);
+        PassLama = findViewById(R.id.etPassLama);
         tvPasswordBaru = findViewById(R.id.tvPasswordBaruEditProfile);
         tvConfirmPassword = findViewById(R.id.tvConfirmPasswordBaruEditProfile);
         btnUpdate = findViewById(R.id.btnUpdateEditProfile);
@@ -41,7 +41,7 @@ public class EditProfileActivity extends AppCompatActivity {
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadius(100);
         drawable.setColor(Color.WHITE);
-        tvNama.setBackground(drawable);
+        PassLama.setBackground(drawable);
         tvPasswordBaru.setBackground(drawable);
         tvConfirmPassword.setBackground(drawable);
 
@@ -58,7 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
         listWishlist= (ArrayList<ClassWishlist>) j.getSerializableExtra("listWishlist");
         for (int i = 0; i < listUser.size(); i++) {
             if(listUser.get(i).getAktif().equals("1")){
-                tvNama.setText(listUser.get(i).getNama());
+                PassLama.setText(listUser.get(i).getPassword());
             }
         }
 
@@ -75,16 +75,12 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     public void Update(){
-        String nama = "";
-        String pass = "";
-        int ctr = 0;
         PasswordBaru = tvPasswordBaru.getText().toString();
         PasswordConfirmBaru = tvConfirmPassword.getText().toString();
-        if(!tvNama.equals("") || !tvPasswordBaru.equals("")){
+        if(!PassLama.equals("") || !tvPasswordBaru.equals("")){
             if(PasswordBaru.equals(PasswordConfirmBaru)){
                 for (int i = 0; i < listUser.size(); i++) {
                     if(listUser.get(i).getAktif().equals("1")){
-                        listUser.get(i).setNama(tvNama.getText().toString());
                         listUser.get(i).setPassword(tvPasswordBaru.getText().toString());
                         Toast.makeText(this, "Berhasil", Toast.LENGTH_SHORT).show();
                     }
