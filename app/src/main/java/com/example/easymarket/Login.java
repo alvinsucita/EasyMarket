@@ -117,7 +117,7 @@ public class Login extends AppCompatActivity {
                 }
             }
             if(ctr>0){
-                Intent a = new Intent(Login.this, Home.class);
+                Intent a = new Intent(Login.this, HomeRootActivity.class);
                 a.putExtra("listUser", listUser);
                 a.putExtra("listToko", listToko);
                 a.putExtra("listBarang", listBarang);
