@@ -201,6 +201,11 @@ public class Home extends AppCompatActivity {
                 Intent i = new Intent(Home.this,InfoBarang.class);
                 putextra(i);
                 i.putExtra("indeks",indeks);
+                i.putExtra("listUser", listUser);
+                i.putExtra("listWishlist", listWishlist);
+                i.putExtra("listToko", listToko);
+                i.putExtra("listBarang", listBarang);
+                i.putExtra("listRequestLelang", listRequestLelang);
                 startActivity(i);
             }
         });

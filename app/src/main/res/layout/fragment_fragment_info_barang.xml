@@ -46,6 +46,7 @@
         android:layout_width="20sp"
         android:layout_height="20sp"
         android:layout_marginStart="10dp"
+        android:background="@drawable/baseline_thumb_up_black_18dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvLikesBarang"
         app:layout_constraintStart_toEndOf="@+id/tvLikesBarang"
