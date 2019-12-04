@@ -32,6 +32,7 @@ public class InfoBarang extends AppCompatActivity {
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<ClassLikes>listLikes = new ArrayList<>();
     int jumlah= 0;
     String aktif="0";
     int indeks=0;
@@ -84,16 +85,16 @@ public class InfoBarang extends AppCompatActivity {
         nama.setText(listBarang.get(indeks).namabarang);
         hargabarang.setText("Rp. "+hargaasli);
 
-        changeFragment(new FragmentInfoBarang(),listBarang);
+        changeFragment(new FragmentInfoBarang(),listBarang,listUser);
         bottomNavBarang=findViewById(R.id.bottomNavBarang);
         bottomNavBarang.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId( )== R.id.infobarang){
-                    changeFragment(new FragmentInfoBarang(),listBarang);
+                    changeFragment(new FragmentInfoBarang(),listBarang,listUser);
                 }
                 else if(menuItem.getItemId( )== R.id.commentbarang){
-                    changeFragment(new FragmentCommentBarang(),listBarang);
+                    changeFragment(new FragmentCommentBarang(),listBarang,listUser);
                 }
                 return true;
             }
@@ -184,11 +185,12 @@ public class InfoBarang extends AppCompatActivity {
             Toast.makeText(this, listWishlist.get(0).namabarang, Toast.LENGTH_SHORT).show();
     }
 
-    public void changeFragment(Fragment f, ArrayList<Barang>listBarang){
+    public void changeFragment(Fragment f, ArrayList<Barang>listBarang,ArrayList<User>listUser){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
         bundle.putSerializable("listBarang",listBarang);
+        bundle.putSerializable("listUser",listUser);
         f.setArguments(bundle);
         ft.replace(R.id.containerBarang, f);
         ft.commit();
