@@ -82,7 +82,13 @@ public class Login extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id== android.R.id.home){
-            this.finish();
+            Intent i = new Intent(Login.this, Home.class);
+            i.putExtra("listUser", listUser);
+            i.putExtra("listToko", listToko);
+            i.putExtra("listBarang", listBarang);
+            i.putExtra("listWishlist", listWishlist);
+            i.putExtra("listRequestLelang", listRequestLelang);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
