@@ -1,6 +1,10 @@
 package com.example.easymarket;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,10 +18,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 
 public class InfoBarang extends AppCompatActivity {
 
+    BottomNavigationView bottomNavBarang;
     TextView isi,nama,hargabarang,likes,dilihat,dibeli;
     Button share,chat,add;
     ArrayList<User> listUser = new ArrayList<>();
@@ -41,38 +48,60 @@ public class InfoBarang extends AppCompatActivity {
         likes=findViewById(R.id.tvLikesBarang);
         dilihat=findViewById(R.id.tvBarangDilihat);
         dibeli=findViewById(R.id.tvBarangTerjual);
-        isi.setText("");
-        nama.setText("");
-        hargabarang.setText("");
-        likes.setText("");
-        dilihat.setText("");
-        dibeli.setText("");
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(25);
+        drawable2.setColor(Color.BLACK);
+        share.setBackground(drawable2);
+        chat.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(25);
+        drawable3.setColor(Color.BLACK);
+        add.setBackground(drawable3);
+
+        changeFragment(new FragmentInfoBarang(),listBarang);
+        bottomNavBarang=findViewById(R.id.bottomNavBarang);
+        bottomNavBarang.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId( )== R.id.infobarang ){
+                    changeFragment(new FragmentInfoBarang(),listBarang);
+                }
+                else if(menuItem.getItemId( )== R.id.commentbarang){
+                    changeFragment(new FragmentCommentBarang(),listBarang);
+                }
+                return true;
+            }
+        });
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setCornerRadius(100);
-        drawable2.setStroke(8, Color.LTGRAY);
-        drawable2.setColor(Color.WHITE);
-        add.setBackground(drawable2);
-
-        GradientDrawable drawable3 = new GradientDrawable();
-        drawable3.setShape(GradientDrawable.RECTANGLE);
-        drawable3.setCornerRadius(100);
-        drawable3.setStroke(8, Color.LTGRAY);
-        drawable3.setColor(Color.WHITE);
-        share.setBackground(drawable3);
-
-
-
-        GradientDrawable drawable4 = new GradientDrawable();
-        drawable4.setColor(Color.WHITE);
-        drawable4.setShape(GradientDrawable.RECTANGLE);
-        drawable4.setStroke(5, Color.BLACK);
-        drawable4.setCornerRadius(100);
-        isi.setBackground(drawable4);
+//        GradientDrawable drawable2 = new GradientDrawable();
+//        drawable2.setShape(GradientDrawable.RECTANGLE);
+//        drawable2.setCornerRadius(100);
+//        drawable2.setStroke(8, Color.LTGRAY);
+//        drawable2.setColor(Color.WHITE);
+//        add.setBackground(drawable2);
+//
+//        GradientDrawable drawable3 = new GradientDrawable();
+//        drawable3.setShape(GradientDrawable.RECTANGLE);
+//        drawable3.setCornerRadius(100);
+//        drawable3.setStroke(8, Color.LTGRAY);
+//        drawable3.setColor(Color.WHITE);
+//        share.setBackground(drawable3);
+//
+//
+//
+//        GradientDrawable drawable4 = new GradientDrawable();
+//        drawable4.setColor(Color.WHITE);
+//        drawable4.setShape(GradientDrawable.RECTANGLE);
+//        drawable4.setStroke(5, Color.BLACK);
+//        drawable4.setCornerRadius(100);
+//        isi.setBackground(drawable4);
 
         Intent i = getIntent();
         listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
@@ -84,12 +113,12 @@ public class InfoBarang extends AppCompatActivity {
             aktif=i.getStringExtra("adayanglogin");
         }
         listBarang.get(indeks).dilihat+=1;
-        isi.setText(listBarang.get(indeks).deskripsi+"");
-        nama.setText(listBarang.get(indeks).namabarang+"");
-        hargabarang.setText("Rp. "+listBarang.get(indeks).harga+",00-");
-        likes.setText("Likes : "+listBarang.get(indeks).likes);
-        dilihat.setText("Dilihat : "+listBarang.get(indeks).dilihat+" kali");
-        dibeli.setText("Terjual : "+listBarang.get(indeks).dibeli+" kali");
+//        isi.setText(listBarang.get(indeks).deskripsi+"");
+//        nama.setText(listBarang.get(indeks).namabarang+"");
+//        hargabarang.setText("Rp. "+listBarang.get(indeks).harga+",00-");
+//        likes.setText("Likes : "+listBarang.get(indeks).likes);
+//        dilihat.setText("Dilihat : "+listBarang.get(indeks).dilihat+" kali");
+//        dibeli.setText("Terjual : "+listBarang.get(indeks).dibeli+" kali");
     }
 
     @Override
@@ -115,10 +144,6 @@ public class InfoBarang extends AppCompatActivity {
             if(aktif.equals("1")){
                 i.putExtra("adayanglogin","1");
             }
-            startActivity(i);
-        }
-        else if(id==R.id.menuComment){
-            Intent i = new Intent(InfoBarang.this,InfoComment.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
@@ -199,5 +224,15 @@ public class InfoBarang extends AppCompatActivity {
 
     public void share(View view) {
             Toast.makeText(this, listWishlist.get(0).namabarang, Toast.LENGTH_SHORT).show();
+    }
+
+    public void changeFragment(Fragment f, ArrayList<Barang>listBarang){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("listBarang",listBarang);
+        f.setArguments(bundle);
+        ft.replace(R.id.containerBarang, f);
+        ft.commit();
     }
 }
