@@ -13,8 +13,4 @@
         android:id="@+id/itemEvent"
         android:icon="@drawable/baseline_event_black_18dp"
         android:title="Event" />
-    <item
-        android:id="@+id/itemHistory"
-        android:icon="@drawable/baseline_history_black_18dp"
-        android:title="History" />
 </menu>

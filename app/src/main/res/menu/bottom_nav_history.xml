@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemDitunda"
+        android:icon="@drawable/baseline_payment_black_18dp"
+        android:title="Ditunda" />
+    <item
+        android:id="@+id/itemMenunggu"
+        android:icon="@drawable/baseline_hourglass_empty_black_18dp"
+        android:title="Menunggu" />
+    <item
+        android:id="@+id/itemTerkirim"
+        android:icon="@drawable/baseline_send_black_18dp"
+        android:title="Terkirim" />
+    <item
+        android:id="@+id/itemBatal"
+        android:icon="@drawable/baseline_cancel_black_18dp"
+        android:title="Dibatalkan" />
+</menu>

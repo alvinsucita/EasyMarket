@@ -23,9 +23,9 @@
         android:title="Lelang"
         android:visible="false"/>
     <item
-        android:id="@+id/itemCekPengiriman"
-        android:visible="false"
-        android:title="Cek Pengiriman" />
+        android:id="@+id/itemHistory"
+        android:title="Riwayat"
+        android:visible="false" />
     <item
         android:id="@+id/itemRefund"
         android:visible="false"

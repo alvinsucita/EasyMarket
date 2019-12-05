@@ -1,33 +1,23 @@
 package com.example.easymarket;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,10 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -250,8 +236,6 @@ public class Home extends AppCompatActivity {
                     changeFragment(new FragmentLelang(),listBarang,listUser);
                 }else if(menuItem.getItemId( )== R.id.itemEvent){
                     changeFragment(new FragmentEvent(),listBarang,listUser);
-                }else if(menuItem.getItemId( )== R.id.itemHistory){
-                    changeFragment(new FragmentHistory(),listBarang,listUser);
                 }
 //                else if(adafilter==true){
 //                    if(!listBarangFilter.isEmpty()){
@@ -597,8 +581,9 @@ public class Home extends AppCompatActivity {
             i = putextra(i);
             startActivity(i);
         }
-        else if(item.getItemId()==R.id.itemCekPengiriman){
-            Intent i = new Intent(Home.this,CekPerjalananActivity.class);
+        else if(item.getItemId()==R.id.itemHistory){
+            Intent i = new Intent(Home.this,HistoryActivity.class);
+            i = putextra(i);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemRefund){
