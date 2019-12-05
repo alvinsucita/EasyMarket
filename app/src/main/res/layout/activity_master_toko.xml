@@ -43,7 +43,7 @@
         android:id="@+id/btnRefreshToko"
         android:layout_width="110dp"
         android:layout_height="58dp"
-        android:text="Refresh"
+        android:text="Edit"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
