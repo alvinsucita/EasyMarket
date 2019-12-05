@@ -7,13 +7,19 @@
     android:background="#F1F1F1"
     tools:context=".InfoBarang">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddToWishlist"
+        app:layout_constraintBottom_toTopOf="@+id/btnShare"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -119,54 +125,63 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/btnPersonalChat"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:background="@android:color/black"
-        android:drawableTop="@drawable/baseline_chat_white_18dp"
-        android:fontFamily="@font/cabin"
-        android:onClick="toChat"
-        android:paddingTop="2dp"
-        android:textAlignment="textStart"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toEndOf="@+id/btnShare"
-        app:layout_constraintTop_toTopOf="@+id/btnAddToWishlist" />
-
-    <Button
         android:id="@+id/btnShare"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
         android:background="@android:color/black"
-        android:drawableTop="@drawable/baseline_share_white_18dp"
+        android:drawableLeft="@drawable/baseline_share_white_18dp"
         android:fontFamily="@font/cabin"
         android:onClick="share"
+        android:paddingLeft="10dp"
         android:paddingTop="2dp"
-        android:textAlignment="textStart"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnPersonalChat" />
+        android:paddingRight="10dp"
+        android:text="Share"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddToWishlist"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnAddToWishlist"
+        android:id="@+id/btnPersonalChat"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/black"
-        android:drawableRight="@drawable/baseline_add_shopping_cart_white_18dp"
+        android:drawableLeft="@drawable/baseline_chat_white_18dp"
+        android:fontFamily="@font/cabin"
+        android:onClick="toChat"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingRight="10dp"
+        android:text="Chat"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddToWishlist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <Button
+        android:id="@+id/btnAddToWishlist"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/black"
+        android:drawableLeft="@drawable/baseline_add_shopping_cart_white_18dp"
         android:fontFamily="@font/cabin"
         android:onClick="addwishlist"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="Add to Wishlist"
-        android:textAlignment="textStart"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnPersonalChat" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

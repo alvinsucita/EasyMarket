@@ -2,6 +2,9 @@ package com.example.easymarket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
@@ -29,6 +34,7 @@ public class Home extends AppCompatActivity {
     EditText search;
     RecyclerView rv;
     String userlogin;
+    BottomNavigationView bottomNavHome;
     ArrayList<User> listUser = new ArrayList<>();
     ArrayList<Barang> listBarang = new ArrayList<>();
     ArrayList<Toko> listToko = new ArrayList<>();
@@ -58,24 +64,10 @@ public class Home extends AppCompatActivity {
         listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Games",65000,350,1000,70,50,R.drawable.logitech,R.drawable.logitech2,R.drawable.logitech3));
         listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Games",128000,50,120,30,0,R.drawable.deathadder,R.drawable.deathadder2,R.drawable.deathadder3));
         listRequestLelang.add(new ClassRequestLelang("FA00003"));
-        search=findViewById(R.id.etSearch);
-        filter=findViewById(R.id.btnFilter);
-        rv=findViewById(R.id.rvhome);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(Color.WHITE);
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setStroke(8, Color.LTGRAY);
-        drawable.setCornerRadius(100);
-        search.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setCornerRadius(100);
-        drawable2.setStroke(8, Color.LTGRAY);
-        drawable2.setColor(Color.WHITE);
-        filter.setBackground(drawable2);
+//        search=findViewById(R.id.etSearch);
+//        filter=findViewById(R.id.btnFilter);
+//        rv=findViewById(R.id.rvhome);
+//        rv.setLayoutManager(new LinearLayoutManager(this));
 
 
         Intent i = getIntent();
@@ -96,121 +88,179 @@ public class Home extends AppCompatActivity {
         }
 
 
-        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
-        rv.setAdapter(adapterMenuBarang);
+//        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
+//        rv.setAdapter(adapterMenuBarang);
 
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//        search.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                adasearch=true;
+//                adafilter=false;
+//                if(listBarangFilter.size()>0){
+//                    listBarangSearch.clear();
+//                    for (int j = 0; j < listBarangFilter.size(); j++) {
+//                        if(listBarangFilter.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
+//                            listBarangSearch.add(listBarangFilter.get(j));
+//                        }
+//                    }
+//                    AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
+//                    rv.setAdapter(adapterMenuBarang);
+//                }
+//                else{
+//                    listBarangSearch.clear();
+//                    for (int j = 0; j < listBarang.size(); j++) {
+//                        if(listBarang.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
+//                            listBarangSearch.add(listBarang.get(j));
+//                        }
+//                    }
+//                    AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
+//                    rv.setAdapter(adapterMenuBarang);
+//                }
+//            }
+//        });
 
-            }
+//        adapterMenuBarang = new AdapterMenuBarang(listBarang, new RVClickListener() {
+//            @Override
+//            public void recyclerViewListBarangClick(View v, int posisi) {
+//                int indeks=0;
+//
+//                if(adasearch==true){
+//                    if(!listBarangSearch.isEmpty()){
+//                        if(listBarangFilter.isEmpty()){
+//                            for (int j = 0; j < listBarang.size(); j++) {
+//                                if (listBarangSearch.get(posisi).idbarang.equals(listBarang.get(j).idbarang)) {
+//                                    indeks = j;
+//                                }
+//                            }
+//                        }
+//                        else{
+//                            int temp=0;
+//                            for (int j = 0; j < listBarangFilter.size(); j++) {
+//                                if (listBarangSearch.get(posisi).idbarang.equals(listBarangFilter.get(j).idbarang)) {
+//                                    temp=j;
+//                                }
+//                            }
+//                            for (int j = 0; j < listBarang.size(); j++) {
+//                                if(listBarangFilter.get(temp).idbarang.equals(listBarang.get(j).idbarang)){
+//                                    indeks=j;
+//                                }
+//                            }
+//                        }
+//                    }
+//                    else{
+//                        indeks = posisi;
+//                    }
+//                }
+//                else if(adafilter==true){
+//                    if(!listBarangFilter.isEmpty()){
+//                        if(listBarangSearch.isEmpty()){
+//                            for (int j = 0; j < listBarang.size(); j++) {
+//                                if (listBarangFilter.get(posisi).idbarang.equals(listBarang.get(j).idbarang)) {
+//                                    indeks = j;
+//                                }
+//                            }
+//                        }
+//                        else{
+//                            int temp=0;
+//                            for (int j = 0; j < listBarangSearch.size(); j++) {
+//                                if (listBarangFilter.get(posisi).idbarang.equals(listBarangSearch.get(j).idbarang)) {
+//                                    temp = j;
+//                                }
+//                            }
+//                            for (int j = 0; j < listBarang.size(); j++) {
+//                                if(listBarangSearch.get(temp).idbarang.equals(listBarang.get(j).idbarang)){
+//                                    indeks=j;
+//                                }
+//                            }
+//                        }
+//                    }
+//                    else{
+//                        indeks = posisi;
+//                    }
+//                }
+//                else{
+//                    indeks = posisi;
+//                }
+//
+//                Intent i = new Intent(Home.this,InfoBarang.class);
+//                i.putExtra("indeks",indeks);
+//                i.putExtra("listUser", listUser);
+//                i.putExtra("listWishlist", listWishlist);
+//                i.putExtra("listToko", listToko);
+//                i.putExtra("listBarang", listBarang);
+//                i.putExtra("listRequestLelang", listRequestLelang);
+//                i.putExtra("adayanglogin","1");
+//                startActivity(i);
+//            }
+//        });
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                adasearch=true;
-                adafilter=false;
-                if(listBarangFilter.size()>0){
-                    listBarangSearch.clear();
-                    for (int j = 0; j < listBarangFilter.size(); j++) {
-                        if(listBarangFilter.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
-                            listBarangSearch.add(listBarangFilter.get(j));
-                        }
-                    }
-                    AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
-                    rv.setAdapter(adapterMenuBarang);
-                }
-                else{
-                    listBarangSearch.clear();
-                    for (int j = 0; j < listBarang.size(); j++) {
-                        if(listBarang.get(j).namabarang.toLowerCase().contains(search.getText().toString().toLowerCase())){
-                            listBarangSearch.add(listBarang.get(j));
-                        }
-                    }
-                    AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarangSearch);
-                    rv.setAdapter(adapterMenuBarang);
-                }
-            }
-        });
-
-        adapterMenuBarang = new AdapterMenuBarang(listBarang, new RVClickListener() {
-            @Override
-            public void recyclerViewListBarangClick(View v, int posisi) {
-                int indeks=0;
-
-                if(adasearch==true){
-                    if(!listBarangSearch.isEmpty()){
-                        if(listBarangFilter.isEmpty()){
-                            for (int j = 0; j < listBarang.size(); j++) {
-                                if (listBarangSearch.get(posisi).idbarang.equals(listBarang.get(j).idbarang)) {
-                                    indeks = j;
-                                }
-                            }
-                        }
-                        else{
-                            int temp=0;
-                            for (int j = 0; j < listBarangFilter.size(); j++) {
-                                if (listBarangSearch.get(posisi).idbarang.equals(listBarangFilter.get(j).idbarang)) {
-                                    temp=j;
-                                }
-                            }
-                            for (int j = 0; j < listBarang.size(); j++) {
-                                if(listBarangFilter.get(temp).idbarang.equals(listBarang.get(j).idbarang)){
-                                    indeks=j;
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        indeks = posisi;
-                    }
-                }
-                else if(adafilter==true){
-                    if(!listBarangFilter.isEmpty()){
-                        if(listBarangSearch.isEmpty()){
-                            for (int j = 0; j < listBarang.size(); j++) {
-                                if (listBarangFilter.get(posisi).idbarang.equals(listBarang.get(j).idbarang)) {
-                                    indeks = j;
-                                }
-                            }
-                        }
-                        else{
-                            int temp=0;
-                            for (int j = 0; j < listBarangSearch.size(); j++) {
-                                if (listBarangFilter.get(posisi).idbarang.equals(listBarangSearch.get(j).idbarang)) {
-                                    temp = j;
-                                }
-                            }
-                            for (int j = 0; j < listBarang.size(); j++) {
-                                if(listBarangSearch.get(temp).idbarang.equals(listBarang.get(j).idbarang)){
-                                    indeks=j;
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        indeks = posisi;
-                    }
-                }
-                else{
-                    indeks = posisi;
-                }
-
-                Intent i = new Intent(Home.this,InfoBarang.class);
-                i.putExtra("indeks",indeks);
-                i.putExtra("listUser", listUser);
-                i.putExtra("listWishlist", listWishlist);
-                i.putExtra("listToko", listToko);
-                i.putExtra("listBarang", listBarang);
-                i.putExtra("listRequestLelang", listRequestLelang);
-                i.putExtra("adayanglogin",aktif);
-                startActivity(i);
-            }
-        });
+//        changeFragment(new FragmentHome(),listBarang,listUser);
+//        bottomNavHome = findViewById(R.id.bottomNavHome);
+//        bottomNavHome.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                if(menuItem.getItemId( )== R.id.itemHome){
+//                    changeFragment(new FragmentHome(),listBarang,listUser);
+//                }else if(menuItem.getItemId( )== R.id.itemLelang){
+//                    changeFragment(new FragmentLelang(),listBarang,listUser);
+//                }else if(menuItem.getItemId( )== R.id.itemEvent){
+//                    changeFragment(new FragmentEvent(),listBarang,listUser);
+//                }else if(menuItem.getItemId( )== R.id.itemHistory){
+//                    changeFragment(new FragmentHistory(),listBarang,listUser);
+//                }
+//                else if(adafilter==true){
+//                    if(!listBarangFilter.isEmpty()){
+//                        if(listBarangSearch.isEmpty()){
+//                            for (int j = 0; j < listBarang.size(); j++) {
+//                                if (listBarangFilter.get(posisi).idbarang.equals(listBarang.get(j).idbarang)) {
+//                                    indeks = j;
+//                                }
+//                            }
+//                        }
+//                        else{
+//                            int temp=0;
+//                            for (int j = 0; j < listBarangSearch.size(); j++) {
+//                                if (listBarangFilter.get(posisi).idbarang.equals(listBarangSearch.get(j).idbarang)) {
+//                                    temp = j;
+//                                }
+//                            }
+//                            for (int j = 0; j < listBarang.size(); j++) {
+//                                if(listBarangSearch.get(temp).idbarang.equals(listBarang.get(j).idbarang)){
+//                                    indeks=j;
+//                                }
+//                            }
+//                        }
+//                    }
+//                    else{
+//                        indeks = posisi;
+//                    }
+//                }
+//                else{
+//                    indeks = posisi;
+//                }
+//
+//                Intent i = new Intent(Home.this,InfoBarang.class);
+//                i.putExtra("indeks",indeks);
+//                i.putExtra("listUser", listUser);
+//                i.putExtra("listWishlist", listWishlist);
+//                i.putExtra("listToko", listToko);
+//                i.putExtra("listBarang", listBarang);
+//                i.putExtra("listRequestLelang", listRequestLelang);
+//                i.putExtra("adayanglogin",aktif);
+//                startActivity(i);
+//                return true;
+//            }
+//        });
     }
 
     @Override
@@ -503,5 +553,16 @@ public class Home extends AppCompatActivity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void changeFragment(Fragment f, ArrayList<Barang>listBarang, ArrayList<User>listUser){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("listBarang",listBarang);
+        bundle.putSerializable("listUser",listUser);
+        f.setArguments(bundle);
+        ft.replace(R.id.containerHome, f);
+        ft.commit();
     }
 }
