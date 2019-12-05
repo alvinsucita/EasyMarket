@@ -7,25 +7,12 @@ public class Toko implements Serializable {
     String daerahasal;
     String email;
     String password;
-    String aktif;
 
-    public Toko(String nama, String daerahasal, String email, String password, String aktif) {
+    public Toko(String nama, String daerahasal, String email, String password) {
         this.nama = nama;
         this.daerahasal = daerahasal;
         this.email = email;
         this.password = password;
-        this.aktif = aktif;
-    }
-
-    @Override
-    public String toString() {
-        return "Toko{" +
-                "nama='" + nama + '\'' +
-                ", daerahasal='" + daerahasal + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", aktif='" + aktif + '\'' +
-                '}';
     }
 
     public String getNama() {
@@ -58,13 +45,5 @@ public class Toko implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getAktif() {
-        return aktif;
-    }
-
-    public void setAktif(String aktif) {
-        this.aktif = aktif;
     }
 }

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -61,11 +62,6 @@ public class HomeToko extends AppCompatActivity {
                 return true;
             }
         });
-        for (int j = 0; j < listToko.size(); j++) {
-            if(listToko.get(j).aktif.equals("1")){
-                tokologin=listToko.get(j).nama;
-            }
-        }
     }
 
     @Override
@@ -87,12 +83,8 @@ public class HomeToko extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.itemLogout){
+            FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(HomeToko.this,Login.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("listWishlist", listWishlist);
-            i.putExtra("listRequestLelang", listRequestLelang);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);

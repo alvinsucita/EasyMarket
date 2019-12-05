@@ -77,9 +77,9 @@ public class FragmentInfoBarang extends Fragment {
                 int ctr=0;
 
                 for (int i = 0; i < listUser.size(); i++) {
-                    if(listUser.get(i).aktif.equals("1")){
-                        emailuser=listUser.get(i).email;
-                    }
+//                    if(listUser.get(i).aktif.equals("1")){
+//                        emailuser=listUser.get(i).email;
+//                    }
                 }
 
                 if(infoBarang.listLikes.size()==0){

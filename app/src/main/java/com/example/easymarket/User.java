@@ -9,29 +9,15 @@ public class User implements Serializable {
     String gender;
     String daerahasal;
     String umur;
-    String aktif;
 
-    public User(String email, String nama, String password, String gender, String daerahasal, String umur, String aktif) {
+    public User(){}
+    public User(String email, String nama, String password, String gender, String daerahasal, String umur) {
         this.email = email;
         this.nama = nama;
         this.password = password;
         this.gender = gender;
         this.daerahasal = daerahasal;
         this.umur = umur;
-        this.aktif = aktif;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", nama='" + nama + '\'' +
-                ", password='" + password + '\'' +
-                ", gender='" + gender + '\'' +
-                ", daerahasal='" + daerahasal + '\'' +
-                ", umur='" + umur + '\'' +
-                ", aktif='" + aktif + '\'' +
-                '}';
     }
 
     public String getEmail() {
@@ -80,13 +66,5 @@ public class User implements Serializable {
 
     public void setUmur(String umur) {
         this.umur = umur;
-    }
-
-    public String getAktif() {
-        return aktif;
-    }
-
-    public void setAktif(String aktif) {
-        this.aktif = aktif;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.easymarket;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActionBar;
@@ -8,6 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HalamanCover extends AppCompatActivity {
 
@@ -20,8 +28,40 @@ public class HalamanCover extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(HalamanCover.this,Home.class);
-                startActivity(i);
+                DatabaseReference databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("Toko");
+                if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+                    databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(ds.child("email").getValue().toString())){
+                                    cek=false;
+                                }
+                            }
+                            if(cek==false){
+                                ///LoginToko
+                                Intent i = new Intent(HalamanCover.this,HomeToko.class);
+                                startActivity(i);
+                                Toast.makeText(getApplicationContext(), "Welcome Toko, "+FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                //LoginUser
+                                Intent i = new Intent(HalamanCover.this,Home.class);
+                                startActivity(i);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else{
+                    Intent i = new Intent(HalamanCover.this,Home.class);
+                    startActivity(i);
+                }
             }
         }, 4000);
     }

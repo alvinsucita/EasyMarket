@@ -39,6 +39,9 @@ public class Register extends AppCompatActivity {
     RadioGroup rgJenis;
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String tiperegister="";
+    DatabaseReference databaseReference_user,databaseReference_toko;
+    User userbaru;
+    Toko tokobaru;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,78 +114,124 @@ public class Register extends AppCompatActivity {
             else{
                 Intent i = new Intent(Register.this,Login.class);
                 if(tiperegister.equals("toko")){
-                    int ctr=0;
-                    for (int j = 0; j < listToko.size(); j++) {
-                        if(email.getText().toString().equals(listToko.get(j).email)){
-                            ctr++;
-                        }
-                    }
-                    if(ctr==0){
-                        listToko.add(new Toko(stremail,"",stremail,strpassword,"0"));
-                        Intent a = new Intent(Register.this, Login.class);
-                        a.putExtra("listUser", listUser);
-                        a.putExtra("listBarang", listBarang);
-                        a.putExtra("listWishlist", listWishlist);
-                        a.putExtra("listRequestLelang", listRequestLelang);
-                        a.putExtra("listToko", listToko);
-                        startActivity(a);
-                        Toast.makeText(this, "Toko berhasil didaftarkan", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(ctr>0){
-                        Toast.makeText(this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else if(tiperegister.equals("user")){
-                    int ctr=0;
-                    for (int j = 0; j < listUser.size(); j++) {
-                        if(email.getText().toString().equals(listUser.get(j).email)) {
-                            ctr++;
-                        }
-                    }
-                    if(ctr==0){
-                        final User baru = new User(stremail,stremail,strpassword,"","","","0");
-                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
-                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                        firebaseAuth.createUserWithEmailAndPassword(stremail,strpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(!task.isSuccessful()){
-                                    Toast.makeText(Register.this, "Register Gagal", Toast.LENGTH_SHORT).show();
+                    tokobaru = new Toko(stremail,"",stremail,strpassword);
+                    databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("Toko");
+                    databaseReference_user = FirebaseDatabase.getInstance().getReference().child("User");
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
+                    databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(stremail.equals(ds.child("email").getValue().toString())){
+                                    Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                    cek=false;
                                 }
                             }
-                        });
-                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Boolean cek = true;
-                                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(stremail.equals(ds.child("email"))){
-                                        cek=false;
-                                    }
-                                }
-                                if(cek==true){
-                                    databaseReference.push().setValue(baru).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()) {
-                                                Toast.makeText(Register.this, "Berhasil Register", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(Register.this,Home.class);
-                                                startActivity(i);
+                            if(cek==true){
+                                databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        Boolean cek = true;
+                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                            if(stremail.equals(ds.child("email").getValue().toString())){
+                                                Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                                cek=false;
                                             }
                                         }
-                                    });
-                                }
-                                else{
-                                    Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                                        if(cek==true){
+                                            databaseReference_toko.push().setValue(tokobaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()) {
+                                                        Toast.makeText(Register.this, "Berhasil Register toko", Toast.LENGTH_SHORT).show();
+                                                        Intent i = new Intent(Register.this,HomeToko.class);
+                                                        startActivity(i);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        else{
+                                            Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                            else{
+                                Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else if(tiperegister.equals("user")){
+                    userbaru = new User(stremail,stremail,strpassword,"","","");
+                    databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("Toko");
+                    databaseReference_user = FirebaseDatabase.getInstance().getReference().child("User");
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
+                    databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(stremail.equals(ds.child("email").getValue().toString())){
+                                    Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                    cek=false;
                                 }
                             }
+                            if(cek==true){
+                                databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        Boolean cek = true;
+                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                            if(stremail.equals(ds.child("email").getValue().toString())){
+                                                Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                                cek=false;
+                                            }
+                                        }
+                                        if(cek==true){
+                                            databaseReference_user.push().setValue(userbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()) {
+                                                        Toast.makeText(Register.this, "Berhasil Register user", Toast.LENGTH_SHORT).show();
+                                                        Intent i = new Intent(Register.this,Home.class);
+                                                        startActivity(i);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        else{
+                                            Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                    }
+                                });
                             }
-                        });
-                    }
+                            else{
+                                Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
         }

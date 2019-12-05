@@ -60,14 +60,14 @@ public class UserProfileActivity extends AppCompatActivity {
         if(i.hasExtra("listUser")){
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
             for (int j = 0; j < listUser.size(); j++) {
-                if(listUser.get(j).aktif.equals("1")){
-                    tvNama.setText(listUser.get(j).getNama());
-                    tvGender.setText(listUser.get(j).getGender());
-                    tvAsalDaerah.setText(listUser.get(j).getDaerahasal());
-                    tvUmur.setText(listUser.get(j).getUmur());
-                    tvEmail.setText(listUser.get(j).getEmail());
-                    tvPass.setText(listUser.get(j).getPassword());
-                }
+//                if(listUser.get(j).aktif.equals("1")){
+//                    tvNama.setText(listUser.get(j).getNama());
+//                    tvGender.setText(listUser.get(j).getGender());
+//                    tvAsalDaerah.setText(listUser.get(j).getDaerahasal());
+//                    tvUmur.setText(listUser.get(j).getUmur());
+//                    tvEmail.setText(listUser.get(j).getEmail());
+//                    tvPass.setText(listUser.get(j).getPassword());
+//                }
             }
         }
         if(i.hasExtra("adayanglogin")){
@@ -82,12 +82,12 @@ public class UserProfileActivity extends AppCompatActivity {
     }
     public void update(){
         for (int j = 0; j < listUser.size(); j++) {
-            if(listUser.get(j).aktif.equals("1")){
-                if(listUser.get(j).getPassword().equals(tvPassLama.getText().toString())){
-                    listUser.get(j).setNama(tvNama.getText().toString());
-                    listUser.get(j).setPassword(tvPass.getText().toString());
-                }
-            }
+//            if(listUser.get(j).aktif.equals("1")){
+//                if(listUser.get(j).getPassword().equals(tvPassLama.getText().toString())){
+//                    listUser.get(j).setNama(tvNama.getText().toString());
+//                    listUser.get(j).setPassword(tvPass.getText().toString());
+//                }
+//            }
         }
         Toast.makeText(this, "berhasilUpdate", Toast.LENGTH_SHORT).show();
     }

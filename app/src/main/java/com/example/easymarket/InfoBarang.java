@@ -142,9 +142,9 @@ public class InfoBarang extends AppCompatActivity {
         if(aktif.equals("1")){
             String useryangbeli="",barangyangdibeli="",harga="";
             for (int i = 0; i < listUser.size(); i++) {
-                if(listUser.get(i).aktif.equals("1")){
-                    useryangbeli = listUser.get(i).nama;
-                }
+//                if(listUser.get(i).aktif.equals("1")){
+//                    useryangbeli = listUser.get(i).nama;
+//                }
             }
             barangyangdibeli=nama.getText().toString();
             harga=hargabarang.getText().toString();

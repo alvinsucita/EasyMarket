@@ -18,6 +18,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 
@@ -92,7 +97,7 @@ public class FragmentTambahBarang extends Fragment {
         listspinner.add("Olahraga");
         listspinner.add("Lain-lain");
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
+        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(dataAdapter);
         add.setOnClickListener(new View.OnClickListener() {
@@ -105,11 +110,11 @@ public class FragmentTambahBarang extends Fragment {
                 String strkategori = sp.getSelectedItem().toString();
                 String strid = "";
                 int ctr=0;
-                for (int i = 0; i < listBarang.size(); i++) {
-                    if(listBarang.get(i).kategori.equals(strkategori)){
-                        ctr++;
-                    }
-                }
+//                for (int i = 0; i < listBarang.size(); i++) {
+//                    if(listBarang.get(i).kategori.equals(strkategori)){
+//                        ctr++;
+//                    }
+//                }
 
                 if(ctr>=0&&ctr<9){
                     strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"0000"+(ctr+1);
@@ -124,8 +129,16 @@ public class FragmentTambahBarang extends Fragment {
                 }
 
                 if(!strnama.equals("") && !strharga.equals("") && !strdeskripsi.equals("") && !strstok.equals("")){
-                    listBarang.add(new Barang(strid,((HomeToko) getActivity()).tokologin,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok),0,0,0));
-                    Toast.makeText(getContext(), "Barang berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                    Barang barangbaru=new Barang(strid,((HomeToko) getActivity()).tokologin,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok));
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Barang");
+                    String key=databaseReference.push().getKey();
+                    databaseReference.child(key).setValue(barangbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getContext(), "Barang berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                     namabarang.setText("");
                     harga.setText("");
                     deskripsi.setText("");

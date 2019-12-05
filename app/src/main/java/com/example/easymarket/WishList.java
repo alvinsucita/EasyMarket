@@ -66,9 +66,9 @@ public class WishList extends AppCompatActivity {
 
 
         for (int j = 0; j < listUser.size(); j++) {
-            if(listUser.get(j).aktif.equals("1")){
-                yanglogin=listUser.get(j).nama;
-            }
+//            if(listUser.get(j).aktif.equals("1")){
+//                yanglogin=listUser.get(j).nama;
+//            }
         }
         for (int j = 0; j < listWishlist.size(); j++) {
             if(listWishlist.get(j).yangbeli.equals(yanglogin)){

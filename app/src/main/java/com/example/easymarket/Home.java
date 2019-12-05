@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -25,9 +26,24 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.Format;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Home extends AppCompatActivity {
 
@@ -50,25 +66,50 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        listUser.add(new User("felixlonald@hotmail.com","felix lonald","lonald","Pria","Jawa Timur","20","0"));
-        listUser.add(new User("sunyoto@gmail.com","sunyoto kurniawan","kurniawan","Pria","Madura","35","0"));
-        listUser.add(new User("sint@gmail.com","santi","sinta","Wanita","Jakarta","22","0"));
-        listToko.add(new Toko("Hypershop","Jawa Timur","hyper@gmail.com","hyperx","0"));
-        listToko.add(new Toko("Happy Store","Jawa Timur","happy@gmail.com","hapstore","0"));
-        listToko.add(new Toko("Games X Shop","Jawa Timur","gamesx@gmail.com","gamshop","0"));
-        listBarang.add(new Barang("FA00001","Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Pakaian",11000,0,0,0,10,R.drawable.sendalswallow,R.drawable.swallow2,R.drawable.sandalswallow3));
-        listBarang.add(new Barang("FA00002","Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Pakaian",2800000,7,30,3,2,R.drawable.adidasterrex,R.drawable.adidasterrex2,R.drawable.terrex3));
-        listBarang.add(new Barang("FA00003","Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Pakaian",11000000,200,500,1,10,R.drawable.balenciagatriples,R.drawable.balenciaga2,R.drawable.balenciaga3));
-        listBarang.add(new Barang("IB00001","Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Anak",227000,5,70,30,30,R.drawable.enfamil,R.drawable.enfamil2,R.drawable.enfamil3));
-        listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Games",1950000,100,230,10,100,R.drawable.blackwidowchroma,R.drawable.blackwidow2,R.drawable.blackwidow3));
-        listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Games",65000,350,1000,70,50,R.drawable.logitech,R.drawable.logitech2,R.drawable.logitech3));
-        listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Games",128000,50,120,30,0,R.drawable.deathadder,R.drawable.deathadder2,R.drawable.deathadder3));
-        listRequestLelang.add(new ClassRequestLelang("FA00003"));
+        listUser.add(new User("felixlonald@hotmail.com","felix lonald","lonald","Pria","Jawa Timur","20"));
+        listUser.add(new User("sunyoto@gmail.com","sunyoto kurniawan","kurniawan","Pria","Madura","35"));
+        listUser.add(new User("sint@gmail.com","santi","sinta","Wanita","Jakarta","22"));
+        listToko.add(new Toko("Hypershop","Jawa Timur","hyper@gmail.com","hyperx"));
+        listToko.add(new Toko("Happy Store","Jawa Timur","happy@gmail.com","hapstore"));
+        listToko.add(new Toko("Games X Shop","Jawa Timur","gamesx@gmail.com","gamshop"));
+//        listBarang.add(new Barang("FA00001","Hypershop","Sendal Swallow","Sendal jepit yang sangat murah dan kualitas pas-pas an","Pakaian",11000,0,0,0,10,R.drawable.sendalswallow,R.drawable.swallow2,R.drawable.sandalswallow3));
+//        listBarang.add(new Barang("FA00002","Hypershop","Adidas Terrex Free Hiker GTX","Sepatu yang cocok untuk pria yang aktif berpetualang","Pakaian",2800000,7,30,3,2,R.drawable.adidasterrex,R.drawable.adidasterrex2,R.drawable.terrex3));
+//        listBarang.add(new Barang("FA00003","Hypershop","Balenciaga Triple S","Sepatu mahal yang sangat waw","Pakaian",11000000,200,500,1,10,R.drawable.balenciagatriples,R.drawable.balenciaga2,R.drawable.balenciaga3));
+//        listBarang.add(new Barang("IB00001","Happy Store","Susu Formula Enfamil A+","Merk susu pertumbuhan bayi diperkaya Prebiotik GOS tuk kesehatan pencernaan dan nutrisi penting lainnya","Ibu dan Anak",227000,5,70,30,30,R.drawable.enfamil,R.drawable.enfamil2,R.drawable.enfamil3));
+//        listBarang.add(new Barang("GA00001","Games X Shop","Razer Blackwidow Chroma V2","Keyboard Gaming termahal yang berkualitas bintang 5","Games",1950000,100,230,10,100,R.drawable.blackwidowchroma,R.drawable.blackwidow2,R.drawable.blackwidow3));
+//        listBarang.add(new Barang("GA00002","Games X Shop","Logitech Wireless M280 Mouse","Mouse standard yang dimiliki semua orang","Games",65000,350,1000,70,50,R.drawable.logitech,R.drawable.logitech2,R.drawable.logitech3));
+//        listBarang.add(new Barang("GA00003","Games X Shop","Razer Deathadder Mouse","Mouse Razer versi murah","Games",128000,50,120,30,0,R.drawable.deathadder,R.drawable.deathadder2,R.drawable.deathadder3));
+//        listRequestLelang.add(new ClassRequestLelang("FA00003"));
 //        search=findViewById(R.id.etSearch);
 //        filter=findViewById(R.id.btnFilter);
-//        rv=findViewById(R.id.rvhome);
-//        rv.setLayoutManager(new LinearLayoutManager(this));
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Barang");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+//                    Barang isiBarang = new Barang();
+//                    isiBarang.setStok("");
+//                    isiBarang.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+//                    isiBarang.setGender("");
+//                    isiBarang.setNama(nama.getText().toString());
+//                    isiBarang.setPassword(ds.child("password").getValue().toString());
+//                    isiBarang.setUmur("");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+
+            Toast.makeText(getApplicationContext(), "Welcome, "+FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+
+        }
 
         Intent i = getIntent();
         if(i.hasExtra("adayanglogin")){
@@ -80,16 +121,10 @@ public class Home extends AppCompatActivity {
             listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
             listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
             listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
-            for (int j = 0; j < listUser.size(); j++) {
-                if(listUser.get(j).aktif.equals("1")){
-                    userlogin=listUser.get(j).nama;
-                }
-            }
         }
 
 
-//        AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
-//        rv.setAdapter(adapterMenuBarang);
+
 
 //        search.addTextChangedListener(new TextWatcher() {
 //            @Override
@@ -204,20 +239,20 @@ public class Home extends AppCompatActivity {
 //            }
 //        });
 
-//        changeFragment(new FragmentHome(),listBarang,listUser);
-//        bottomNavHome = findViewById(R.id.bottomNavHome);
-//        bottomNavHome.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//                if(menuItem.getItemId( )== R.id.itemHome){
-//                    changeFragment(new FragmentHome(),listBarang,listUser);
-//                }else if(menuItem.getItemId( )== R.id.itemLelang){
-//                    changeFragment(new FragmentLelang(),listBarang,listUser);
-//                }else if(menuItem.getItemId( )== R.id.itemEvent){
-//                    changeFragment(new FragmentEvent(),listBarang,listUser);
-//                }else if(menuItem.getItemId( )== R.id.itemHistory){
-//                    changeFragment(new FragmentHistory(),listBarang,listUser);
-//                }
+        changeFragment(new FragmentHome(),listBarang,listUser);
+        bottomNavHome = findViewById(R.id.bottomNavHome);
+        bottomNavHome.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId( )== R.id.itemHome){
+                    changeFragment(new FragmentHome(),listBarang,listUser);
+                }else if(menuItem.getItemId( )== R.id.itemLelang){
+                    changeFragment(new FragmentLelang(),listBarang,listUser);
+                }else if(menuItem.getItemId( )== R.id.itemEvent){
+                    changeFragment(new FragmentEvent(),listBarang,listUser);
+                }else if(menuItem.getItemId( )== R.id.itemHistory){
+                    changeFragment(new FragmentHistory(),listBarang,listUser);
+                }
 //                else if(adafilter==true){
 //                    if(!listBarangFilter.isEmpty()){
 //                        if(listBarangSearch.isEmpty()){
@@ -258,28 +293,40 @@ public class Home extends AppCompatActivity {
 //                i.putExtra("listRequestLelang", listRequestLelang);
 //                i.putExtra("adayanglogin",aktif);
 //                startActivity(i);
-//                return true;
-//            }
-//        });
+                Date a = new Date();
+                SimpleDateFormat time = new SimpleDateFormat("hh:mm aa");
+                Calendar now = Calendar.getInstance();
+                Toast.makeText(Home.this,now.get(Calendar.DAY_OF_MONTH)+"/"+now.get(Calendar.MONTH)+"/"+now.get(Calendar.YEAR)+" - "+time.format(a), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu,menu);
-        if(aktif.equals("0")){
-            menu.getItem(0).setVisible(true);
-            menu.getItem(1).setVisible(false);
-            menu.getItem(2).setVisible(false);
-            menu.getItem(3).setVisible(false);
-            menu.getItem(4).setVisible(false);
-            menu.getItem(5).setVisible(false);
-            menu.getItem(6).setVisible(false);
-            menu.getItem(7).setVisible(false);
-            menu.getItem(8).setVisible(false);
-        }
-        else{
-            menu.getItem(3).setTitle("Hai, "+userlogin+" !");
+
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                        if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                            String  nama = ds.child("nama").getValue().toString();
+                            menu.getItem(3).setTitle("Hai, "+nama+" !");
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             menu.getItem(3).setVisible(true);
             menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(true);
@@ -289,6 +336,17 @@ public class Home extends AppCompatActivity {
             menu.getItem(6).setVisible(true);
             menu.getItem(7).setVisible(false);
             menu.getItem(8).setVisible(true);
+        }
+        else{
+            menu.getItem(0).setVisible(true);
+            menu.getItem(1).setVisible(false);
+            menu.getItem(2).setVisible(false);
+            menu.getItem(3).setVisible(false);
+            menu.getItem(4).setVisible(false);
+            menu.getItem(5).setVisible(false);
+            menu.getItem(6).setVisible(false);
+            menu.getItem(7).setVisible(false);
+            menu.getItem(8).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -514,14 +572,9 @@ public class Home extends AppCompatActivity {
             startActivity(i);
         }
         else if(item.getItemId()==R.id.itemLogout){
+            FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(Home.this,Home.class);
-            for (int j = 0; j < listUser.size(); j++) {
-                if(listUser.get(j).aktif.equals("1")){
-                    listUser.get(j).aktif="0";
-                    i = putextra(i);
-                    startActivity(i);
-                }
-            }
+            startActivity(i);
         }
         else if(item.getItemId()==R.id.itemEvent){
             Intent i = new Intent(Home.this,EventPage.class);

@@ -57,9 +57,9 @@ public class EditProfileActivity extends AppCompatActivity {
         listBarang= (ArrayList<Barang>) j.getSerializableExtra("listBarang");
         listWishlist= (ArrayList<ClassWishlist>) j.getSerializableExtra("listWishlist");
         for (int i = 0; i < listUser.size(); i++) {
-            if(listUser.get(i).getAktif().equals("1")){
-                PassLama.setText(listUser.get(i).getPassword());
-            }
+//            if(listUser.get(i).getAktif().equals("1")){
+//                PassLama.setText(listUser.get(i).getPassword());
+//            }
         }
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -80,10 +80,10 @@ public class EditProfileActivity extends AppCompatActivity {
         if(!PassLama.equals("") || !tvPasswordBaru.equals("")){
             if(PasswordBaru.equals(PasswordConfirmBaru)){
                 for (int i = 0; i < listUser.size(); i++) {
-                    if(listUser.get(i).getAktif().equals("1")){
-                        listUser.get(i).setPassword(tvPasswordBaru.getText().toString());
-                        Toast.makeText(this, listUser.get(i).getPassword().toString(), Toast.LENGTH_SHORT).show();
-                    }
+//                    if(listUser.get(i).getAktif().equals("1")){
+//                        listUser.get(i).setPassword(tvPasswordBaru.getText().toString());
+//                        Toast.makeText(this, listUser.get(i).getPassword().toString(), Toast.LENGTH_SHORT).show();
+//                    }
                 }
 
             }

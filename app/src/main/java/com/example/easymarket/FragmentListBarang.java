@@ -76,11 +76,11 @@ public class FragmentListBarang extends Fragment {
         request.setBackground(drawable3);
 
         ArrayList<String> listspinner = new ArrayList<>();
-        for (int i = 0; i < listBarang.size(); i++) {
-            if(listBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
-                listspinner.add(listBarang.get(i).namabarang);
-            }
-        }
+//        for (int i = 0; i < listBarang.size(); i++) {
+//            if(listBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
+//                listspinner.add(listBarang.get(i).namabarang);
+//            }
+//        }
         if(listspinner.size()!=0){
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

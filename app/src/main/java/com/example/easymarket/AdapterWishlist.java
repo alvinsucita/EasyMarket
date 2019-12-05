@@ -44,10 +44,10 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
         for (int i = 0; i < filterWishlist.size(); i++) {
             for (int j = 0; j < listBarang.size(); j++) {
                 if(filterWishlist.get(i).namabarang.equals(listBarang.get(j).namabarang)){
-                    Glide.with(holder.itemView.getContext())
-                            .load(listBarang.get(j).fotoutama)
-                            .override(200,200)
-                            .into(holder.fotobarang);
+//                    Glide.with(holder.itemView.getContext())
+//                            .load(listBarang.get(j).fotoutama)
+//                            .override(200,200)
+//                            .into(holder.fotobarang);
                 }
             }
         }
