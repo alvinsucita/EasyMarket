@@ -141,15 +141,16 @@ public class InfoBarang extends AppCompatActivity {
 
     public void addwishlist(View view) {
         if(aktif.equals("1")){
-            String useryangbeli="",barangyangdibeli="";
+            String useryangbeli="",barangyangdibeli="",harga="";
             for (int i = 0; i < listUser.size(); i++) {
                 if(listUser.get(i).aktif.equals("1")){
                     useryangbeli = listUser.get(i).nama;
                 }
             }
             barangyangdibeli=nama.getText().toString();
+            harga=hargabarang.getText().toString();
             if(listWishlist.size()==0){
-                listWishlist.add(new ClassWishlist(barangyangdibeli,useryangbeli));
+                listWishlist.add(new ClassWishlist(barangyangdibeli,harga,useryangbeli));
                 Toast.makeText(this, "Barang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
             }
             else{
@@ -167,13 +168,13 @@ public class InfoBarang extends AppCompatActivity {
                         }
                         else if(i+1==listWishlist.size()){
                             Toast.makeText(this, "Barang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
-                            listWishlist.add(new ClassWishlist(barangyangdibeli,useryangbeli));
+                            listWishlist.add(new ClassWishlist(barangyangdibeli,harga,useryangbeli));
                             break;
                         }
                     }
                 }
                 else{
-                    listWishlist.add(new ClassWishlist(barangyangdibeli,useryangbeli));
+                    listWishlist.add(new ClassWishlist(barangyangdibeli,harga,useryangbeli));
                     Toast.makeText(this, "Barang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
                 }
             }

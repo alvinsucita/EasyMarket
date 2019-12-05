@@ -4,19 +4,13 @@ import java.io.Serializable;
 
 public class ClassWishlist implements Serializable {
     String namabarang;
+    String hargabarang;
     String yangbeli;
 
-    public ClassWishlist(String namabarang, String yangbeli) {
+    public ClassWishlist(String namabarang, String hargabarang, String yangbeli) {
         this.namabarang = namabarang;
+        this.hargabarang = hargabarang;
         this.yangbeli = yangbeli;
-    }
-
-    @Override
-    public String toString() {
-        return "ClassWishlist{" +
-                "namabarang='" + namabarang + '\'' +
-                ", yangbeli='" + yangbeli + '\'' +
-                '}';
     }
 
     public String getNamabarang() {
@@ -25,6 +19,14 @@ public class ClassWishlist implements Serializable {
 
     public void setNamabarang(String namabarang) {
         this.namabarang = namabarang;
+    }
+
+    public String getHargabarang() {
+        return hargabarang;
+    }
+
+    public void setHargabarang(String hargabarang) {
+        this.hargabarang = hargabarang;
     }
 
     public String getYangbeli() {

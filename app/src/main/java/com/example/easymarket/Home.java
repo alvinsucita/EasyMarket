@@ -77,7 +77,11 @@ public class Home extends AppCompatActivity {
         drawable2.setColor(Color.WHITE);
         filter.setBackground(drawable2);
 
+
         Intent i = getIntent();
+        if(i.hasExtra("adayanglogin")){
+            aktif="1";
+        }
         if(i.hasExtra("listUser")){
             listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
             listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
@@ -90,9 +94,7 @@ public class Home extends AppCompatActivity {
                 }
             }
         }
-        if(i.hasExtra("adayanglogin")){
-            aktif="1";
-        }
+
 
         AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listBarang);
         rv.setAdapter(adapterMenuBarang);
@@ -205,7 +207,7 @@ public class Home extends AppCompatActivity {
                 i.putExtra("listToko", listToko);
                 i.putExtra("listBarang", listBarang);
                 i.putExtra("listRequestLelang", listRequestLelang);
-                i.putExtra("adayanglogin","1");
+                i.putExtra("adayanglogin",aktif);
                 startActivity(i);
             }
         });
