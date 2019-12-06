@@ -2,7 +2,7 @@ package com.example.easymarket;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class ClassUser implements Serializable {
     String email;
     String nama;
     String password;
@@ -10,8 +10,8 @@ public class User implements Serializable {
     String daerahasal;
     String umur;
 
-    public User(){}
-    public User(String email, String nama, String password, String gender, String daerahasal, String umur) {
+    public ClassUser(){}
+    public ClassUser(String email, String nama, String password, String gender, String daerahasal, String umur) {
         this.email = email;
         this.nama = nama;
         this.password = password;

@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class ManageUsers extends AppCompatActivity {
 
     ListView listView;
-    ArrayList<User> listUser = new ArrayList<>();
-    ArrayList<Barang> listBarang = new ArrayList<>();
-    ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<ClassUser> listClassUser = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassToko> listClassToko = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
 
     ArrayList<String> test = new ArrayList<>();
@@ -26,15 +26,15 @@ public class ManageUsers extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent i = getIntent();
-        if (i.hasExtra("listUser")) {
-            listUser = (ArrayList<User>) i.getSerializableExtra("listUser");
-            listToko = (ArrayList<Toko>) i.getSerializableExtra("listToko");
-            listBarang = (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+        if (i.hasExtra("listClassUser")) {
+            listClassUser = (ArrayList<ClassUser>) i.getSerializableExtra("listClassUser");
+            listClassToko = (ArrayList<ClassToko>) i.getSerializableExtra("listClassToko");
+            listClassBarang = (ArrayList<ClassBarang>) i.getSerializableExtra("listClassBarang");
             listWishlist = (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
-            for(int a = 0; a<listUser.size(); a++){
-                test.add(listUser.get(a).getNama());
+            for(int a = 0; a< listClassUser.size(); a++){
+                test.add(listClassUser.get(a).getNama());
             }
-            user = new String[listUser.size()];
+            user = new String[listClassUser.size()];
             user = test.toArray(user);
         }
 

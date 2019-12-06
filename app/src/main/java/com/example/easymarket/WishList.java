@@ -11,23 +11,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.SimpleTimeZone;
-import java.util.TimeZone;
 
 public class WishList extends AppCompatActivity {
-    ArrayList<User> listUser = new ArrayList<>();
-    ArrayList<Barang> listBarang = new ArrayList<>();
-    ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<ClassUser> listClassUser = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassToko> listClassToko = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     ArrayList<ClassWishlist> filterWishlist = new ArrayList<>();
     ArrayList<ClassNota> listNota = new ArrayList<>();
@@ -59,15 +50,15 @@ public class WishList extends AppCompatActivity {
         total.setText("Total Harga : ");
 
         Intent i = getIntent();
-        listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
-        listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
-        listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+        listClassUser = (ArrayList<ClassUser>) i.getSerializableExtra("listClassUser");
+        listClassToko = (ArrayList<ClassToko>) i.getSerializableExtra("listClassToko");
+        listClassBarang = (ArrayList<ClassBarang>) i.getSerializableExtra("listClassBarang");
         listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
 
 
-        for (int j = 0; j < listUser.size(); j++) {
-//            if(listUser.get(j).aktif.equals("1")){
-//                yanglogin=listUser.get(j).nama;
+        for (int j = 0; j < listClassUser.size(); j++) {
+//            if(listClassUser.get(j).aktif.equals("1")){
+//                yanglogin=listClassUser.get(j).nama;
 //            }
         }
         for (int j = 0; j < listWishlist.size(); j++) {
@@ -76,10 +67,10 @@ public class WishList extends AppCompatActivity {
             }
         };
 
-        adapter=new AdapterWishlist(filterWishlist,listBarang);
+        adapter=new AdapterWishlist(filterWishlist, listClassBarang);
         adapter.setClick(new AdapterWishlist.onClickCallback() {
             @Override
-            public void onClickCheckbox(Barang b) {
+            public void onClickCheckbox(ClassBarang b) {
                 total.setText(b.harga+"");
             }
         });

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class FragmentListBarang extends Fragment {
 
 
-    public ArrayList<Barang> listBarang;
+    public ArrayList<ClassBarang> listClassBarang;
     Spinner sp;
     TextView nama,harga,kategori,likes,terjual,lihat,deskripsi,stok;
     Button request;
@@ -50,7 +50,7 @@ public class FragmentListBarang extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         HomeToko homeToko = (HomeToko) getActivity();
-        listBarang = (ArrayList<Barang>) getArguments().getSerializable("listBarang");
+        listClassBarang = (ArrayList<ClassBarang>) getArguments().getSerializable("listClassBarang");
         sp=view.findViewById(R.id.spListBarang);
         nama=view.findViewById(R.id.tvNamaBarang);
         harga=view.findViewById(R.id.tvHargaBarang);
@@ -76,9 +76,9 @@ public class FragmentListBarang extends Fragment {
         request.setBackground(drawable3);
 
         ArrayList<String> listspinner = new ArrayList<>();
-//        for (int i = 0; i < listBarang.size(); i++) {
-//            if(listBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
-//                listspinner.add(listBarang.get(i).namabarang);
+//        for (int i = 0; i < listClassBarang.size(); i++) {
+//            if(listClassBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
+//                listspinner.add(listClassBarang.get(i).namabarang);
 //            }
 //        }
         if(listspinner.size()!=0){
@@ -91,15 +91,15 @@ public class FragmentListBarang extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strnama=sp.getSelectedItem().toString();
-                for (int i = 0; i < listBarang.size(); i++) {
-                    if(listBarang.get(i).namabarang.equals(strnama)){
-                        intharga=listBarang.get(i).harga;
-                        strdeskripsi=listBarang.get(i).deskripsi;
-                        strkategori=listBarang.get(i).kategori;
-                        intlikes=listBarang.get(i).likes;
-                        intlihat=listBarang.get(i).dilihat;
-                        intstok=listBarang.get(i).stok;
-                        intterjual=listBarang.get(i).dibeli;
+                for (int i = 0; i < listClassBarang.size(); i++) {
+                    if(listClassBarang.get(i).namabarang.equals(strnama)){
+                        intharga= listClassBarang.get(i).harga;
+                        strdeskripsi= listClassBarang.get(i).deskripsi;
+                        strkategori= listClassBarang.get(i).kategori;
+                        intlikes= listClassBarang.get(i).likes;
+                        intlihat= listClassBarang.get(i).dilihat;
+                        intstok= listClassBarang.get(i).stok;
+                        intterjual= listClassBarang.get(i).dibeli;
                     }
                 }
                 nama.setText("Nama : "+strnama);
@@ -110,7 +110,7 @@ public class FragmentListBarang extends Fragment {
                 likes.setText("Likes : "+intlikes+"");
                 lihat.setText("Dilihat : "+intlihat+" kali");
                 stok.setText("Stok : "+intstok+"pcs");
-                terjual.setText("Barang Terjual : "+intterjual+" kali");
+                terjual.setText("ClassBarang Terjual : "+intterjual+" kali");
             }
 
             @Override
@@ -123,9 +123,9 @@ public class FragmentListBarang extends Fragment {
             public void onClick(View v) {
                 String id="";
                 int ctr=0;
-                for (int i = 0; i < listBarang.size(); i++) {
-                    if(strnama.equals(listBarang.get(i).namabarang)){
-                        id=listBarang.get(i).idbarang;
+                for (int i = 0; i < listClassBarang.size(); i++) {
+                    if(strnama.equals(listClassBarang.get(i).namabarang)){
+                        id= listClassBarang.get(i).idbarang;
                     }
                 }
                 for (int i = 0; i < ((HomeToko) getActivity()).listRequestLelang.size(); i++) {
@@ -138,7 +138,7 @@ public class FragmentListBarang extends Fragment {
                     Toast.makeText(getContext(), ((HomeToko) getActivity()).listRequestLelang.size()+"", Toast.LENGTH_SHORT).show();
                 }
                 else if(ctr>0){
-                    Toast.makeText(getContext(), "Barang sudah direquest", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "ClassBarang sudah direquest", Toast.LENGTH_SHORT).show();
                 }
             }
         });

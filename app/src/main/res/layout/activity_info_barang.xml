@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_begin="196dp" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -33,18 +33,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/ivFoto1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:onClick="preview"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:color/white" />
-
-                <ImageView
-                    android:id="@+id/ivFoto2"
+                    android:id="@+id/ivFoto"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="15dp"
@@ -56,22 +45,11 @@
                     app:srcCompat="@android:color/white" />
 
 
-                <ImageView
-                    android:id="@+id/ivFoto3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:onClick="preview"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:color/white" />
-
                 <TextView
                     android:id="@+id/tvNamaBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="16dp"
                     android:background="@android:color/black"
                     android:fontFamily="@font/cabin"
                     android:paddingLeft="20dp"
@@ -81,8 +59,9 @@
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivFoto1" />
+                    app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
 
                 <TextView
                     android:id="@+id/tvHargaBarang"

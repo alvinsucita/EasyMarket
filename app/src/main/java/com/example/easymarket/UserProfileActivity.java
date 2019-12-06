@@ -18,7 +18,7 @@ public class UserProfileActivity extends AppCompatActivity {
     EditText tvGender,tvNama,tvEmail,tvPass,tvAsalDaerah,tvUmur,tvPassLama;
     Button btnBack,btnUpdate;
     ImageView img;
-    ArrayList<User> listUser = new ArrayList<>();
+    ArrayList<ClassUser> listClassUser = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,16 +57,16 @@ public class UserProfileActivity extends AppCompatActivity {
         Intent i = getIntent();
         String userlogin;
         String aktif="0";
-        if(i.hasExtra("listUser")){
-            listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
-            for (int j = 0; j < listUser.size(); j++) {
-//                if(listUser.get(j).aktif.equals("1")){
-//                    tvNama.setText(listUser.get(j).getNama());
-//                    tvGender.setText(listUser.get(j).getGender());
-//                    tvAsalDaerah.setText(listUser.get(j).getDaerahasal());
-//                    tvUmur.setText(listUser.get(j).getUmur());
-//                    tvEmail.setText(listUser.get(j).getEmail());
-//                    tvPass.setText(listUser.get(j).getPassword());
+        if(i.hasExtra("listClassUser")){
+            listClassUser = (ArrayList<ClassUser>) i.getSerializableExtra("listClassUser");
+            for (int j = 0; j < listClassUser.size(); j++) {
+//                if(listClassUser.get(j).aktif.equals("1")){
+//                    tvNama.setText(listClassUser.get(j).getNama());
+//                    tvGender.setText(listClassUser.get(j).getGender());
+//                    tvAsalDaerah.setText(listClassUser.get(j).getDaerahasal());
+//                    tvUmur.setText(listClassUser.get(j).getUmur());
+//                    tvEmail.setText(listClassUser.get(j).getEmail());
+//                    tvPass.setText(listClassUser.get(j).getPassword());
 //                }
             }
         }
@@ -81,11 +81,11 @@ public class UserProfileActivity extends AppCompatActivity {
         Intent i = new Intent(UserProfileActivity.this,Home.class);
     }
     public void update(){
-        for (int j = 0; j < listUser.size(); j++) {
-//            if(listUser.get(j).aktif.equals("1")){
-//                if(listUser.get(j).getPassword().equals(tvPassLama.getText().toString())){
-//                    listUser.get(j).setNama(tvNama.getText().toString());
-//                    listUser.get(j).setPassword(tvPass.getText().toString());
+        for (int j = 0; j < listClassUser.size(); j++) {
+//            if(listClassUser.get(j).aktif.equals("1")){
+//                if(listClassUser.get(j).getPassword().equals(tvPassLama.getText().toString())){
+//                    listClassUser.get(j).setNama(tvNama.getText().toString());
+//                    listClassUser.get(j).setPassword(tvPass.getText().toString());
 //                }
 //            }
         }

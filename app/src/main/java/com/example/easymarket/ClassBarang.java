@@ -2,7 +2,7 @@ package com.example.easymarket;
 
 import java.io.Serializable;
 
-public class Barang implements Serializable {
+public class ClassBarang implements Serializable {
     String idbarang;
     String namatoko;
     String namabarang;
@@ -13,9 +13,9 @@ public class Barang implements Serializable {
     int dilihat;
     int dibeli;
     int stok;
-    public Barang(){}
+    public ClassBarang(){}
 
-    public Barang(String idbarang, String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {
+    public ClassBarang(String idbarang, String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {
         this.idbarang = idbarang;
         this.namatoko = namatoko;
         this.namabarang = namabarang;

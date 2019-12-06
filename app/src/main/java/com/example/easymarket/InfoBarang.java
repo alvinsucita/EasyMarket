@@ -5,16 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,15 +31,15 @@ public class InfoBarang extends AppCompatActivity {
     BottomNavigationView bottomNavBarang;
     TextView nama,hargabarang;
     Button share,chat,add;
-    ArrayList<User> listUser = new ArrayList<>();
-    ArrayList<Barang> listBarang = new ArrayList<>();
+    ArrayList<ClassUser> listClassUser = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
-    ArrayList<Toko> listToko = new ArrayList<>();
-    ArrayList<ClassLikes>listLikes = new ArrayList<>();
+    ArrayList<ClassToko> listClassToko = new ArrayList<>();
+    DatabaseReference databaseReference;
     int jumlah= 0;
     String aktif="0";
     int indeks=0;
-    ImageView foto1,foto2,foto3;
+    ImageView foto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +50,7 @@ public class InfoBarang extends AppCompatActivity {
         add=findViewById(R.id.btnAddToWishlist);
         chat=findViewById(R.id.btnPersonalChat);
         share=findViewById(R.id.btnShare);
-        foto1=findViewById(R.id.ivFoto1);
-        foto2=findViewById(R.id.ivFoto2);
-        foto3=findViewById(R.id.ivFoto3);
+        foto=findViewById(R.id.ivFoto1);
         nama.setText("");
         hargabarang.setText("");
 
@@ -73,29 +71,50 @@ public class InfoBarang extends AppCompatActivity {
         add.setBackground(drawable3);
 
         Intent i = getIntent();
-        listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
-        listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
-        listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
-        listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
         indeks=i.getIntExtra("indeks",indeks);
-        if(i.hasExtra("adayanglogin")){
-            aktif=i.getStringExtra("adayanglogin");
-        }
-        listBarang.get(indeks).dilihat+=1;
-        String hargaasli = String.format("%,d", listBarang.get(indeks).harga);
-        nama.setText(listBarang.get(indeks).namabarang);
-        hargabarang.setText("Rp. "+hargaasli);
 
-        changeFragment(new FragmentInfoBarang(),listBarang,listUser);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_barang =new ClassBarang();
+                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                    listClassBarang.add(semua_Class_barang);
+                }
+                listClassBarang.get(indeks).dilihat+=1;
+                String hargaasli = String.format("%,d", listClassBarang.get(indeks).harga);
+                nama.setText(listClassBarang.get(indeks).namabarang);
+                hargabarang.setText("Rp. "+hargaasli);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        changeFragment(new FragmentInfoBarang(), listClassBarang, listClassUser);
         bottomNavBarang=findViewById(R.id.bottomNavBarang);
         bottomNavBarang.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId( )== R.id.infobarang){
-                    changeFragment(new FragmentInfoBarang(),listBarang,listUser);
+                    changeFragment(new FragmentInfoBarang(), listClassBarang, listClassUser);
                 }
                 else if(menuItem.getItemId( )== R.id.commentbarang){
-                    changeFragment(new FragmentCommentBarang(),listBarang,listUser);
+                    changeFragment(new FragmentCommentBarang(), listClassBarang, listClassUser);
                 }
                 return true;
             }
@@ -108,13 +127,6 @@ public class InfoBarang extends AppCompatActivity {
 
         if(id == android.R.id.home){
             Intent i = new Intent(InfoBarang.this,Home.class);
-            i.putExtra("listUser", listUser);
-            i.putExtra("listToko", listToko);
-            i.putExtra("listBarang", listBarang);
-            i.putExtra("listWishlist", listWishlist);
-            if(aktif.equals("1")){
-                i.putExtra("adayanglogin","1");
-            }
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
@@ -141,16 +153,16 @@ public class InfoBarang extends AppCompatActivity {
     public void addwishlist(View view) {
         if(aktif.equals("1")){
             String useryangbeli="",barangyangdibeli="",harga="";
-            for (int i = 0; i < listUser.size(); i++) {
-//                if(listUser.get(i).aktif.equals("1")){
-//                    useryangbeli = listUser.get(i).nama;
+            for (int i = 0; i < listClassUser.size(); i++) {
+//                if(listClassUser.get(i).aktif.equals("1")){
+//                    useryangbeli = listClassUser.get(i).nama;
 //                }
             }
             barangyangdibeli=nama.getText().toString();
             harga=hargabarang.getText().toString();
             if(listWishlist.size()==0){
                 listWishlist.add(new ClassWishlist(barangyangdibeli,harga,useryangbeli));
-                Toast.makeText(this, "Barang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ClassBarang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
             }
             else{
                 jumlah=0;
@@ -162,11 +174,11 @@ public class InfoBarang extends AppCompatActivity {
                 if(jumlah>0){
                     for (int i = 0; i < listWishlist.size(); i++) {
                         if(listWishlist.get(i).yangbeli.equals(useryangbeli) && listWishlist.get(i).namabarang.equals(nama.getText().toString())){
-                            Toast.makeText(this, "Barang sudah ada di Wishlist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "ClassBarang sudah ada di Wishlist", Toast.LENGTH_SHORT).show();
                             break;
                         }
                         else if(i+1==listWishlist.size()){
-                            Toast.makeText(this, "Barang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "ClassBarang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
                             listWishlist.add(new ClassWishlist(barangyangdibeli,harga,useryangbeli));
                             break;
                         }
@@ -174,7 +186,7 @@ public class InfoBarang extends AppCompatActivity {
                 }
                 else{
                     listWishlist.add(new ClassWishlist(barangyangdibeli,harga,useryangbeli));
-                    Toast.makeText(this, "Barang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "ClassBarang berhasil ditambahkan ke Wishlist", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -186,17 +198,17 @@ public class InfoBarang extends AppCompatActivity {
     public void share(View view) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT,listBarang.get(indeks).namabarang+"\n"+listBarang.get(indeks).harga );
+        sendIntent.putExtra(Intent.EXTRA_TEXT, listClassBarang.get(indeks).namabarang+"\n"+ listClassBarang.get(indeks).harga );
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, "Share"));
     }
 
-    public void changeFragment(Fragment f, ArrayList<Barang>listBarang,ArrayList<User>listUser){
+    public void changeFragment(Fragment f, ArrayList<ClassBarang> listClassBarang, ArrayList<ClassUser> listClassUser){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("listBarang",listBarang);
-        bundle.putSerializable("listUser",listUser);
+        bundle.putSerializable("listClassBarang", listClassBarang);
+        bundle.putSerializable("listClassUser", listClassUser);
         f.setArguments(bundle);
         ft.replace(R.id.containerBarang, f);
         ft.commit();

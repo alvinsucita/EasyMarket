@@ -2,13 +2,13 @@ package com.example.easymarket;
 
 import java.io.Serializable;
 
-public class Toko implements Serializable {
+public class ClassToko implements Serializable {
     String nama;
     String daerahasal;
     String email;
     String password;
 
-    public Toko(String nama, String daerahasal, String email, String password) {
+    public ClassToko(String nama, String daerahasal, String email, String password) {
         this.nama = nama;
         this.daerahasal = daerahasal;
         this.email = email;

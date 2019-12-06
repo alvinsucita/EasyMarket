@@ -7,6 +7,22 @@
     android:background="#F1F1F1"
     tools:context=".ProfileUtamaActivity">
 
+    <Spinner
+        android:id="@+id/spJenisKelamin"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tvGenderProfileUtamaActivity"
+        app:layout_constraintTop_toBottomOf="@+id/tvGenderProfileUtamaActivity" />
+
+    <Spinner
+        android:id="@+id/spDaerahAsal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tvDaerahAsalProfileUserActivity"
+        app:layout_constraintTop_toBottomOf="@+id/tvDaerahAsalProfileUserActivity" />
+
     <TextView
         android:id="@+id/tvJudul"
         android:layout_width="match_parent"
@@ -59,11 +75,11 @@
         android:id="@+id/tvDaerahAsalProfileUserActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/cabin"
         android:text="Daerah Asal"
-        app:layout_constraintStart_toStartOf="@+id/tvShowUmur"
-        app:layout_constraintTop_toBottomOf="@+id/tvShowUmur" />
+        app:layout_constraintStart_toStartOf="@+id/spUmur"
+        app:layout_constraintTop_toBottomOf="@+id/spUmur" />
 
     <TextView
         android:id="@+id/tvUmurProfileUtamaActivity"
@@ -76,50 +92,14 @@
         app:layout_constraintTop_toBottomOf="@+id/etNamProfilUtamaActivity" />
 
     <TextView
-        android:id="@+id/tvShowUmur"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/cabin"
-        android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tvUmurProfileUtamaActivity"
-        app:layout_constraintTop_toBottomOf="@+id/tvUmurProfileUtamaActivity" />
-
-    <TextView
-        android:id="@+id/tvShowDaerah"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/cabin"
-        android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tvDaerahAsalProfileUserActivity"
-        app:layout_constraintTop_toBottomOf="@+id/tvDaerahAsalProfileUserActivity" />
-
-    <TextView
         android:id="@+id/tvGenderProfileUtamaActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/cabin"
         android:text="Jenis Kelamin"
-        app:layout_constraintStart_toStartOf="@+id/tvShowDaerah"
-        app:layout_constraintTop_toBottomOf="@+id/tvShowDaerah" />
-
-    <TextView
-        android:id="@+id/tvShowGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/cabin"
-        android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tvGenderProfileUtamaActivity"
-        app:layout_constraintTop_toBottomOf="@+id/tvGenderProfileUtamaActivity" />
+        app:layout_constraintStart_toStartOf="@+id/spDaerahAsal"
+        app:layout_constraintTop_toBottomOf="@+id/spDaerahAsal" />
 
     <Button
         android:id="@+id/btSimpanProfile"
@@ -138,11 +118,11 @@
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/cabin"
         android:text="Email"
-        app:layout_constraintStart_toStartOf="@+id/tvShowGender"
-        app:layout_constraintTop_toBottomOf="@+id/tvShowGender" />
+        app:layout_constraintStart_toStartOf="@+id/spJenisKelamin"
+        app:layout_constraintTop_toBottomOf="@+id/spJenisKelamin" />
 
     <TextView
         android:id="@+id/tvShowEmail"
@@ -155,5 +135,13 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+    <Spinner
+        android:id="@+id/spUmur"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/tvUmurProfileUtamaActivity"
+        app:layout_constraintTop_toBottomOf="@+id/tvUmurProfileUtamaActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

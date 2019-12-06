@@ -26,7 +26,6 @@
         android:id="@+id/etNamaBarang"
         android:layout_width="300dp"
         android:layout_height="40sp"
-        android:layout_marginTop="5dp"
         android:background="@android:color/white"
         android:ems="10"
         android:fontFamily="@font/cabin"
@@ -38,21 +37,22 @@
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTambahBarang" />
 
     <Spinner
         android:id="@+id/spKategori"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintStart_toStartOf="@+id/textView28"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaBarang" />
 
     <EditText
         android:id="@+id/etHargaBarang"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:background="@android:color/white"
         android:ems="10"
         android:fontFamily="@font/cabin"
@@ -61,14 +61,15 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spKategori" />
 
     <EditText
         android:id="@+id/etStokBarang"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="28dp"
         android:background="@android:color/white"
         android:ems="10"
         android:fontFamily="@font/cabin"
@@ -77,76 +78,28 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="@+id/textView34"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etHargaBarang" />
 
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/cabin"
         android:text="Tambah"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
-        android:text="Nama Barang :"
-        app:layout_constraintStart_toStartOf="@+id/etNamaBarang"
-        app:layout_constraintTop_toBottomOf="@+id/tvTambahBarang" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
-        android:text="Kategori :"
-        app:layout_constraintStart_toStartOf="@+id/etNamaBarang"
-        app:layout_constraintTop_toBottomOf="@+id/etNamaBarang" />
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
-        android:text="Harga Barang :"
-        app:layout_constraintStart_toStartOf="@+id/spKategori"
-        app:layout_constraintTop_toBottomOf="@+id/spKategori" />
-
-    <TextView
-        android:id="@+id/textView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
-        android:text="Stok Barang :"
-        app:layout_constraintStart_toStartOf="@+id/etHargaBarang"
-        app:layout_constraintTop_toBottomOf="@+id/etHargaBarang" />
-
-    <TextView
-        android:id="@+id/textView35"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
-        android:text="Deskripsi :"
-        app:layout_constraintStart_toStartOf="@+id/etStokBarang"
-        app:layout_constraintTop_toBottomOf="@+id/etStokBarang" />
 
     <EditText
         android:id="@+id/etDeskripsi"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:fontFamily="@font/cabin"
         android:gravity="start|top"
@@ -154,8 +107,9 @@
         android:inputType="textMultiLine"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        app:layout_constraintStart_toStartOf="@+id/textView35"
-        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etStokBarang" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -166,5 +120,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/spKategori"
         app:layout_constraintEnd_toEndOf="@+id/spKategori"
         app:layout_constraintTop_toTopOf="@+id/spKategori" />
+
+    <Button
+        android:id="@+id/btnFoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDeskripsi"
+        app:layout_constraintVertical_bias="0.585" />
+
+    <ImageView
+        android:id="@+id/ivFotoBarang"
+        android:layout_width="133dp"
+        android:layout_height="112dp"
+        android:src="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnFoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDeskripsi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

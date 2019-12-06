@@ -7,19 +7,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.WishlistAdapter> {
 
     ArrayList<ClassWishlist> filterWishlist;
-    ArrayList<Barang> listBarang;
+    ArrayList<ClassBarang> listClassBarang;
     onClickCallback click ;
 
     @NonNull
@@ -29,9 +26,9 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
         return new AdapterWishlist.WishlistAdapter(view);
     }
 
-    public AdapterWishlist(ArrayList<ClassWishlist> filterWishlist, ArrayList<Barang> listBarang) {
+    public AdapterWishlist(ArrayList<ClassWishlist> filterWishlist, ArrayList<ClassBarang> listClassBarang) {
         this.filterWishlist = filterWishlist;
-        this.listBarang = listBarang;
+        this.listClassBarang = listClassBarang;
     }
 
     public void setClick(onClickCallback click) {
@@ -42,10 +39,10 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
     public void onBindViewHolder(@NonNull final AdapterWishlist.WishlistAdapter holder, final int position) {
         holder.nama.setText(filterWishlist.get(position).getNamabarang());
         for (int i = 0; i < filterWishlist.size(); i++) {
-            for (int j = 0; j < listBarang.size(); j++) {
-                if(filterWishlist.get(i).namabarang.equals(listBarang.get(j).namabarang)){
+            for (int j = 0; j < listClassBarang.size(); j++) {
+                if(filterWishlist.get(i).namabarang.equals(listClassBarang.get(j).namabarang)){
 //                    Glide.with(holder.itemView.getContext())
-//                            .load(listBarang.get(j).fotoutama)
+//                            .load(listClassBarang.get(j).fotoutama)
 //                            .override(200,200)
 //                            .into(holder.fotobarang);
                 }
@@ -56,7 +53,7 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
         holder.pilih.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                click.onClickCheckbox(listBarang.get(position));
+                click.onClickCheckbox(listClassBarang.get(position));
             }
         });
     }
@@ -88,6 +85,6 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
         }
     }
     public interface onClickCallback{
-        void onClickCheckbox (Barang b);
+        void onClickCheckbox (ClassBarang b);
     }
 }

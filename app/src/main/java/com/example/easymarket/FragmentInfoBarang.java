@@ -1,6 +1,6 @@
 package com.example.easymarket;
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -14,8 +14,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -35,32 +48,79 @@ public class FragmentInfoBarang extends Fragment {
 
     TextView isi,likes,dilihat,dibeli;
     Button btnLikes;
-    public ArrayList<Barang> listBarang;
-    public ArrayList<User> listUser;
+    public ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    public ArrayList<ClassUser> listClassUser= new ArrayList<>();
+    public ArrayList<ClassLikes> listClassLikes= new ArrayList<>();
+    DatabaseReference databaseReference;
+    ImageView fotobarang;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         final InfoBarang infoBarang = (InfoBarang) getActivity();
-        listBarang = (ArrayList<Barang>) getArguments().getSerializable("listBarang");
-        listUser = (ArrayList<User>) getArguments().getSerializable("listUser");
 
         isi=view.findViewById(R.id.tvIsiDeskripsi);
         likes=view.findViewById(R.id.tvLikesBarang);
         dilihat=view.findViewById(R.id.tvBarangDilihat);
         dibeli=view.findViewById(R.id.tvBarangTerjual);
         btnLikes=view.findViewById(R.id.btnLikes);
+        fotobarang=view.findViewById(R.id.ivFoto);
 
         likes.setText("");
         dilihat.setText("");
         dibeli.setText("");
         isi.setText("");
 
-        likes.setText("Likes : "+listBarang.get(infoBarang.indeks).likes);
-        dilihat.setText("Dilihat : "+listBarang.get(infoBarang.indeks).dilihat+" kali");
-        dibeli.setText("Terjual : "+listBarang.get(infoBarang.indeks).dibeli+" kali");
-        isi.setText(listBarang.get(infoBarang.indeks).deskripsi+"");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_barang =new ClassBarang();
+                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                    listClassBarang.add(semua_Class_barang);
+                }
+                likes.setText("Likes : "+ listClassBarang.get(infoBarang.indeks).likes);
+                dilihat.setText("Dilihat : "+ listClassBarang.get(infoBarang.indeks).dilihat+" kali");
+                dibeli.setText("Terjual : "+ listClassBarang.get(infoBarang.indeks).dibeli+" kali");
+                isi.setText(listClassBarang.get(infoBarang.indeks).deskripsi+"");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLikes");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassLikes semua_Class_likes =new ClassLikes();
+                    semua_Class_likes.setEmailuser(ds.child("emailuser").getValue().toString());
+                    semua_Class_likes.setIdbarang(ds.child("idbarang").getValue().toString());
+                    listClassLikes.add(semua_Class_likes);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         GradientDrawable drawable4 = new GradientDrawable();
         drawable4.setColor(Color.WHITE);
@@ -72,41 +132,106 @@ public class FragmentInfoBarang extends Fragment {
         btnLikes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailuser ="";
-                String idbarang = listBarang.get(infoBarang.indeks).idbarang;
+                String emailuser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                String idbarang = listClassBarang.get(infoBarang.indeks).idbarang;
                 int ctr=0;
 
-                for (int i = 0; i < listUser.size(); i++) {
-//                    if(listUser.get(i).aktif.equals("1")){
-//                        emailuser=listUser.get(i).email;
-//                    }
+                databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLikes");
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean cek = true;
+                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                            ClassLikes semua_Class_likes =new ClassLikes();
+                            semua_Class_likes.setEmailuser(ds.child("emailuser").getValue().toString());
+                            semua_Class_likes.setIdbarang(ds.child("idbarang").getValue().toString());
+                            listClassLikes.add(semua_Class_likes);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                for (int i = 0; i < listClassLikes.size(); i++) {
+                    if(listClassLikes.get(i).emailuser.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()) &&listClassLikes.get(i).idbarang.equals(idbarang)){
+                        ctr++;
+                    }
                 }
 
-                if(infoBarang.listLikes.size()==0){
-                    infoBarang.listLikes.add(new ClassLikes(idbarang,emailuser));
-                    Toast.makeText(infoBarang, "Anda menyukai barang ini", Toast.LENGTH_SHORT).show();
-                    listBarang.get(infoBarang.indeks).likes+=1;
-                    likes.setText("Likes : "+listBarang.get(infoBarang.indeks).likes);
-                }
-                else{
-                    for (int i = 0; i < infoBarang.listLikes.size(); i++) {
-                        for (int j = 0; j < listUser.size(); j++) {
-                            for (int k = 0; k < listBarang.size(); k++) {
-                                if(infoBarang.listLikes.get(i).emailuser.equals(listUser.get(j).email) &&infoBarang.listLikes.get(i).idbarang.equals(listBarang.get(k).idbarang)){
-                                    ctr++;
+                if(ctr==0){
+                    ClassLikes likesbaru = new ClassLikes(idbarang,emailuser);
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLikes");
+                    String key=databaseReference.push().getKey();
+                    databaseReference.child(key).setValue(likesbaru);
+
+                    final DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+                    databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(ds.child("namabarang").getValue().toString().equals(infoBarang.nama.getText().toString())){
+                                    ClassBarang updatebarang = new ClassBarang();
+                                    updatebarang.setKategori(ds.child("kategori").getValue().toString());
+                                    updatebarang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                                    updatebarang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                                    updatebarang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                                    updatebarang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                                    updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                    updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString())+1);
+                                    updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
+                                    updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                    updatebarang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                                    databaseReference2.child(ds.getKey()).setValue(updatebarang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(getContext(), "Anda menyukai barang ini", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                             }
                         }
-                    }
-                    if(ctr==0){
-                        infoBarang.listLikes.add(new ClassLikes(idbarang,emailuser));
-                        Toast.makeText(infoBarang, "Anda menyukai barang ini", Toast.LENGTH_SHORT).show();
-                        listBarang.get(infoBarang.indeks).likes+=1;
-                        likes.setText("Likes : "+listBarang.get(infoBarang.indeks).likes);
-                    }
-                    else{
-                        Toast.makeText(infoBarang, "Barang ini sudah anda sukai", Toast.LENGTH_SHORT).show();
-                    }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                ClassBarang semua_Class_barang =new ClassBarang();
+                                semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                                semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                                semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                                semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                                semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                                semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                                semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                                semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                                listClassBarang.add(semua_Class_barang);
+                            }
+                            likes.setText("Likes : "+ listClassBarang.get(infoBarang.indeks).likes);
+                            dilihat.setText("Dilihat : "+ listClassBarang.get(infoBarang.indeks).dilihat+" kali");
+                            dibeli.setText("Terjual : "+ listClassBarang.get(infoBarang.indeks).dibeli+" kali");
+                            isi.setText(listClassBarang.get(infoBarang.indeks).deskripsi+"");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(infoBarang, "Barang ini sudah anda sukai", Toast.LENGTH_SHORT).show();
                 }
             }
         });

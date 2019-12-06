@@ -147,7 +147,7 @@
     -->
 
     <ImageView
-        android:id="@+id/ivFoto2"
+        android:id="@+id/ivFoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"

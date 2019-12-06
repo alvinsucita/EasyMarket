@@ -18,7 +18,7 @@ public class LelangActivity extends AppCompatActivity {
 
     EditText search;
     RecyclerView rv;
-    ArrayList<Barang> listBarang = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class LelangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lelang);
 
         Intent i = getIntent();
-        listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+        listClassBarang = (ArrayList<ClassBarang>) i.getSerializableExtra("listClassBarang");
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -35,7 +35,7 @@ public class LelangActivity extends AppCompatActivity {
         rv=findViewById(R.id.rvlelang);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        AdapterBarangLelang adapterBarangLelang = new AdapterBarangLelang(listBarang);
+        AdapterBarangLelang adapterBarangLelang = new AdapterBarangLelang(listClassBarang);
         rv.setAdapter(adapterBarangLelang);
 
         GradientDrawable drawable = new GradientDrawable();

@@ -6,10 +6,6 @@
         android:id="@+id/itemLogin"
         android:title="Login" />
     <item
-        android:id="@+id/itemEvent"
-        android:title="Event"
-        android:visible="false" />
-    <item
         android:id="@+id/itemWishlist"
         android:title="Wishlist"
         android:visible="false" />
@@ -19,21 +15,9 @@
         android:visible="false"
         app:showAsAction="always" />
     <item
-        android:id="@+id/itemLelang"
-        android:title="Lelang"
-        android:visible="false"/>
-    <item
         android:id="@+id/itemHistory"
         android:title="Riwayat"
         android:visible="false" />
-    <item
-        android:id="@+id/itemRefund"
-        android:visible="false"
-        android:title="Refund" />
-    <item
-        android:id="@+id/itemEditToko"
-        android:visible="false"
-        android:title="EditToko" />
     <item
         android:id="@+id/itemLogout"
         android:title="Logout"

@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class AdapterBarangLelang extends RecyclerView.Adapter<AdapterBarangLelang.ListViewHolder> {
-    ArrayList<Barang> listBarang;
+    ArrayList<ClassBarang> listClassBarang;
     private static RVClickListener mylistener;
     private int posisi;
 
-    public AdapterBarangLelang(ArrayList<Barang> listBarang,RVClickListener rvcl){
-        this.listBarang = listBarang;
+    public AdapterBarangLelang(ArrayList<ClassBarang> listClassBarang, RVClickListener rvcl){
+        this.listClassBarang = listClassBarang;
         mylistener=rvcl;
     }
 
@@ -31,8 +31,8 @@ public class AdapterBarangLelang extends RecyclerView.Adapter<AdapterBarangLelan
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        holder.nama.setText(listBarang.get(position).namabarang);
-        holder.harga.setText("Last Bid : "+listBarang.get(position).harga);
+        holder.nama.setText(listClassBarang.get(position).namabarang);
+        holder.harga.setText("Last Bid : "+ listClassBarang.get(position).harga);
         holder.info.setText("Info");
         holder.info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,11 +44,11 @@ public class AdapterBarangLelang extends RecyclerView.Adapter<AdapterBarangLelan
 
     @Override
     public int getItemCount() {
-        return listBarang.size();
+        return listClassBarang.size();
     }
 
-    public AdapterBarangLelang(ArrayList<Barang> listBarang) {
-        this.listBarang = listBarang;
+    public AdapterBarangLelang(ArrayList<ClassBarang> listClassBarang) {
+        this.listClassBarang = listClassBarang;
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder{

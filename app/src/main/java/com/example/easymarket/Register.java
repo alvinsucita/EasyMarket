@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,17 +30,12 @@ public class Register extends AppCompatActivity {
     Button register;
     EditText email,password,conpassword;
     String stremail,strpassword,strconpassword;
-    ArrayList<User> listUser = new ArrayList<>();
-    ArrayList<Toko> listToko = new ArrayList<>();
-    ArrayList<Barang> listBarang = new ArrayList<>();
-    ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     RadioButton toko,user;
     RadioGroup rgJenis;
-    ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     String tiperegister="";
     DatabaseReference databaseReference_user,databaseReference_toko;
-    User userbaru;
-    Toko tokobaru;
+    ClassUser userbaru;
+    ClassToko tokobaru;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,15 +78,6 @@ public class Register extends AppCompatActivity {
         drawable5.setCornerRadius(100);
         drawable5.setColor(Color.WHITE);
         conpassword.setBackground(drawable5);
-
-        Intent i = getIntent();
-        if(i.hasExtra("listUser")){
-            listUser= (ArrayList<User>) i.getSerializableExtra("listUser");
-            listToko= (ArrayList<Toko>) i.getSerializableExtra("listToko");
-            listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
-            listBarang= (ArrayList<Barang>) i.getSerializableExtra("listBarang");
-            listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
-        }
     }
 
     public void register(View view) {
@@ -102,21 +87,21 @@ public class Register extends AppCompatActivity {
         int panjangpassword=strpassword.length();
 
         if(stremail.equals("")|| strpassword.equals("") || strconpassword.equals("")||tiperegister.equals("")){
-            Toast.makeText(this, "Isi Semua Field Terlebih Dahulu ! ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Isi semua field terlebih dahulu", Toast.LENGTH_SHORT).show();
         }
         else if(panjangpassword<8 || panjangpassword>16){
             Toast.makeText(this, "Panjang password 8-16 karakter", Toast.LENGTH_SHORT).show();
         }
         else{
             if(!strpassword.equals(strconpassword)){
-                Toast.makeText(this, "Password dan Konfirmasi Password Harus Sama ! ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Password dan konfirmasi password harus sama", Toast.LENGTH_SHORT).show();
             }
             else{
                 Intent i = new Intent(Register.this,Login.class);
                 if(tiperegister.equals("toko")){
-                    tokobaru = new Toko(stremail,"",stremail,strpassword);
-                    databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("Toko");
-                    databaseReference_user = FirebaseDatabase.getInstance().getReference().child("User");
+                    tokobaru = new ClassToko(stremail,"",stremail,strpassword);
+                    databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
+                    databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
                     databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -124,7 +109,7 @@ public class Register extends AppCompatActivity {
                             Boolean cek = true;
                             for (DataSnapshot ds:dataSnapshot.getChildren()){
                                 if(stremail.equals(ds.child("email").getValue().toString())){
-                                    Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
                                     cek=false;
                                 }
                             }
@@ -135,7 +120,7 @@ public class Register extends AppCompatActivity {
                                         Boolean cek = true;
                                         for (DataSnapshot ds:dataSnapshot.getChildren()){
                                             if(stremail.equals(ds.child("email").getValue().toString())){
-                                                Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
                                                 cek=false;
                                             }
                                         }
@@ -144,7 +129,7 @@ public class Register extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()) {
-                                                        Toast.makeText(Register.this, "Berhasil Register toko", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(Register.this, "Toko berhasil didaftarkan", Toast.LENGTH_SHORT).show();
                                                         Intent i = new Intent(Register.this,HomeToko.class);
                                                         startActivity(i);
                                                     }
@@ -174,9 +159,9 @@ public class Register extends AppCompatActivity {
                     });
                 }
                 else if(tiperegister.equals("user")){
-                    userbaru = new User(stremail,stremail,strpassword,"","","");
-                    databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("Toko");
-                    databaseReference_user = FirebaseDatabase.getInstance().getReference().child("User");
+                    userbaru = new ClassUser(stremail,stremail,strpassword,"","","");
+                    databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
+                    databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
                     databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -184,7 +169,7 @@ public class Register extends AppCompatActivity {
                             Boolean cek = true;
                             for (DataSnapshot ds:dataSnapshot.getChildren()){
                                 if(stremail.equals(ds.child("email").getValue().toString())){
-                                    Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
                                     cek=false;
                                 }
                             }
@@ -195,7 +180,7 @@ public class Register extends AppCompatActivity {
                                         Boolean cek = true;
                                         for (DataSnapshot ds:dataSnapshot.getChildren()){
                                             if(stremail.equals(ds.child("email").getValue().toString())){
-                                                Toast.makeText(Register.this, "Gagal Register", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
                                                 cek=false;
                                             }
                                         }
@@ -204,8 +189,8 @@ public class Register extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()) {
-                                                        Toast.makeText(Register.this, "Berhasil Register user", Toast.LENGTH_SHORT).show();
-                                                        Intent i = new Intent(Register.this,Home.class);
+                                                        Toast.makeText(Register.this, "User berhasil didaftarkan", Toast.LENGTH_SHORT).show();
+                                                        Intent i = new Intent(Register.this,Login.class);
                                                         startActivity(i);
                                                     }
                                                 }
@@ -256,11 +241,6 @@ public class Register extends AppCompatActivity {
 
     public void toLogin(View view) {
         Intent i = new Intent(Register.this, Login.class);
-        i.putExtra("listUser", listUser);
-        i.putExtra("listToko", listToko);
-        i.putExtra("listBarang", listBarang);
-        i.putExtra("listWishlist", listWishlist);
-        i.putExtra("listRequestLelang", listRequestLelang);
         startActivity(i);
     }
 }

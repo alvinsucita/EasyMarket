@@ -28,7 +28,7 @@ public class HalamanCover extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                DatabaseReference databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("Toko");
+                DatabaseReference databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                 if(FirebaseAuth.getInstance().getCurrentUser()!=null){
                     databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -43,7 +43,6 @@ public class HalamanCover extends AppCompatActivity {
                                 ///LoginToko
                                 Intent i = new Intent(HalamanCover.this,HomeToko.class);
                                 startActivity(i);
-                                Toast.makeText(getApplicationContext(), "Welcome Toko, "+FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 //LoginUser

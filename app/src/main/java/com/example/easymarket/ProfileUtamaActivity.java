@@ -15,9 +15,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,15 +43,12 @@ import java.util.ArrayList;
 public class ProfileUtamaActivity extends AppCompatActivity {
 
 
-    ImageView img,profile;
-    TextView tvNama,tvUmur,tvGender,tvDaerahAsal, tvEmail;
+    ImageView profile;
+    TextView tvNama,tvEmail;
     Button simpan;
-    ArrayList<User> listUser = new ArrayList<>();
-    ArrayList<Barang> listBarang = new ArrayList<>();
-    ArrayList<Toko> listToko = new ArrayList<>();
-    ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
     EditText nama;
     Uri selected;
+    Spinner spUmur,spDaerah,spGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +56,13 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_utama);
 
         tvNama = findViewById(R.id.etNamProfilUtamaActivity);
-        tvUmur = findViewById(R.id.tvShowUmur);
-        tvGender = findViewById(R.id.tvShowGender);
-        tvDaerahAsal = findViewById(R.id.tvShowDaerah);
         tvEmail = findViewById(R.id.tvShowEmail);
         profile=findViewById(R.id.imgViewProfileUtamaActivity);
         simpan = findViewById(R.id.btSimpanProfile);
         nama = findViewById(R.id.etNamProfilUtamaActivity);
+        spUmur=findViewById(R.id.spUmur);
+        spDaerah=findViewById(R.id.spDaerahAsal);
+        spGender=findViewById(R.id.spJenisKelamin);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
@@ -77,23 +76,76 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         drawable2.setColor(Color.BLACK);
         simpan.setBackground(drawable2);
 
-        Intent j = getIntent();
-        listUser= (ArrayList<User>) j.getSerializableExtra("listUser");
-        listToko= (ArrayList<Toko>) j.getSerializableExtra("listToko");
-        listBarang= (ArrayList<Barang>) j.getSerializableExtra("listBarang");
-        listWishlist= (ArrayList<ClassWishlist>) j.getSerializableExtra("listWishlist");
+        final ArrayList<String>listSpinnerUmur = new ArrayList<>();
+        final ArrayList<String>listSpinnerDaerahAsal = new ArrayList<>();
+        final ArrayList<String>listSpinnerGender = new ArrayList<>();
 
-        for (int i = 0; i < listUser.size(); i++) {
-//            if(listUser.get(i).getAktif().equals("1")){
-//                int indexalamatemail = listUser.get(i).getEmail().indexOf("@");
-//                String hiddenemail =listUser.get(i).getEmail().substring(0,2)+"******"+listUser.get(i).getEmail().substring(indexalamatemail,listUser.get(i).email.length());
-//                tvNama.setText(listUser.get(i).getNama());
-//                tvUmur.setText(listUser.get(i).getUmur()+" Thn");
-//                tvGender.setText(listUser.get(i).getGender());
-//                tvDaerahAsal.setText(listUser.get(i).getDaerahasal());
-//                tvEmail.setText(hiddenemail);
-//            }
-        }
+        listSpinnerUmur.add("18");
+        listSpinnerUmur.add("19");
+        listSpinnerUmur.add("20");
+        listSpinnerUmur.add("21");
+        listSpinnerUmur.add("22");
+        listSpinnerUmur.add("23");
+        listSpinnerUmur.add("24");
+        listSpinnerUmur.add("25");
+        listSpinnerUmur.add("26");
+        listSpinnerUmur.add("27");
+        listSpinnerUmur.add("28");
+        listSpinnerUmur.add("29");
+        listSpinnerUmur.add("30");
+        listSpinnerUmur.add("31");
+        listSpinnerUmur.add("32");
+        listSpinnerUmur.add("33");
+        listSpinnerUmur.add("34");
+        listSpinnerUmur.add("35");
+        listSpinnerUmur.add("36");
+        listSpinnerUmur.add("37");
+        listSpinnerUmur.add("38");
+        listSpinnerUmur.add("39");
+        listSpinnerUmur.add("40");
+        listSpinnerUmur.add("41");
+        listSpinnerUmur.add("42");
+        listSpinnerUmur.add("43");
+        listSpinnerUmur.add("44");
+        listSpinnerUmur.add("45");
+        listSpinnerUmur.add("46");
+        listSpinnerUmur.add("47");
+        listSpinnerUmur.add("48");
+        listSpinnerUmur.add("49");
+        listSpinnerUmur.add("50");
+        listSpinnerUmur.add("51");
+        listSpinnerUmur.add("52");
+        listSpinnerUmur.add("53");
+        listSpinnerUmur.add("54");
+        listSpinnerUmur.add("55");
+        listSpinnerUmur.add("56");
+        listSpinnerUmur.add("57");
+        listSpinnerUmur.add("58");
+        listSpinnerUmur.add("59");
+        listSpinnerUmur.add("60");
+        listSpinnerUmur.add("Belum diatur");
+        listSpinnerDaerahAsal.add("Jakarta");
+        listSpinnerDaerahAsal.add("Jawa Barat");
+        listSpinnerDaerahAsal.add("Jawa Tengah");
+        listSpinnerDaerahAsal.add("Yogyakarta");
+        listSpinnerDaerahAsal.add("Jawa Timur");
+        listSpinnerDaerahAsal.add("Madura");
+        listSpinnerDaerahAsal.add("Belum diatur");
+        listSpinnerGender.add("Pria");
+        listSpinnerGender.add("Wanita");
+        listSpinnerGender.add("Belum diatur");
+
+        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,listSpinnerUmur);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spUmur.setAdapter(dataAdapter);
+
+        final ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,listSpinnerDaerahAsal);
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spDaerah.setAdapter(dataAdapter2);
+
+        final ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,listSpinnerGender);
+        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spGender.setAdapter(dataAdapter3);
 
         //ambil gambar untuk profil
         FirebaseStorage.getInstance().getReference().child("ProfilePicture").child(FirebaseAuth.getInstance().getCurrentUser().getEmail()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -109,14 +161,58 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         });
 
 
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean cek = true;
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                     if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        int index=100,index2=100,index3=100;
+                        int indexemail=ds.child("email").getValue().toString().indexOf("@");
+                        String tampungemail =ds.child("email").getValue().toString().substring(0,2)+"********"+ds.child("email").getValue().toString().substring(indexemail);
                         nama.setText(ds.child("nama").getValue().toString());
+                        tvEmail.setText(tampungemail);
+                        String strumur=ds.child("umur").getValue().toString();
+                        String strdaerah=ds.child("daerahasal").getValue().toString();
+                        String strgender=ds.child("gender").getValue().toString();
+
+                        for (int i = 0; i < listSpinnerUmur.size(); i++) {
+                            if(listSpinnerUmur.get(i).equals(strumur)){
+                                index=i;
+                            }
+                        }
+                        if(index<100){
+                            spUmur.setSelection(index);
+                        }
+                        else{
+                            spUmur.setSelection(listSpinnerUmur.size()-1);
+                        }
+
+                        for (int i = 0; i < listSpinnerDaerahAsal.size(); i++) {
+                            if(listSpinnerDaerahAsal.get(i).equals(strdaerah)){
+                                index2=i;
+                            }
+                        }
+                        if(index2<100){
+                            spDaerah.setSelection(index2);
+                        }
+                        else{
+                            spDaerah.setSelection(listSpinnerDaerahAsal.size()-1);
+                        }
+
+                        for (int i = 0; i < listSpinnerGender.size(); i++) {
+                            if(listSpinnerGender.get(i).equals(strgender)){
+                                index=i;
+                            }
+                        }
+                        if(index<100){
+                            spGender.setSelection(index);
+                        }
+                        else{
+                            spGender.setSelection(listSpinnerGender.size()-1);
+                        }
+
                     }
                 }
             }
@@ -126,8 +222,6 @@ public class ProfileUtamaActivity extends AppCompatActivity {
 
             }
         });
-
-
 
         //simpan perubahan
         simpan.setOnClickListener(new View.OnClickListener() {
@@ -157,20 +251,20 @@ public class ProfileUtamaActivity extends AppCompatActivity {
                             }
                         });
                     }
-                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("User");
+                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Boolean cek = true;
                             for (DataSnapshot ds:dataSnapshot.getChildren()){
                                 if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                                    User updateuser = new User();
-                                    updateuser.setDaerahasal("");
+                                    ClassUser updateuser = new ClassUser();
+                                    updateuser.setDaerahasal(spDaerah.getSelectedItem().toString());
                                     updateuser.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                                    updateuser.setGender("");
+                                    updateuser.setGender(spGender.getSelectedItem().toString());
                                     updateuser.setNama(nama.getText().toString());
                                     updateuser.setPassword(ds.child("password").getValue().toString());
-                                    updateuser.setUmur("");
+                                    updateuser.setUmur(spUmur.getSelectedItem().toString());
                                     databaseReference.child(ds.getKey()).setValue(updateuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -203,22 +297,7 @@ public class ProfileUtamaActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_edit_profile,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.item_edit_profile){
-            Intent a = new Intent(ProfileUtamaActivity.this, EditProfileActivity.class);
-            a.putExtra("listUser", listUser);
-            a.putExtra("listBarang", listBarang);
-            a.putExtra("listWishlist", listWishlist);
-            a.putExtra("listToko", listToko);
-            startActivity(a);
-        }
         int id = item.getItemId();
         if(id== android.R.id.home){
             Intent a = new Intent(ProfileUtamaActivity.this, Home.class);

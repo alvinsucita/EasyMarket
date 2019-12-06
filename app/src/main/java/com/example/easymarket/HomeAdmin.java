@@ -9,15 +9,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.google.firebase.database.DatabaseReference;
-
 import java.util.ArrayList;
 
 public class HomeAdmin extends AppCompatActivity {
 
-    ArrayList<User> listUser = new ArrayList<>();
-    ArrayList<Barang> listBarang = new ArrayList<>();
-    ArrayList<Toko> listToko = new ArrayList<>();
+    ArrayList<ClassUser> listClassUser = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassToko> listClassToko = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
 
     @Override
@@ -25,19 +23,19 @@ public class HomeAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
         Intent i = getIntent();
-        if (i.hasExtra("listUser")) {
-            listUser = (ArrayList<User>) i.getSerializableExtra("listUser");
-            listToko = (ArrayList<Toko>) i.getSerializableExtra("listToko");
-            listBarang = (ArrayList<Barang>) i.getSerializableExtra("listBarang");
+        if (i.hasExtra("listClassUser")) {
+            listClassUser = (ArrayList<ClassUser>) i.getSerializableExtra("listClassUser");
+            listClassToko = (ArrayList<ClassToko>) i.getSerializableExtra("listClassToko");
+            listClassBarang = (ArrayList<ClassBarang>) i.getSerializableExtra("listClassBarang");
             listWishlist = (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
         }
     }
 
     public Intent putextra(Intent i){
-        i.putExtra("listUser", listUser);
+        i.putExtra("listClassUser", listClassUser);
         i.putExtra("listWishlist", listWishlist);
-        i.putExtra("listToko", listToko);
-        i.putExtra("listBarang", listBarang);
+        i.putExtra("listClassToko", listClassToko);
+        i.putExtra("listClassBarang", listClassBarang);
         return i;
     }
 

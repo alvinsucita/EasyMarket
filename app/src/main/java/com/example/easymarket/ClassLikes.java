@@ -4,6 +4,8 @@ public class ClassLikes {
     String idbarang;
     String emailuser;
 
+    public ClassLikes(){}
+
     public ClassLikes(String idbarang, String emailuser) {
         this.idbarang = idbarang;
         this.emailuser = emailuser;
