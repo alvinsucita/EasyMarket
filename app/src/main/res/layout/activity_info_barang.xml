@@ -8,11 +8,11 @@
     tools:context=".InfoBarang">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="196dp" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -34,8 +34,8 @@
 
                 <ImageView
                     android:id="@+id/ivFoto"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:layout_marginTop="15dp"
                     android:onClick="preview"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -111,16 +111,16 @@
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/black"
-        android:drawableLeft="@drawable/baseline_share_white_18dp"
+        android:drawableLeft="@drawable/baseline_share_white_24dp"
         android:fontFamily="@font/cabin"
         android:onClick="share"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
         android:paddingRight="10dp"
         android:text="Share"
         android:textColor="@android:color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/btnAddToWishlist"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/guideline1"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -131,17 +131,17 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/black"
-        android:drawableLeft="@drawable/baseline_chat_white_18dp"
+        android:drawableLeft="@drawable/baseline_chat_white_24dp"
         android:fontFamily="@font/cabin"
         android:onClick="toChat"
         android:paddingLeft="10dp"
-        android:paddingTop="2dp"
         android:paddingRight="10dp"
         android:text="Chat"
         android:textColor="@android:color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/btnAddToWishlist"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="@+id/guideline1" />
 
     <Button
         android:id="@+id/btnAddToWishlist"
@@ -151,14 +151,14 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@android:color/black"
-        android:drawableLeft="@drawable/baseline_add_shopping_cart_white_18dp"
+        android:drawableLeft="@drawable/baseline_add_shopping_cart_white_24dp"
         android:fontFamily="@font/cabin"
         android:onClick="addwishlist"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="Add to Wishlist"
         android:textColor="@android:color/white"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
