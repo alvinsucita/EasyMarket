@@ -51,7 +51,7 @@ public class FragmentTambahBarang extends Fragment {
     ImageView foto;
     Uri selected;
     ArrayList<ClassBarang>listClassBarang = new ArrayList<>();
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference_barang,databaseReference_toko;
     public FragmentTambahBarang() {
         // Required empty public constructor
     }
@@ -131,8 +131,8 @@ public class FragmentTambahBarang extends Fragment {
         listspinner.add("Olahraga");
         listspinner.add("Lain-lain");
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference_barang = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+        databaseReference_barang.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean cek = true;
@@ -161,19 +161,19 @@ public class FragmentTambahBarang extends Fragment {
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(dataAdapter);
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String strnama = namabarang.getText().toString();
-                String strharga = harga.getText().toString();
-                String strdeskripsi = deskripsi.getText().toString();
-                String strstok = stok.getText().toString();
-                String strkategori = sp.getSelectedItem().toString();
+                final String strnama = namabarang.getText().toString();
+                final String strharga = harga.getText().toString();
+                final String strdeskripsi = deskripsi.getText().toString();
+                final String strstok = stok.getText().toString();
+                final String strkategori = sp.getSelectedItem().toString();
                 String strid = "";
                 int ctr=0;
 
-                databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                databaseReference_barang.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Boolean cek = true;
@@ -219,22 +219,40 @@ public class FragmentTambahBarang extends Fragment {
 
                 if(!strnama.equals("") && !strharga.equals("") && !strdeskripsi.equals("") && !strstok.equals("")){
                     if(selected!=null){
-                        FirebaseStorage.getInstance().getReference().child("GambarBarang/"+ strid).putFile(selected);
-                        ClassBarang barangbaru=new ClassBarang(strid,((HomeToko) getActivity()).tokologin,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok));
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
-                        String key=databaseReference.push().getKey();
-                        databaseReference.child(key).setValue(barangbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
+                        final String finalStrid = strid;
+                        databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getContext(), "Barang baru berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Boolean cek = true;
+                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                    if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                        String emailtoko = ds.child("email").getValue().toString();
+
+                                        FirebaseStorage.getInstance().getReference().child("GambarBarang/"+ finalStrid).putFile(selected);
+                                        ClassBarang barangbaru=new ClassBarang(finalStrid,emailtoko,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok));
+                                        databaseReference_barang = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+                                        String key=databaseReference_barang.push().getKey();
+                                        databaseReference_barang.child(key).setValue(barangbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(getContext(), "Barang baru berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        namabarang.setText("");
+                                        harga.setText("");
+                                        deskripsi.setText("");
+                                        stok.setText("");
+                                        foto.setBackgroundResource(0);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
                             }
                         });
-
-                        namabarang.setText("");
-                        harga.setText("");
-                        deskripsi.setText("");
-                        stok.setText("");
-                        foto.setBackgroundResource(0);
                     }
                     else{
                         Toast.makeText(homeToko, "Masukkan foto barang", Toast.LENGTH_SHORT).show();

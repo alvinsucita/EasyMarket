@@ -3,37 +3,29 @@ package com.example.easymarket;
 import java.io.Serializable;
 
 public class ClassWishlist implements Serializable {
-    String namabarang;
-    String hargabarang;
-    String yangbeli;
+    String idbarang;
+    String emailpembeli;
 
-    public ClassWishlist(String namabarang, String hargabarang, String yangbeli) {
-        this.namabarang = namabarang;
-        this.hargabarang = hargabarang;
-        this.yangbeli = yangbeli;
+    public ClassWishlist(){}
+
+    public ClassWishlist(String idbarang, String emailpembeli) {
+        this.idbarang = idbarang;
+        this.emailpembeli = emailpembeli;
     }
 
-    public String getNamabarang() {
-        return namabarang;
+    public String getIdbarang() {
+        return idbarang;
     }
 
-    public void setNamabarang(String namabarang) {
-        this.namabarang = namabarang;
+    public void setIdbarang(String idbarang) {
+        this.idbarang = idbarang;
     }
 
-    public String getHargabarang() {
-        return hargabarang;
+    public String getEmailpembeli() {
+        return emailpembeli;
     }
 
-    public void setHargabarang(String hargabarang) {
-        this.hargabarang = hargabarang;
-    }
-
-    public String getYangbeli() {
-        return yangbeli;
-    }
-
-    public void setYangbeli(String yangbeli) {
-        this.yangbeli = yangbeli;
+    public void setEmailpembeli(String emailpembeli) {
+        this.emailpembeli = emailpembeli;
     }
 }

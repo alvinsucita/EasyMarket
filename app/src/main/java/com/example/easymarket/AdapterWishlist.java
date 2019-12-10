@@ -1,5 +1,6 @@
 package com.example.easymarket;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.ArrayList;
 
 public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.WishlistAdapter> {
 
-    ArrayList<ClassWishlist> filterWishlist;
     ArrayList<ClassBarang> listClassBarang;
     onClickCallback click ;
 
@@ -26,8 +30,7 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
         return new AdapterWishlist.WishlistAdapter(view);
     }
 
-    public AdapterWishlist(ArrayList<ClassWishlist> filterWishlist, ArrayList<ClassBarang> listClassBarang) {
-        this.filterWishlist = filterWishlist;
+    public AdapterWishlist(ArrayList<ClassBarang> listClassBarang) {
         this.listClassBarang = listClassBarang;
     }
 
@@ -37,18 +40,15 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
 
     @Override
     public void onBindViewHolder(@NonNull final AdapterWishlist.WishlistAdapter holder, final int position) {
-        holder.nama.setText(filterWishlist.get(position).getNamabarang());
-        for (int i = 0; i < filterWishlist.size(); i++) {
-            for (int j = 0; j < listClassBarang.size(); j++) {
-                if(filterWishlist.get(i).namabarang.equals(listClassBarang.get(j).namabarang)){
-//                    Glide.with(holder.itemView.getContext())
-//                            .load(listClassBarang.get(j).fotoutama)
-//                            .override(200,200)
-//                            .into(holder.fotobarang);
-                }
+        holder.nama.setText(listClassBarang.get(position).namabarang);
+        FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassBarang.get(position).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(holder.itemView.getContext()).load(uri).into(holder.fotobarang);
             }
-        }
-        holder.harga.setText(filterWishlist.get(position).getHargabarang());
+        });
+        String hargaasli = String.format("%,d", listClassBarang.get(position).harga);
+        holder.harga.setText("Rp. "+hargaasli);
 
         holder.pilih.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +60,7 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
 
     @Override
     public int getItemCount() {
-        return filterWishlist.size();
+        return listClassBarang.size();
     }
 
     public class WishlistAdapter extends RecyclerView.ViewHolder {

@@ -99,7 +99,7 @@ public class Register extends AppCompatActivity {
             else{
                 Intent i = new Intent(Register.this,Login.class);
                 if(tiperegister.equals("toko")){
-                    tokobaru = new ClassToko(stremail,"",stremail,strpassword);
+                    tokobaru = new ClassToko(stremail,stremail,strpassword);
                     databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                     databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);

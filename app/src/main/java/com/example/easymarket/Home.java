@@ -45,10 +45,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            Toast.makeText(getApplicationContext(), "Welcome, "+FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
-        }
-
         changeFragment(new FragmentHome());
         bottomNavHome = findViewById(R.id.bottomNavHome);
         bottomNavHome.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -86,7 +82,7 @@ public class Home extends AppCompatActivity {
                     for (DataSnapshot ds:dataSnapshot.getChildren()){
                         if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                             String  nama = ds.child("nama").getValue().toString();
-                            menu.getItem(2).setTitle("Hai, "+nama+" !");
+                            menu.getItem(2).setTitle("Hai, "+nama);
                         }
                     }
                 }
