@@ -57,11 +57,16 @@ public class InfoBarang extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.BLACK);
+        share.setBackground(drawable);
+
         GradientDrawable drawable2 = new GradientDrawable();
         drawable2.setShape(GradientDrawable.RECTANGLE);
         drawable2.setCornerRadius(100);
         drawable2.setColor(Color.BLACK);
-        share.setBackground(drawable2);
         chat.setBackground(drawable2);
 
         GradientDrawable drawable3 = new GradientDrawable();

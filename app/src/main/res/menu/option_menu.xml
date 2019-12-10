@@ -4,9 +4,11 @@
 
     <item
         android:id="@+id/itemLogin"
+        android:icon="@drawable/baseline_account_circle_black_18dp"
         android:title="Login" />
     <item
         android:id="@+id/itemWishlist"
+        android:icon="@drawable/baseline_shopping_basket_black_18dp"
         android:title="Wishlist"
         android:visible="false" />
     <item
@@ -16,10 +18,12 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/itemHistory"
+        android:icon="@drawable/baseline_update_black_18dp"
         android:title="Riwayat"
         android:visible="false" />
     <item
         android:id="@+id/itemLogout"
+        android:icon="@drawable/baseline_exit_to_app_black_18dp"
         android:title="Logout"
         android:visible="false" />
 </menu>

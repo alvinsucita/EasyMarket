@@ -115,6 +115,12 @@ public class FragmentTambahBarang extends Fragment {
         drawable4.setColor(Color.WHITE);
         deskripsi.setBackground(drawable4);
 
+        GradientDrawable drawable5 = new GradientDrawable();
+        drawable5.setShape(GradientDrawable.RECTANGLE);
+        drawable5.setCornerRadius(100);
+        drawable5.setColor(Color.BLACK);
+        carifoto.setBackground(drawable5);
+
         ArrayList<String> listspinner = new ArrayList<>();
         listspinner.add("Pakaian");
         listspinner.add("Ibu dan Anak");
