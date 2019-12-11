@@ -1,53 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="170dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
 
     <Button
         android:id="@+id/btnTambah"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="192dp"
-        android:background="@drawable/add"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/baseline_add_black_24dp"
         android:onClick="tambah1"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivBarang1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintStart_toStartOf="@+id/tvNamaBarang"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaBarang" />
 
     <TextView
         android:id="@+id/tvNamaBarang"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="172dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/cabin"
         android:text="kosong"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="16dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivBarang1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236" />
+        app:layout_constraintStart_toEndOf="@+id/ivBarang"
+        app:layout_constraintTop_toTopOf="@+id/ivBarang" />
 
     <ImageView
         android:id="@+id/ivBarang"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="15dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cbPilih"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:color/white" />
 
@@ -55,77 +48,61 @@
         android:id="@+id/btnHapus"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="64dp"
-        android:background="@drawable/delete"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/baseline_delete_black_18dp"
         android:onClick="hapus1"
+        android:textColor="@android:color/black"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/btnKurang"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintTop_toTopOf="@+id/btnKurang" />
 
     <TextView
         android:id="@+id/tvJumlah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="156dp"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/cabin"
         android:text="0"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="20dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintBottom_toBottomOf="@+id/btnTambah"
         app:layout_constraintStart_toEndOf="@+id/btnTambah"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintTop_toTopOf="@+id/btnTambah" />
 
     <Button
         android:id="@+id/btnKurang"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/remove"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/baseline_remove_black_24dp"
         android:onClick="kurang1"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toEndOf="@+id/tvJumlah"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintTop_toTopOf="@+id/btnTambah" />
 
     <CheckBox
         android:id="@+id/cbPilih"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:onClick="pilih1"
         android:textSize="16sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBarang"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.485" />
+        app:layout_constraintTop_toTopOf="@+id/ivBarang" />
 
     <TextView
         android:id="@+id/tvHargaBarang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="112dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/cabin"
         android:text="Rp.77.000,00-"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="16dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivBarang1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
+        app:layout_constraintStart_toStartOf="@+id/btnTambah"
+        app:layout_constraintTop_toBottomOf="@+id/btnTambah" />
 </androidx.constraintlayout.widget.ConstraintLayout>

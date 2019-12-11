@@ -45,13 +45,23 @@
         android:id="@+id/btnLikes"
         android:layout_width="20sp"
         android:layout_height="20sp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:background="@drawable/baseline_thumb_up_black_18dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvLikesBarang"
         app:layout_constraintStart_toEndOf="@+id/tvLikesBarang"
         app:layout_constraintTop_toTopOf="@+id/tvLikesBarang" />
 
+
+    <Button
+        android:id="@+id/btnDislikes"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/baseline_thumb_down_black_18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLikes"
+        app:layout_constraintStart_toEndOf="@+id/btnLikes"
+        app:layout_constraintTop_toTopOf="@+id/btnLikes" />
 
     <TextView
         android:id="@+id/tvLikesBarang"
