@@ -4,6 +4,8 @@ package com.example.easymarket;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.icu.text.IDNA;
 import android.os.Bundle;
 
@@ -66,6 +68,19 @@ public class  FragmentCommentBarang extends Fragment {
         rv = view.findViewById(R.id.rvcomment);
         isicomment=view.findViewById(R.id.etEditComment);
         tambahkomen=view.findViewById(R.id.btnComment);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(25);
+        drawable.setStroke(8, Color.LTGRAY);
+        drawable.setColor(Color.WHITE);
+        isicomment.setBackground(drawable);
+
+        GradientDrawable drawable5 = new GradientDrawable();
+        drawable5.setShape(GradientDrawable.RECTANGLE);
+        drawable5.setCornerRadius(25);
+        drawable5.setColor(Color.BLACK);
+        tambahkomen.setBackground(drawable5);
 
         FirebaseDatabase.getInstance().getReference().child("ClassComment").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

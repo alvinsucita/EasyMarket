@@ -1,5 +1,7 @@
 package com.example.easymarket;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,11 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.CommentV
             nama=itemView.findViewById(R.id.tvNama);
             isi=itemView.findViewById(R.id.tvIsiComment);
 
+            GradientDrawable drawable4 = new GradientDrawable();
+            drawable4.setColor(Color.WHITE);
+            drawable4.setShape(GradientDrawable.RECTANGLE);
+            drawable4.setCornerRadius(50);
+            isi.setBackground(drawable4);
         }
     }
 }
