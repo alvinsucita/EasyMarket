@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 
@@ -29,6 +36,7 @@ public class FragmentListBarang extends Fragment {
 
 
     public ArrayList<ClassBarang> listClassBarang;
+    public ArrayList<ClassBarang> filterBarang;
     Spinner sp;
     TextView nama,harga,kategori,likes,terjual,lihat,deskripsi,stok;
     Button request;
@@ -75,12 +83,42 @@ public class FragmentListBarang extends Fragment {
         drawable3.setColor(Color.BLACK);
         request.setBackground(drawable3);
 
+        FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                listClassBarang.clear();
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_barang =new ClassBarang();
+                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                    listClassBarang.add(semua_Class_barang);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         ArrayList<String> listspinner = new ArrayList<>();
 //        for (int i = 0; i < listClassBarang.size(); i++) {
 //            if(listClassBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
 //                listspinner.add(listClassBarang.get(i).namabarang);
 //            }
 //        }
+
         if(listspinner.size()!=0){
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
