@@ -219,7 +219,7 @@ public class ProfileUtamaActivity extends AppCompatActivity {
                                 if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                                     ClassUser updateuser = new ClassUser();
                                     updateuser.setDaerahasal(spDaerah.getSelectedItem().toString());
-                                    //updateuser.setAktif("1");
+                                    updateuser.setAktif("1");
                                     updateuser.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                                     updateuser.setGender(spGender.getSelectedItem().toString());
                                     updateuser.setNama(nama.getText().toString());

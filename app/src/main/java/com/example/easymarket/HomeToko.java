@@ -96,6 +96,7 @@ public class HomeToko extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.itemLogout){
             FirebaseAuth.getInstance().signOut();
+            FirebaseAuth.getInstance().signInWithEmailAndPassword("guest@guest.com","guest123");
             Intent i = new Intent(HomeToko.this,Login.class);
             startActivity(i);
         }
