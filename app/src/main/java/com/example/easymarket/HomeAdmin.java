@@ -1,13 +1,13 @@
 package com.example.easymarket;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -53,7 +53,6 @@ public class HomeAdmin extends AppCompatActivity {
             i = putextra(i);
             startActivity(i);
         }
-
         else if(item.getItemId()==R.id.manageuser){
             Intent i = new Intent(HomeAdmin.this,ManageUsers.class);
             i = putextra(i);

@@ -22,6 +22,8 @@
         <activity android:name=".Home" />
         <activity android:name=".ProfileUtamaActivity" />
         <activity android:name=".UserProfileActivity" />
+        <activity android:name=".MasterKas" />
+        <activity android:name=".MasterChangelog" />
         <activity android:name=".MasterLelang" />
         <activity android:name=".MasterTrans" />
         <activity android:name=".HomeAdmin" />
