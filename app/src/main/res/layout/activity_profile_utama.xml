@@ -10,16 +10,14 @@
     <Spinner
         android:id="@+id/spJenisKelamin"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="@+id/tvGenderProfileUtamaActivity"
         app:layout_constraintTop_toBottomOf="@+id/tvGenderProfileUtamaActivity" />
 
     <Spinner
         android:id="@+id/spDaerahAsal"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="@+id/tvDaerahAsalProfileUserActivity"
         app:layout_constraintTop_toBottomOf="@+id/tvDaerahAsalProfileUserActivity" />
 
@@ -42,7 +40,7 @@
         android:id="@+id/imgViewProfileUtamaActivity"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvJudul" />
@@ -53,14 +51,13 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/cabin"
         android:text="Nama"
-        app:layout_constraintStart_toStartOf="@+id/etNamProfilUtamaActivity"
+        app:layout_constraintStart_toStartOf="@+id/etNamaProfilUtamaActivity"
         app:layout_constraintTop_toBottomOf="@+id/imgViewProfileUtamaActivity" />
 
     <EditText
-        android:id="@+id/etNamProfilUtamaActivity"
+        android:id="@+id/etNamaProfilUtamaActivity"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
         android:ems="10"
         android:fontFamily="@font/cabin"
         android:inputType="textPersonName"
@@ -75,11 +72,11 @@
         android:id="@+id/tvDaerahAsalProfileUserActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/cabin"
         android:text="Daerah Asal"
-        app:layout_constraintStart_toStartOf="@+id/spUmur"
-        app:layout_constraintTop_toBottomOf="@+id/spUmur" />
+        app:layout_constraintStart_toStartOf="@+id/etUmurProfilUtamaActivity"
+        app:layout_constraintTop_toBottomOf="@+id/etUmurProfilUtamaActivity" />
 
     <TextView
         android:id="@+id/tvUmurProfileUtamaActivity"
@@ -87,15 +84,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/cabin"
-        android:text="Umur"
-        app:layout_constraintStart_toStartOf="@+id/etNamProfilUtamaActivity"
-        app:layout_constraintTop_toBottomOf="@+id/etNamProfilUtamaActivity" />
+        android:text="Tanggal Lahir"
+        app:layout_constraintStart_toStartOf="@+id/etNamaProfilUtamaActivity"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaProfilUtamaActivity" />
 
     <TextView
         android:id="@+id/tvGenderProfileUtamaActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/cabin"
         android:text="Jenis Kelamin"
         app:layout_constraintStart_toStartOf="@+id/spDaerahAsal"
@@ -109,6 +106,7 @@
         android:fontFamily="@font/cabin"
         android:text="Simpan"
         android:textColor="@android:color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -117,7 +115,7 @@
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/cabin"
         android:text="Email"
         app:layout_constraintStart_toStartOf="@+id/spJenisKelamin"
@@ -135,12 +133,47 @@
         app:layout_constraintStart_toStartOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
-    <Spinner
-        android:id="@+id/spUmur"
+    <EditText
+        android:id="@+id/etUmurProfilUtamaActivity"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="3dp"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingRight="45dp"
         app:layout_constraintStart_toStartOf="@+id/tvUmurProfileUtamaActivity"
         app:layout_constraintTop_toBottomOf="@+id/tvUmurProfileUtamaActivity" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/baseline_date_range_black_18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etUmurProfilUtamaActivity"
+        app:layout_constraintEnd_toEndOf="@+id/etUmurProfilUtamaActivity"
+        app:layout_constraintTop_toTopOf="@+id/etUmurProfilUtamaActivity" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spDaerahAsal"
+        app:layout_constraintEnd_toEndOf="@+id/spDaerahAsal"
+        app:layout_constraintTop_toTopOf="@+id/spDaerahAsal"
+        app:srcCompat="@drawable/downpoint" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spJenisKelamin"
+        app:layout_constraintEnd_toEndOf="@+id/spJenisKelamin"
+        app:layout_constraintTop_toTopOf="@+id/spJenisKelamin"
+        app:srcCompat="@drawable/downpoint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,13 +35,6 @@ public class NotaProdukFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nota_produk, container, false);
-        show = view.findViewById(R.id.textView10);
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setStroke(5, Color.BLACK);
-        drawable2.setCornerRadius(15);
-        drawable2.setColor(Color.WHITE);
-        show.setBackground(drawable2);
         return view;
     }
 
