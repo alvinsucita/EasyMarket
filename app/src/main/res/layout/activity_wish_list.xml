@@ -7,6 +7,213 @@
     android:background="#F1F1F1"
     tools:context=".WishList">
 
+    <ImageView
+        android:id="@+id/ivBarang2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cbPilih2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.409"
+        app:srcCompat="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvNamaBarang2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/cabin"
+        android:text="kosong"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivBarang2"
+        app:layout_constraintTop_toTopOf="@+id/ivBarang2" />
+
+    <Button
+        android:id="@+id/btnHapus2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/baseline_delete_black_18dp"
+        android:onClick="hapus2"
+        android:textColor="@android:color/black"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnKurang2" />
+
+    <Button
+        android:id="@+id/btnKurang2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/baseline_remove_black_24dp"
+        android:onClick="kurang2"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/tvJumlah2"
+        app:layout_constraintTop_toTopOf="@+id/btnTambah2" />
+
+    <CheckBox
+        android:id="@+id/cbPilih2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="112dp"
+        android:onClick="pilih2"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBarang2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <TextView
+        android:id="@+id/tvHargaBarang2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/cabin"
+        android:text="Rp.77.000,00-"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/btnTambah2"
+        app:layout_constraintTop_toBottomOf="@+id/btnTambah2" />
+
+    <TextView
+        android:id="@+id/tvJumlah2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/cabin"
+        android:text="0"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnTambah2"
+        app:layout_constraintStart_toEndOf="@+id/btnTambah2"
+        app:layout_constraintTop_toTopOf="@+id/btnTambah2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnTambah2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/baseline_add_black_24dp"
+        android:onClick="tambah2"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/tvNamaBarang2"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaBarang2" />
+
+    <CheckBox
+        android:id="@+id/cbPilih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="112dp"
+        android:onClick="pilih1"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBarang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnTambah"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/baseline_add_black_24dp"
+        android:onClick="tambah1"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/tvNamaBarang"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaBarang" />
+
+    <TextView
+        android:id="@+id/tvNamaBarang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/cabin"
+        android:text="kosong"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivBarang"
+        app:layout_constraintTop_toTopOf="@+id/ivBarang" />
+
+    <ImageView
+        android:id="@+id/ivBarang"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="80dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cbPilih"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062"
+        app:srcCompat="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnHapus"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/baseline_delete_black_18dp"
+        android:onClick="hapus1"
+        android:textColor="@android:color/black"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnKurang" />
+
+    <TextView
+        android:id="@+id/tvJumlah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="0"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/btnTambah"
+        app:layout_constraintStart_toEndOf="@+id/btnTambah"
+        app:layout_constraintTop_toTopOf="@+id/btnTambah" />
+
+    <Button
+        android:id="@+id/btnKurang"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/baseline_remove_black_24dp"
+        android:onClick="kurang1"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/tvJumlah"
+        app:layout_constraintTop_toTopOf="@+id/btnTambah" />
+
+    <TextView
+        android:id="@+id/tvHargaBarang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Rp.77.000,00-"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/btnTambah"
+        app:layout_constraintTop_toBottomOf="@+id/btnTambah" />
+
     <TextView
         android:id="@+id/tvJudulWishlist"
         android:layout_width="0dp"
@@ -22,19 +229,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/cabin"
-        android:text="Total Harga : Rp.77.000,00-"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnBeli"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/btnBeli"
         android:layout_width="300dp"
@@ -48,16 +242,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvWishlist"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTotal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvJudulWishlist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,19 +4,12 @@ import java.io.Serializable;
 
 public class ClassRequestLelang implements Serializable {
     String idbarang;
-    boolean masuklelang;
+    int masuklelang;
 
-    public boolean isMasuklelang() {
-        return masuklelang;
-    }
-
-    public void setMasuklelang(boolean masuklelang) {
-        this.masuklelang = masuklelang;
-    }
-
-    public ClassRequestLelang(String idbarang) {
+    public ClassRequestLelang(){}
+    public ClassRequestLelang(String idbarang, int masuklelang) {
         this.idbarang = idbarang;
-        this.masuklelang = true;
+        this.masuklelang = masuklelang;
     }
 
     public String getIdbarang() {
@@ -25,5 +18,13 @@ public class ClassRequestLelang implements Serializable {
 
     public void setIdbarang(String idbarang) {
         this.idbarang = idbarang;
+    }
+
+    public int getMasuklelang() {
+        return masuklelang;
+    }
+
+    public void setMasuklelang(int masuklelang) {
+        this.masuklelang = masuklelang;
     }
 }

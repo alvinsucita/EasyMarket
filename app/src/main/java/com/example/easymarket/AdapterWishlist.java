@@ -81,7 +81,6 @@ public class AdapterWishlist extends RecyclerView.Adapter<AdapterWishlist.Wishli
             hapus=itemView.findViewById(R.id.btnHapus);
             fotobarang=itemView.findViewById(R.id.ivBarang);
 
-
         }
     }
     public interface onClickCallback{

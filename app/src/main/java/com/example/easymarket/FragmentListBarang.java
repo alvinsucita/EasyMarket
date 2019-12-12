@@ -43,6 +43,7 @@ public class FragmentListBarang extends Fragment {
 
     public ArrayList<ClassBarang> listClassBarang= new ArrayList<>();
     public ArrayList<ClassBarang> filterBarang= new ArrayList<>();
+    public ArrayList<ClassRequestLelang> requestLelang= new ArrayList<>();
     Spinner sp;
     TextView nama,harga,kategori,likes,terjual,lihat,deskripsi,stok;
     Button request;
@@ -175,25 +176,26 @@ public class FragmentListBarang extends Fragment {
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id="";
-                int ctr=0;
-                for (int i = 0; i < listClassBarang.size(); i++) {
-                    if(strnama.equals(listClassBarang.get(i).namabarang)){
-                        id= listClassBarang.get(i).idbarang;
-                    }
-                }
-                for (int i = 0; i < ((HomeToko) getActivity()).listRequestLelang.size(); i++) {
-                    if(id.equals(((HomeToko) getActivity()).listRequestLelang.get(i).idbarang)){
-                        ctr++;
-                    }
-                }
-                if(ctr==0){
-                    ((HomeToko) getActivity()).listRequestLelang.add(new ClassRequestLelang(id));
-                    Toast.makeText(getContext(), ((HomeToko) getActivity()).listRequestLelang.size()+"", Toast.LENGTH_SHORT).show();
-                }
-                else if(ctr>0){
-                    Toast.makeText(getContext(), "ClassBarang sudah direquest", Toast.LENGTH_SHORT).show();
-                }
+
+//                String id="";
+//                int ctr=0;
+//                for (int i = 0; i < listClassBarang.size(); i++) {
+//                    if(strnama.equals(listClassBarang.get(i).namabarang)){
+//                        id= listClassBarang.get(i).idbarang;
+//                    }
+//                }
+//                for (int i = 0; i < ((HomeToko) getActivity()).listRequestLelang.size(); i++) {
+//                    if(id.equals(((HomeToko) getActivity()).listRequestLelang.get(i).idbarang)){
+//                        ctr++;
+//                    }
+//                }
+//                if(ctr==0){
+//                    ((HomeToko) getActivity()).listRequestLelang.add(new ClassRequestLelang(id));
+//                    Toast.makeText(getContext(), ((HomeToko) getActivity()).listRequestLelang.size()+"", Toast.LENGTH_SHORT).show();
+//                }
+//                else if(ctr>0){
+//                    Toast.makeText(getContext(), "ClassBarang sudah direquest", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
