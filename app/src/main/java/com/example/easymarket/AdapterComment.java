@@ -1,26 +1,15 @@
 package com.example.easymarket;
 
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 public class AdapterComment extends RecyclerView.Adapter<AdapterComment.CommentViewHolder> {
-    ArrayList<ClassComment>filterComment;
-
-    public AdapterComment(ArrayList<ClassComment> listComment) {
-        this.filterComment = listComment;
-    }
-
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,15 +20,12 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        holder.nama.setText(filterComment.get(position).nama);
-        holder.isi.setText(filterComment.get(position).isi);
+
     }
-
-
 
     @Override
     public int getItemCount() {
-        return filterComment.size();
+        return 0;
     }
 
     public class CommentViewHolder extends RecyclerView.ViewHolder {
@@ -52,11 +38,6 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.CommentV
             nama=itemView.findViewById(R.id.tvNama);
             isi=itemView.findViewById(R.id.tvIsiComment);
 
-            GradientDrawable drawable4 = new GradientDrawable();
-            drawable4.setColor(Color.WHITE);
-            drawable4.setShape(GradientDrawable.RECTANGLE);
-            drawable4.setCornerRadius(50);
-            isi.setBackground(drawable4);
         }
     }
 }
