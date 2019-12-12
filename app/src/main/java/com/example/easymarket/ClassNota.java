@@ -4,38 +4,28 @@ import java.io.Serializable;
 
 public class ClassNota implements Serializable {
     String idnota;
-    String tanggal;
     String namatoko;
-    String namabarang;
+    String idbarang;
     String namauser;
-    String nohp;
     String alamat;
-    String kota;
-    String kodepos;
     String pembayaran;
     String jenispengiriman;
     int hargabarang;
     int jumlahbarang;
     int hargapengiriman;
-    int subtotal;
     int total;
 
-    public ClassNota(String idnota, String tanggal, String namatoko, String namabarang, String namauser, String nohp, String alamat, String kota, String kodepos, String pembayaran, String jenispengiriman, int hargabarang, int jumlahbarang, int hargapengiriman, int subtotal, int total) {
+    public ClassNota(String idnota, String namatoko, String idbarang, String namauser, String alamat, String pembayaran, String jenispengiriman, int hargabarang, int jumlahbarang, int hargapengiriman, int total) {
         this.idnota = idnota;
-        this.tanggal = tanggal;
         this.namatoko = namatoko;
-        this.namabarang = namabarang;
+        this.idbarang = idbarang;
         this.namauser = namauser;
-        this.nohp = nohp;
         this.alamat = alamat;
-        this.kota = kota;
-        this.kodepos = kodepos;
         this.pembayaran = pembayaran;
         this.jenispengiriman = jenispengiriman;
         this.hargabarang = hargabarang;
         this.jumlahbarang = jumlahbarang;
         this.hargapengiriman = hargapengiriman;
-        this.subtotal = subtotal;
         this.total = total;
     }
 
@@ -47,14 +37,6 @@ public class ClassNota implements Serializable {
         this.idnota = idnota;
     }
 
-    public String getTanggal() {
-        return tanggal;
-    }
-
-    public void setTanggal(String tanggal) {
-        this.tanggal = tanggal;
-    }
-
     public String getNamatoko() {
         return namatoko;
     }
@@ -63,12 +45,12 @@ public class ClassNota implements Serializable {
         this.namatoko = namatoko;
     }
 
-    public String getNamabarang() {
-        return namabarang;
+    public String getIdbarang() {
+        return idbarang;
     }
 
-    public void setNamabarang(String namabarang) {
-        this.namabarang = namabarang;
+    public void setIdbarang(String idbarang) {
+        this.idbarang = idbarang;
     }
 
     public String getNamauser() {
@@ -79,36 +61,12 @@ public class ClassNota implements Serializable {
         this.namauser = namauser;
     }
 
-    public String getNohp() {
-        return nohp;
-    }
-
-    public void setNohp(String nohp) {
-        this.nohp = nohp;
-    }
-
     public String getAlamat() {
         return alamat;
     }
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
-    }
-
-    public String getKota() {
-        return kota;
-    }
-
-    public void setKota(String kota) {
-        this.kota = kota;
-    }
-
-    public String getKodepos() {
-        return kodepos;
-    }
-
-    public void setKodepos(String kodepos) {
-        this.kodepos = kodepos;
     }
 
     public String getPembayaran() {
@@ -149,14 +107,6 @@ public class ClassNota implements Serializable {
 
     public void setHargapengiriman(int hargapengiriman) {
         this.hargapengiriman = hargapengiriman;
-    }
-
-    public int getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(int subtotal) {
-        this.subtotal = subtotal;
     }
 
     public int getTotal() {

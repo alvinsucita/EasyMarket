@@ -235,26 +235,46 @@ public class WishList extends AppCompatActivity {
         if(pilihbarang1==false && pilihbarang2==false){
             Toast.makeText(this, "Pilih 1 barang untuk dibeli", Toast.LENGTH_SHORT).show();
         }
-        else if(pilihbarang1==true && pilihbarang2==false){
+        else if(pilihbarang1==true && pilihbarang2==false && intjumlah>0){
             String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
             String idbarang=filterClassBarang.get(0).idbarang;
             int jumlah = intjumlah;
 
+            Intent i = new Intent(WishList.this, DetailAlamat.class);
+            i.putExtra("akunyangbeli",akunyangbeli);
+            i.putExtra("idbarang",idbarang);
+            i.putExtra("jumlah",jumlah);
+            startActivity(i);
         }
-        else if(pilihbarang1==false && pilihbarang2==true){
+        else if(pilihbarang1==false && pilihbarang2==true && intjumlah2>0){
             String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
             String idbarang=filterClassBarang.get(1).idbarang;
             int jumlah = intjumlah2;
+
+            Intent i = new Intent(WishList.this, DetailAlamat.class);
+            i.putExtra("akunyangbeli",akunyangbeli);
+            i.putExtra("idbarang",idbarang);
+            i.putExtra("jumlah",jumlah);
+            startActivity(i);
         }
-        else if(pilihbarang1==true && pilihbarang2==true){
+        else if(pilihbarang1==true && pilihbarang2==true && intjumlah>0 && intjumlah2>0){
             String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
             String idbarang1=filterClassBarang.get(0).idbarang;
             String idbarang2=filterClassBarang.get(1).idbarang;
             int jumlah = intjumlah;
             int jumlah2 = intjumlah2;
+
+            Intent i = new Intent(WishList.this, DetailAlamat.class);
+            i.putExtra("akunyangbeli",akunyangbeli);
+            i.putExtra("idbarang1",idbarang1);
+            i.putExtra("idbarang2",idbarang2);
+            i.putExtra("jumlah",jumlah);
+            i.putExtra("jumlah2",jumlah2);
+            startActivity(i);
         }
-        Intent i = new Intent(WishList.this, DetailAlamat.class);
-        startActivity(i);
+        else{
+            Toast.makeText(this, "jumlah barang yang dibeli minimal 1", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void tambah1(View view) {

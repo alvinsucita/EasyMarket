@@ -100,7 +100,7 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/etNamaPenerima"
         android:layout_width="183dp"
         android:layout_height="86dp"
         android:layout_marginStart="208dp"

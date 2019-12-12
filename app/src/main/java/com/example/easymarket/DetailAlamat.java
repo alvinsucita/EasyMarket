@@ -12,26 +12,29 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class DetailAlamat extends AppCompatActivity {
 
-    EditText labelalamat,nama,nohp,alamat,kota,kode;
+    EditText nama,nohp,alamat,kota,kode;
     Spinner pembayaran;
     ArrayList<String> spinnerArray =  new ArrayList<>();
     Button konfirmasi;
+    String akunyangbeli="",idbarang1="",idbarang2="";
+    int jumlah=0,jumlah2=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_alamat);
-        nama=findViewById(R.id.editText3);
-        nohp=findViewById(R.id.editText4);
-        kota=findViewById(R.id.editText5);
-        kode=findViewById(R.id.editText6);
-        alamat=findViewById(R.id.editText7);
+        nama=findViewById(R.id.etNamaPenerima);
+        nohp=findViewById(R.id.etNomorHp);
+        kota=findViewById(R.id.etKota);
+        kode=findViewById(R.id.etKode);
+        alamat=findViewById(R.id.etAlamat);
         pembayaran = findViewById(R.id.sppembayaran);
-        konfirmasi=findViewById(R.id.button3);
+        konfirmasi=findViewById(R.id.btnKonfirmasi);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
@@ -70,6 +73,22 @@ public class DetailAlamat extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Intent i = getIntent();
+        if (i.hasExtra("idbarang1")) {
+            akunyangbeli = i.getStringExtra("akunyangbeli");
+            idbarang1 = i.getStringExtra("idbarang1");
+            idbarang2 = i.getStringExtra("idbarang2");
+            jumlah = i.getIntExtra("jumlah",0);
+            jumlah2 = i.getIntExtra("jumlah2",0);
+        }
+        else{
+            akunyangbeli = i.getStringExtra("akunyangbeli");
+            idbarang1 = i.getStringExtra("idbarang");
+            jumlah = i.getIntExtra("jumlah",0);
+
+            Toast.makeText(this, akunyangbeli+" "+idbarang1+" "+jumlah, Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -82,7 +101,22 @@ public class DetailAlamat extends AppCompatActivity {
     }
 
     public void toDetailPengiriman(View view) {
-        Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
-        startActivity(i);
+        String strnama = nama.getText().toString();
+        String strnohp = nohp.getText().toString();
+        String stralamat = alamat.getText().toString();
+        String strkota = kota.getText().toString();
+        String strkode = kode.getText().toString();
+
+        if(strnama.equals("")||strnohp.equals("")||stralamat.equals("")||strkota.equals("")||strkode.equals("")){
+            Toast.makeText(this, "Isi semua field terlebih dahulu", Toast.LENGTH_SHORT).show();
+        }
+        else{
+
+
+            Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+            startActivity(i);
+        }
+
+
     }
 }

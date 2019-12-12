@@ -8,7 +8,7 @@
     tools:context=".DetailAlamat">
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/etNamaPenerima"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/etKode"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
@@ -38,11 +38,11 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/editText5"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintStart_toStartOf="@+id/etKota"
+        app:layout_constraintTop_toBottomOf="@+id/etKota" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/etAlamat"
         android:layout_width="300dp"
         android:layout_height="80dp"
         android:layout_marginTop="15dp"
@@ -55,8 +55,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/editText6"
-        app:layout_constraintTop_toBottomOf="@+id/editText6" />
+        app:layout_constraintStart_toStartOf="@+id/etKode"
+        app:layout_constraintTop_toBottomOf="@+id/etKode" />
 
     <TextView
         android:id="@+id/tvdeskripsi"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/etKota"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
@@ -86,11 +86,11 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/editText4"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintStart_toStartOf="@+id/etNomorHp"
+        app:layout_constraintTop_toBottomOf="@+id/etNomorHp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/etNomorHp"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
@@ -102,8 +102,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/editText3"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintStart_toStartOf="@+id/etNamaPenerima"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaPenerima" />
 
     <TextView
         android:id="@+id/tvshowpembayaran"
@@ -113,8 +113,8 @@
         android:fontFamily="@font/cabin"
         android:text="Jenis Pembayaran :"
         android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="@+id/editText7"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintStart_toStartOf="@+id/etAlamat"
+        app:layout_constraintTop_toBottomOf="@+id/etAlamat" />
 
     <Spinner
         android:id="@+id/sppembayaran"
@@ -138,7 +138,7 @@
         app:srcCompat="@drawable/downpoint" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnKonfirmasi"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginBottom="15dp"
@@ -160,7 +160,7 @@
         android:fontFamily="@font/cabin"
         android:text="Detail Pengiriman :"
         android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="@+id/editText3"
+        app:layout_constraintStart_toStartOf="@+id/etNamaPenerima"
         app:layout_constraintTop_toBottomOf="@+id/tvdeskripsi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
