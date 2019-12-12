@@ -47,7 +47,7 @@ public class FragmentInfoBarang extends Fragment {
     }
 
     TextView isi,likes,dilihat,dibeli;
-    Button btnLikes;
+    Button btnLikes,btndislikes;
     public ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     public ArrayList<ClassUser> listClassUser= new ArrayList<>();
     public ArrayList<ClassLikes> listClassLikes= new ArrayList<>();
@@ -66,6 +66,7 @@ public class FragmentInfoBarang extends Fragment {
         dilihat=view.findViewById(R.id.tvBarangDilihat);
         dibeli=view.findViewById(R.id.tvBarangTerjual);
         btnLikes=view.findViewById(R.id.btnLikes);
+        btndislikes=view.findViewById(R.id.btnDislikes);
         fotobarang=view.findViewById(R.id.ivFoto);
 
         likes.setText("");
@@ -175,9 +176,9 @@ public class FragmentInfoBarang extends Fragment {
                                 }
 
                                 if(ctr==0){
-                                    ClassLikes likesbaru = new ClassLikes(idbarang,emailuser);
+                                    ClassLikes likesbaru = new ClassLikes(idbarang,emailuser,1);
                                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLikes");
-                                    String key=databaseReference.push().getKey();
+                                    final String key=databaseReference.push().getKey();
                                     databaseReference.child(key).setValue(likesbaru);
 
                                     FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -246,7 +247,71 @@ public class FragmentInfoBarang extends Fragment {
                                     });
                                 }
                                 else{
-                                    Toast.makeText(infoBarang, "Barang ini sudah anda sukai", Toast.LENGTH_SHORT).show();
+                                    FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Boolean cek = true;
+                                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                if(ds.child("namabarang").getValue().toString().equals(infoBarang.nama.getText().toString())){
+                                                    ClassBarang updatebarang = new ClassBarang();
+                                                    updatebarang.setKategori(ds.child("kategori").getValue().toString());
+                                                    updatebarang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                                                    updatebarang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                                                    updatebarang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                                                    updatebarang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                                                    updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                                    updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString())-1);
+                                                    updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
+                                                    updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                                    updatebarang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                                                    FirebaseDatabase.getInstance().getReference().child("ClassBarang").child(ds.getKey()).setValue(updatebarang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            Toast.makeText(getContext(), "Anda tidak jadi menyukai barang ini", Toast.LENGTH_SHORT).show();
+                                                            //ubah tampilan agar likes bertambah 1
+                                                            FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                    Boolean cek = true;
+                                                                    listClassBarang.clear();
+                                                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                                        ClassBarang semua_Class_barang =new ClassBarang();
+                                                                        semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                                                                        semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                                                                        semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                                                                        semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                                                                        semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                                                        semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                                                                        semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                                                                        semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                                                                        semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                                                        semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                                                                        listClassBarang.add(semua_Class_barang);
+                                                                    }
+
+                                                                    likes.setText("Likes : "+ listClassBarang.get(infoBarang.indeks).likes);
+                                                                    dilihat.setText("Dilihat : "+ listClassBarang.get(infoBarang.indeks).dilihat+" kali");
+                                                                    dibeli.setText("Terjual : "+ listClassBarang.get(infoBarang.indeks).dibeli+" kali");
+                                                                    isi.setText(listClassBarang.get(infoBarang.indeks).deskripsi+"");
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                }
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
                                 }
                             }
                         }
@@ -259,5 +324,6 @@ public class FragmentInfoBarang extends Fragment {
                 }
             }
         });
+        
     }
 }

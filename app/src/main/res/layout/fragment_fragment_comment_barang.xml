@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvcomment"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_width="384dp"
+        android:layout_height="307dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -22,6 +22,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:fontFamily="@font/cabin"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -31,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rvcomment" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
