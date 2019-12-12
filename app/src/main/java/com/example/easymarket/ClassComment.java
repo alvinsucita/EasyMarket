@@ -5,6 +5,7 @@ public class ClassComment {
     String nama;
     String isi;
 
+    public ClassComment(){}
     public ClassComment(String idbarang, String nama, String isi) {
         this.idbarang = idbarang;
         this.nama = nama;

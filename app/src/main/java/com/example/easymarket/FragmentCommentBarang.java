@@ -52,6 +52,10 @@ public class  FragmentCommentBarang extends Fragment {
         this.context = contextku;
     }
 
+    public FragmentCommentBarang() {
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
