@@ -1,5 +1,7 @@
 package com.example.easymarket;
 
+import java.util.Date;
+
 public class ClassComment {
     String idbarang;
     String nama;

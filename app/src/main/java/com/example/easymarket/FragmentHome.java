@@ -62,6 +62,7 @@ public class FragmentHome extends Fragment {
     Boolean adafilter=false;
     Boolean adasearch=false;
     AdapterMenuBarang adapterMenuBarang;
+    RVClickListener rvcl;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,83 +74,13 @@ public class FragmentHome extends Fragment {
         filter = view.findViewById(R.id.btnFilter);
         rv = view.findViewById(R.id.rvhome);
 
-        adapterMenuBarang = new AdapterMenuBarang(listClassBarang, new RVClickListener() {
-            @Override
-            public void recyclerViewListBarangClick(View v, int posisi) {
-                int indeks=0;
-
-                if(adasearch==true){
-                    if(!listClassBarangSearches.isEmpty()){
-                        if(listClassBarangFilter.isEmpty()){
-                            for (int j = 0; j < listClassBarang.size(); j++) {
-                                if (listClassBarangSearches.get(posisi).idbarang.equals(listClassBarang.get(j).idbarang)) {
-                                    indeks = j;
-                                }
-                            }
-                        }
-                        else{
-                            int temp=0;
-                            for (int j = 0; j < listClassBarangFilter.size(); j++) {
-                                if (listClassBarangSearches.get(posisi).idbarang.equals(listClassBarangFilter.get(j).idbarang)) {
-                                    temp=j;
-                                }
-                            }
-                            for (int j = 0; j < listClassBarang.size(); j++) {
-                                if(listClassBarangFilter.get(temp).idbarang.equals(listClassBarang.get(j).idbarang)){
-                                    indeks=j;
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        indeks = posisi;
-                    }
-                }
-                else if(adafilter==true){
-                    if(!listClassBarangFilter.isEmpty()){
-                        if(listClassBarangSearches.isEmpty()){
-                            for (int j = 0; j < listClassBarang.size(); j++) {
-                                if (listClassBarangFilter.get(posisi).idbarang.equals(listClassBarang.get(j).idbarang)) {
-                                    indeks = j;
-                                }
-                            }
-                        }
-                        else{
-                            int temp=0;
-                            for (int j = 0; j < listClassBarangSearches.size(); j++) {
-                                if (listClassBarangFilter.get(posisi).idbarang.equals(listClassBarangSearches.get(j).idbarang)) {
-                                    temp = j;
-                                }
-                            }
-                            for (int j = 0; j < listClassBarang.size(); j++) {
-                                if(listClassBarangSearches.get(temp).idbarang.equals(listClassBarang.get(j).idbarang)){
-                                    indeks=j;
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        indeks = posisi;
-                    }
-                }
-                else{
-                    indeks = posisi;
-                }
-
-                Intent i = new Intent(FragmentHome.this.getContext(),InfoBarang.class);
-                i.putExtra("indeks",indeks);
-                startActivity(i);
-            }
-        });
-
-
-
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean cek = true;
+                listClassBarang.clear();
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                     ClassBarang semua_Class_barang =new ClassBarang();
                     semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
@@ -165,7 +96,75 @@ public class FragmentHome extends Fragment {
                     listClassBarang.add(semua_Class_barang);
                 }
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listClassBarang);
+                //AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listClassBarang,rvcl);
+                adapterMenuBarang = new AdapterMenuBarang(listClassBarang, new RVClickListener() {
+                    @Override
+                    public void recyclerViewListBarangClick(View v, int posisi) {
+                        int indeks=0;
+
+                        if(adasearch==true){
+                            if(!listClassBarangSearches.isEmpty()){
+                                if(listClassBarangFilter.isEmpty()){
+                                    for (int j = 0; j < listClassBarang.size(); j++) {
+                                        if (listClassBarangSearches.get(posisi).idbarang.equals(listClassBarang.get(j).idbarang)) {
+                                            indeks = j;
+                                        }
+                                    }
+                                }
+                                else{
+                                    int temp=0;
+                                    for (int j = 0; j < listClassBarangFilter.size(); j++) {
+                                        if (listClassBarangSearches.get(posisi).idbarang.equals(listClassBarangFilter.get(j).idbarang)) {
+                                            temp=j;
+                                        }
+                                    }
+                                    for (int j = 0; j < listClassBarang.size(); j++) {
+                                        if(listClassBarangFilter.get(temp).idbarang.equals(listClassBarang.get(j).idbarang)){
+                                            indeks=j;
+                                        }
+                                    }
+                                }
+                            }
+                            else{
+                                indeks = posisi;
+                            }
+                        }
+                        else if(adafilter==true){
+                            if(!listClassBarangFilter.isEmpty()){
+                                if(listClassBarangSearches.isEmpty()){
+                                    for (int j = 0; j < listClassBarang.size(); j++) {
+                                        if (listClassBarangFilter.get(posisi).idbarang.equals(listClassBarang.get(j).idbarang)) {
+                                            indeks = j;
+                                        }
+                                    }
+                                }
+                                else{
+                                    int temp=0;
+                                    for (int j = 0; j < listClassBarangSearches.size(); j++) {
+                                        if (listClassBarangFilter.get(posisi).idbarang.equals(listClassBarangSearches.get(j).idbarang)) {
+                                            temp = j;
+                                        }
+                                    }
+                                    for (int j = 0; j < listClassBarang.size(); j++) {
+                                        if(listClassBarangSearches.get(temp).idbarang.equals(listClassBarang.get(j).idbarang)){
+                                            indeks=j;
+                                        }
+                                    }
+                                }
+                            }
+                            else{
+                                indeks = posisi;
+                            }
+                        }
+                        else{
+                            indeks = posisi;
+                        }
+
+                        Intent i = new Intent(FragmentHome.this.getContext(),InfoBarang.class);
+                        i.putExtra("indeks",indeks);
+                        startActivity(i);
+                    }
+                });
                 rv.setAdapter(adapterMenuBarang);
             }
 
