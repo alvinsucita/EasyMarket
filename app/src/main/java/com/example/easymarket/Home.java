@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,8 +33,13 @@ import java.util.Date;
 
 public class Home extends AppCompatActivity {
 
+    EditText search;
+    RecyclerView rv;
     BottomNavigationView bottomNavHome;
+    ArrayList<ClassUser> listClassUser = new ArrayList<>();
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassToko> listClassToko = new ArrayList<>();
+    Button filter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,22 +83,7 @@ public class Home extends AppCompatActivity {
                         if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                             String  nama = ds.child("nama").getValue().toString();
                             menu.getItem(2).setTitle("Hai, "+nama);
-                            cek=false;
                         }
-                    }
-                    if(cek){
-                        menu.getItem(0).setVisible(true);
-                        menu.getItem(1).setVisible(false);
-                        menu.getItem(2).setVisible(false);
-                        menu.getItem(3).setVisible(false);
-                        menu.getItem(4).setVisible(false);
-                    }
-                    else {
-                        menu.getItem(0).setVisible(false);
-                        menu.getItem(1).setVisible(true);
-                        menu.getItem(2).setVisible(true);
-                        menu.getItem(3).setVisible(true);
-                        menu.getItem(4).setVisible(true);
                     }
                 }
 
@@ -100,6 +92,18 @@ public class Home extends AppCompatActivity {
 
                 }
             });
+            menu.getItem(0).setVisible(false);
+            menu.getItem(1).setVisible(true);
+            menu.getItem(2).setVisible(true);
+            menu.getItem(3).setVisible(true);
+            menu.getItem(4).setVisible(true);
+        }
+        else{
+            menu.getItem(0).setVisible(true);
+            menu.getItem(1).setVisible(false);
+            menu.getItem(2).setVisible(false);
+            menu.getItem(3).setVisible(false);
+            menu.getItem(4).setVisible(false);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -112,7 +116,6 @@ public class Home extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.itemLogout){
             FirebaseAuth.getInstance().signOut();
-            FirebaseAuth.getInstance().signInWithEmailAndPassword("guest@guest.com","guest123");
             Intent i = new Intent(Home.this,Home.class);
             startActivity(i);
         }

@@ -1,6 +1,5 @@
 package com.example.easymarket;
 
-import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class AdapterMenuBarang extends RecyclerView.Adapter<AdapterMenuBarang.ListViewHolder> {
     ArrayList<ClassBarang> listClassBarang;
     private static RVClickListener mylistener;
+    private int posisi;
 
     public AdapterMenuBarang(ArrayList<ClassBarang> listClassBarang, RVClickListener rvcl){
         this.listClassBarang = listClassBarang;

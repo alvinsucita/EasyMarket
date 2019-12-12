@@ -11,6 +11,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -42,22 +44,23 @@ public class ProfileUtamaActivity extends AppCompatActivity {
 
 
     ImageView profile;
-    TextView tvEmail;
+    TextView tvNama,tvEmail;
     Button simpan;
-    EditText nama, umur;
+    EditText nama;
     Uri selected;
-    Spinner spDaerah,spGender;
+    Spinner spUmur,spDaerah,spGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_utama);
 
+        tvNama = findViewById(R.id.etNamProfilUtamaActivity);
         tvEmail = findViewById(R.id.tvShowEmail);
         profile=findViewById(R.id.imgViewProfileUtamaActivity);
         simpan = findViewById(R.id.btSimpanProfile);
-        nama = findViewById(R.id.etNamaProfilUtamaActivity);
-        umur=findViewById(R.id.etUmurProfilUtamaActivity);
+        nama = findViewById(R.id.etNamProfilUtamaActivity);
+        spUmur=findViewById(R.id.spUmur);
         spDaerah=findViewById(R.id.spDaerahAsal);
         spGender=findViewById(R.id.spJenisKelamin);
 
@@ -65,38 +68,62 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadius(100);
         drawable.setColor(Color.WHITE);
-        nama.setBackground(drawable);
+        tvNama.setBackground(drawable);
 
         GradientDrawable drawable2 = new GradientDrawable();
         drawable2.setShape(GradientDrawable.RECTANGLE);
         drawable2.setCornerRadius(100);
-        drawable2.setColor(Color.WHITE);
-        umur.setBackground(drawable2);
-
-        GradientDrawable drawable3 = new GradientDrawable();
-        drawable3.setShape(GradientDrawable.RECTANGLE);
-        drawable3.setCornerRadius(100);
-        drawable3.setStroke(8, Color.LTGRAY);
-        drawable3.setColor(Color.WHITE);
-        spDaerah.setBackground(drawable3);
-
-        GradientDrawable drawable4 = new GradientDrawable();
-        drawable4.setShape(GradientDrawable.RECTANGLE);
-        drawable4.setCornerRadius(100);
-        drawable4.setStroke(8, Color.LTGRAY);
-        drawable4.setColor(Color.WHITE);
-        spGender.setBackground(drawable4);
-
-        GradientDrawable drawable5 = new GradientDrawable();
-        drawable5.setShape(GradientDrawable.RECTANGLE);
-        drawable5.setCornerRadius(100);
-        drawable5.setColor(Color.BLACK);
-        simpan.setBackground(drawable5);
+        drawable2.setColor(Color.BLACK);
+        simpan.setBackground(drawable2);
 
         final ArrayList<String>listSpinnerUmur = new ArrayList<>();
         final ArrayList<String>listSpinnerDaerahAsal = new ArrayList<>();
         final ArrayList<String>listSpinnerGender = new ArrayList<>();
 
+        listSpinnerUmur.add("18");
+        listSpinnerUmur.add("19");
+        listSpinnerUmur.add("20");
+        listSpinnerUmur.add("21");
+        listSpinnerUmur.add("22");
+        listSpinnerUmur.add("23");
+        listSpinnerUmur.add("24");
+        listSpinnerUmur.add("25");
+        listSpinnerUmur.add("26");
+        listSpinnerUmur.add("27");
+        listSpinnerUmur.add("28");
+        listSpinnerUmur.add("29");
+        listSpinnerUmur.add("30");
+        listSpinnerUmur.add("31");
+        listSpinnerUmur.add("32");
+        listSpinnerUmur.add("33");
+        listSpinnerUmur.add("34");
+        listSpinnerUmur.add("35");
+        listSpinnerUmur.add("36");
+        listSpinnerUmur.add("37");
+        listSpinnerUmur.add("38");
+        listSpinnerUmur.add("39");
+        listSpinnerUmur.add("40");
+        listSpinnerUmur.add("41");
+        listSpinnerUmur.add("42");
+        listSpinnerUmur.add("43");
+        listSpinnerUmur.add("44");
+        listSpinnerUmur.add("45");
+        listSpinnerUmur.add("46");
+        listSpinnerUmur.add("47");
+        listSpinnerUmur.add("48");
+        listSpinnerUmur.add("49");
+        listSpinnerUmur.add("50");
+        listSpinnerUmur.add("51");
+        listSpinnerUmur.add("52");
+        listSpinnerUmur.add("53");
+        listSpinnerUmur.add("54");
+        listSpinnerUmur.add("55");
+        listSpinnerUmur.add("56");
+        listSpinnerUmur.add("57");
+        listSpinnerUmur.add("58");
+        listSpinnerUmur.add("59");
+        listSpinnerUmur.add("60");
+        listSpinnerUmur.add("Belum diatur");
         listSpinnerDaerahAsal.add("Jakarta");
         listSpinnerDaerahAsal.add("Jawa Barat");
         listSpinnerDaerahAsal.add("Jawa Tengah");
@@ -107,6 +134,10 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         listSpinnerGender.add("Pria");
         listSpinnerGender.add("Wanita");
         listSpinnerGender.add("Belum diatur");
+
+        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,listSpinnerUmur);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spUmur.setAdapter(dataAdapter);
 
         final ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,listSpinnerDaerahAsal);
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -141,12 +172,22 @@ public class ProfileUtamaActivity extends AppCompatActivity {
                         int indexemail=ds.child("email").getValue().toString().indexOf("@");
                         String tampungemail =ds.child("email").getValue().toString().substring(0,2)+"********"+ds.child("email").getValue().toString().substring(indexemail);
                         nama.setText(ds.child("nama").getValue().toString());
-                        umur.setText(ds.child("umur").getValue().toString());
                         tvEmail.setText(tampungemail);
                         String strumur=ds.child("umur").getValue().toString();
                         String strdaerah=ds.child("daerahasal").getValue().toString();
                         String strgender=ds.child("gender").getValue().toString();
 
+                        for (int i = 0; i < listSpinnerUmur.size(); i++) {
+                            if(listSpinnerUmur.get(i).equals(strumur)){
+                                index=i;
+                            }
+                        }
+                        if(index<100){
+                            spUmur.setSelection(index);
+                        }
+                        else{
+                            spUmur.setSelection(listSpinnerUmur.size()-1);
+                        }
 
                         for (int i = 0; i < listSpinnerDaerahAsal.size(); i++) {
                             if(listSpinnerDaerahAsal.get(i).equals(strdaerah)){
@@ -223,7 +264,7 @@ public class ProfileUtamaActivity extends AppCompatActivity {
                                     updateuser.setGender(spGender.getSelectedItem().toString());
                                     updateuser.setNama(nama.getText().toString());
                                     updateuser.setPassword(ds.child("password").getValue().toString());
-                                    updateuser.setUmur(umur.getText().toString());
+                                    updateuser.setUmur(spUmur.getSelectedItem().toString());
                                     databaseReference.child(ds.getKey()).setValue(updateuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {

@@ -8,18 +8,12 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-
-import java.util.ArrayList;
 
 public class DetailAlamat extends AppCompatActivity {
 
     EditText labelalamat,nama,nohp,alamat,kota,kode;
-    Spinner pembayaran;
-    ArrayList<String> spinnerArray =  new ArrayList<>();
     Button konfirmasi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,43 +24,48 @@ public class DetailAlamat extends AppCompatActivity {
         kota=findViewById(R.id.editText5);
         kode=findViewById(R.id.editText6);
         alamat=findViewById(R.id.editText7);
-        pembayaran = findViewById(R.id.sppembayaran);
         konfirmasi=findViewById(R.id.button3);
 
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(100);
         drawable.setColor(Color.WHITE);
-        nama.setBackground(drawable);
-        nohp.setBackground(drawable);
-        kota.setBackground(drawable);
-        kode.setBackground(drawable);
-
-        GradientDrawable drawable2 = new GradientDrawable();
-        drawable2.setShape(GradientDrawable.RECTANGLE);
-        drawable2.setCornerRadius(50);
-        drawable2.setColor(Color.WHITE);
-        alamat.setBackground(drawable2);
+        drawable.setShape(GradientDrawable.OVAL);
+        drawable.setStroke(5, Color.BLACK);
+        konfirmasi.setBackground(drawable);
 
         GradientDrawable drawable3 = new GradientDrawable();
-        drawable3.setShape(GradientDrawable.RECTANGLE);
-        drawable3.setCornerRadius(100);
-        drawable3.setStroke(8, Color.LTGRAY);
         drawable3.setColor(Color.WHITE);
-        pembayaran.setBackground(drawable3);
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setStroke(5, Color.BLACK);
+        drawable3.setCornerRadius(15);
+        nama.setBackground(drawable3);
 
         GradientDrawable drawable4 = new GradientDrawable();
+        drawable4.setColor(Color.WHITE);
         drawable4.setShape(GradientDrawable.RECTANGLE);
-        drawable4.setCornerRadius(100);
-        drawable4.setColor(Color.BLACK);
-        konfirmasi.setBackground(drawable4);
+        drawable4.setStroke(5, Color.BLACK);
+        drawable4.setCornerRadius(15);
+        nohp.setBackground(drawable4);
 
-        spinnerArray.add("COD");
-        spinnerArray.add("PayPal");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, spinnerArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        final Spinner sItems = (Spinner) findViewById(R.id.sppembayaran);
-        sItems.setAdapter(adapter);
+        GradientDrawable drawable5 = new GradientDrawable();
+        drawable5.setColor(Color.WHITE);
+        drawable5.setShape(GradientDrawable.RECTANGLE);
+        drawable5.setStroke(5, Color.BLACK);
+        drawable5.setCornerRadius(15);
+        alamat.setBackground(drawable5);
+
+        GradientDrawable drawable6 = new GradientDrawable();
+        drawable6.setColor(Color.WHITE);
+        drawable6.setShape(GradientDrawable.RECTANGLE);
+        drawable6.setStroke(5, Color.BLACK);
+        drawable6.setCornerRadius(15);
+        kode.setBackground(drawable6);
+
+        GradientDrawable drawable7 = new GradientDrawable();
+        drawable7.setColor(Color.WHITE);
+        drawable7.setShape(GradientDrawable.RECTANGLE);
+        drawable7.setStroke(5, Color.BLACK);
+        drawable7.setCornerRadius(15);
+        kota.setBackground(drawable7);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -82,7 +81,7 @@ public class DetailAlamat extends AppCompatActivity {
     }
 
     public void toDetailPengiriman(View view) {
-        Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+        Intent i = new Intent(DetailAlamat.this,DetailPengiriman.class);
         startActivity(i);
     }
 }

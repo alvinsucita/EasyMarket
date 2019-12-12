@@ -4,14 +4,11 @@
 
     <item
         android:id="@+id/produk"
-        android:icon="@drawable/baseline_shopping_cart_black_18dp"
         android:title="Produk" />
     <item
         android:id="@+id/pengiriman"
-        android:icon="@drawable/baseline_local_shipping_black_18dp"
         android:title="Pengiriman" />
     <item
         android:id="@+id/pembayaran"
-        android:icon="@drawable/baseline_payment_black_18dp"
         android:title="Pembayaran" />
 </menu>

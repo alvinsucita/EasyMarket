@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +27,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -41,7 +37,9 @@ public class InfoBarang extends AppCompatActivity {
     ArrayList<ClassUser> listClassUser = new ArrayList<>();
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     ArrayList<ClassWishlist> listWishlist = new ArrayList<>();
+    ArrayList<ClassToko> listClassToko = new ArrayList<>();
     DatabaseReference databaseReference_barang,databaseReference_user,databaseReference_wishlist;
+    int jumlah= 0;
     String aktif="0";
     int indeks=0;
     ImageView foto;
@@ -55,7 +53,7 @@ public class InfoBarang extends AppCompatActivity {
         add=findViewById(R.id.btnAddToWishlist);
         chat=findViewById(R.id.btnPersonalChat);
         share=findViewById(R.id.btnShare);
-        foto=findViewById(R.id.ivFoto);
+        foto=findViewById(R.id.ivFoto1);
         nama.setText("");
         hargabarang.setText("");
 
@@ -102,44 +100,11 @@ public class InfoBarang extends AppCompatActivity {
                     semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                     listClassBarang.add(semua_Class_barang);
                 }
+                listClassBarang.get(indeks).dilihat+=1;
                 String hargaasli = String.format("%,d", listClassBarang.get(indeks).harga);
                 nama.setText(listClassBarang.get(indeks).namabarang);
                 hargabarang.setText("Rp. "+hargaasli);
-                FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassBarang.get(indeks).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Glide.with(getApplicationContext()).load(uri).into(foto);
-                    }
-                });
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        final DatabaseReference databaseReference2 = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
-        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean cek = true;
-                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(ds.child("namabarang").getValue().toString().equals(nama.getText().toString())){
-                        ClassBarang updatebarang = new ClassBarang();
-                        updatebarang.setKategori(ds.child("kategori").getValue().toString());
-                        updatebarang.setDeskripsi(ds.child("deskripsi").getValue().toString());
-                        updatebarang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
-                        updatebarang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString())+1);
-                        updatebarang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
-                        updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
-                        updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
-                        updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
-                        updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
-                        updatebarang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
-                        databaseReference2.child(ds.getKey()).setValue(updatebarang);
-                    }
-                }
             }
 
             @Override
@@ -176,7 +141,7 @@ public class InfoBarang extends AppCompatActivity {
                     changeFragment(new FragmentInfoBarang(), listClassBarang, listClassUser);
                 }
                 else if(menuItem.getItemId( )== R.id.commentbarang){
-                    changeFragment(new FragmentCommentBarang(getApplicationContext()), listClassBarang, listClassUser);
+                    changeFragment(new FragmentCommentBarang(), listClassBarang, listClassUser);
                 }
                 return true;
             }
@@ -203,69 +168,56 @@ public class InfoBarang extends AppCompatActivity {
             Toast.makeText(this, "Login terlebih dahulu", Toast.LENGTH_SHORT).show();
         }
     }
+    public void preview(View view) {
+        Intent i = new Intent(InfoBarang.this,PreviewActivity.class);
+        startActivity(i);
+    }
+    public void beli(View view) {
+        Intent i = new Intent(InfoBarang.this,TransactionActivity.class);
+        startActivity(i);
+    }
 
     public void addwishlist(View view) {
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
+            databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Boolean cek = true;
                     for (DataSnapshot ds:dataSnapshot.getChildren()){
                         if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                            cek=false;
-                        }
-                    }
-                    if(cek){
-                        Toast.makeText(getApplicationContext(), "Login terlebih dahulu", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
-                        databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Boolean cek = true;
-                                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                                        String yangbeli = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                                        int ctr=0;
-                                        String stridbarang="";
+                            String yangbeli = ds.child("email").getValue().toString();
+                            int ctr=0;
+                            String stridbarang="";
 
-                                        for (int i = 0; i < listClassBarang.size(); i++) {
-                                            if(listClassBarang.get(i).namabarang.equals(nama.getText().toString())){
-                                                stridbarang=listClassBarang.get(i).idbarang;
-                                            }
-                                        }
-
-                                        for (int i = 0; i < listWishlist.size(); i++) {
-                                            if(listWishlist.get(i).idbarang.equals(stridbarang)&&listWishlist.get(i).emailpembeli.equals(yangbeli)){
-                                                ctr++;
-                                            }
-                                        }
-
-                                        if(ctr==0){
-                                            ClassWishlist wishlistbaru=new ClassWishlist(stridbarang,yangbeli);
-                                            databaseReference_wishlist = FirebaseDatabase.getInstance().getReference().child("ClassWishlist");
-                                            String key=databaseReference_wishlist.push().getKey();
-                                            databaseReference_wishlist.child(key).setValue(wishlistbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(getApplicationContext(), "Barang berhasil ditambahkan ke wishlist", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        }
-                                        else{
-                                            Toast.makeText(InfoBarang.this, "Barang ini sudah ada di wishlist anda", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
+                            for (int i = 0; i < listClassBarang.size(); i++) {
+                                if(listClassBarang.get(i).namabarang.equals(nama.getText().toString())){
+                                    stridbarang=listClassBarang.get(i).idbarang;
                                 }
                             }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            for (int i = 0; i < listWishlist.size(); i++) {
+                                if(listWishlist.get(i).idbarang.equals(stridbarang)){
+                                    ctr++;
+                                }
                             }
-                        });
+
+                            if(ctr==0){
+                                ClassWishlist wishlistbaru=new ClassWishlist(stridbarang,yangbeli);
+                                databaseReference_wishlist = FirebaseDatabase.getInstance().getReference().child("ClassWishlist");
+                                String key=databaseReference_wishlist.push().getKey();
+                                databaseReference_wishlist.child(key).setValue(wishlistbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(getApplicationContext(), "Barang berhasil ditambahkan ke wishlist", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                            else{
+                                Toast.makeText(InfoBarang.this, "Barang ini sudah ada di wishlist anda", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
                 }
 
@@ -274,44 +226,34 @@ public class InfoBarang extends AppCompatActivity {
 
                 }
             });
+
+        }
+        else {
+            Toast.makeText(this, "Login terlebih dahulu", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void share(View view) {
+        DatabaseReference databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Boolean cek = true;
-                    for (DataSnapshot ds:dataSnapshot.getChildren()){
-                        if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                            cek=false;
-                        }
-                    }
-                    if(cek){
-                        Toast.makeText(InfoBarang.this, "Login terlebih dahulu", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Intent sendIntent = new Intent();
-                        sendIntent.setAction(Intent.ACTION_SEND);
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, listClassBarang.get(indeks).namabarang+"\n"+ listClassBarang.get(indeks).harga );
-                        sendIntent.setType("text/plain");
-                        startActivity(Intent.createChooser(sendIntent, "Share"));
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, listClassBarang.get(indeks).namabarang+"\n"+ listClassBarang.get(indeks).harga );
+            sendIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sendIntent, "Share"));
+        }
+        else{
+            Toast.makeText(this, "Login terlebih dahulu", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void changeFragment(Fragment f, ArrayList<ClassBarang> listClassBarang, ArrayList<ClassUser> listClassUser){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("listClassBarang", listClassBarang);
+        bundle.putSerializable("listClassUser", listClassUser);
+        f.setArguments(bundle);
         ft.replace(R.id.containerBarang, f);
         ft.commit();
     }

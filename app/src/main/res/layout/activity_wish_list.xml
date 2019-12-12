@@ -4,60 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1F1F1"
+    android:background="#BAFF4007"
     tools:context=".WishList">
 
     <TextView
         android:id="@+id/tvJudulWishlist"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@android:color/black"
-        android:fontFamily="@font/cabin"
-        android:text="Daftar Wishlist"
-        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daftar Wishlist : "
         android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/tvTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/cabin"
+        android:layout_marginBottom="28dp"
         android:text="Total Harga : Rp.77.000,00-"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnBeli"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnBeli"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/cabin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:onClick="toDetailAlamat"
         android:text="Beli"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWishlist"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTotal"
+        android:layout_height="500dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBeli"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvJudulWishlist" />
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulWishlist"
+        app:layout_constraintVertical_bias="0.009" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

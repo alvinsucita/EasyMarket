@@ -3,128 +3,104 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#F1F1F1"
+    android:layout_height="263dp"
+    android:background="#4CD0D0"
     tools:context=".NotaPengirimanFragment">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@android:color/black"
-        android:fontFamily="@font/cabin"
-        android:text=" Detail Pengiriman"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text=" Detail Pengiriman : "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
         android:text="Alamat : "
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView15"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
         android:id="@+id/tvnotaalamat"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/cabin"
+        android:layout_marginTop="16dp"
         android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvnotaresi"
         app:layout_constraintStart_toStartOf="@+id/tvnotaresi"
-        app:layout_constraintTop_toTopOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/tvnotaresi" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="13dp"
         android:text="Kurir Pengiriman :"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView13"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/tvnotanamatoko"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/cabin"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="140dp"
         android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/textView13" />
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Resi Pengiriman :"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/tvnotakurir"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/cabin"
+        android:layout_marginTop="13dp"
         android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvnotanamatoko"
         app:layout_constraintStart_toStartOf="@+id/tvnotanamatoko"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/tvnotanamatoko" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="5dp"
-        android:fontFamily="@font/cabin"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="15dp"
         android:text="Nama Toko :"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline1"
+        android:textColor="@android:color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
         android:id="@+id/tvnotaresi"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/cabin"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvnotakurir"
         app:layout_constraintStart_toStartOf="@+id/tvnotakurir"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/tvnotakurir" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

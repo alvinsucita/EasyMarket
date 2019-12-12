@@ -99,7 +99,7 @@ public class Register extends AppCompatActivity {
             else{
                 Intent i = new Intent(Register.this,Login.class);
                 if(tiperegister.equals("toko")){
-                    tokobaru = new ClassToko(stremail,stremail,strpassword,"1");
+                    tokobaru = new ClassToko(stremail,stremail,strpassword);
                     databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                     databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
@@ -159,7 +159,7 @@ public class Register extends AppCompatActivity {
                     });
                 }
                 else if(tiperegister.equals("user")){
-                    userbaru = new ClassUser(stremail,stremail,strpassword,"","","","1");
+                    userbaru = new ClassUser(stremail,stremail,strpassword,"","","");
                     databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                     databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
                     FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
