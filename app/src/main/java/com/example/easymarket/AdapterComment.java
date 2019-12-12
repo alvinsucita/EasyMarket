@@ -51,12 +51,6 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.CommentV
             foto=itemView.findViewById(R.id.ivFoto);
             nama=itemView.findViewById(R.id.tvNama);
             isi=itemView.findViewById(R.id.tvIsiComment);
-
-            GradientDrawable drawable4 = new GradientDrawable();
-            drawable4.setColor(Color.WHITE);
-            drawable4.setShape(GradientDrawable.RECTANGLE);
-            drawable4.setCornerRadius(50);
-            isi.setBackground(drawable4);
         }
     }
 }
