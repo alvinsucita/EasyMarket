@@ -1,22 +1,36 @@
 package com.example.easymarket;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -27,12 +41,14 @@ import java.util.ArrayList;
 public class FragmentListBarang extends Fragment {
 
 
-    public ArrayList<ClassBarang> listClassBarang;
+    public ArrayList<ClassBarang> listClassBarang= new ArrayList<>();
+    public ArrayList<ClassBarang> filterBarang= new ArrayList<>();
     Spinner sp;
     TextView nama,harga,kategori,likes,terjual,lihat,deskripsi,stok;
     Button request;
-    String strnama="",strkategori="",strdeskripsi="";
+    String strnama="",strkategori="",strdeskripsi="",idbarang="";
     int intharga=0,intstok=0,intlihat=0,intterjual=0,intlikes=0;
+    ImageView foto;
 
     public FragmentListBarang() {
         // Required empty public constructor
@@ -60,6 +76,7 @@ public class FragmentListBarang extends Fragment {
         terjual=view.findViewById(R.id.tvTerjual);
         likes=view.findViewById(R.id.tvLikes);
         request=view.findViewById(R.id.btnRequest);
+        foto=view.findViewById(R.id.ivFoto);
 
         GradientDrawable drawable2 = new GradientDrawable();
         drawable2.setShape(GradientDrawable.RECTANGLE);
@@ -74,31 +91,63 @@ public class FragmentListBarang extends Fragment {
         drawable3.setColor(Color.BLACK);
         request.setBackground(drawable3);
 
-        ArrayList<String> listspinner = new ArrayList<>();
-//        for (int i = 0; i < listClassBarang.size(); i++) {
-//            if(listClassBarang.get(i).namatoko.equals(((HomeToko) getActivity()).tokologin)){
-//                listspinner.add(listClassBarang.get(i).namabarang);
-//            }
-//        }
-        if(listspinner.size()!=0){
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            sp.setAdapter(dataAdapter);
-        }
+        FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                listClassBarang.clear();
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_barang =new ClassBarang();
+                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                    listClassBarang.add(semua_Class_barang);
+                }
+                for (int i = 0; i < listClassBarang.size(); i++) {
+                    if(listClassBarang.get(i).namatoko.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        filterBarang.add(listClassBarang.get(i));
+                    }
+                }
+
+                ArrayList<String> listspinner = new ArrayList<>();
+                for (int i = 0; i < filterBarang.size(); i++) {
+                    listspinner.add(filterBarang.get(i).namabarang);
+                }
+
+                if(listspinner.size()!=0){
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
+                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    sp.setAdapter(dataAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strnama=sp.getSelectedItem().toString();
-                for (int i = 0; i < listClassBarang.size(); i++) {
-                    if(listClassBarang.get(i).namabarang.equals(strnama)){
-                        intharga= listClassBarang.get(i).harga;
-                        strdeskripsi= listClassBarang.get(i).deskripsi;
-                        strkategori= listClassBarang.get(i).kategori;
-                        intlikes= listClassBarang.get(i).likes;
-                        intlihat= listClassBarang.get(i).dilihat;
-                        intstok= listClassBarang.get(i).stok;
-                        intterjual= listClassBarang.get(i).dibeli;
+                for (int i = 0; i < filterBarang.size(); i++) {
+                    if(filterBarang.get(i).namabarang.equals(strnama)){
+                        intharga= filterBarang.get(i).harga;
+                        strdeskripsi= filterBarang.get(i).deskripsi;
+                        strkategori=filterBarang.get(i).kategori;
+                        intlikes= filterBarang.get(i).likes;
+                        intlihat= filterBarang.get(i).dilihat;
+                        intstok= filterBarang.get(i).stok;
+                        intterjual= filterBarang.get(i).dibeli;
+                        idbarang = filterBarang.get(i).idbarang;
                     }
                 }
                 nama.setText("Nama : "+strnama);
@@ -109,7 +158,13 @@ public class FragmentListBarang extends Fragment {
                 likes.setText("Likes : "+intlikes+"");
                 lihat.setText("Dilihat : "+intlihat+" kali");
                 stok.setText("Stok : "+intstok+"pcs");
-                terjual.setText("ClassBarang Terjual : "+intterjual+" kali");
+                terjual.setText("Barang Terjual : "+intterjual+" kali");
+                FirebaseStorage.getInstance().getReference().child("GambarBarang").child(idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getContext()).load(uri).into(foto);
+                    }
+                });
             }
 
             @Override

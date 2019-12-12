@@ -143,6 +143,8 @@ public class FragmentHome extends Fragment {
         });
 
 
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

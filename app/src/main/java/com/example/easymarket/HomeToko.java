@@ -5,37 +5,62 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class HomeToko extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ArrayList<ClassUser> listClassUser;
-    ArrayList<ClassBarang> listClassBarang;
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     ArrayList<ClassToko> listClassToko;
     ArrayList<ClassWishlist> listWishlist;
     ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
-    String tokologin="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_toko);
 
-        Intent i = getIntent();
-        listClassUser = (ArrayList<ClassUser>) i.getSerializableExtra("listClassUser");
-        listClassToko = (ArrayList<ClassToko>) i.getSerializableExtra("listClassToko");
-        listClassBarang = (ArrayList<ClassBarang>) i.getSerializableExtra("listClassBarang");
-        listWishlist= (ArrayList<ClassWishlist>) i.getSerializableExtra("listWishlist");
-        listRequestLelang= (ArrayList<ClassRequestLelang>) i.getSerializableExtra("listRequestLelang");
+
+        FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_barang =new ClassBarang();
+                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                    listClassBarang.add(semua_Class_barang);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         changeFragment(new FragmentListBarang(), listClassBarang);
         bottomNavigationView=findViewById(R.id.btmNav);
