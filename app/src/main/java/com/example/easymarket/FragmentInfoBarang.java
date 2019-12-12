@@ -66,6 +66,7 @@ public class FragmentInfoBarang extends Fragment {
         dilihat=view.findViewById(R.id.tvBarangDilihat);
         dibeli=view.findViewById(R.id.tvBarangTerjual);
         btnLikes=view.findViewById(R.id.btnLikes);
+        //btndislikes=view.findViewById(R.id.btnDislikes);
         fotobarang=view.findViewById(R.id.ivFoto);
 
         likes.setText("");
