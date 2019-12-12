@@ -176,7 +176,7 @@ public class InfoBarang extends AppCompatActivity {
                     changeFragment(new FragmentInfoBarang(), listClassBarang, listClassUser);
                 }
                 else if(menuItem.getItemId( )== R.id.commentbarang){
-                    changeFragment(new FragmentCommentBarang(getApplicationContext()), listClassBarang, listClassUser);
+                    changeFragment(new FragmentCommentBarang(), listClassBarang, listClassUser);
                 }
                 return true;
             }
@@ -227,7 +227,7 @@ public class InfoBarang extends AppCompatActivity {
                                 Boolean cek = true;
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                                     if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                                        String yangbeli = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                        String yangbeli = ds.child("email").getValue().toString();
                                         int ctr=0;
                                         String stridbarang="";
 
@@ -238,7 +238,7 @@ public class InfoBarang extends AppCompatActivity {
                                         }
 
                                         for (int i = 0; i < listWishlist.size(); i++) {
-                                            if(listWishlist.get(i).idbarang.equals(stridbarang)&&listWishlist.get(i).emailpembeli.equals(yangbeli)){
+                                            if(listWishlist.get(i).idbarang.equals(stridbarang)){
                                                 ctr++;
                                             }
                                         }
@@ -312,6 +312,10 @@ public class InfoBarang extends AppCompatActivity {
     public void changeFragment(Fragment f, ArrayList<ClassBarang> listClassBarang, ArrayList<ClassUser> listClassUser){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("listClassBarang", listClassBarang);
+        bundle.putSerializable("listClassUser", listClassUser);
+        f.setArguments(bundle);
         ft.replace(R.id.containerBarang, f);
         ft.commit();
     }

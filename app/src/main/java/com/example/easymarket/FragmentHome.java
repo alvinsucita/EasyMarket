@@ -75,6 +75,8 @@ public class FragmentHome extends Fragment {
         rv = view.findViewById(R.id.rvhome);
 
 
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
