@@ -76,12 +76,6 @@ public class  FragmentCommentBarang extends Fragment {
         drawable.setColor(Color.WHITE);
         isicomment.setBackground(drawable);
 
-        GradientDrawable drawable5 = new GradientDrawable();
-        drawable5.setShape(GradientDrawable.RECTANGLE);
-        drawable5.setCornerRadius(25);
-        drawable5.setColor(Color.BLACK);
-        tambahkomen.setBackground(drawable5);
-
         FirebaseDatabase.getInstance().getReference().child("ClassComment").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
