@@ -47,11 +47,11 @@ public class WishList extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        GradientDrawable drawable4 = new GradientDrawable();
-        drawable4.setColor(Color.WHITE);
-        drawable4.setShape(GradientDrawable.OVAL);
-        drawable4.setStroke(5, Color.BLACK);
-        beli.setBackground(drawable4);
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setColor(Color.BLACK);
+        beli.setBackground(drawable3);
 
         total.setText("Total Harga : ");
 
