@@ -21,7 +21,6 @@
         <activity android:name=".NotaActivity" />
         <activity android:name=".Home" />
         <activity android:name=".ProfileUtamaActivity" />
-        <activity android:name=".DetailPengiriman" />
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".MasterKas" />
         <activity android:name=".MasterChangelog" />
