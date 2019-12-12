@@ -9,18 +9,15 @@ public class ClassUser implements Serializable {
     String gender;
     String daerahasal;
     String umur;
-    String aktif;
 
     public ClassUser(){}
-
-    public ClassUser(String email, String nama, String password, String gender, String daerahasal, String umur, String aktif) {
+    public ClassUser(String email, String nama, String password, String gender, String daerahasal, String umur) {
         this.email = email;
         this.nama = nama;
         this.password = password;
         this.gender = gender;
         this.daerahasal = daerahasal;
         this.umur = umur;
-        this.aktif = aktif;
     }
 
     public String getEmail() {
@@ -69,13 +66,5 @@ public class ClassUser implements Serializable {
 
     public void setUmur(String umur) {
         this.umur = umur;
-    }
-
-    public String getAktif() {
-        return aktif;
-    }
-
-    public void setAktif(String aktif) {
-        this.aktif = aktif;
     }
 }

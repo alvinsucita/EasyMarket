@@ -53,7 +53,11 @@ public class HomeAdmin extends AppCompatActivity {
             i = putextra(i);
             startActivity(i);
         }
-
+        else if(item.getItemId()==R.id.changelog){
+            Intent i = new Intent(HomeAdmin.this,MasterChangelog.class);
+            i = putextra(i);
+            startActivity(i);
+        }
         else if(item.getItemId()==R.id.manageuser){
             Intent i = new Intent(HomeAdmin.this,ManageUsers.class);
             i = putextra(i);
@@ -76,6 +80,11 @@ public class HomeAdmin extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.managetrans){
             Intent i = new Intent(HomeAdmin.this,MasterTrans.class);
+            i = putextra(i);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.managekas){
+            Intent i = new Intent(HomeAdmin.this,MasterKas.class);
             i = putextra(i);
             startActivity(i);
         }
