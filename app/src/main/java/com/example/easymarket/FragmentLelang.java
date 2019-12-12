@@ -1,13 +1,20 @@
 package com.example.easymarket;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
@@ -28,4 +35,39 @@ public class FragmentLelang extends Fragment {
         return inflater.inflate(R.layout.fragment_fragment_lelang, container, false);
     }
 
+    EditText searchlelang;
+    Button filterlelang;
+    RecyclerView rvlelang;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        final Home home = (Home)getActivity();
+
+        searchlelang = view.findViewById(R.id.etSearchLelang);
+        filterlelang = view.findViewById(R.id.btnFilterLelang);
+        rvlelang = view.findViewById(R.id.rvlelang);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setColor(Color.WHITE);
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setStroke(8, Color.LTGRAY);
+        drawable.setCornerRadius(100);
+        searchlelang.setBackground(drawable);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setStroke(8, Color.LTGRAY);
+        drawable2.setColor(Color.WHITE);
+        filterlelang.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(25);
+        drawable3.setStroke(8, Color.LTGRAY);
+        drawable3.setColor(Color.WHITE);
+        rvlelang.setBackground(drawable3);
+    }
 }
