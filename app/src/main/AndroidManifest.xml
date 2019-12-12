@@ -12,13 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".AdapterComment"></activity>
+        <activity android:name=".HistoryActivity" />
         <activity android:name=".MasterToko" />
         <activity android:name=".InfoBarangLelang" />
         <activity android:name=".LelangActivity" />
         <activity android:name=".InfoPengirimanActivity" />
         <activity android:name=".NotaActivity" />
-        <activity android:name=".EditProfileActivity" />
         <activity android:name=".Home" />
         <activity android:name=".ProfileUtamaActivity" />
         <activity android:name=".DetailPengiriman" />

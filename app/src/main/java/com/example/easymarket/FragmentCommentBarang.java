@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentCommentBarang extends Fragment {
+public class  FragmentCommentBarang extends Fragment {
 
 
     public FragmentCommentBarang() {
