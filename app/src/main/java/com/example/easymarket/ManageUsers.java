@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +25,6 @@ public class ManageUsers extends AppCompatActivity {
 
     ListView listView;
     ArrayList<ClassUser> listClassUser = new ArrayList<>();
-    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
 
     ArrayList<String> test = new ArrayList<>();
     String[] user;
@@ -43,7 +41,6 @@ public class ManageUsers extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("ClassUser").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean cek = true;
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                     ClassUser semua_Class_user = new ClassUser();
                     semua_Class_user.setEmail(ds.child("email").getValue().toString());
@@ -72,7 +69,6 @@ public class ManageUsers extends AppCompatActivity {
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Boolean cek = true;
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                                     if(ds.child("email").getValue().toString().equals(a)){
                                         ClassUser updateuser = new ClassUser();
