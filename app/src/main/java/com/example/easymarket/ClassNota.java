@@ -15,6 +15,7 @@ public class ClassNota implements Serializable {
     int hargapengiriman;
     int total;
 
+    public ClassNota(){};
     public ClassNota(String idnota, String namatoko, String idbarang, String namauser, String alamat, String pembayaran, String jenispengiriman, int hargabarang, int jumlahbarang, int hargapengiriman, int total) {
         this.idnota = idnota;
         this.namatoko = namatoko;
