@@ -32,7 +32,6 @@ public class AdapterBarangLelang extends RecyclerView.Adapter<AdapterBarangLelan
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.nama.setText(listClassBarang.get(position).namabarang);
-        holder.harga.setText("Last Bid : "+ listClassBarang.get(position).harga);
     }
 
     @Override

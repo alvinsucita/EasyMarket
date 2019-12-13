@@ -15,10 +15,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -28,9 +33,10 @@ public class DetailAlamat extends AppCompatActivity {
     Spinner pembayaran;
     ArrayList<String> spinnerArray =  new ArrayList<>();
     Button konfirmasi;
-    String akunyangbeli="",idbarang1="",idbarang2="";
-    int jumlah=0,jumlah2=0;
+    String akunyangbeli="",toko="",idbarang1="",idbarang2="";
+    int jumlah=0,jumlah2=0,harga=0,harga2=0;
     ArrayList<ClassNota> listClassNota = new ArrayList<>();
+    DatabaseReference databaseReference_nota;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,8 +87,6 @@ public class DetailAlamat extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         Intent i = getIntent();
         if (i.hasExtra("idbarang1")) {
             akunyangbeli = i.getStringExtra("akunyangbeli");
@@ -95,8 +99,8 @@ public class DetailAlamat extends AppCompatActivity {
             akunyangbeli = i.getStringExtra("akunyangbeli");
             idbarang1 = i.getStringExtra("idbarang");
             jumlah = i.getIntExtra("jumlah",0);
-
-            Toast.makeText(this, akunyangbeli+" "+idbarang1+" "+jumlah, Toast.LENGTH_SHORT).show();
+            harga = i.getIntExtra("harga",0);
+            toko = i.getStringExtra("toko");
         }
     }
     @Override
@@ -110,9 +114,9 @@ public class DetailAlamat extends AppCompatActivity {
     }
 
     public void toDetailPengiriman(View view) {
-        String strnama = nama.getText().toString();
+        final String strnama = nama.getText().toString();
         String strnohp = nohp.getText().toString();
-        String stralamat = alamat.getText().toString();
+        final String stralamat = alamat.getText().toString();
         String strkota = kota.getText().toString();
         String strkode = kode.getText().toString();
 
@@ -127,17 +131,34 @@ public class DetailAlamat extends AppCompatActivity {
                     for (DataSnapshot ds:dataSnapshot.getChildren()){
                         ClassNota semua_Class_Nota =new ClassNota();
                         semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setNamatoko((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setNamatoko((ds.child("namatoko").getValue().toString()));
+                        semua_Class_Nota.setIdbarang((ds.child("idbarang").getValue().toString()));
+                        semua_Class_Nota.setNamauser(ds.child("namauser").getValue().toString());
+                        semua_Class_Nota.setAlamat((ds.child("alamat").getValue().toString()));
+                        semua_Class_Nota.setPembayaran((ds.child("pembayaran").getValue().toString()));
+                        semua_Class_Nota.setJenispengiriman((ds.child("jenispengiriman").getValue().toString()));
+                        semua_Class_Nota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
+                        semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
+                        semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
+                        semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+                        listClassNota.add(semua_Class_Nota);
+                    }
 
-
-                       // listClassBarang.add(semua_Class_barang);
+                    if(listClassNota.size()==0){
+                        ClassNota notabaru=new ClassNota("NO0001",toko,idbarang1,strnama,stralamat,"COD","COD",harga,jumlah,14000,harga*jumlah+14000);
+                        databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                        String key=databaseReference_nota.push().getKey();
+                        databaseReference_nota.child(key).setValue(notabaru);
+                        Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+                        startActivity(i);
+                    }
+                    else {
+                        ClassNota notabaru=new ClassNota("NO000"+listClassNota.size()+1,toko,idbarang1,strnama,stralamat,"COD","COD",harga,jumlah,14000,harga*jumlah+14000);
+                        databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                        String key=databaseReference_nota.push().getKey();
+                        databaseReference_nota.child(key).setValue(notabaru);
+                        Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+                        startActivity(i);
                     }
                 }
 
@@ -146,8 +167,6 @@ public class DetailAlamat extends AppCompatActivity {
 
                 }
             });
-            Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
-            startActivity(i);
         }
 
 

@@ -29,40 +29,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/cabin"
-        android:text="Alamat : "
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView15"
-        app:layout_constraintStart_toStartOf="@+id/textView15"
-        app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-    <TextView
-        android:id="@+id/tvnotaalamat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/cabin"
-        android:text="TextView"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvnotaresi"
-        app:layout_constraintStart_toStartOf="@+id/tvnotaresi"
-        app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-    <TextView
         android:id="@+id/textView11"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/cabin"
-        android:text="Kurir Pengiriman :"
+        android:text="Jenis Pengiriman : "
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView13"
         app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toTopOf="@+id/tvnotakurir" />
 
     <TextView
         android:id="@+id/tvnotanamatoko"
@@ -81,25 +56,26 @@
         android:id="@+id/textView15"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/cabin"
-        android:text="Resi Pengiriman :"
+        android:text="Alamat"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toTopOf="@+id/tvnotaalamat" />
 
     <TextView
         android:id="@+id/tvnotakurir"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/cabin"
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tvnotanamatoko"
         app:layout_constraintStart_toStartOf="@+id/tvnotanamatoko"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/tvnotanamatoko" />
 
     <TextView
         android:id="@+id/textView13"
@@ -116,15 +92,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
-        android:id="@+id/tvnotaresi"
+        android:id="@+id/tvnotaalamat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/cabin"
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tvnotakurir"
         app:layout_constraintStart_toStartOf="@+id/tvnotakurir"
-        app:layout_constraintTop_toTopOf="@+id/textView15" />
+        app:layout_constraintTop_toBottomOf="@+id/tvnotakurir" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

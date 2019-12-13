@@ -119,6 +119,7 @@ public class Login extends AppCompatActivity {
                                         });
                                     }
                                 }
+                                Toast.makeText(Login.this, "ID anda telah dibanned oleh admin", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override

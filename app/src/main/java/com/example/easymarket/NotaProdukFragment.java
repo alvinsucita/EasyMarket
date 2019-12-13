@@ -1,17 +1,33 @@
 package com.example.easymarket;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.ArrayList;
 
 
 /**
@@ -22,20 +38,103 @@ import android.widget.TextView;
  */
 public class NotaProdukFragment extends Fragment {
 
+
     private OnFragmentInteractionListener mListener;
 
     public NotaProdukFragment() {
         // Required empty public constructor
     }
 
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     TextView show;
+    ImageView barang;
+    TextView nama,jumlah,harga;
+    ArrayList<ClassNota> listClassNota = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_nota_produk, container, false);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        nama=view.findViewById(R.id.tvNamaBarang3);
+        jumlah=view.findViewById(R.id.tvJumlah3);
+        harga=view.findViewById(R.id.tvHargaBarang3);
+        barang=view.findViewById(R.id.ivBarang3);
+
+        FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_barang =new ClassBarang();
+                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                    listClassBarang.add(semua_Class_barang);
+                }
+                FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean cek = true;
+                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                            ClassNota semua_Class_Nota =new ClassNota();
+                            semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                            semua_Class_Nota.setNamatoko((ds.child("namatoko").getValue().toString()));
+                            semua_Class_Nota.setIdbarang((ds.child("idbarang").getValue().toString()));
+                            semua_Class_Nota.setNamauser(ds.child("namauser").getValue().toString());
+                            semua_Class_Nota.setAlamat((ds.child("alamat").getValue().toString()));
+                            semua_Class_Nota.setPembayaran((ds.child("pembayaran").getValue().toString()));
+                            semua_Class_Nota.setJenispengiriman((ds.child("jenispengiriman").getValue().toString()));
+                            semua_Class_Nota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
+                            semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
+                            semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
+                            semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+                            listClassNota.add(semua_Class_Nota);
+                        }
+                        for (int i = 0; i < listClassBarang.size(); i++) {
+                            if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
+                                nama.setText(listClassBarang.get(i).namabarang);
+                            }
+                        }
+                        String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
+
+                        jumlah.setText(listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
+                        harga.setText("Rp. "+hargaasli);
+                        FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(getContext()).load(uri).into(barang);
+                            }
+                        }) ;
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

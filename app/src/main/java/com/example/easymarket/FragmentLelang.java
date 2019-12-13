@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,6 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 /**
@@ -38,6 +47,8 @@ public class FragmentLelang extends Fragment {
     EditText searchlelang;
     Button filterlelang;
     RecyclerView rvlelang;
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    AdapterMenuBarang adapterMenuBarang;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -69,5 +80,34 @@ public class FragmentLelang extends Fragment {
         drawable3.setStroke(8, Color.LTGRAY);
         drawable3.setColor(Color.WHITE);
         rvlelang.setBackground(drawable3);
+
+        FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_barang =new ClassBarang();
+                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                    listClassBarang.add(semua_Class_barang);
+                }
+                rvlelang.setLayoutManager(new LinearLayoutManager(getContext()));
+                adapterMenuBarang = new AdapterMenuBarang(listClassBarang);
+                rvlelang.setAdapter(adapterMenuBarang);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

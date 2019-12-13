@@ -70,13 +70,12 @@
         android:id="@+id/textView19"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/cabin"
         android:text="Total Ongkos Kirim :"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textView16"
         app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toTopOf="@+id/tvnotaongkos" />
 
     <TextView
         android:id="@+id/tvnotametode"
@@ -95,12 +94,13 @@
         android:id="@+id/tvnotaongkos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/cabin"
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/tvnotatotalbarang"
         app:layout_constraintStart_toStartOf="@+id/tvnotatotalbarang"
-        app:layout_constraintTop_toTopOf="@+id/textView19" />
+        app:layout_constraintTop_toBottomOf="@+id/tvnotatotalbarang" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

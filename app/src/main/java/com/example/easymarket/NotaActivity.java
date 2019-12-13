@@ -14,13 +14,23 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.ArrayList;
 
 public class NotaActivity extends AppCompatActivity implements NotaProdukFragment.OnFragmentInteractionListener{
 
     BottomNavigationView bottomNavigationNota;
     Button konfirmasi;
+    ArrayList<ClassNota> listClassNota = new ArrayList<>();
+    TextView total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,7 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
         setContentView(R.layout.activity_nota);
 
         konfirmasi = findViewById(R.id.btkonfirmasinota);
+        total = findViewById(R.id.tvnotatotalbayar);
 
         GradientDrawable drawable4 = new GradientDrawable();
         drawable4.setShape(GradientDrawable.RECTANGLE);
@@ -35,28 +46,58 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
         drawable4.setColor(Color.BLACK);
         konfirmasi.setBackground(drawable4);
 
-        changeFragment(new NotaProdukFragment(),"");
+        FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassNota semua_Class_Nota =new ClassNota();
+                    semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                    semua_Class_Nota.setNamatoko((ds.child("namatoko").getValue().toString()));
+                    semua_Class_Nota.setIdbarang((ds.child("idbarang").getValue().toString()));
+                    semua_Class_Nota.setNamauser(ds.child("namauser").getValue().toString());
+                    semua_Class_Nota.setAlamat((ds.child("alamat").getValue().toString()));
+                    semua_Class_Nota.setPembayaran((ds.child("pembayaran").getValue().toString()));
+                    semua_Class_Nota.setJenispengiriman((ds.child("jenispengiriman").getValue().toString()));
+                    semua_Class_Nota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
+                    semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
+                    semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
+                    semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+                    listClassNota.add(semua_Class_Nota);
+                }
+                String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).total);
+                total.setText("Rp. "+hargaasli);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        changeFragment(new NotaProdukFragment(),listClassNota);
         bottomNavigationNota = findViewById(R.id.BottomNavNota);
         bottomNavigationNota.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId()==R.id.produk){
-                    changeFragment(new NotaProdukFragment(),"");
+                    changeFragment(new NotaProdukFragment(),listClassNota);
                 }else if(menuItem.getItemId()==R.id.pengiriman){
-                    changeFragment(new NotaPengirimanFragment(),"");
+                    changeFragment(new NotaPengirimanFragment(),listClassNota);
                 }else if(menuItem.getItemId()==R.id.pembayaran){
-                    changeFragment(new NotaPembayaranFragment(),"");
+                    changeFragment(new NotaPembayaranFragment(),listClassNota);
                 }
                 return true;
             }
         });
-
-
     }
 
-    public void changeFragment(Fragment f, String data){
+    public void changeFragment(Fragment f, ArrayList<ClassNota> listClassNota){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("listClassNota", listClassNota);
+        f.setArguments(bundle);
         ft.replace(R.id.FragmentNota, f);
         ft.commit();
     }
