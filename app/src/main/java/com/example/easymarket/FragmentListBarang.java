@@ -200,7 +200,11 @@ public class FragmentListBarang extends Fragment {
                             databaseReference_request.child(key).setValue(requestBaru);
                         }
                         else{
-
+                            for (int i = 0; i < requestLelang.size(); i++) {
+//                                if(){
+//
+//                                }
+                            }
                         }
                     }
 
