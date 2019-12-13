@@ -12,14 +12,8 @@
         android:id="@+id/managetoko"
         android:title="Manage Toko" />
     <item
-        android:id="@+id/managetickets"
-        android:title="Manage Tickets (Pengaduan)" />
-    <item
         android:id="@+id/managelelang"
         android:title="Manage Lelang" />
-    <item
-        android:id="@+id/managetrans"
-        android:title="Manage Transaksi" />
     <item
         android:id="@+id/logoutadmin"
         android:title="Logout" />

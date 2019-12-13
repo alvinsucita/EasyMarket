@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AdapterComment"></activity>
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".MasterToko" />
         <activity android:name=".InfoBarangLelang" />
         <activity android:name=".LelangActivity" />
         <activity android:name=".InfoPengirimanActivity" />
@@ -23,9 +22,7 @@
         <activity android:name=".ProfileUtamaActivity" />
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".MasterLelang" />
-        <activity android:name=".MasterTrans" />
         <activity android:name=".HomeAdmin" />
-        <activity android:name=".ManageTickets" />
         <activity android:name=".InputEvent" />
         <activity android:name=".CekPerjalananActivity" />
         <activity android:name=".ChatRoom" />

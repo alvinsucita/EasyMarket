@@ -23,36 +23,24 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
         android:text="Manage Users"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/lvusers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnBanUser"
         android:layout_width="110dp"
         android:layout_height="58dp"
-        android:text="Edit"
+        android:text="Ban"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.975" />
 
-    <Button
-        android:id="@+id/btnRefresh"
-        android:layout_width="110dp"
-        android:layout_height="58dp"
-        android:text="Refresh"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
