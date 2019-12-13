@@ -198,12 +198,30 @@ public class FragmentListBarang extends Fragment {
                             databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
                             String key=databaseReference_request.push().getKey();
                             databaseReference_request.child(key).setValue(requestBaru);
+                            Toast.makeText(getContext(), "Barang anda berhasil direquest ke admin untuk dilelang", Toast.LENGTH_SHORT).show();
                         }
                         else{
+                            int ctr=0;
                             for (int i = 0; i < requestLelang.size(); i++) {
-//                                if(){
-//
-//                                }
+                                if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==1){
+                                    ctr++;
+                                }
+                                else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==0){
+                                    ctr=100;
+                                }
+                            }
+                            if(ctr>0){
+                                Toast.makeText(getContext(), "Barang anda masih belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(ctr==100){
+                                Toast.makeText(getContext(), "Barang anda sudah ada di lelang", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                ClassRequestLelang requestBaru=new ClassRequestLelang(idbarang,1);
+                                databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                String key=databaseReference_request.push().getKey();
+                                databaseReference_request.child(key).setValue(requestBaru);
+                                Toast.makeText(getContext(), "Barang anda berhasil direquest ke admin untuk dilelang", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -213,26 +231,6 @@ public class FragmentListBarang extends Fragment {
 
                     }
                 });
-
-//                String id="";
-//                int ctr=0;
-//                for (int i = 0; i < listClassBarang.size(); i++) {
-//                    if(strnama.equals(listClassBarang.get(i).namabarang)){
-//                        id= listClassBarang.get(i).idbarang;
-//                    }
-//                }
-//                for (int i = 0; i < ((HomeToko) getActivity()).listRequestLelang.size(); i++) {
-//                    if(id.equals(((HomeToko) getActivity()).listRequestLelang.get(i).idbarang)){
-//                        ctr++;
-//                    }
-//                }
-//                if(ctr==0){
-//                    ((HomeToko) getActivity()).listRequestLelang.add(new ClassRequestLelang(id));
-//                    Toast.makeText(getContext(), ((HomeToko) getActivity()).listRequestLelang.size()+"", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(ctr>0){
-//                    Toast.makeText(getContext(), "ClassBarang sudah direquest", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
     }
