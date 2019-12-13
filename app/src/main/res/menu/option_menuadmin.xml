@@ -9,9 +9,6 @@
         android:id="@+id/manageuser"
         android:title="Manage User" />
     <item
-        android:id="@+id/managetoko"
-        android:title="Manage Toko" />
-    <item
         android:id="@+id/managelelang"
         android:title="Manage Lelang" />
     <item
