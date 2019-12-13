@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BAFF4007"
+    android:background="#F1F1F1"
     android:orientation="vertical"
-    tools:context=".HomeToko" >
+    tools:context=".HomeToko">
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btmNav" >
+        android:layout_above="@id/btmNav">
 
     </FrameLayout>
 
