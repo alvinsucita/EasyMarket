@@ -33,13 +33,6 @@ public class AdapterBarangLelang extends RecyclerView.Adapter<AdapterBarangLelan
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.nama.setText(listClassBarang.get(position).namabarang);
         holder.harga.setText("Last Bid : "+ listClassBarang.get(position).harga);
-        holder.info.setText("Info");
-        holder.info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
@@ -54,13 +47,11 @@ public class AdapterBarangLelang extends RecyclerView.Adapter<AdapterBarangLelan
     public class ListViewHolder extends RecyclerView.ViewHolder{
         ImageView fotobarang;
         TextView nama,harga;
-        Button info;
         public ListViewHolder(@NonNull final View itemView) {
             super(itemView);
             fotobarang=itemView.findViewById(R.id.ivBarangLelang);
             nama=itemView.findViewById(R.id.tvNamaBarangLelang);
             harga=itemView.findViewById(R.id.tvHargaLelang);
-            info=itemView.findViewById(R.id.btnInfoBarangLelang);
 
         }
     }

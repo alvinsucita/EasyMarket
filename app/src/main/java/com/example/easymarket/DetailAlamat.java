@@ -1,5 +1,6 @@
 package com.example.easymarket;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class DetailAlamat extends AppCompatActivity {
@@ -24,6 +30,7 @@ public class DetailAlamat extends AppCompatActivity {
     Button konfirmasi;
     String akunyangbeli="",idbarang1="",idbarang2="";
     int jumlah=0,jumlah2=0;
+    ArrayList<ClassNota> listClassNota = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +81,8 @@ public class DetailAlamat extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         Intent i = getIntent();
         if (i.hasExtra("idbarang1")) {
             akunyangbeli = i.getStringExtra("akunyangbeli");
@@ -111,8 +120,32 @@ public class DetailAlamat extends AppCompatActivity {
             Toast.makeText(this, "Isi semua field terlebih dahulu", Toast.LENGTH_SHORT).show();
         }
         else{
+            FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                        ClassNota semua_Class_Nota =new ClassNota();
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setNamatoko((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
 
 
+                       // listClassBarang.add(semua_Class_barang);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
             Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
             startActivity(i);
         }
