@@ -23,9 +23,7 @@
         <activity android:name=".ProfileUtamaActivity" />
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".MasterLelang" />
-        <activity android:name=".MasterTrans" />
         <activity android:name=".HomeAdmin" />
-        <activity android:name=".ManageTickets" />
         <activity android:name=".InputEvent" />
         <activity android:name=".CekPerjalananActivity" />
         <activity android:name=".ChatRoom" />

@@ -63,18 +63,8 @@ public class HomeAdmin extends AppCompatActivity {
             i = putextra(i);
             startActivity(i);
         }
-        else if(item.getItemId()==R.id.managetickets){
-            Intent i = new Intent(HomeAdmin.this,ManageTickets.class);
-            i = putextra(i);
-            startActivity(i);
-        }
         else if(item.getItemId()==R.id.managelelang){
             Intent i = new Intent(HomeAdmin.this,MasterLelang.class);
-            i = putextra(i);
-            startActivity(i);
-        }
-        else if(item.getItemId()==R.id.managetrans){
-            Intent i = new Intent(HomeAdmin.this,MasterTrans.class);
             i = putextra(i);
             startActivity(i);
         }
