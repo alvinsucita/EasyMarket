@@ -26,8 +26,7 @@ public class MasterLelang extends AppCompatActivity {
 
     ListView listView;
     ArrayList<ClassRequestLelang> listClassReq = new ArrayList<>();
-    ArrayList<ClassLelang> listClassLelang = new ArrayList<>();
-    DatabaseReference dbRefL, dbreftemp;
+    DatabaseReference dbreftemp;
 
     ArrayList<String> test = new ArrayList<>();
     String[] user;
