@@ -16,7 +16,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -99,10 +101,17 @@ public class Register extends AppCompatActivity {
             else{
                 Intent i = new Intent(Register.this,Login.class);
                 if(tiperegister.equals("toko")){
-                    tokobaru = new ClassToko(stremail,stremail,strpassword,"1");
+                    tokobaru = new ClassToko();
+                    tokobaru.setAktif("1");
+                    tokobaru.setEmail(stremail);
+                    tokobaru.setNama(stremail);
+                    tokobaru.setPassword(strpassword);
+
+
+
+
                     databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                     databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
                     databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -125,14 +134,27 @@ public class Register extends AppCompatActivity {
                                             }
                                         }
                                         if(cek==true){
-                                            databaseReference_toko.push().setValue(tokobaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                 @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if(task.isSuccessful()) {
-                                                        Toast.makeText(Register.this, "Toko berhasil didaftarkan", Toast.LENGTH_SHORT).show();
-                                                        Intent i = new Intent(Register.this,HomeToko.class);
-                                                        startActivity(i);
-                                                    }
+                                                public void onSuccess(AuthResult authResult) {
+                                                    FirebaseAuth.getInstance().signInWithEmailAndPassword(stremail,strpassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                                        @Override
+                                                        public void onSuccess(AuthResult authResult) {
+                                                            tokobaru.setFirebaseUID(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                                            databaseReference_toko.push().setValue(tokobaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if(task.isSuccessful()) {
+                                                                        Toast.makeText(Register.this, "Toko berhasil didaftarkan", Toast.LENGTH_SHORT).show();
+                                                                        Intent i = new Intent(Register.this,HomeToko.class);
+                                                                        startActivity(i);
+                                                                        FirebaseAuth.getInstance().signOut();
+                                                                        FirebaseAuth.getInstance().signInWithEmailAndPassword("guest@guest.com","guest123");
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                    });
                                                 }
                                             });
                                         }
@@ -159,64 +181,84 @@ public class Register extends AppCompatActivity {
                     });
                 }
                 else if(tiperegister.equals("user")){
-                    userbaru = new ClassUser(stremail,stremail,strpassword,"","","","1");
+                    userbaru = new ClassUser();
+                    userbaru.setNama(stremail);
+                    userbaru.setAktif("1");
+                    userbaru.setDaerahasal("");
+                    userbaru.setEmail(stremail);
+                    userbaru.setGender("");
+                    userbaru.setPassword(strpassword);
+                    userbaru.setUmur("");
+
                     databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                     databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword);
-                    databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(stremail,strpassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Boolean cek = true;
-                            for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                if(stremail.equals(ds.child("email").getValue().toString())){
-                                    Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
-                                    cek=false;
-                                }
-                            }
-                            if(cek==true){
-                                databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        Boolean cek = true;
-                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                            if(stremail.equals(ds.child("email").getValue().toString())){
+                        public void onSuccess(AuthResult authResult) {
+                            FirebaseAuth.getInstance().signInWithEmailAndPassword(stremail,strpassword).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    databaseReference_user.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Boolean cek = true;
+                                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                if(stremail.equals(ds.child("email").getValue().toString())){
+                                                    Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                                                    cek=false;
+                                                }
+                                            }
+                                            if(cek==true){
+                                                databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        Boolean cek = true;
+                                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                            if(stremail.equals(ds.child("email").getValue().toString())){
+                                                                Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                                                                cek=false;
+                                                            }
+                                                        }
+                                                        if(cek==true){
+                                                            userbaru.setFirebaseUID(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                                            databaseReference_user.push().setValue(userbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if(task.isSuccessful()) {
+                                                                        Toast.makeText(Register.this, "User berhasil didaftarkan", Toast.LENGTH_SHORT).show();
+                                                                        Intent i = new Intent(Register.this,Login.class);
+                                                                        startActivity(i);
+                                                                        FirebaseAuth.getInstance().signOut();
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                        else{
+                                                            Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                            }
+                                            else{
                                                 Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
-                                                cek=false;
                                             }
                                         }
-                                        if(cek==true){
-                                            databaseReference_user.push().setValue(userbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if(task.isSuccessful()) {
-                                                        Toast.makeText(Register.this, "User berhasil didaftarkan", Toast.LENGTH_SHORT).show();
-                                                        Intent i = new Intent(Register.this,Login.class);
-                                                        startActivity(i);
-                                                    }
-                                                }
-                                            });
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                         }
-                                        else{
-                                            Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-                            else{
-                                Toast.makeText(Register.this, "Email sudah terpakai", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                    });
+                                }
+                            });
                         }
                     });
+
                 }
             }
         }

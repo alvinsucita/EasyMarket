@@ -92,7 +92,7 @@ public class Login extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Boolean cek = false;
                     for (DataSnapshot ds:dataSnapshot.getChildren()){
-                        if(stremail.equals(ds.child("email").getValue().toString())&&strpass.equals(ds.child("password").getValue().toString())&&ds.child("aktif").getValue().toString().equals("1")){
+                        if(stremail.equals(ds.child("email").getValue().toString())&&strpass.equals(ds.child("password").getValue().toString())){
                             cek=true;
                             FirebaseAuth.getInstance().signInWithEmailAndPassword(stremail,strpass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -109,7 +109,7 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
                                 for (DataSnapshot ds2:dataSnapshot2.getChildren()){
-                                    if(stremail.equals(ds2.child("email").getValue().toString())&&strpass.equals(ds2.child("password").getValue().toString())&&ds2.child("aktif").getValue().toString().equals("1")){
+                                    if(stremail.equals(ds2.child("email").getValue().toString())&&strpass.equals(ds2.child("password").getValue().toString())){
                                         FirebaseAuth.getInstance().signInWithEmailAndPassword(stremail,strpass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -119,7 +119,6 @@ public class Login extends AppCompatActivity {
                                         });
                                     }
                                 }
-                                Toast.makeText(Login.this, "ID anda telah dibanned oleh admin", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override

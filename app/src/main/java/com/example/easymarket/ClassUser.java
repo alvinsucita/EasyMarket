@@ -6,6 +6,7 @@ public class ClassUser implements Serializable {
     String email;
     String nama;
     String password;
+    String FirebaseUID;
     String gender;
     String daerahasal;
     String umur;
@@ -13,10 +14,11 @@ public class ClassUser implements Serializable {
 
     public ClassUser(){}
 
-    public ClassUser(String email, String nama, String password, String gender, String daerahasal, String umur, String aktif) {
+    public ClassUser(String email, String nama, String password, String firebaseUID, String gender, String daerahasal, String umur, String aktif) {
         this.email = email;
         this.nama = nama;
         this.password = password;
+        FirebaseUID = firebaseUID;
         this.gender = gender;
         this.daerahasal = daerahasal;
         this.umur = umur;
@@ -45,6 +47,14 @@ public class ClassUser implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFirebaseUID() {
+        return FirebaseUID;
+    }
+
+    public void setFirebaseUID(String firebaseUID) {
+        FirebaseUID = firebaseUID;
     }
 
     public String getGender() {

@@ -7,12 +7,15 @@ public class ClassToko implements Serializable {
     String email;
     String password;
     String aktif;
+    String FirebaseUID;
 
-    public ClassToko(String nama, String email, String password, String aktif) {
+    public ClassToko(){}
+    public ClassToko(String nama, String email, String password, String aktif, String firebaseUID) {
         this.nama = nama;
         this.email = email;
         this.password = password;
         this.aktif = aktif;
+        FirebaseUID = firebaseUID;
     }
 
     public String getNama() {
@@ -45,5 +48,13 @@ public class ClassToko implements Serializable {
 
     public void setAktif(String aktif) {
         this.aktif = aktif;
+    }
+
+    public String getFirebaseUID() {
+        return FirebaseUID;
+    }
+
+    public void setFirebaseUID(String firebaseUID) {
+        FirebaseUID = firebaseUID;
     }
 }

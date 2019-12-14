@@ -40,13 +40,27 @@
         <activity android:name=".InfoComment" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ManageUsers" />
         <activity android:name=".PreviewActivity" />
         <activity android:name=".PopupEvent" />
         <activity android:name=".RefundActivity" />
         <activity android:name=".Register" />
         <activity android:name=".TransactionActivity" />
         <activity android:name=".WishList" />
+        <service
+            android:name=".Notifications.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Notifications.MyFirebaseMessaging"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="preloaded_fonts"

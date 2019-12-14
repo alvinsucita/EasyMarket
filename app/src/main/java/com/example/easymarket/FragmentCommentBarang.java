@@ -22,15 +22,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.easymarket.Notifications.Client;
+import com.example.easymarket.Notifications.Data;
+import com.example.easymarket.Notifications.MyResponse;
+import com.example.easymarket.Notifications.Sender;
+import com.example.easymarket.Notifications.Token;
 import com.google.android.gms.common.util.Base64Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -47,7 +58,12 @@ public class  FragmentCommentBarang extends Fragment {
     ArrayList<ClassBarang>listClassBarang = new ArrayList<>();
     ArrayList<ClassComment>filterComment= new ArrayList<>();
     Context context;
-
+    //notifikasi
+    ClassUser usersekarang =new ClassUser();
+    ClassToko usertujuan =new ClassToko();
+    boolean notify=false;
+    APIService apiService;
+    String idtoko;
     public FragmentCommentBarang(Context contextku) {
         this.context = contextku;
     }
@@ -60,19 +76,22 @@ public class  FragmentCommentBarang extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_comment_barang, container, false);
+        View view=inflater.inflate(R.layout.fragment_fragment_comment_barang, container, false);
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final InfoBarang infoBarang = (InfoBarang) getActivity();
-
+        idtoko = infoBarang.listClassBarang.get(infoBarang.indeks).namatoko;
         rv = view.findViewById(R.id.rvcomment);
         isicomment=view.findViewById(R.id.etEditComment);
+        apiService= Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        getusernow();
+        getusertujuan(idtoko);
         tambahkomen=view.findViewById(R.id.btnComment);
-
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadius(25);
@@ -108,6 +127,17 @@ public class  FragmentCommentBarang extends Fragment {
         tambahkomen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(context, usersekarang.getFirebaseUID()+" - "+usertujuan.getFirebaseUID(), Toast.LENGTH_SHORT).show();
+                //beri notifikasi
+                notify=true;
+                final String msg=isicomment.getText().toString();
+                if(usertujuan!=null){
+                    if(notify){
+                        sendNotification(usertujuan.getFirebaseUID(),usersekarang.nama,msg);
+                    }
+                    notify=false;
+                }
                 if(!isicomment.getText().toString().equals("")){
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -184,6 +214,84 @@ public class  FragmentCommentBarang extends Fragment {
                 else{
                     Toast.makeText(getContext(), "Komen tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+    //send notifikasi
+    public void sendNotification(String receiver,final String username,final String message){
+        DatabaseReference tokens=FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(receiver);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Token token=snapshot.getValue(Token.class);
+                    Data data=new Data(usersekarang.getFirebaseUID(), R.mipmap.ic_launcher_round,username+"Memberikan Komentar: "+message,"EasyMarket",usertujuan.getFirebaseUID());
+
+                    Sender sender=new Sender(data,token.getToken());
+
+                    apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+                        @Override
+                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                            if(response.code()==200){
+                                if(response.body().success!=1){
+                                    Toast.makeText(context, "Failed Send Notification!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    //update token
+    private void updateToken(String token){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1=new Token(token);
+        reference.child(usersekarang.getFirebaseUID()).setValue(token1);
+    }
+    public void getusernow(){
+        FirebaseDatabase.getInstance().getReference().child("ClassUser").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds :dataSnapshot.getChildren()) {
+                    if (ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                        usersekarang.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
+                        usersekarang.setNama(ds.child("nama").getValue().toString());
+                        updateToken(FirebaseInstanceId.getInstance().getToken());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void getusertujuan(final String idtoko){
+        FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds :dataSnapshot.getChildren()) {
+                    if (ds.child("email").getValue().toString().equals(idtoko)) {
+                        usertujuan.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
+                        usertujuan.setNama(ds.child("nama").getValue().toString());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

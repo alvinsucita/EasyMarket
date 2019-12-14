@@ -24,6 +24,7 @@ public class HalamanCover extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_halaman_cover);
 
+
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -34,20 +35,25 @@ public class HalamanCover extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Boolean cek = true;
-                            for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                if(FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(ds.child("email").getValue().toString())){
-                                    cek=false;
+                            if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                    if(FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(ds.child("email").getValue().toString())){
+                                        cek=false;
+                                    }
+                                }
+                                if(cek==false){
+                                    ///LoginToko
+                                    Intent i = new Intent(HalamanCover.this,HomeToko.class);
+                                    startActivity(i);
+                                }
+                                else {
+                                    //LoginUser
+                                    Intent i = new Intent(HalamanCover.this,Home.class);
+                                    startActivity(i);
                                 }
                             }
-                            if(cek==false){
-                                ///LoginToko
-                                Intent i = new Intent(HalamanCover.this,HomeToko.class);
-                                startActivity(i);
-                            }
                             else {
-                                //LoginUser
-                                Intent i = new Intent(HalamanCover.this,Home.class);
-                                startActivity(i);
+                                FirebaseAuth.getInstance().signInWithEmailAndPassword("guest@guest.com","guest123");
                             }
                         }
 
