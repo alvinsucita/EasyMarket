@@ -6,115 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".InputEvent">
 
-    <ImageView
-        android:id="@+id/ivaddpicevent"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09"/>
-
-    <Button
-        android:id="@+id/btnaddpicevent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="72dp"
-        android:backgroundTint="@android:color/white"
-        android:text="Tambah Image"
-        app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivaddpicevent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvshowaddeventname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="22dp"
-        android:text="Nama Event :"
-        app:layout_constraintBottom_toTopOf="@+id/etaddeventname"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnaddpicevent" />
-
     <EditText
         android:id="@+id/etaddeventname"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="29dp"
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="54dp"
         android:background="@android:color/white"
         android:ems="10"
         android:hint="Nama Event"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventtype"
+        app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventdesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventname" />
 
     <TextView
-        android:id="@+id/tvshowaddeventtype"
+        android:id="@+id/tvshowaddeventname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="18dp"
-        android:text="Harga Produk"
-        app:layout_constraintBottom_toTopOf="@+id/etaddeventtype"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etaddeventname" />
-
-    <EditText
-        android:id="@+id/etaddeventtype"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="30dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:hint="Tipe"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventdesc"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="298dp"
+        android:layout_marginBottom="19dp"
+        android:text="Nama Event :"
+        app:layout_constraintBottom_toTopOf="@+id/etaddeventname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventtype" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etaddeventdesc"
+        android:layout_width="match_parent"
+        android:layout_height="122dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginBottom="194dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:hint="Deskripsi"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventname" />
 
     <TextView
         android:id="@+id/tvshowaddeventdesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="298dp"
+        android:layout_marginBottom="100dp"
         android:text="Deskripsi :"
         app:layout_constraintBottom_toTopOf="@+id/etaddeventdesc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etaddeventtype" />
-
-    <EditText
-        android:id="@+id/etaddeventdesc"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="47dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Deskripsi"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/btnaddevent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventdesc" />
+        app:layout_constraintTop_toBottomOf="@+id/etaddeventname" />
 
     <Button
-        android:id="@+id/btnaddevent"
-        android:layout_width="0dp"
+        android:id="@+id/buttoninsert"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
-        android:backgroundTint="@android:color/white"
-        android:text="Tambah Produk"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="90dp"
+        android:text="Insert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
