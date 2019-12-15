@@ -76,6 +76,7 @@ public class MasterLelang extends AppCompatActivity {
                                 if(ds.child("idbarang").getValue().toString().equals(listClassReq.get(i).getIdbarang())){
                                     Toast.makeText(MasterLelang.this, "halohai", Toast.LENGTH_LONG).show();
                                     ClassLelang lelangbaru = new ClassLelang(listClassReq.get(i).getIdbarang(), Integer.valueOf(ds.child("harga").getValue().toString()), 0, null);
+                                    dbreftemp = null;
                                     dbreftemp = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
                                     String key = dbreftemp.push().getKey();
                                     dbreftemp.child(key).setValue(lelangbaru);
