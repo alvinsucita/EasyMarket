@@ -7,6 +7,19 @@
     android:background="#F1F1F1"
     tools:context=".ProfileUtamaActivity">
 
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/cabin"
+        android:text="/"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etBulanProfilUtamaActivity"
+        app:layout_constraintStart_toEndOf="@+id/etBulanProfilUtamaActivity"
+        app:layout_constraintTop_toTopOf="@+id/etBulanProfilUtamaActivity" />
+
     <Spinner
         android:id="@+id/spJenisKelamin"
         android:layout_width="300dp"
@@ -75,8 +88,8 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/cabin"
         android:text="Daerah Asal"
-        app:layout_constraintStart_toStartOf="@+id/etUmurProfilUtamaActivity"
-        app:layout_constraintTop_toBottomOf="@+id/etUmurProfilUtamaActivity" />
+        app:layout_constraintStart_toStartOf="@+id/etTanggalProfilUtamaActivity"
+        app:layout_constraintTop_toBottomOf="@+id/etTanggalProfilUtamaActivity" />
 
     <TextView
         android:id="@+id/tvUmurProfileUtamaActivity"
@@ -134,27 +147,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <EditText
-        android:id="@+id/etUmurProfilUtamaActivity"
-        android:layout_width="300dp"
+        android:id="@+id/etTanggalProfilUtamaActivity"
+        android:layout_width="87dp"
         android:layout_height="40dp"
         android:layout_marginTop="3dp"
         android:ems="10"
         android:fontFamily="@font/cabin"
+        android:hint="D"
         android:inputType="number"
         android:paddingLeft="10dp"
-        android:paddingRight="45dp"
+        android:paddingRight="10dp"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="@+id/tvUmurProfileUtamaActivity"
         app:layout_constraintTop_toBottomOf="@+id/tvUmurProfileUtamaActivity" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/baseline_date_range_black_18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/etUmurProfilUtamaActivity"
-        app:layout_constraintEnd_toEndOf="@+id/etUmurProfilUtamaActivity"
-        app:layout_constraintTop_toTopOf="@+id/etUmurProfilUtamaActivity" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -175,5 +180,50 @@
         app:layout_constraintEnd_toEndOf="@+id/spJenisKelamin"
         app:layout_constraintTop_toTopOf="@+id/spJenisKelamin"
         app:srcCompat="@drawable/downpoint" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/cabin"
+        android:text="/"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etTanggalProfilUtamaActivity"
+        app:layout_constraintStart_toEndOf="@+id/etTanggalProfilUtamaActivity"
+        app:layout_constraintTop_toTopOf="@+id/etTanggalProfilUtamaActivity" />
+
+    <EditText
+        android:id="@+id/etBulanProfilUtamaActivity"
+        android:layout_width="87dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="M"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/etTanggalProfilUtamaActivity"
+        app:layout_constraintStart_toEndOf="@+id/textView26"
+        app:layout_constraintTop_toTopOf="@+id/etTanggalProfilUtamaActivity" />
+
+    <EditText
+        android:id="@+id/etTahunProfilUtamaActivity"
+        android:layout_width="87dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="Y"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/etBulanProfilUtamaActivity"
+        app:layout_constraintStart_toEndOf="@+id/textView28"
+        app:layout_constraintTop_toTopOf="@+id/etBulanProfilUtamaActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

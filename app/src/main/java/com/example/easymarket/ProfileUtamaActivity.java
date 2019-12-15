@@ -43,7 +43,7 @@ public class ProfileUtamaActivity extends AppCompatActivity {
     ImageView profile;
     TextView tvEmail;
     Button simpan;
-    EditText nama, umur;
+    EditText nama, umur, tanggal, bulan, tahun;
     Uri selected;
     Spinner spDaerah,spGender;
 
@@ -56,9 +56,12 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         profile=findViewById(R.id.imgViewProfileUtamaActivity);
         simpan = findViewById(R.id.btSimpanProfile);
         nama = findViewById(R.id.etNamaProfilUtamaActivity);
-        umur=findViewById(R.id.etUmurProfilUtamaActivity);
+        umur=findViewById(R.id.etTanggalProfilUtamaActivity);
         spDaerah=findViewById(R.id.spDaerahAsal);
         spGender=findViewById(R.id.spJenisKelamin);
+        tanggal = findViewById(R.id.etTanggalProfilUtamaActivity);
+        bulan = findViewById(R.id.etBulanProfilUtamaActivity);
+        tahun = findViewById(R.id.etTahunProfilUtamaActivity);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
@@ -70,7 +73,9 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         drawable2.setShape(GradientDrawable.RECTANGLE);
         drawable2.setCornerRadius(100);
         drawable2.setColor(Color.WHITE);
-        umur.setBackground(drawable2);
+        tanggal.setBackground(drawable2);
+        bulan.setBackground(drawable2);
+        tahun.setBackground(drawable2);
 
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setShape(GradientDrawable.RECTANGLE);
