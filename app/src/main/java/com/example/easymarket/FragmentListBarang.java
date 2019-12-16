@@ -227,6 +227,9 @@ public class FragmentListBarang extends Fragment {
                                 else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==100){
                                     ctr=100;
                                 }
+                                else{
+                                    ctr=100;
+                                }
                             }
                             if(ctr==1){
                                 Toast.makeText(getContext(), "Barang anda masih belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
