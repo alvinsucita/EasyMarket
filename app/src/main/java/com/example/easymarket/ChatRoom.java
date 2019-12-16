@@ -3,6 +3,7 @@ package com.example.easymarket;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ public class ChatRoom extends AppCompatActivity {
     Button send;
     EditText pesan;
     RecyclerView rvChat;
+    String emailtoko;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,9 @@ public class ChatRoom extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Intent i = getIntent();
+        emailtoko=i.getStringExtra("emailtoko");
 
     }
 

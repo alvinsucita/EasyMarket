@@ -45,6 +45,8 @@ public class InfoBarang extends AppCompatActivity {
     String aktif="0";
     int indeks=0;
     ImageView foto;
+    String emailtoko="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,7 +197,9 @@ public class InfoBarang extends AppCompatActivity {
     }
 
     public void toChat(View view) {
+        emailtoko=listClassBarang.get(indeks).namatoko;
         Intent i = new Intent(InfoBarang.this,ChatRoom.class);
+        i.putExtra("emailtoko",emailtoko);
         startActivity(i);
     }
 
