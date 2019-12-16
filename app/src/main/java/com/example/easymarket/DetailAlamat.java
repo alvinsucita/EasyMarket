@@ -94,6 +94,9 @@ public class DetailAlamat extends AppCompatActivity {
             idbarang2 = i.getStringExtra("idbarang2");
             jumlah = i.getIntExtra("jumlah",0);
             jumlah2 = i.getIntExtra("jumlah2",0);
+            harga = i.getIntExtra("harga",0);
+            harga2 = i.getIntExtra("harga2",0);
+            toko = i.getStringExtra("toko");
         }
         else{
             akunyangbeli = i.getStringExtra("akunyangbeli");
@@ -119,6 +122,7 @@ public class DetailAlamat extends AppCompatActivity {
         final String stralamat = alamat.getText().toString();
         String strkota = kota.getText().toString();
         String strkode = kode.getText().toString();
+        final String strjenispembayaran = pembayaran.getSelectedItem().toString();
 
         if(strnama.equals("")||strnohp.equals("")||stralamat.equals("")||strkota.equals("")||strkode.equals("")){
             Toast.makeText(this, "Isi semua field terlebih dahulu", Toast.LENGTH_SHORT).show();
@@ -145,20 +149,58 @@ public class DetailAlamat extends AppCompatActivity {
                     }
 
                     if(listClassNota.size()==0){
-                        ClassNota notabaru=new ClassNota("NO0001",toko,idbarang1,strnama,stralamat,"COD","COD",harga,jumlah,14000,harga*jumlah+14000);
-                        databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
-                        String key=databaseReference_nota.push().getKey();
-                        databaseReference_nota.child(key).setValue(notabaru);
-                        Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
-                        startActivity(i);
+                        if(jumlah2==0){
+                            ClassNota notabaru=new ClassNota("NO0001",toko,idbarang1,strnama,stralamat,strjenispembayaran,"COD",harga,jumlah,14000,harga*jumlah+14000);
+                            databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                            String key=databaseReference_nota.push().getKey();
+                            databaseReference_nota.child(key).setValue(notabaru);
+                            Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+                            startActivity(i);
+                        }
+                        else{
+                            ClassNota notabaru=new ClassNota("NO0001",toko,idbarang1,strnama,stralamat,strjenispembayaran,"COD",harga,jumlah,14000,harga*jumlah+14000);
+                            databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                            String key=databaseReference_nota.push().getKey();
+                            databaseReference_nota.child(key).setValue(notabaru);
+
+                            ClassNota notabaru2=new ClassNota("NO0001",toko,idbarang2,strnama,stralamat,strjenispembayaran,"COD",harga2,jumlah2,14000,harga2*jumlah2+14000);
+                            databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                            String key2=databaseReference_nota.push().getKey();
+                            databaseReference_nota.child(key2).setValue(notabaru2);
+
+                            Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+                            i.putExtra("dua","dua");
+                            startActivity(i);
+
+                        }
                     }
                     else {
-                        ClassNota notabaru=new ClassNota("NO000"+listClassNota.size()+1,toko,idbarang1,strnama,stralamat,"COD","COD",harga,jumlah,14000,harga*jumlah+14000);
-                        databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
-                        String key=databaseReference_nota.push().getKey();
-                        databaseReference_nota.child(key).setValue(notabaru);
-                        Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
-                        startActivity(i);
+                        if(jumlah2==0){
+                            ClassNota notabaru=new ClassNota("NO000"+listClassNota.size()+1,toko,idbarang1,strnama,stralamat,strjenispembayaran,"COD",harga,jumlah,14000,harga*jumlah+14000);
+                            databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                            String key=databaseReference_nota.push().getKey();
+                            databaseReference_nota.child(key).setValue(notabaru);
+
+                            Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+                            startActivity(i);
+                        }
+                        else{
+                            ClassNota notabaru=new ClassNota("NO000"+listClassNota.size()+1,toko,idbarang1,strnama,stralamat,strjenispembayaran,"COD",harga,jumlah,14000,harga*jumlah+14000);
+                            databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                            String key=databaseReference_nota.push().getKey();
+                            databaseReference_nota.child(key).setValue(notabaru);
+
+                            ClassNota notabaru2=new ClassNota("NO000"+listClassNota.size(),toko,idbarang2,strnama,stralamat,strjenispembayaran,"COD",harga2,jumlah2,14000,harga2*jumlah2+14000);
+                            databaseReference_nota = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                            String key2=databaseReference_nota.push().getKey();
+                            databaseReference_nota.child(key2).setValue(notabaru2);
+
+                            Intent i = new Intent(DetailAlamat.this,NotaActivity.class);
+                            i.putExtra("dua","dua");
+                            startActivity(i);
+
+                        }
+
                     }
                 }
 

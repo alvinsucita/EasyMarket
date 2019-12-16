@@ -219,19 +219,22 @@ public class FragmentListBarang extends Fragment {
                             int ctr=0;
                             for (int i = 0; i < requestLelang.size(); i++) {
                                 if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==1){
-                                    ctr++;
+                                    ctr=1;
                                 }
                                 else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==0){
+                                    ctr=0;
+                                }
+                                else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==100){
                                     ctr=100;
                                 }
                             }
-                            if(ctr>0){
+                            if(ctr==1){
                                 Toast.makeText(getContext(), "Barang anda masih belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
                             }
-                            else if(ctr==100){
+                            else if(ctr==0){
                                 Toast.makeText(getContext(), "Barang anda sudah ada di lelang", Toast.LENGTH_SHORT).show();
                             }
-                            else{
+                            else if(ctr==100){
                                 ClassRequestLelang requestBaru=new ClassRequestLelang(idbarang,1);
                                 databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
                                 String key=databaseReference_request.push().getKey();

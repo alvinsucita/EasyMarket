@@ -46,8 +46,12 @@ public class WishList extends AppCompatActivity {
     CheckBox pilih,pilih2;
     ImageView foto,foto2;
     TextView nama,harga,jumlah,nama2,harga2,jumlah2;
-    int intjumlah=0,intjumlah2=0;
     Boolean pilihbarang1=false,pilihbarang2=false;
+
+    String akunyangbeli="",idbarang="",idbarang2="",toko="";
+    int intharga=0,intharga2=0,jumlahtampung=0,jumlahtampung2=0;
+    int intjumlah=0,intjumlah2=0;
+
 
 
     @Override
@@ -266,32 +270,85 @@ public class WishList extends AppCompatActivity {
             });
         }
         else if(pilihbarang1==false && pilihbarang2==true && intjumlah2>0){
-//            String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
-//            String idbarang=filterClassBarang.get(1).idbarang;
-//            int jumlah = intjumlah2;
-//
-//            Intent i = new Intent(WishList.this, DetailAlamat.class);
-//            i.putExtra("akunyangbeli",akunyangbeli);
-//            i.putExtra("idbarang",idbarang);
-//            i.putExtra("jumlah",jumlah);
-//            startActivity(i);
-            Toast.makeText(this, "pilihbarang 2", Toast.LENGTH_SHORT).show();
+            FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()) {
+                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(1).namatoko)){
+                            String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            String idbarang=filterClassBarang.get(1).idbarang;
+                            int harga=filterClassBarang.get(1).harga;
+                            int jumlah = intjumlah2;
+                            String toko = ds.child("email").getValue().toString();
+
+                            Intent i = new Intent(WishList.this, DetailAlamat.class);
+                            i.putExtra("akunyangbeli",akunyangbeli);
+                            i.putExtra("idbarang",idbarang);
+                            i.putExtra("harga",harga);
+                            i.putExtra("jumlah",jumlah);
+                            i.putExtra("toko",toko);
+                            startActivity(i);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
         else if(pilihbarang1==true && pilihbarang2==true && intjumlah>0 && intjumlah2>0){
-//            String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
-//            String idbarang1=filterClassBarang.get(0).idbarang;
-//            String idbarang2=filterClassBarang.get(1).idbarang;
-//            int jumlah = intjumlah;
-//            int jumlah2 = intjumlah2;
-//
-//            Intent i = new Intent(WishList.this, DetailAlamat.class);
-//            i.putExtra("akunyangbeli",akunyangbeli);
-//            i.putExtra("idbarang1",idbarang1);
-//            i.putExtra("idbarang2",idbarang2);
-//            i.putExtra("jumlah",jumlah);
-//            i.putExtra("jumlah2",jumlah2);
-//            startActivity(i);
-            Toast.makeText(this, " 2 2 nya", Toast.LENGTH_SHORT).show();
+            FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()) {
+                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(0).namatoko)){
+                            akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                            idbarang=filterClassBarang.get(0).idbarang;
+                            jumlahtampung = intjumlah;
+                            intharga=filterClassBarang.get(0).harga;
+                            toko = ds.child("email").getValue().toString();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()) {
+                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(1).namatoko)){
+                            idbarang2=filterClassBarang.get(1).idbarang;
+                            jumlahtampung2 = intjumlah2;
+                            intharga2=filterClassBarang.get(1).harga;
+                        }
+                    }
+                    Intent i = new Intent(WishList.this, DetailAlamat.class);
+                    i.putExtra("akunyangbeli",akunyangbeli);
+                    i.putExtra("idbarang1",idbarang);
+                    i.putExtra("idbarang2",idbarang2);
+                    i.putExtra("harga",intharga);
+                    i.putExtra("harga2",intharga2);
+                    i.putExtra("jumlah",jumlahtampung);
+                    i.putExtra("jumlah2",jumlahtampung2);
+                    i.putExtra("toko",toko);
+                    startActivity(i);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
         else{
             Toast.makeText(this, "jumlah barang yang dibeli minimal 1", Toast.LENGTH_SHORT).show();
@@ -319,7 +376,7 @@ public class WishList extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean cek = true;
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(ds.child("emailpembeli").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&ds.child("idbarang").equals(filterClassBarang.get(0).idbarang)){
+                    if(ds.child("emailpembeli").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&ds.child("idbarang").getValue().toString().equals(filterClassBarang.get(0).idbarang)){
                         ClassWishlist updatewishlist = new ClassWishlist();
                         updatewishlist.setEmailpembeli("kosong@gmail.com");
                         updatewishlist.setIdbarang("");
@@ -363,7 +420,7 @@ public class WishList extends AppCompatActivity {
     public void kurang2(View view) {
         if(intjumlah2-1>=0){
             intjumlah2--;
-            jumlah.setText(intjumlah2+"");
+            jumlah2.setText(intjumlah2+"");
         }
     }
 
@@ -383,7 +440,7 @@ public class WishList extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean cek = true;
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(ds.child("emailpembeli").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&ds.child("idbarang").equals(filterClassBarang.get(1).idbarang)){
+                    if(ds.child("emailpembeli").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&ds.child("idbarang").getValue().toString().equals(filterClassBarang.get(1).idbarang)){
                         ClassWishlist updatewishlist = new ClassWishlist();
                         updatewishlist.setEmailpembeli("kosong@gmail.com");
                         updatewishlist.setIdbarang("");
@@ -393,6 +450,7 @@ public class WishList extends AppCompatActivity {
             }
 
             @Override
+
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }

@@ -31,6 +31,7 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
     Button konfirmasi;
     ArrayList<ClassNota> listClassNota = new ArrayList<>();
     TextView total;
+    int cekbarang=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,31 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
                     semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
                     listClassNota.add(semua_Class_Nota);
                 }
-                String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).total);
-                total.setText("Rp. "+hargaasli);
+                Intent i = getIntent();
+                if(i.hasExtra("dua")){
+                    int totalsementara=0;
+                    cekbarang=1;
+                    for (int j = 0; j < listClassNota.size(); j++) {
+                        if(j==listClassNota.size()-2){
+                            totalsementara=totalsementara+listClassNota.get(j).total-14000;
+                        }
+                        else if(j==listClassNota.size()-1){
+                            totalsementara=totalsementara+listClassNota.get(j).total-14000;
+                        }
+                    }
+                    String hargaasli = String.format("%,d", totalsementara+14000);
+                    total.setText("Rp. "+hargaasli);
+                }
+                else{
+                    int totalsementara=0;
+                    for (int j = 0; j < listClassNota.size(); j++) {
+                        if(j==listClassNota.size()-1){
+                            totalsementara=totalsementara+listClassNota.get(j).total-14000;
+                        }
+                    }
+                    String hargaasli = String.format("%,d", totalsementara+14000);
+                    total.setText("Rp. "+hargaasli);
+                }
             }
 
             @Override

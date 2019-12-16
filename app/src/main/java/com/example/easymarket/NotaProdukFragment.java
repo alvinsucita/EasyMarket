@@ -47,8 +47,8 @@ public class NotaProdukFragment extends Fragment {
 
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     TextView show;
-    ImageView barang;
-    TextView nama,jumlah,harga;
+    ImageView barang,barang2;
+    TextView nama,jumlah,harga,nama2,jumlah2,harga2;
     ArrayList<ClassNota> listClassNota = new ArrayList<>();
 
     @Override
@@ -66,6 +66,10 @@ public class NotaProdukFragment extends Fragment {
         jumlah=view.findViewById(R.id.tvJumlah3);
         harga=view.findViewById(R.id.tvHargaBarang3);
         barang=view.findViewById(R.id.ivBarang3);
+        nama2=view.findViewById(R.id.tvNamaBarang4);
+        jumlah2=view.findViewById(R.id.tvJumlah4);
+        harga2=view.findViewById(R.id.tvHargaBarang4);
+        barang2=view.findViewById(R.id.ivBarang4);
 
         FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -104,21 +108,66 @@ public class NotaProdukFragment extends Fragment {
                             semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
                             listClassNota.add(semua_Class_Nota);
                         }
-                        for (int i = 0; i < listClassBarang.size(); i++) {
-                            if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
-                                nama.setText(listClassBarang.get(i).namabarang);
-                            }
-                        }
-                        String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
+                        final NotaActivity notaActivity = (NotaActivity) getActivity();
 
-                        jumlah.setText(listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
-                        harga.setText("Rp. "+hargaasli);
-                        FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Glide.with(getContext()).load(uri).into(barang);
+                        if(notaActivity.cekbarang==1){
+                            int totalsementara=0;
+                            nama2.setVisibility(View.VISIBLE);
+                            harga2.setVisibility(View.VISIBLE);
+                            jumlah2.setVisibility(View.VISIBLE);
+                            barang2.setVisibility(View.VISIBLE);
+
+                            for (int i = 0; i < listClassBarang.size(); i++) {
+                                if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
+                                    nama2.setText(listClassBarang.get(i).namabarang);
+                                }
+                                else if(listClassNota.get(listClassNota.size()-2).idbarang.equals(listClassBarang.get(i).idbarang)){
+                                    nama.setText(listClassBarang.get(i).namabarang);
+                                }
                             }
-                        }) ;
+                            String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
+                            String hargaasli2 = String.format("%,d", listClassNota.get(listClassNota.size()-2).hargabarang);
+
+                            jumlah.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-2).jumlahbarang+"");
+                            harga.setText("Rp. "+hargaasli2);
+                            FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-2).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Glide.with(getContext()).load(uri).into(barang);
+                                }
+                            }) ;
+
+                            jumlah2.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
+                            harga2.setText("Rp. "+hargaasli);
+                            FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Glide.with(getContext()).load(uri).into(barang2);
+                                }
+                            }) ;
+                        }
+                        else{
+                            for (int i = 0; i < listClassBarang.size(); i++) {
+                                if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
+                                    nama.setText(listClassBarang.get(i).namabarang);
+                                }
+                            }
+                            String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
+
+                            jumlah.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
+                            harga.setText("Rp. "+hargaasli);
+                            FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Glide.with(getContext()).load(uri).into(barang);
+                                }
+                            }) ;
+
+                            nama2.setVisibility(View.INVISIBLE);
+                            harga2.setVisibility(View.INVISIBLE);
+                            jumlah2.setVisibility(View.INVISIBLE);
+                            barang2.setVisibility(View.INVISIBLE);
+                        }
                     }
 
                     @Override

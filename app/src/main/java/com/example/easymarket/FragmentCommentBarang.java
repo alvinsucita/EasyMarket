@@ -134,6 +134,7 @@ public class  FragmentCommentBarang extends Fragment {
                 final String msg=isicomment.getText().toString();
                 if(usertujuan!=null){
                     if(notify){
+                        //uid tujuan , message saya, isi message
                         sendNotification(usertujuan.getFirebaseUID(),usersekarang.nama,msg);
                     }
                     notify=false;

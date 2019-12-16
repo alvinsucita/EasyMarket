@@ -70,13 +70,36 @@ public class NotaPembayaranFragment extends Fragment {
                     semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
                     listClassNota.add(semua_Class_Nota);
                 }
+                final NotaActivity notaActivity = (NotaActivity) getActivity();
 
-                String hargaasli = String.format("%,d",listClassNota.get(listClassNota.size()-1).hargabarang*listClassNota.get(listClassNota.size()-1).jumlahbarang);
-                String hargaasli2 = String.format("%,d",listClassNota.get(listClassNota.size()-1).hargapengiriman);
+                if(notaActivity.cekbarang==1){
+                    int totalsementara=0;
+                    for (int j = 0; j < listClassNota.size(); j++) {
+                        if(j==listClassNota.size()-2){
+                            totalsementara=totalsementara+listClassNota.get(j).total-14000;
+                        }
+                        else if(j==listClassNota.size()-1){
+                            totalsementara=totalsementara+listClassNota.get(j).total-14000;
+                        }
+                    }
+                    String hargaasli = String.format("%,d", totalsementara);
+                    String hargaasli2 = String.format("%,d",listClassNota.get(listClassNota.size()-1).hargapengiriman);
+                    total.setText("Rp. "+hargaasli);
+                    metode.setText(listClassNota.get(listClassNota.size()-1).pembayaran);
 
-                metode.setText(listClassNota.get(listClassNota.size()-1).pembayaran);
-                total.setText("Rp. "+hargaasli);
-                ongkir.setText("Rp. "+hargaasli2);
+                    ongkir.setText("Rp. "+hargaasli2);
+                }
+                else{
+                    String hargaasli = String.format("%,d",listClassNota.get(listClassNota.size()-1).hargabarang*listClassNota.get(listClassNota.size()-1).jumlahbarang);
+                    String hargaasli2 = String.format("%,d",listClassNota.get(listClassNota.size()-1).hargapengiriman);
+
+                    metode.setText(listClassNota.get(listClassNota.size()-1).pembayaran);
+
+                    ongkir.setText("Rp. "+hargaasli2);
+
+                    total.setText("Rp. "+hargaasli);
+                }
+
             }
 
             @Override

@@ -48,6 +48,8 @@ public class FragmentLelang extends Fragment {
     Button filterlelang;
     RecyclerView rvlelang;
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassBarang> filterBarang = new ArrayList<>();
+    ArrayList<ClassLelang> listClassLelang = new ArrayList<>();
     AdapterMenuBarang adapterMenuBarang;
 
     @Override
@@ -99,8 +101,36 @@ public class FragmentLelang extends Fragment {
                     semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                     listClassBarang.add(semua_Class_barang);
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference().child("ClassLelang").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassLelang semua_Class_lelang =new ClassLelang();
+                    semua_Class_lelang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_lelang.setHarganormal(Integer.parseInt(ds.child("harganormal").getValue().toString()));
+                    semua_Class_lelang.setHargatertinggi(Integer.parseInt(ds.child("hargatertinggi").getValue().toString()));
+                    semua_Class_lelang.setNamabidder(ds.child("namabidder").getValue().toString());
+                    listClassLelang.add(semua_Class_lelang);
+                }
+
+                for (int i = 0; i < listClassLelang.size(); i++) {
+                    for (int j = 0; j < listClassBarang.size(); j++) {
+                        if(listClassLelang.get(i).idbarang.equals(listClassBarang.get(j).idbarang)){
+                            filterBarang.add(listClassBarang.get(j));
+                        }
+                    }
+                }
                 rvlelang.setLayoutManager(new LinearLayoutManager(getContext()));
-                adapterMenuBarang = new AdapterMenuBarang(listClassBarang);
+                adapterMenuBarang = new AdapterMenuBarang(filterBarang);
                 rvlelang.setAdapter(adapterMenuBarang);
             }
 

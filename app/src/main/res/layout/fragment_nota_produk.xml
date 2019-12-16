@@ -3,11 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="500dp"
     android:background="#F1F1F1"
     android:paddingBottom="15dp"
     tools:context=".NotaProdukFragment">
 
+
+    <ImageView
+        android:id="@+id/ivBarang4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="44dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBarang3"
+        app:srcCompat="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tvJumlah4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/cabin"
+        android:text="0"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/tvNamaBarang4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvNamaBarang4"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaBarang4" />
+
+    <TextView
+        android:id="@+id/tvNamaBarang4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/cabin"
+        android:text="kosong"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/ivBarang4"
+        app:layout_constraintTop_toTopOf="@+id/ivBarang4" />
+
+    <TextView
+        android:id="@+id/tvHargaBarang4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/cabin"
+        android:text="Rp.77.000,00-"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/tvJumlah4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvJumlah4"
+        app:layout_constraintTop_toBottomOf="@+id/tvJumlah4" />
 
     <TextView
         android:id="@+id/tvNamaBarang3"
