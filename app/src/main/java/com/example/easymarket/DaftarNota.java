@@ -1,5 +1,6 @@
 package com.example.easymarket;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -43,10 +45,10 @@ public class DaftarNota extends AppCompatActivity {
                     semua_Class_nota.setAlamat(ds.child("alamat").getValue().toString());
                     semua_Class_nota.setPembayaran(ds.child("pembayaran").getValue().toString());
                     semua_Class_nota.setJenispengiriman(ds.child("jenispengiriman").getValue().toString());
-//                    semua_Class_nota.setHargabarang(Integer.valueOf(ds.child("hargabarang").getValue().toString());
-//                    semua_Class_nota.setJumlahbarang(Integer.valueOf(ds.child("jumlahbarang").getValue().toString());
-//                    semua_Class_nota.setHargapengiriman(Integer.valueOf(ds.child("hargapengiriman").getValue().toString());
-//                    semua_Class_nota.setTotal(Integer.valueOf(ds.child("total").getValue().toString()));
+                    semua_Class_nota.setHargabarang(Integer.valueOf(ds.child("hargabarang").getValue().toString()));
+                    semua_Class_nota.setJumlahbarang(Integer.valueOf(ds.child("jumlahbarang").getValue().toString()));
+                    semua_Class_nota.setHargapengiriman(Integer.valueOf(ds.child("hargapengiriman").getValue().toString()));
+                    semua_Class_nota.setTotal(Integer.valueOf(ds.child("total").getValue().toString()));
                     listClassNota.add(semua_Class_nota);
                 }
                 for(int a = 0; a< listClassNota.size(); a++){
@@ -60,7 +62,26 @@ public class DaftarNota extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                        Toast.makeText(ManageUsers.this, position + "", Toast.LENGTH_LONG).show();
-
+                        AlertDialog alertDialog = new AlertDialog.Builder(DaftarNota.this).create();
+                        alertDialog.setTitle(listClassNota.get(position).getIdnota());
+                        alertDialog.setMessage(
+                                "ID : " + listClassNota.get(position).getIdnota() +
+                                "\nNama Toko : " + listClassNota.get(position).getNamatoko() +
+                                "\nID Barang : " + listClassNota.get(position).getIdbarang() +
+                                "\nNama User : " + listClassNota.get(position).getNamauser() +
+                                "\nAlamat : " + listClassNota.get(position).getAlamat() +
+                                "\nPembayaran : " + listClassNota.get(position).getPembayaran() +
+                                "\nPengiriman : " + listClassNota.get(position).getJenispengiriman() +
+                                "\nHarga/brg : " + listClassNota.get(position).getHargabarang() +
+                                "\nQty : " + listClassNota.get(position).getJumlahbarang() +
+                                "\nOngkir : " + listClassNota.get(position).getHargapengiriman() +
+                                "\nTotal : " + listClassNota.get(position).getTotal()
+                        );
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        alertDialog.show();
                     }
                 });
 
