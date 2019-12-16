@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,6 +40,22 @@ public class InfoBarangLelang extends AppCompatActivity {
 
     String yangbid="",idbarang="";
     int hargatertinggi=0,hargayangdimasukkan=0;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            Intent i = new Intent(InfoBarangLelang.this,Home.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +90,8 @@ public class InfoBarangLelang extends AppCompatActivity {
         drawable4.setCornerRadius(50);
         deskripsi.setBackground(drawable4);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Intent i = getIntent();
         i.getIntExtra("indeks",0);
