@@ -50,7 +50,12 @@ public class FragmentLelang extends Fragment {
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     ArrayList<ClassBarang> filterBarang = new ArrayList<>();
     ArrayList<ClassLelang> listClassLelang = new ArrayList<>();
-    AdapterMenuBarang adapterMenuBarang;
+    AdapterBarangLelang adapterBarangLelang;
+
+    ArrayList<ClassBarang> listClassBarangSearches = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarangFilter = new ArrayList<>();
+    Boolean adafilter=false;
+    Boolean adasearch=false;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -118,6 +123,7 @@ public class FragmentLelang extends Fragment {
                     semua_Class_lelang.setIdbarang(ds.child("idbarang").getValue().toString());
                     semua_Class_lelang.setHarganormal(Integer.parseInt(ds.child("harganormal").getValue().toString()));
                     semua_Class_lelang.setHargatertinggi(Integer.parseInt(ds.child("hargatertinggi").getValue().toString()));
+                    semua_Class_lelang.setHargaawal(Integer.parseInt(ds.child("hargaawal").getValue().toString()));
                     semua_Class_lelang.setNamabidder(ds.child("namabidder").getValue().toString());
                     listClassLelang.add(semua_Class_lelang);
                 }
@@ -130,8 +136,16 @@ public class FragmentLelang extends Fragment {
                     }
                 }
                 rvlelang.setLayoutManager(new LinearLayoutManager(getContext()));
-                adapterMenuBarang = new AdapterMenuBarang(filterBarang);
-                rvlelang.setAdapter(adapterMenuBarang);
+
+                adapterBarangLelang = new AdapterBarangLelang(filterBarang, new RVClickListener() {
+                    @Override
+                    public void recyclerViewListBarangClick(View v, int posisi) {
+                        Intent i = new Intent(FragmentLelang.this.getContext(),InfoBarangLelang.class);
+                        i.putExtra("indeks",posisi);
+                        startActivity(i);
+                    }
+                });
+                rvlelang.setAdapter(adapterBarangLelang);
             }
 
             @Override
