@@ -14,7 +14,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/ivFoto"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
@@ -24,7 +24,7 @@
         app:srcCompat="@android:color/white" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tvNamaBarang"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -36,10 +36,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/tvJumlahBarang"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -51,10 +51,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaBarang" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/tvTotal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -66,10 +66,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+        app:layout_constraintTop_toBottomOf="@+id/tvJumlahBarang" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/tvNamaPembeli"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -81,10 +81,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnBatal"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnKonfirmasi"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="5dp"
