@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -60,7 +61,8 @@ public class FragmentListBarang extends Fragment {
     public ArrayList<ClassRequestLelang> requestLelang= new ArrayList<>();
     Spinner sp;
     TextView nama,harga,kategori,likes,terjual,lihat,deskripsi,stok;
-    Button request;
+    EditText nominal;
+    Button request, tambahstok;
     String strnama="",strkategori="",strdeskripsi="",idbarang="";
     int intharga=0,intstok=0,intlihat=0,intterjual=0,intlikes=0;
     ImageView foto;
@@ -96,6 +98,14 @@ public class FragmentListBarang extends Fragment {
         likes=view.findViewById(R.id.tvLikes);
         request=view.findViewById(R.id.btnRequest);
         foto=view.findViewById(R.id.ivFoto);
+        nominal = view.findViewById(R.id.etNominalTambahStok);
+        tambahstok = view.findViewById(R.id.btnTambahStok);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.WHITE);
+        nominal.setBackground(drawable);
 
         GradientDrawable drawable2 = new GradientDrawable();
         drawable2.setShape(GradientDrawable.RECTANGLE);
@@ -109,6 +119,12 @@ public class FragmentListBarang extends Fragment {
         drawable3.setCornerRadius(100);
         drawable3.setColor(Color.BLACK);
         request.setBackground(drawable3);
+
+        GradientDrawable drawable4 = new GradientDrawable();
+        drawable4.setShape(GradientDrawable.RECTANGLE);
+        drawable4.setCornerRadius(100);
+        drawable4.setColor(Color.BLACK);
+        tambahstok.setBackground(drawable4);
 
         FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

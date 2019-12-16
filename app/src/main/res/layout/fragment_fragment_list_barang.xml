@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnRequest"
+        app:layout_constraintBottom_toTopOf="@+id/btnTambahStok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvListBarang">
@@ -188,10 +188,47 @@
         android:layout_height="40dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
+        android:drawableLeft="@drawable/outline_gavel_white_24dp"
+        android:fontFamily="@font/cabin"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Request Lelang Barang"
         android:textColor="@android:color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etNominalTambahStok"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="Nominal stok"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnRequest"
+        app:layout_constraintEnd_toStartOf="@+id/btnTambahStok"
+        app:layout_constraintStart_toStartOf="@+id/btnRequest" />
+
+    <Button
+        android:id="@+id/btnTambahStok"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:drawableLeft="@drawable/baseline_add_box_white_24dp"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/cabin"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Tambah Stok"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnRequest"
+        app:layout_constraintEnd_toEndOf="@+id/btnRequest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

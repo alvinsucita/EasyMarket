@@ -50,7 +50,5 @@ public class InfoBarangLelang extends AppCompatActivity {
         drawable4.setCornerRadius(50);
         deskripsi.setBackground(drawable4);
 
-
-
     }
 }
