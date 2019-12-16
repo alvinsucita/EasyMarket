@@ -188,7 +188,9 @@ public class Register extends AppCompatActivity {
                     userbaru.setEmail(stremail);
                     userbaru.setGender("");
                     userbaru.setPassword(strpassword);
-                    userbaru.setUmur("");
+                    userbaru.setHari(1);
+                    userbaru.setBulan(1);
+                    userbaru.setTahun(2000);
 
                     databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                     databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");

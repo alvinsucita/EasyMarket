@@ -9,20 +9,24 @@ public class ClassUser implements Serializable {
     String FirebaseUID;
     String gender;
     String daerahasal;
-    String umur;
     String aktif;
+    int hari;
+    int bulan;
+    int tahun;
 
     public ClassUser(){}
 
-    public ClassUser(String email, String nama, String password, String firebaseUID, String gender, String daerahasal, String umur, String aktif) {
+    public ClassUser(String email, String nama, String password, String firebaseUID, String gender, String daerahasal, String aktif, int hari, int bulan, int tahun) {
         this.email = email;
         this.nama = nama;
         this.password = password;
         FirebaseUID = firebaseUID;
         this.gender = gender;
         this.daerahasal = daerahasal;
-        this.umur = umur;
         this.aktif = aktif;
+        this.hari = hari;
+        this.bulan = bulan;
+        this.tahun = tahun;
     }
 
     public String getEmail() {
@@ -73,19 +77,35 @@ public class ClassUser implements Serializable {
         this.daerahasal = daerahasal;
     }
 
-    public String getUmur() {
-        return umur;
-    }
-
-    public void setUmur(String umur) {
-        this.umur = umur;
-    }
-
     public String getAktif() {
         return aktif;
     }
 
     public void setAktif(String aktif) {
         this.aktif = aktif;
+    }
+
+    public int getHari() {
+        return hari;
+    }
+
+    public void setHari(int hari) {
+        this.hari = hari;
+    }
+
+    public int getBulan() {
+        return bulan;
+    }
+
+    public void setBulan(int bulan) {
+        this.bulan = bulan;
+    }
+
+    public int getTahun() {
+        return tahun;
+    }
+
+    public void setTahun(int tahun) {
+        this.tahun = tahun;
     }
 }
