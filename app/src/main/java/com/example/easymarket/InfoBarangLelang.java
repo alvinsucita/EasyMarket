@@ -13,14 +13,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -30,6 +35,7 @@ import java.util.ArrayList;
 public class InfoBarangLelang extends AppCompatActivity {
 
     TextView deskripsi,nama,hargaasli,hargaawal,dilihat;
+    EditText hargabid;
     Button share, bid;
     ImageView foto;
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
@@ -39,7 +45,7 @@ public class InfoBarangLelang extends AppCompatActivity {
     int indekslelang=0;
 
     String yangbid="",idbarang="";
-    int hargatertinggi=0,hargayangdimasukkan=0;
+    int hargatertinggi=0,hargayangdimasukkan=0,hargaminim=0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,6 +76,8 @@ public class InfoBarangLelang extends AppCompatActivity {
         dilihat=findViewById(R.id.tvBarangDilihatLelang);
         nama=findViewById(R.id.tvNamaBarangLelang);
         foto=findViewById(R.id.ivFotoLelang);
+        hargabid=findViewById(R.id.etNominalBid);
+
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
@@ -142,6 +150,7 @@ public class InfoBarangLelang extends AppCompatActivity {
                         hargaawal.setText("Mulai dari : Rp. "+hargaaslii);
                         yangbid= FirebaseAuth.getInstance().getCurrentUser().getEmail();
                         hargatertinggi=listClassLelang.get(j).hargatertinggi;
+                        hargaminim=listClassLelang.get(j).hargaawal;
                     }
                 }
 
@@ -165,6 +174,59 @@ public class InfoBarangLelang extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    public void share(View view) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, listClassBarang.get(indeks).namabarang+"\n"+ listClassBarang.get(indeks).harga );
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share"));
+    }
+
+    public void bid(View view) {
+        hargayangdimasukkan=Integer.parseInt(hargabid.getText().toString());
+        if(hargayangdimasukkan>hargaminim){
+            if(hargayangdimasukkan>hargatertinggi){
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean cek = true;
+                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                            if(ds.child("idbarang").getValue().toString().equals(listClassBarang.get(indeks).idbarang)){
+                                ClassLelang updatelelang = new ClassLelang();
+                                updatelelang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                updatelelang.setHargaawal(Integer.parseInt(ds.child("hargaawal").getValue().toString()));
+                                updatelelang.setHargatertinggi(hargayangdimasukkan);
+                                updatelelang.setHarganormal(Integer.parseInt(ds.child("harganormal").getValue().toString()));
+                                updatelelang.setNamabidder(yangbid);
+                                databaseReference.child(ds.getKey()).setValue(updatelelang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        Toast.makeText(InfoBarangLelang.this, "Bid anda berhasil dimasukkan, tunggu konfirmasi selanjutnya", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                        hargabid.setText("");
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+            else if(hargayangdimasukkan<hargatertinggi){
+                Toast.makeText(this, "Bid anda berhasil dimasukkan, tunggu konfirmasi selanjutnya", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Toast.makeText(this, "Bid yang dimasukkan harus lebih besar dari harga minimal", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }
