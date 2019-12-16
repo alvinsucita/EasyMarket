@@ -185,8 +185,10 @@
         android:layout_marginBottom="15dp"
         android:ems="10"
         android:fontFamily="@font/cabin"
-        android:hint="Masukkan nominal"
+        android:hint="Nominal bid"
         android:inputType="number"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnBid"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />

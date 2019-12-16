@@ -40,8 +40,7 @@ public class InfoBarangLelang extends AppCompatActivity {
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setColor(Color.WHITE);
         drawable3.setShape(GradientDrawable.RECTANGLE);
-        drawable3.setStroke(5, Color.BLACK);
-        drawable3.setCornerRadius(50);
+        drawable3.setCornerRadius(100);
         nominal.setBackground(drawable3);
 
         GradientDrawable drawable4 = new GradientDrawable();
