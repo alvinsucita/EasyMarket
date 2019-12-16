@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -163,9 +163,8 @@
 
     <Button
         android:id="@+id/btnBid"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:background="@android:color/black"
@@ -176,7 +175,20 @@
         android:text="BID"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/etNominalBid"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="Masukkan nominal"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnBid"
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
