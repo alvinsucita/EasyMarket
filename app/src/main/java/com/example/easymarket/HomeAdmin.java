@@ -38,6 +38,10 @@ public class HomeAdmin extends AppCompatActivity {
             Intent i = new Intent(HomeAdmin.this,ManageCloseLelang.class);
             startActivity(i);
         }
+        else if(item.getItemId()==R.id.daftarnota){
+            Intent i = new Intent(HomeAdmin.this,DaftarNota.class);
+            startActivity(i);
+        }
         else if(item.getItemId()==R.id.managerefund){
             Intent i = new Intent(HomeAdmin.this,ManageRefund.class);
             startActivity(i);

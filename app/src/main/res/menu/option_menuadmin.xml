@@ -15,6 +15,9 @@
         android:id="@+id/closelelang"
         android:title="Close Lelang" />
     <item
+        android:id="@+id/daftarnota"
+        android:title="Daftar Nota" />
+    <item
         android:id="@+id/managerefund"
         android:title="Refund" />
     <item
