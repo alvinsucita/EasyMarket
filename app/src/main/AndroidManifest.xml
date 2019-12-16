@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdapterComment"></activity>
+        <activity android:name=".ManageRefund"></activity>
+        <activity android:name=".ManageCloseLelang" />
+        <activity android:name=".AdapterComment" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".InfoBarangLelang" />
         <activity android:name=".LelangActivity" />
@@ -47,6 +49,7 @@
         <activity android:name=".Register" />
         <activity android:name=".TransactionActivity" />
         <activity android:name=".WishList" />
+
         <service
             android:name=".Notifications.MyFirebaseIdService"
             android:enabled="true"

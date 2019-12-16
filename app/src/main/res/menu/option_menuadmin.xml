@@ -12,6 +12,12 @@
         android:id="@+id/managelelang"
         android:title="Manage Lelang" />
     <item
+        android:id="@+id/closelelang"
+        android:title="Close Lelang" />
+    <item
+        android:id="@+id/managerefund"
+        android:title="Refund" />
+    <item
         android:id="@+id/logoutadmin"
         android:title="Logout" />
 </menu>
