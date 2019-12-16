@@ -14,9 +14,11 @@ public class ClassNota implements Serializable {
     int jumlahbarang;
     int hargapengiriman;
     int total;
+    int posisi=0;
 
     public ClassNota(){};
-    public ClassNota(String idnota, String namatoko, String idbarang, String namauser, String alamat, String pembayaran, String jenispengiriman, int hargabarang, int jumlahbarang, int hargapengiriman, int total) {
+
+    public ClassNota(String idnota, String namatoko, String idbarang, String namauser, String alamat, String pembayaran, String jenispengiriman, int hargabarang, int jumlahbarang, int hargapengiriman, int total, int posisi) {
         this.idnota = idnota;
         this.namatoko = namatoko;
         this.idbarang = idbarang;
@@ -28,6 +30,7 @@ public class ClassNota implements Serializable {
         this.jumlahbarang = jumlahbarang;
         this.hargapengiriman = hargapengiriman;
         this.total = total;
+        this.posisi = posisi;
     }
 
     public String getIdnota() {
@@ -116,5 +119,13 @@ public class ClassNota implements Serializable {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public int getPosisi() {
+        return posisi;
+    }
+
+    public void setPosisi(int posisi) {
+        this.posisi = posisi;
     }
 }
