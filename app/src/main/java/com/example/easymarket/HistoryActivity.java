@@ -35,19 +35,19 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        changeFragment(new FragmentDitunda());
+        changeFragment(new FragmentMenunggu(),listClassNota);
         bottomNavHistory = findViewById(R.id.bottomNavHistory);
         bottomNavHistory.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId( )== R.id.itemDitunda){
-                    changeFragment(new FragmentDitunda());
+                    changeFragment(new FragmentDitunda(),listClassNota);
                 }else if(menuItem.getItemId( )== R.id.itemMenunggu){
-                    changeFragment(new FragmentMenunggu());
+                    changeFragment(new FragmentMenunggu(),listClassNota);
                 }else if(menuItem.getItemId( )== R.id.itemTerkirim){
-                    changeFragment(new FragmentTerkirim());
+                    changeFragment(new FragmentTerkirim(),listClassNota);
                 }else if(menuItem.getItemId( )== R.id.itemBatal){
-                    changeFragment(new FragmentBatal());
+                    changeFragment(new FragmentBatal(),listClassNota);
                 }
                 return true;
             }
@@ -92,10 +92,11 @@ public class HistoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void changeFragment(Fragment f){
+    public void changeFragment(Fragment f,ArrayList<ClassNota> listClassNota){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Bundle bundle = new Bundle();
+        bundle.putSerializable("listClassNota", listClassNota);
         f.setArguments(bundle);
         ft.replace(R.id.containerHistory, f);
         ft.commit();

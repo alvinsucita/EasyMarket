@@ -21,7 +21,6 @@ import android.view.ViewGroup;
  */
 public class FragmentMenunggu extends Fragment {
 
-
     public FragmentMenunggu() {
         // Required empty public constructor
     }
