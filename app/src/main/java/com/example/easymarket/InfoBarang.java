@@ -195,13 +195,8 @@ public class InfoBarang extends AppCompatActivity {
     }
 
     public void toChat(View view) {
-        if(aktif.equals("1")){
-            Intent i = new Intent(InfoBarang.this,ChatRoom.class);
-            startActivity(i);
-        }
-        else {
-            Toast.makeText(this, "Login terlebih dahulu", Toast.LENGTH_SHORT).show();
-        }
+        Intent i = new Intent(InfoBarang.this,ChatRoom.class);
+        startActivity(i);
     }
 
     public void addwishlist(View view) {

@@ -48,7 +48,9 @@ public class ManageUsers extends AppCompatActivity {
                     semua_Class_user.setPassword(ds.child("password").getValue().toString());
                     semua_Class_user.setGender(ds.child("gender").getValue().toString());
                     semua_Class_user.setDaerahasal(ds.child("daerahasal").getValue().toString());
-                    semua_Class_user.setUmur(ds.child("umur").getValue().toString());
+                    semua_Class_user.setHari(Integer.parseInt(ds.child("hari").getValue().toString()));
+                    semua_Class_user.setBulan(Integer.parseInt(ds.child("bulan").getValue().toString()));
+                    semua_Class_user.setTahun(Integer.parseInt(ds.child("tahun").getValue().toString()));
                     semua_Class_user.setAktif(ds.child("aktif").getValue().toString());
                     listClassUser.add(semua_Class_user);
                 }
@@ -79,7 +81,9 @@ public class ManageUsers extends AppCompatActivity {
                                         updateuser.setGender(ds.child("gender").getValue().toString());
                                         updateuser.setNama(ds.child("nama").getValue().toString());
                                         updateuser.setPassword(ds.child("password").getValue().toString());
-                                        updateuser.setUmur(ds.child("umur").getValue().toString());
+                                        updateuser.setHari(Integer.parseInt(ds.child("hari").getValue().toString()));
+                                        updateuser.setBulan(Integer.parseInt(ds.child("bulan").getValue().toString()));
+                                        updateuser.setTahun(Integer.parseInt(ds.child("tahun").getValue().toString()));
                                         databaseReference.child(ds.getKey()).setValue(updateuser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
