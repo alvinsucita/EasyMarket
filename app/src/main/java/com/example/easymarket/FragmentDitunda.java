@@ -95,7 +95,10 @@ public class FragmentDitunda extends Fragment {
                         e.printStackTrace();
                     }
                 }
-                else Toast.makeText(this.getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                else {
+//                    Toast.makeText(this.getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+                    
+                }
             }
             else if(resultCode == com.paypal.android.sdk.payments.PaymentActivity.RESULT_EXTRAS_INVALID)
             {
