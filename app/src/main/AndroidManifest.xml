@@ -34,7 +34,6 @@
         <activity android:name=".CekPerjalananActivity" />
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
-        <activity android:name=".EventPage" />
         <activity android:name=".HalamanCover">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
