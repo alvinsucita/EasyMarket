@@ -38,7 +38,7 @@ public class AdapterMenunggu extends RecyclerView.Adapter<AdapterMenunggu.ListVi
     @Override
     public void onBindViewHolder(@NonNull final ListViewHolder holder, int position) {
         String hargaasli = String.format("%,d", listClassNota.get(position).total);
-//        holder.nama.setText(listClassBarang.get(position).namabarang);
+        holder.nama.setText(listClassBarang.get(position).namabarang);
         holder.jumlah.setText("Jumlah barang "+listClassNota.get(position).jumlahbarang);
         holder.total.setText("Rp. "+hargaasli);
         FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(position).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

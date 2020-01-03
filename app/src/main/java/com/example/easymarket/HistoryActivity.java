@@ -39,7 +39,7 @@ public class HistoryActivity extends AppCompatActivity {
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                     ClassBarang semua_Class_Barang =new ClassBarang();
                     semua_Class_Barang.setIdbarang((ds.child("idbarang").getValue().toString()));
-                    semua_Class_Barang.setIdbarang((ds.child("namabarang").getValue().toString()));
+                    semua_Class_Barang.setNamabarang((ds.child("namabarang").getValue().toString()));
                     listClassBarang.add(semua_Class_Barang);
                 }
             }

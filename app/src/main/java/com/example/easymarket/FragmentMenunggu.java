@@ -71,14 +71,13 @@ public class FragmentMenunggu extends Fragment {
                 }
             }
         }
-        
-//        rvmenunggu.setLayoutManager(new LinearLayoutManager(getContext()));
-//        adaptermenunggu= new AdapterMenunggu(listClassNota, listClassBarang, new RVClickListener() {
-//            @Override
-//            public void recyclerViewListBarangClick(View v, int posisi) {
-//
-//            }
-//        });
-//        rvmenunggu.setAdapter(adaptermenunggu);
+        rvmenunggu.setLayoutManager(new LinearLayoutManager(getContext()));
+        adaptermenunggu= new AdapterMenunggu(listClassNota, listClassBarang, new RVClickListener() {
+            @Override
+            public void recyclerViewListBarangClick(View v, int posisi) {
+
+            }
+        });
+        rvmenunggu.setAdapter(adaptermenunggu);
     }
 }
