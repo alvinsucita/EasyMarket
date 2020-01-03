@@ -14,7 +14,7 @@ public class ClassNota implements Serializable {
     int jumlahbarang;
     int hargapengiriman;
     int total;
-    int posisi=0;
+    int posisi;
 
     public ClassNota(){};
 

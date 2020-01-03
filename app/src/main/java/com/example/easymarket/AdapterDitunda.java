@@ -1,5 +1,6 @@
 package com.example.easymarket;
 
+import android.net.Uri;
 import android.text.style.IconMarginSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -30,7 +35,10 @@ public class AdapterDitunda extends RecyclerView.Adapter<AdapterDitunda.ListView
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-
+        String hargaasli = String.format("%,d", listClassNota.get(position).total);
+        holder.nama.setText(listClassNota.get(position).idbarang);
+        holder.jumlah.setText("Jumlah barang "+listClassNota.get(position).jumlahbarang);
+        holder.total.setText("Rp. "+hargaasli);
     }
 
     @Override
