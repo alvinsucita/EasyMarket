@@ -75,7 +75,7 @@ public class FragmentMenunggu extends Fragment {
             @Override
             public void recyclerViewListBarangClick(View v, int posisi) {
                 Intent i = new Intent(FragmentMenunggu.this.getContext(),NotaActivity.class);
-                i.putExtra("liat",listClassNota);
+                i.putExtra("liat",listClassNota.get(posisi));
                 i.putExtra("posisi",2);
                 startActivity(i);
             }
