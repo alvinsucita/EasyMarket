@@ -70,7 +70,7 @@ public class HistoryActivity extends AppCompatActivity {
                     semua_Class_Nota.setPosisi(Integer.parseInt(ds.child("posisi").getValue().toString()));
                     listClassNota.add(semua_Class_Nota);
                 }
-                changeFragment(new FragmentMenunggu());
+                changeFragment(new FragmentDitunda());
                 bottomNavHistory = findViewById(R.id.bottomNavHistory);
                 bottomNavHistory.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override

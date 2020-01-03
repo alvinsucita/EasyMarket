@@ -56,6 +56,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/btnBayar"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/cabin"
+        android:onClick="bayar"
+        android:text="Bayar"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/cabin"
+        android:onClick="cancel"
+        android:text="Cancel"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.843"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <FrameLayout
         android:id="@+id/FragmentNota"
         android:layout_width="match_parent"

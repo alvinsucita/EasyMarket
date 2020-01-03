@@ -27,7 +27,6 @@ public class AdapterMenunggu extends RecyclerView.Adapter<AdapterMenunggu.ListVi
         mylistener=rvcl;
     }
 
-
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -52,10 +51,6 @@ public class AdapterMenunggu extends RecyclerView.Adapter<AdapterMenunggu.ListVi
     @Override
     public int getItemCount() {
         return listClassNota.size();
-    }
-
-    public AdapterMenunggu(ArrayList<ClassNota> listClassNota){
-        this.listClassNota = listClassNota;
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {

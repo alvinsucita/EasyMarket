@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -42,7 +42,6 @@ public class FragmentMenunggu extends Fragment {
     AdapterMenunggu adaptermenunggu;
     ArrayList<ClassNota> listClassNota = new ArrayList<>();
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
-    RVClickListener RVCL;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -75,7 +74,10 @@ public class FragmentMenunggu extends Fragment {
         adaptermenunggu= new AdapterMenunggu(listClassNota, listClassBarang, new RVClickListener() {
             @Override
             public void recyclerViewListBarangClick(View v, int posisi) {
-
+                Intent i = new Intent(FragmentMenunggu.this.getContext(),NotaActivity.class);
+                i.putExtra("liat",listClassNota);
+                i.putExtra("posisi",2);
+                startActivity(i);
             }
         });
         rvmenunggu.setAdapter(adaptermenunggu);
