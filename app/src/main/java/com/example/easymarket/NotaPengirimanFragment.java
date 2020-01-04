@@ -53,9 +53,9 @@ public class NotaPengirimanFragment extends Fragment {
 
         final NotaActivity notaActivity = (NotaActivity) getActivity();
         if(notaActivity.cekada==1){
-            namatoko.setText(notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).namatoko);
-            kurir.setText(notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).jenispengiriman);
-            alamat.setText(notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).alamat);
+            namatoko.setText(notaActivity.listClassNota.get(notaActivity.indeks).namatoko);
+            kurir.setText(notaActivity.listClassNota.get(notaActivity.indeks).jenispengiriman);
+            alamat.setText(notaActivity.listClassNota.get(notaActivity.indeks).alamat);
         }
         else{
             FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {

@@ -93,15 +93,15 @@ public class NotaProdukFragment extends Fragment {
                 final NotaActivity notaActivity = (NotaActivity) getActivity();
                 if(notaActivity.cekada==1){
                     for (int i = 0; i < listClassBarang.size(); i++) {
-                        if(notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
+                        if(notaActivity.listClassNota.get(notaActivity.indeks).idbarang.equals(listClassBarang.get(i).idbarang)){
                             nama.setText(listClassBarang.get(i).namabarang);
                         }
                     }
-                    String hargaasli = String.format("%,d", notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).hargabarang);
+                    String hargaasli = String.format("%,d", notaActivity.listClassNota.get(notaActivity.indeks).hargabarang);
 
-                    jumlah.setText("Jumlah barang : "+notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).jumlahbarang+"");
+                    jumlah.setText("Jumlah barang : "+notaActivity.listClassNota.get(notaActivity.indeks).jumlahbarang+"");
                     harga.setText("Rp. "+hargaasli);
-                    FirebaseStorage.getInstance().getReference().child("GambarBarang").child(notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    FirebaseStorage.getInstance().getReference().child("GambarBarang").child(notaActivity.listClassNota.get(notaActivity.indeks).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             Glide.with(getContext()).load(uri).into(barang);

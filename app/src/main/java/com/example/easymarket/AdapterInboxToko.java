@@ -16,12 +16,12 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
-public class AdapterTerkirim extends RecyclerView.Adapter<AdapterTerkirim.ListViewHolder> {
+public class AdapterInboxToko extends RecyclerView.Adapter<AdapterInboxToko.ListViewHolder> {
     ArrayList<ClassNota> listClassNota;
     ArrayList<ClassBarang> listClassBarang;
     private static RVClickListener mylistener;
 
-    public AdapterTerkirim(ArrayList<ClassNota> listClassNota,ArrayList<ClassBarang> listClassBarang, RVClickListener rvcl){
+    public AdapterInboxToko(ArrayList<ClassNota> listClassNota,ArrayList<ClassBarang> listClassBarang, RVClickListener rvcl){
         this.listClassNota = listClassNota;
         this.listClassBarang = listClassBarang;
         mylistener=rvcl;
@@ -30,17 +30,17 @@ public class AdapterTerkirim extends RecyclerView.Adapter<AdapterTerkirim.ListVi
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerterkirim,parent,false);
-        return new AdapterTerkirim.ListViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerinboxtoko,parent,false);
+        return new AdapterInboxToko.ListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ListViewHolder holder, int position) {
-        String hargaasli = String.format("%,d", listClassNota.get(position).total);
-        holder.nama.setText(listClassBarang.get(position).namabarang);
-        holder.jumlah.setText("Jumlah barang "+listClassNota.get(position).jumlahbarang);
+        String hargaasli = String.format("%,d", listClassNota.get(position).getTotal());
+        holder.nama.setText(listClassBarang.get(position).getNamabarang());
+        holder.jumlah.setText("Jumlah barang "+listClassNota.get(position).getJumlahbarang());
         holder.total.setText("Rp. "+hargaasli);
-        FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(position).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(position).getIdbarang()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(holder.itemView.getContext()).load(uri).into(holder.foto);
@@ -58,14 +58,14 @@ public class AdapterTerkirim extends RecyclerView.Adapter<AdapterTerkirim.ListVi
         TextView nama,jumlah,total;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
-            foto=itemView.findViewById(R.id.ivbarangterkirim);
-            nama=itemView.findViewById(R.id.tvnamabarangterkirim);
-            jumlah=itemView.findViewById(R.id.tvjumlahbarangterkirim);
-            total=itemView.findViewById(R.id.tvtotalbarangterkirim);
+            foto=itemView.findViewById(R.id.ivbarangdijual);
+            nama=itemView.findViewById(R.id.tvnamabarangdijual);
+            jumlah=itemView.findViewById(R.id.tvjumlahbarangdijual);
+            total=itemView.findViewById(R.id.tvtotalbarangdijual);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mylistener.recyclerViewListBarangClick(v, AdapterTerkirim.ListViewHolder.this.getLayoutPosition());
+                    mylistener.recyclerViewListBarangClick(v, AdapterInboxToko.ListViewHolder.this.getLayoutPosition());
                 }
             });
         }

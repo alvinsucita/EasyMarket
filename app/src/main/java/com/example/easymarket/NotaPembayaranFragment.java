@@ -55,10 +55,10 @@ public class NotaPembayaranFragment extends Fragment {
         final NotaActivity notaActivity = (NotaActivity) getActivity();
 
         if(notaActivity.cekada==1){
-            String hargaasli = String.format("%,d",notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).hargabarang*notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).jumlahbarang);
-            String hargaasli2 = String.format("%,d",notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).hargapengiriman);
+            String hargaasli = String.format("%,d",notaActivity.listClassNota.get(notaActivity.indeks).hargabarang*notaActivity.listClassNota.get(notaActivity.indeks).jumlahbarang);
+            String hargaasli2 = String.format("%,d",notaActivity.listClassNota.get(notaActivity.indeks).hargapengiriman);
 
-            metode.setText(notaActivity.listClassNota.get(notaActivity.listClassNota.size()-1).pembayaran);
+            metode.setText(notaActivity.listClassNota.get(notaActivity.indeks).pembayaran);
 
             ongkir.setText("Rp. "+hargaasli2);
 

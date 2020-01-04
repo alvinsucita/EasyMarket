@@ -94,7 +94,8 @@ public class ActivityPembayaran extends AppCompatActivity {
 
     private void processPayment() {
         amount = et.getText().toString();
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(Integer.valueOf(amount)), "USD", "BAYAR", PayPalPayment.PAYMENT_INTENT_SALE);
+        int convert = Integer.parseInt(amount)/14000;
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(Integer.valueOf(convert)), "USD", "BAYAR", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent i = new Intent(this, PaymentActivity.class);
         i.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         i.putExtra(com.paypal.android.sdk.payments.PaymentActivity.EXTRA_PAYMENT, payment);

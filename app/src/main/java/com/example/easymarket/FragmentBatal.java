@@ -69,7 +69,8 @@ public class FragmentBatal extends Fragment {
             @Override
             public void recyclerViewListBarangClick(View v, int posisi) {
                 Intent i = new Intent(FragmentBatal.this.getContext(),NotaActivity.class);
-                i.putExtra("liat",listClassNota.get(posisi));
+                i.putExtra("liat",listClassNota);
+                i.putExtra("indeks",posisi);
                 i.putExtra("posisi",4);
                 startActivity(i);
             }

@@ -270,6 +270,54 @@ public class FragmentListBarang extends Fragment {
                 });
             }
         });
+        tambahstok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int intnominal=Integer.parseInt(nominal.getText().toString());
+                if(intnominal>0){
+                    final int totalstok = intstok+intnominal;
+
+                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(ds.child("namatoko").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                    ClassBarang updatebarang = new ClassBarang();
+                                    updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
+                                    updatebarang.setStok(totalstok);
+                                    updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                    updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                                    updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                    updatebarang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                                    updatebarang.setKategori(ds.child("kategori").getValue().toString());
+                                    updatebarang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                                    updatebarang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                                    updatebarang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                                    databaseReference.child(ds.getKey()).setValue(updatebarang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(FragmentListBarang.this.getContext(), "Stok barang berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+                            stok.setText("Stok : "+totalstok+"pcs");
+                            nominal.setText("");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(getContext(), "Kuantitas barang tidak valid", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     //send notifikasi
     public void sendNotification(String receiver,final String username,final String message){

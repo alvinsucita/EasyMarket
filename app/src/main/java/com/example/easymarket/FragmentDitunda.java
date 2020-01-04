@@ -69,7 +69,8 @@ public class FragmentDitunda extends Fragment {
             @Override
             public void recyclerViewListBarangClick(View v, int posisi) {
                 Intent i = new Intent(FragmentDitunda.this.getContext(),NotaActivity.class);
-                i.putExtra("liat",listClassNota.get(posisi));
+                i.putExtra("liat",listClassNota);
+                i.putExtra("indeks",posisi);
                 i.putExtra("posisi",1);
                 startActivity(i);
             }
