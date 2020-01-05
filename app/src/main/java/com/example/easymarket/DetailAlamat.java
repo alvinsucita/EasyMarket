@@ -61,6 +61,7 @@ public class DetailAlamat extends AppCompatActivity {
         kota=findViewById(R.id.etKota);
         kode=findViewById(R.id.etKode);
         kodeverif=findViewById(R.id.etKodeVerif);
+        kirim=findViewById(R.id.btnKirim);
         alamat=findViewById(R.id.etAlamat);
         pembayaran = findViewById(R.id.sppembayaran);
         konfirmasi=findViewById(R.id.btnKonfirmasi);
