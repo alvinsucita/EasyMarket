@@ -66,6 +66,17 @@
         app:layout_constraintStart_toStartOf="@+id/tvJumlah4"
         app:layout_constraintTop_toBottomOf="@+id/tvJumlah4" />
 
+    <ImageView
+        android:id="@+id/ivBarang3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:srcCompat="@android:color/white" />
+
     <TextView
         android:id="@+id/tvNamaBarang3"
         android:layout_width="0dp"
@@ -80,17 +91,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivBarang3"
         app:layout_constraintTop_toTopOf="@+id/ivBarang3" />
-
-    <ImageView
-        android:id="@+id/ivBarang3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:srcCompat="@android:color/white" />
 
     <TextView
         android:id="@+id/tvJumlah3"

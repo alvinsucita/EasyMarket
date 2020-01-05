@@ -7,6 +7,23 @@
     android:background="#F1F1F1"
     tools:context=".DetailAlamat">
 
+    <Button
+        android:id="@+id/btnKirim"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/cabin"
+        android:onClick="kirim"
+        android:text="Kirim"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toEndOf="@+id/etKodeVerif"
+        app:layout_constraintTop_toTopOf="@+id/etKodeVerif"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/etNamaPenerima"
         android:layout_width="300dp"
@@ -42,9 +59,25 @@
         app:layout_constraintTop_toBottomOf="@+id/etKota" />
 
     <EditText
+        android:id="@+id/etKodeVerif"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:hint="Kode Verifikasi"
+        android:inputType="textPostalAddress"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/sppembayaran"
+        app:layout_constraintTop_toBottomOf="@+id/sppembayaran" />
+
+    <EditText
         android:id="@+id/etAlamat"
         android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@android:color/white"
         android:ems="10"

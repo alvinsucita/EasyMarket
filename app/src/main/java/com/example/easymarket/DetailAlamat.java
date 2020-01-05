@@ -15,6 +15,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.easymarket.Notifications.Client;
+import com.example.easymarket.Notifications.Data;
+import com.example.easymarket.Notifications.MyResponse;
+import com.example.easymarket.Notifications.Sender;
+import com.example.easymarket.Notifications.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,29 +27,40 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DetailAlamat extends AppCompatActivity {
 
-    EditText nama,nohp,alamat,kota,kode;
+    EditText nama,nohp,alamat,kota,kode,kodeverif;
     Spinner pembayaran;
     ArrayList<String> spinnerArray =  new ArrayList<>();
-    Button konfirmasi;
+    Button konfirmasi,kirim;
     String akunyangbeli="",toko="",idbarang1="",idbarang2="";
     int jumlah=0,jumlah2=0,harga=0,harga2=0;
     ArrayList<ClassNota> listClassNota = new ArrayList<>();
     DatabaseReference databaseReference_nota;
+    boolean notify=false;
+    APIService apiService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_alamat);
+        apiService= Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        updateToken(FirebaseInstanceId.getInstance().getToken());
         nama=findViewById(R.id.etNamaPenerima);
         nohp=findViewById(R.id.etNomorHp);
         kota=findViewById(R.id.etKota);
         kode=findViewById(R.id.etKode);
+        kodeverif=findViewById(R.id.etKodeVerif);
         alamat=findViewById(R.id.etAlamat);
         pembayaran = findViewById(R.id.sppembayaran);
         konfirmasi=findViewById(R.id.btnKonfirmasi);
@@ -64,6 +80,12 @@ public class DetailAlamat extends AppCompatActivity {
         drawable2.setColor(Color.WHITE);
         alamat.setBackground(drawable2);
 
+        GradientDrawable drawable9 = new GradientDrawable();
+        drawable9.setShape(GradientDrawable.RECTANGLE);
+        drawable9.setCornerRadius(50);
+        drawable9.setColor(Color.WHITE);
+        kodeverif.setBackground(drawable9);
+
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setShape(GradientDrawable.RECTANGLE);
         drawable3.setCornerRadius(100);
@@ -76,6 +98,12 @@ public class DetailAlamat extends AppCompatActivity {
         drawable4.setCornerRadius(100);
         drawable4.setColor(Color.BLACK);
         konfirmasi.setBackground(drawable4);
+
+        GradientDrawable drawable5 = new GradientDrawable();
+        drawable5.setShape(GradientDrawable.RECTANGLE);
+        drawable5.setCornerRadius(100);
+        drawable5.setColor(Color.BLACK);
+        kirim.setBackground(drawable5);
 
         spinnerArray.add("COD");
         spinnerArray.add("PayPal");
@@ -126,6 +154,12 @@ public class DetailAlamat extends AppCompatActivity {
 
         if(strnama.equals("")||strnohp.equals("")||stralamat.equals("")||strkota.equals("")||strkode.equals("")){
             Toast.makeText(this, "Isi semua field terlebih dahulu", Toast.LENGTH_SHORT).show();
+        }
+        else if(kodeverif.getText().toString().equals("")){
+            Toast.makeText(this, "kode verifikasi harus di isi, lihat di notif anda", Toast.LENGTH_SHORT).show();
+        }
+        else if(!kodeverif.getText().toString().equals("KCX5Y")){
+            Toast.makeText(this, "Kode Verifikasi salah", Toast.LENGTH_SHORT).show();
         }
         else{
             FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -264,5 +298,53 @@ public class DetailAlamat extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void sendNotification(String receiver,final String username,final String message){
+        DatabaseReference tokens=FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(receiver);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Token token=snapshot.getValue(Token.class);
+                    Data data=new Data(FirebaseAuth.getInstance().getCurrentUser().getUid(), R.mipmap.ic_launcher_round,username+"Kode Verifikasi : "+message,"EasyMarket",FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+                    Sender sender=new Sender(data,token.getToken());
+
+                    apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+                        @Override
+                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                            if(response.code()==200){
+                                if(response.body().success!=1){
+                                    Toast.makeText(DetailAlamat.this, "Failed Send Notification!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    //update token
+    private void updateToken(String token){
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1=new Token(token);
+        reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token1);
+    }
+
+    public void kirim(View view) {
+        sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(),"","KCX5Y");
+        Toast.makeText(this, "Kode Verifikasi sudah di kirim, cek notifikasi handphone anda", Toast.LENGTH_SHORT).show();
     }
 }

@@ -211,6 +211,7 @@ public class FragmentListBarang extends Fragment {
             @Override
             public void onClick(View v) {
                 //coba notifikasi
+//                sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(),"asdasd","sssaaaaa");
                 FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F1F1"
+    tools:context=".InfoBarangDitunda">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btncanceltertunda"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <ImageView
+                    android:id="@+id/ivbarangtertunda"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tvnamabarangtertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="kosong"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivbarangtertunda"
+                    app:layout_constraintTop_toTopOf="@+id/ivbarangtertunda" />
+
+                <TextView
+                    android:id="@+id/tvjumlahbarangtertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="0"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@+id/tvnamabarangtertunda"
+                    app:layout_constraintStart_toStartOf="@+id/tvnamabarangtertunda"
+                    app:layout_constraintTop_toBottomOf="@+id/tvnamabarangtertunda" />
+
+                <TextView
+                    android:id="@+id/tvhargabarangtertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="Rp.77.000,00-"
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@+id/tvjumlahbarangtertunda"
+                    app:layout_constraintStart_toStartOf="@+id/tvjumlahbarangtertunda"
+                    app:layout_constraintTop_toBottomOf="@+id/tvjumlahbarangtertunda" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cabin"
+                    android:text="Jenis Pengiriman : "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
+                    app:layout_constraintTop_toTopOf="@+id/tvkurirtertunda" />
+
+                <TextView
+                    android:id="@+id/tvnamatokotertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toTopOf="@+id/textView13" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cabin"
+                    android:text="Alamat : "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView11"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintTop_toTopOf="@+id/tvalamattertunda" />
+
+                <TextView
+                    android:id="@+id/tvkurirtertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvnamatokotertunda"
+                    app:layout_constraintStart_toStartOf="@+id/tvnamatokotertunda"
+                    app:layout_constraintTop_toBottomOf="@+id/tvnamatokotertunda" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="Nama Toko :"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline1"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvhargabarangtertunda" />
+
+                <TextView
+                    android:id="@+id/tvalamattertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvkurirtertunda"
+                    app:layout_constraintStart_toStartOf="@+id/tvkurirtertunda"
+                    app:layout_constraintTop_toBottomOf="@+id/tvkurirtertunda" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="Metode Pembayaran :"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvmetodetertunda"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvalamattertunda" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="Total Harga Barang :"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView17"
+                    app:layout_constraintStart_toStartOf="@+id/textView17"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+                <TextView
+                    android:id="@+id/tvtotalbarangtertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cabin"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvmetodetertunda"
+                    app:layout_constraintStart_toStartOf="@+id/tvmetodetertunda"
+                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cabin"
+                    android:text="Total Ongkos Kirim :"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView16"
+                    app:layout_constraintStart_toStartOf="@+id/textView16"
+                    app:layout_constraintTop_toTopOf="@+id/tvongkostertunda" />
+
+                <TextView
+                    android:id="@+id/tvmetodetertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+                <TextView
+                    android:id="@+id/tvongkostertunda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="TextView"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tvtotalbarangtertunda"
+                    app:layout_constraintStart_toStartOf="@+id/tvtotalbarangtertunda"
+                    app:layout_constraintTop_toBottomOf="@+id/tvtotalbarangtertunda" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btncanceltertunda"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="15dp"
+        android:drawableLeft="@drawable/baseline_cancel_white_24dp"
+        android:fontFamily="@font/cabin"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Batal"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnkonfirmasitertunda"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:drawableLeft="@drawable/baseline_check_circle_white_24dp"
+        android:fontFamily="@font/cabin"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Konfirmasi"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
