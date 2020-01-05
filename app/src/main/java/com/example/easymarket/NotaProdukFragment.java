@@ -89,92 +89,117 @@ public class NotaProdukFragment extends Fragment {
                     semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                     listClassBarang.add(semua_Class_barang);
                 }
-                FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean cek = true;
-                        for (DataSnapshot ds:dataSnapshot.getChildren()){
-                            ClassNota semua_Class_Nota =new ClassNota();
-                            semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                            semua_Class_Nota.setNamatoko((ds.child("namatoko").getValue().toString()));
-                            semua_Class_Nota.setIdbarang((ds.child("idbarang").getValue().toString()));
-                            semua_Class_Nota.setNamauser(ds.child("namauser").getValue().toString());
-                            semua_Class_Nota.setAlamat((ds.child("alamat").getValue().toString()));
-                            semua_Class_Nota.setPembayaran((ds.child("pembayaran").getValue().toString()));
-                            semua_Class_Nota.setJenispengiriman((ds.child("jenispengiriman").getValue().toString()));
-                            semua_Class_Nota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
-                            semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
-                            semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
-                            semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
-                            listClassNota.add(semua_Class_Nota);
-                        }
-                        final NotaActivity notaActivity = (NotaActivity) getActivity();
 
-                        if(notaActivity.cekbarang==1){
-                            int totalsementara=0;
-                            nama2.setVisibility(View.VISIBLE);
-                            harga2.setVisibility(View.VISIBLE);
-                            jumlah2.setVisibility(View.VISIBLE);
-                            barang2.setVisibility(View.VISIBLE);
-
-                            for (int i = 0; i < listClassBarang.size(); i++) {
-                                if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
-                                    nama2.setText(listClassBarang.get(i).namabarang);
-                                }
-                                else if(listClassNota.get(listClassNota.size()-2).idbarang.equals(listClassBarang.get(i).idbarang)){
-                                    nama.setText(listClassBarang.get(i).namabarang);
-                                }
-                            }
-                            String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
-                            String hargaasli2 = String.format("%,d", listClassNota.get(listClassNota.size()-2).hargabarang);
-
-                            jumlah.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-2).jumlahbarang+"");
-                            harga.setText("Rp. "+hargaasli2);
-                            FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-2).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Glide.with(getContext()).load(uri).into(barang);
-                                }
-                            }) ;
-
-                            jumlah2.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
-                            harga2.setText("Rp. "+hargaasli);
-                            FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Glide.with(getContext()).load(uri).into(barang2);
-                                }
-                            }) ;
-                        }
-                        else{
-                            for (int i = 0; i < listClassBarang.size(); i++) {
-                                if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
-                                    nama.setText(listClassBarang.get(i).namabarang);
-                                }
-                            }
-                            String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
-
-                            jumlah.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
-                            harga.setText("Rp. "+hargaasli);
-                            FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Glide.with(getContext()).load(uri).into(barang);
-                                }
-                            }) ;
-
-                            nama2.setVisibility(View.INVISIBLE);
-                            harga2.setVisibility(View.INVISIBLE);
-                            jumlah2.setVisibility(View.INVISIBLE);
-                            barang2.setVisibility(View.INVISIBLE);
+                final NotaActivity notaActivity = (NotaActivity) getActivity();
+                if(notaActivity.cekada==1){
+                    for (int i = 0; i < listClassBarang.size(); i++) {
+                        if(notaActivity.listClassNota.get(notaActivity.indeks).idbarang.equals(listClassBarang.get(i).idbarang)){
+                            nama.setText(listClassBarang.get(i).namabarang);
                         }
                     }
+                    String hargaasli = String.format("%,d", notaActivity.listClassNota.get(notaActivity.indeks).hargabarang);
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    jumlah.setText("Jumlah barang : "+notaActivity.listClassNota.get(notaActivity.indeks).jumlahbarang+"");
+                    harga.setText("Rp. "+hargaasli);
+                    FirebaseStorage.getInstance().getReference().child("GambarBarang").child(notaActivity.listClassNota.get(notaActivity.indeks).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getContext()).load(uri).into(barang);
+                        }
+                    }) ;
 
-                    }
-                });
+                    nama2.setVisibility(View.INVISIBLE);
+                    harga2.setVisibility(View.INVISIBLE);
+                    jumlah2.setVisibility(View.INVISIBLE);
+                    barang2.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                ClassNota semua_Class_Nota =new ClassNota();
+                                semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                                semua_Class_Nota.setNamatoko((ds.child("namatoko").getValue().toString()));
+                                semua_Class_Nota.setIdbarang((ds.child("idbarang").getValue().toString()));
+                                semua_Class_Nota.setNamauser(ds.child("namauser").getValue().toString());
+                                semua_Class_Nota.setAlamat((ds.child("alamat").getValue().toString()));
+                                semua_Class_Nota.setPembayaran((ds.child("pembayaran").getValue().toString()));
+                                semua_Class_Nota.setJenispengiriman((ds.child("jenispengiriman").getValue().toString()));
+                                semua_Class_Nota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
+                                semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
+                                semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
+                                semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+                                listClassNota.add(semua_Class_Nota);
+                            }
+
+                            if(notaActivity.cekbarang==1){
+                                int totalsementara=0;
+                                nama2.setVisibility(View.VISIBLE);
+                                harga2.setVisibility(View.VISIBLE);
+                                jumlah2.setVisibility(View.VISIBLE);
+                                barang2.setVisibility(View.VISIBLE);
+
+                                for (int i = 0; i < listClassBarang.size(); i++) {
+                                    if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
+                                        nama2.setText(listClassBarang.get(i).namabarang);
+                                    }
+                                    else if(listClassNota.get(listClassNota.size()-2).idbarang.equals(listClassBarang.get(i).idbarang)){
+                                        nama.setText(listClassBarang.get(i).namabarang);
+                                    }
+                                }
+                                String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
+                                String hargaasli2 = String.format("%,d", listClassNota.get(listClassNota.size()-2).hargabarang);
+
+                                jumlah.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-2).jumlahbarang+"");
+                                harga.setText("Rp. "+hargaasli2);
+                                FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-2).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Glide.with(getContext()).load(uri).into(barang);
+                                    }
+                                }) ;
+
+                                jumlah2.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
+                                harga2.setText("Rp. "+hargaasli);
+                                FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Glide.with(getContext()).load(uri).into(barang2);
+                                    }
+                                }) ;
+                            }
+                            else{
+                                for (int i = 0; i < listClassBarang.size(); i++) {
+                                    if(listClassNota.get(listClassNota.size()-1).idbarang.equals(listClassBarang.get(i).idbarang)){
+                                        nama.setText(listClassBarang.get(i).namabarang);
+                                    }
+                                }
+                                String hargaasli = String.format("%,d", listClassNota.get(listClassNota.size()-1).hargabarang);
+
+                                jumlah.setText("Jumlah barang : "+listClassNota.get(listClassNota.size()-1).jumlahbarang+"");
+                                harga.setText("Rp. "+hargaasli);
+                                FirebaseStorage.getInstance().getReference().child("GambarBarang").child(listClassNota.get(listClassNota.size()-1).idbarang).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Glide.with(getContext()).load(uri).into(barang);
+                                    }
+                                }) ;
+
+                                nama2.setVisibility(View.INVISIBLE);
+                                harga2.setVisibility(View.INVISIBLE);
+                                jumlah2.setVisibility(View.INVISIBLE);
+                                barang2.setVisibility(View.INVISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
 
             @Override

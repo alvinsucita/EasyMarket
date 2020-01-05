@@ -48,6 +48,7 @@ public class ManageUsers extends AppCompatActivity {
                     semua_Class_user.setPassword(ds.child("password").getValue().toString());
                     semua_Class_user.setGender(ds.child("gender").getValue().toString());
                     semua_Class_user.setDaerahasal(ds.child("daerahasal").getValue().toString());
+                    semua_Class_user.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
                     semua_Class_user.setHari(Integer.parseInt(ds.child("hari").getValue().toString()));
                     semua_Class_user.setBulan(Integer.parseInt(ds.child("bulan").getValue().toString()));
                     semua_Class_user.setTahun(Integer.parseInt(ds.child("tahun").getValue().toString()));
@@ -81,6 +82,7 @@ public class ManageUsers extends AppCompatActivity {
                                         updateuser.setGender(ds.child("gender").getValue().toString());
                                         updateuser.setNama(ds.child("nama").getValue().toString());
                                         updateuser.setPassword(ds.child("password").getValue().toString());
+                                        updateuser.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
                                         updateuser.setHari(Integer.parseInt(ds.child("hari").getValue().toString()));
                                         updateuser.setBulan(Integer.parseInt(ds.child("bulan").getValue().toString()));
                                         updateuser.setTahun(Integer.parseInt(ds.child("tahun").getValue().toString()));

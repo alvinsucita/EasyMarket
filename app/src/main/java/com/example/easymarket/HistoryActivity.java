@@ -21,11 +21,8 @@ import java.util.ArrayList;
 public class HistoryActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavHistory;
-    ArrayList<ClassUser> listClassUser = new ArrayList<>();
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     ArrayList<ClassNota> listClassNota = new ArrayList<>();
-    ArrayList<ClassToko> listClassToko = new ArrayList<>();
-    ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +32,21 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        changeFragment(new FragmentMenunggu(),listClassNota);
-        bottomNavHistory = findViewById(R.id.bottomNavHistory);
-        bottomNavHistory.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if(menuItem.getItemId( )== R.id.itemDitunda){
-                    changeFragment(new FragmentDitunda(),listClassNota);
-                }else if(menuItem.getItemId( )== R.id.itemMenunggu){
-                    changeFragment(new FragmentMenunggu(),listClassNota);
-                }else if(menuItem.getItemId( )== R.id.itemTerkirim){
-                    changeFragment(new FragmentTerkirim(),listClassNota);
-                }else if(menuItem.getItemId( )== R.id.itemBatal){
-                    changeFragment(new FragmentBatal(),listClassNota);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    ClassBarang semua_Class_Barang =new ClassBarang();
+                    semua_Class_Barang.setIdbarang((ds.child("idbarang").getValue().toString()));
+                    semua_Class_Barang.setNamabarang((ds.child("namabarang").getValue().toString()));
+                    listClassBarang.add(semua_Class_Barang);
                 }
-                return true;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
@@ -70,8 +67,26 @@ public class HistoryActivity extends AppCompatActivity {
                     semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
                     semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
                     semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+                    semua_Class_Nota.setPosisi(Integer.parseInt(ds.child("posisi").getValue().toString()));
                     listClassNota.add(semua_Class_Nota);
                 }
+                changeFragment(new FragmentDitunda());
+                bottomNavHistory = findViewById(R.id.bottomNavHistory);
+                bottomNavHistory.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        if(menuItem.getItemId( )== R.id.itemDitunda){
+                            changeFragment(new FragmentDitunda());
+                        }else if(menuItem.getItemId( )== R.id.itemMenunggu){
+                            changeFragment(new FragmentMenunggu());
+                        }else if(menuItem.getItemId( )== R.id.itemTerkirim){
+                            changeFragment(new FragmentTerkirim());
+                        }else if(menuItem.getItemId( )== R.id.itemBatal){
+                            changeFragment(new FragmentBatal());
+                        }
+                        return true;
+                    }
+                });
             }
 
             @Override
@@ -92,12 +107,9 @@ public class HistoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void changeFragment(Fragment f,ArrayList<ClassNota> listClassNota){
+    public void changeFragment(Fragment f){
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("listClassNota", listClassNota);
-        f.setArguments(bundle);
         ft.replace(R.id.containerHistory, f);
         ft.commit();
     }

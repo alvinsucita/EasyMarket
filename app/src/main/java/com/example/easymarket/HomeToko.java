@@ -40,18 +40,20 @@ public class HomeToko extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean cek = true;
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    ClassBarang semua_Class_barang =new ClassBarang();
-                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
-                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
-                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
-                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
-                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
-                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
-                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
-                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
-                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
-                    listClassBarang.add(semua_Class_barang);
+                    if(ds.child("namatoko").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        ClassBarang semua_Class_barang =new ClassBarang();
+                        semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                        semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                        semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                        semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                        semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                        semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                        semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                        semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                        semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                        semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                        listClassBarang.add(semua_Class_barang);
+                    }
                 }
             }
 

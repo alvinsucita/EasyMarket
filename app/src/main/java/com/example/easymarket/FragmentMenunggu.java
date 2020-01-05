@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -14,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 
 /**
@@ -34,15 +39,17 @@ public class FragmentMenunggu extends Fragment {
     }
 
     RecyclerView rvmenunggu;
-    AdapterBatal adaptermenunggu;
+    AdapterMenunggu adaptermenunggu;
+    ArrayList<ClassNota> listClassNota = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final HistoryActivity historyActivity = (HistoryActivity)getActivity();
-
         rvmenunggu = view.findViewById(R.id.rvMenunggu);
+
+        final HistoryActivity historyActivity = (HistoryActivity)getActivity();
 
         GradientDrawable drawable3 = new GradientDrawable();
         drawable3.setShape(GradientDrawable.RECTANGLE);
@@ -51,8 +58,29 @@ public class FragmentMenunggu extends Fragment {
         drawable3.setColor(Color.WHITE);
         rvmenunggu.setBackground(drawable3);
 
+        for (int i = 0; i < historyActivity.listClassNota.size(); i++) {
+            if(historyActivity.listClassNota.get(i).namauser.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&historyActivity.listClassNota.get(i).posisi==2){
+                listClassNota.add(historyActivity.listClassNota.get(i));
+            }
+        }
+        for (int i = 0; i < historyActivity.listClassBarang.size(); i++) {
+            for (int j = 0; j < listClassNota.size(); j++) {
+                if(historyActivity.listClassBarang.get(i).idbarang.equals(listClassNota.get(j).idbarang)){
+                    listClassBarang.add(historyActivity.listClassBarang.get(i));
+                }
+            }
+        }
         rvmenunggu.setLayoutManager(new LinearLayoutManager(getContext()));
+        adaptermenunggu= new AdapterMenunggu(listClassNota, listClassBarang, new RVClickListener() {
+            @Override
+            public void recyclerViewListBarangClick(View v, int posisi) {
+                Intent i = new Intent(FragmentMenunggu.this.getContext(),NotaActivity.class);
+                i.putExtra("liat",listClassNota);
+                i.putExtra("indeks",posisi);
+                i.putExtra("posisi",2);
+                startActivity(i);
+            }
+        });
         rvmenunggu.setAdapter(adaptermenunggu);
     }
-
 }

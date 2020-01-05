@@ -62,7 +62,6 @@ public class FragmentHome extends Fragment {
     Boolean adafilter=false;
     Boolean adasearch=false;
     AdapterMenuBarang adapterMenuBarang;
-    RVClickListener rvcl;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

@@ -51,35 +51,42 @@ public class NotaPengirimanFragment extends Fragment {
         kurir=view.findViewById(R.id.tvnotakurir);
         alamat=view.findViewById(R.id.tvnotaalamat);
 
-
-        FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean cek = true;
-                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    ClassNota semua_Class_Nota =new ClassNota();
-                    semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
-                    semua_Class_Nota.setNamatoko((ds.child("namatoko").getValue().toString()));
-                    semua_Class_Nota.setIdbarang((ds.child("idbarang").getValue().toString()));
-                    semua_Class_Nota.setNamauser(ds.child("namauser").getValue().toString());
-                    semua_Class_Nota.setAlamat((ds.child("alamat").getValue().toString()));
-                    semua_Class_Nota.setPembayaran((ds.child("pembayaran").getValue().toString()));
-                    semua_Class_Nota.setJenispengiriman((ds.child("jenispengiriman").getValue().toString()));
-                    semua_Class_Nota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
-                    semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
-                    semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
-                    semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
-                    listClassNota.add(semua_Class_Nota);
+        final NotaActivity notaActivity = (NotaActivity) getActivity();
+        if(notaActivity.cekada==1){
+            namatoko.setText(notaActivity.listClassNota.get(notaActivity.indeks).namatoko);
+            kurir.setText(notaActivity.listClassNota.get(notaActivity.indeks).jenispengiriman);
+            alamat.setText(notaActivity.listClassNota.get(notaActivity.indeks).alamat);
+        }
+        else{
+            FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                        ClassNota semua_Class_Nota =new ClassNota();
+                        semua_Class_Nota.setIdnota((ds.child("idnota").getValue().toString()));
+                        semua_Class_Nota.setNamatoko((ds.child("namatoko").getValue().toString()));
+                        semua_Class_Nota.setIdbarang((ds.child("idbarang").getValue().toString()));
+                        semua_Class_Nota.setNamauser(ds.child("namauser").getValue().toString());
+                        semua_Class_Nota.setAlamat((ds.child("alamat").getValue().toString()));
+                        semua_Class_Nota.setPembayaran((ds.child("pembayaran").getValue().toString()));
+                        semua_Class_Nota.setJenispengiriman((ds.child("jenispengiriman").getValue().toString()));
+                        semua_Class_Nota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
+                        semua_Class_Nota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
+                        semua_Class_Nota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
+                        semua_Class_Nota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+                        listClassNota.add(semua_Class_Nota);
+                    }
+                    namatoko.setText(listClassNota.get(listClassNota.size()-1).namatoko);
+                    kurir.setText(listClassNota.get(listClassNota.size()-1).jenispengiriman);
+                    alamat.setText(listClassNota.get(listClassNota.size()-1).alamat);
                 }
-                namatoko.setText(listClassNota.get(listClassNota.size()-1).namatoko);
-                kurir.setText(listClassNota.get(listClassNota.size()-1).jenispengiriman);
-                alamat.setText(listClassNota.get(listClassNota.size()-1).alamat);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
     }
 }

@@ -12,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InfoBarangLain"></activity>
-        <activity android:name=".InfoBarangDitunda" />
+        <activity android:name=".ActivityPembayaran"></activity>
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".InfoRequestBarang" />
@@ -36,7 +35,6 @@
         <activity android:name=".CekPerjalananActivity" />
         <activity android:name=".ChatRoom" />
         <activity android:name=".DetailAlamat" />
-        <activity android:name=".EventPage" />
         <activity android:name=".HalamanCover">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
