@@ -21,6 +21,7 @@
         <activity android:name=".ManageCloseLelang" />
         <activity android:name=".AdapterComment" />
         <activity android:name=".HistoryActivity" />
+        <activity android:name=".DetailEvent" />
         <activity android:name=".InfoBarangLelang" />
         <activity android:name=".LelangActivity" />
         <activity android:name=".InfoPengirimanActivity" />

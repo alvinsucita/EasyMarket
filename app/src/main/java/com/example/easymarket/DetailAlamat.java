@@ -254,9 +254,7 @@ public class DetailAlamat extends AppCompatActivity {
                                 i.putExtra("dua","dua");
                                 startActivity(i);
                             }
-
                         }
-
                     }
                 }
 
@@ -266,7 +264,5 @@ public class DetailAlamat extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 }

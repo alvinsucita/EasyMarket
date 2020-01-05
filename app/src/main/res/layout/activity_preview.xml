@@ -7,29 +7,12 @@
     android:background="#BAFF4007"
     tools:context=".PreviewActivity">
 
-    <LinearLayout
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <VideoView
-            android:id="@+id/videoViewPreview"
-            android:layout_width="wrap_content"
-            android:layout_height="310dp" />
-
-        <EditText
-            android:id="@+id/editTextDeskripsiPreview"
-            android:layout_width="match_parent"
-            android:layout_height="184dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine" />
-
-        <Button
-            android:id="@+id/buttonBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BACK" />
-    </LinearLayout>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

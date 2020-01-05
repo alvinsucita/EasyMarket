@@ -13,6 +13,7 @@ public class ClassBarang implements Serializable {
     int dilihat;
     int dibeli;
     int stok;
+
     public ClassBarang(){}
 
     public ClassBarang(String idbarang, String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {

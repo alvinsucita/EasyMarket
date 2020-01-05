@@ -3,24 +3,14 @@ package com.example.easymarket;
 import java.io.Serializable;
 
 public class ClassChat implements Serializable {
-    String nama;
     String isi;
     String yangkirim;
     String yangdikirim;
 
-    public ClassChat(String nama, String isi, String yangkirim, String yangdikirim) {
-        this.nama = nama;
+    public ClassChat(String isi, String yangkirim, String yangdikirim) {
         this.isi = isi;
         this.yangkirim = yangkirim;
         this.yangdikirim = yangdikirim;
-    }
-
-    public String getNama() {
-        return nama;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
     }
 
     public String getIsi() {

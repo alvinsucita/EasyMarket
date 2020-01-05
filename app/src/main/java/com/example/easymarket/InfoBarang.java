@@ -314,8 +314,9 @@ public class InfoBarang extends AppCompatActivity {
         ft.commit();
     }
 
-    public void embedd(){
-
+    public void toVideo(View view) {
+        Intent i = new Intent(InfoBarang.this,PreviewActivity.class);
+        i.putExtra("nama",nama.getText().toString());
+        startActivity(i);
     }
-
 }
