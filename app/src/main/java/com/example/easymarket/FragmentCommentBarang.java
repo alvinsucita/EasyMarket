@@ -226,7 +226,7 @@ public class  FragmentCommentBarang extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Token token=snapshot.getValue(Token.class);
-                    Data data=new Data(usersekarang.getFirebaseUID(), R.mipmap.ic_launcher_round,username+"Memberikan Komentar: "+message,"EasyMarket",usertujuan.getFirebaseUID());
+                    Data data=new Data(usersekarang.getFirebaseUID(), R.mipmap.ic_launcher_round,username+" Memberikan Komentar: "+message,"EasyMarket",usertujuan.getFirebaseUID());
 
                     Sender sender=new Sender(data,token.getToken());
 

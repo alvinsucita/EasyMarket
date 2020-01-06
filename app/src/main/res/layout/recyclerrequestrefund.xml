@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/ivGaris2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,7 +16,7 @@
         app:srcCompat="@android:color/black" />
 
     <TextView
-        android:id="@+id/tvJudulEvent"
+        android:id="@+id/tvJudulRefund"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -30,5 +30,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

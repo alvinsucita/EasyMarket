@@ -59,7 +59,7 @@ public class FragmentMenunggu extends Fragment {
         rvmenunggu.setBackground(drawable3);
 
         for (int i = 0; i < historyActivity.listClassNota.size(); i++) {
-            if(historyActivity.listClassNota.get(i).namauser.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&historyActivity.listClassNota.get(i).posisi==2){
+            if(historyActivity.listClassNota.get(i).namauser.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())&&historyActivity.listClassNota.get(i).posisi==2||historyActivity.listClassNota.get(i).posisi==9){
                 listClassNota.add(historyActivity.listClassNota.get(i));
             }
         }
