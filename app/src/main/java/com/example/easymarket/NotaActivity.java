@@ -1,11 +1,5 @@
 package com.example.easymarket;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -17,6 +11,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -269,7 +268,6 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Boolean cek = true;
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                                     if(ds.child("namatoko").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                                         ClassBarang updatebarang = new ClassBarang();
@@ -295,7 +293,6 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
                                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        Boolean cek = true;
                                         for (DataSnapshot ds:dataSnapshot.getChildren()){
                                             if(listClassNota.get(indeks).getIdnota().equals(ds.child("idnota").getValue().toString())){
                                                 ClassNota updatenota = new ClassNota();
@@ -359,7 +356,6 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Boolean cek = true;
                     for (DataSnapshot ds:dataSnapshot.getChildren()){
                         if(listClassNota.get(indeks).getIdnota().equals(ds.child("idnota").getValue().toString())){
                             ClassNota updatenota = new ClassNota();
@@ -411,7 +407,6 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Boolean cek = true;
                     for (DataSnapshot ds:dataSnapshot.getChildren()){
                         if(listClassNota.get(indeks).getIdnota().equals(ds.child("idnota").getValue().toString())){
                             ClassNota updatenota = new ClassNota();

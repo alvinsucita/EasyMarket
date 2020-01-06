@@ -56,5 +56,4 @@ public class HomeAdmin extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

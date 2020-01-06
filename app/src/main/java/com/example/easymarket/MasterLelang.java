@@ -47,17 +47,12 @@ public class MasterLelang extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String apaini = "";
                         for (DataSnapshot ds:dataSnapshot.getChildren()){
                             if(ds.child("masuklelang").getValue().toString().equals("0")){
                                 ClassRequestLelang semua_Class_req = new ClassRequestLelang();
                                 semua_Class_req.setIdbarang(ds.child("idbarang").getValue().toString());
                                 semua_Class_req.setMasuklelang(Integer.parseInt(ds.child("masuklelang").getValue().toString()));
                                 listClassReq.add(semua_Class_req);
-//                                dbreftemp = FirebaseDatabase.getInstance().getReference().child("universaltemp");
-//                                String key = dbreftemp.push().getKey();
-//                                apaini = ds.child("idbarang").getValue().toString();
-//                                dbreftemp.child(key).setValue(apaini);
                             }
                         }
                     }
@@ -70,7 +65,6 @@ public class MasterLelang extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String apaini = "";
                         for (DataSnapshot ds:dataSnapshot.getChildren()){
                             for(int i = 0; i < listClassReq.size(); i++){
                                 if(ds.child("idbarang").getValue().toString().equals(listClassReq.get(i).getIdbarang())){
@@ -118,7 +112,6 @@ public class MasterLelang extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         TextView tv = view.findViewById(R.id.layoutjudul);
                         a = tv.getText().toString();
-//                        Toast.makeText(MasterLelang.this, a, Toast.LENGTH_LONG).show();
                         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -126,7 +119,6 @@ public class MasterLelang extends AppCompatActivity {
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                                     if(ds.child("idbarang").getValue().toString().equals(a)){
                                         ClassRequestLelang updatelelang = new ClassRequestLelang();
-//                                        Toast.makeText(MasterLelang.this, ds.child("masuklelang").getValue().toString(), Toast.LENGTH_LONG).show();
                                         if(ds.child("masuklelang").getValue().toString().equals("1")) {
                                             updatelelang.setMasuklelang(0);
                                             updatelelang.setIdbarang(ds.child("idbarang").getValue().toString());
