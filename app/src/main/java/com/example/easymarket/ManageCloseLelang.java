@@ -77,6 +77,26 @@ public class ManageCloseLelang extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(ManageCloseLelang.this, "berhasil close", Toast.LENGTH_SHORT).show();
+                                                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                        for (DataSnapshot dss:dataSnapshot.getChildren()){
+                                                            if(dss.child("idbarang").getValue().toString().equals(a)){
+                                                                ClassRequestLelang updatelelang = new ClassRequestLelang();
+                                                                if(dss.child("masuklelang").getValue().toString().equals("1")) {
+                                                                    updatelelang.setMasuklelang(100);
+                                                                    updatelelang.setIdbarang(dss.child("idbarang").getValue().toString());
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                    }
+                                                });
                                             }
                                         });
                                     }

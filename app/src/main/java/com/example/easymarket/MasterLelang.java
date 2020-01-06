@@ -138,7 +138,6 @@ public class MasterLelang extends AppCompatActivity {
 
                             }
                         });
-
                     }
                 });
             }
