@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class ManageCloseLelang extends AppCompatActivity {
 
     ListView listView;
     ArrayList<ClassLelang> listClassLelang = new ArrayList<>();
+    ArrayList<ClassRequestLelang> listClassReq = new ArrayList<>();
     DatabaseReference dbreftemp;
 
     ArrayList<String> test = new ArrayList<>();
@@ -38,7 +40,7 @@ public class ManageCloseLelang extends AppCompatActivity {
         setContentView(R.layout.activity_manage_close_lelang);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        listView = findViewById(R.id.lvlelang);
+        listView = findViewById(R.id.lvclose);
         FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -46,6 +48,10 @@ public class ManageCloseLelang extends AppCompatActivity {
                     if(Integer.parseInt(ds.child("masuklelang").getValue().toString())==1){
                         ClassLelang semua_Class_lelang = new ClassLelang();
                         semua_Class_lelang.setIdbarang(ds.child("idbarang").getValue().toString());
+                        semua_Class_lelang.setIdbarang(ds.child("harganormal").getValue().toString());
+                        semua_Class_lelang.setIdbarang(ds.child("hargatertinggi").getValue().toString());
+                        semua_Class_lelang.setIdbarang(ds.child("hargaawal").getValue().toString());
+                        semua_Class_lelang.setIdbarang(ds.child("namabidder").getValue().toString());
                         listClassLelang.add(semua_Class_lelang);
                     }
                 }
@@ -59,25 +65,18 @@ public class ManageCloseLelang extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                        TextView tv = view.findViewById(R.id.layoutjudul);
-//                        a = tv.getText().toString();
-//                        Toast.makeText(MasterLelang.this, a, Toast.LENGTH_LONG).show();
-                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                        TextView tv = findViewById(R.id.layoutjudul);
+                        a = tv.getText().toString();
+                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
                         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                                     if(ds.child("idbarang").getValue().toString().equals(a)){
-                                        ClassRequestLelang updatelelang = new ClassRequestLelang();
-//                                        Toast.makeText(MasterLelang.this, ds.child("masuklelang").getValue().toString(), Toast.LENGTH_LONG).show();
-                                        if(ds.child("masuklelang").getValue().toString().equals("1")) {
-                                            updatelelang.setMasuklelang(0);
-                                            updatelelang.setIdbarang(ds.child("idbarang").getValue().toString());
-                                        }
-                                        databaseReference.child(ds.getKey()).setValue(updatelelang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        ds.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(ManageCloseLelang.this, "berhasil approve", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ManageCloseLelang.this, "berhasil close", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
@@ -89,7 +88,6 @@ public class ManageCloseLelang extends AppCompatActivity {
 
                             }
                         });
-
                     }
                 });
             }
