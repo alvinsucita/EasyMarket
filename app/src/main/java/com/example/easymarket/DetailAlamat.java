@@ -65,6 +65,7 @@ public class DetailAlamat extends AppCompatActivity {
         alamat=findViewById(R.id.etAlamat);
         pembayaran = findViewById(R.id.sppembayaran);
         konfirmasi=findViewById(R.id.btnKonfirmasi);
+        kirim=findViewById(R.id.btnKirim);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
