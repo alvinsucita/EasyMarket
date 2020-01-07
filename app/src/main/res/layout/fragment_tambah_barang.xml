@@ -93,7 +93,7 @@
         android:id="@+id/btnAdd"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         android:drawableLeft="@drawable/baseline_add_box_white_24dp"
         android:fontFamily="@font/cabin"
         android:paddingLeft="10dp"

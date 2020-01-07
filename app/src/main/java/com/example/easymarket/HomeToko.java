@@ -93,6 +93,9 @@ public class HomeToko extends AppCompatActivity {
                         else if(menuItem.getItemId( )== R.id.navInbox){
                             changeFragment(new FragmentInbox(), listClassBarang);
                         }
+                        else if(menuItem.getItemId( )== R.id.navChat){
+                            changeFragment(new FragmentChatToko(), listClassBarang);
+                        }
                         return true;
                     }
                 });

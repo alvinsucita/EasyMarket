@@ -29,16 +29,11 @@ public class ChatRoom extends AppCompatActivity {
         rvChat=findViewById(R.id.rvChat);
 
         GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(25);
+        drawable.setStroke(8, Color.LTGRAY);
         drawable.setColor(Color.WHITE);
-        drawable.setShape(GradientDrawable.OVAL);
-        drawable.setStroke(5, Color.BLACK);
-        send.setBackground(drawable);
-
-        GradientDrawable drawable5 = new GradientDrawable();
-        drawable5.setColor(Color.WHITE);
-        drawable5.setShape(GradientDrawable.RECTANGLE);
-        drawable5.setStroke(5, Color.BLACK);
-        pesan.setBackground(drawable5);
+        pesan.setBackground(drawable);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
