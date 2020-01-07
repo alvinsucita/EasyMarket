@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 public class HomeToko extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassToko> listClassToko = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,7 @@ public class HomeToko extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Boolean cek = true;
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(ds.child("namatoko").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                    if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                         ClassBarang semua_Class_barang =new ClassBarang();
                         semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
                         semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
@@ -59,24 +61,46 @@ public class HomeToko extends AppCompatActivity {
             }
         });
 
-        changeFragment(new FragmentListBarang(), listClassBarang);
-        bottomNavigationView=findViewById(R.id.btmNav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if(menuItem.getItemId( )== R.id.navListBarang){
-                    changeFragment(new FragmentListBarang(), listClassBarang);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        ClassToko semua_Class_Toko =new ClassToko();
+                        semua_Class_Toko.setDaerahasal(ds.child("daerahasal").getValue().toString());
+                        semua_Class_Toko.setNama(ds.child("nama").getValue().toString());
+                        semua_Class_Toko.setEmail(ds.child("email").getValue().toString());
+                        semua_Class_Toko.setAktif(ds.child("aktif").getValue().toString());
+                        semua_Class_Toko.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
+                        listClassToko.add(semua_Class_Toko);
+                    }
                 }
-                else if(menuItem.getItemId()== R.id.navProfile){
-                    changeFragment(new FragmentProfileToko(), listClassBarang);
-                }
-                else if(menuItem.getItemId( )== R.id.navTambah){
-                    changeFragment(new FragmentTambahBarang(), listClassBarang);
-                }
-                else if(menuItem.getItemId( )== R.id.navInbox){
-                    changeFragment(new FragmentInbox(), listClassBarang);
-                }
-                return true;
+                changeFragment(new FragmentProfileToko(), listClassBarang);
+                bottomNavigationView=findViewById(R.id.btmNav);
+                bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        if(menuItem.getItemId( )== R.id.navListBarang){
+                            changeFragment(new FragmentListBarang(), listClassBarang);
+                        }
+                        else if(menuItem.getItemId()== R.id.navProfile){
+                            changeFragment(new FragmentProfileToko(), listClassBarang);
+                        }
+                        else if(menuItem.getItemId( )== R.id.navTambah){
+                            changeFragment(new FragmentTambahBarang(), listClassBarang);
+                        }
+                        else if(menuItem.getItemId( )== R.id.navInbox){
+                            changeFragment(new FragmentInbox(), listClassBarang);
+                        }
+                        return true;
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }

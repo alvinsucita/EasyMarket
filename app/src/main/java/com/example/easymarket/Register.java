@@ -106,9 +106,8 @@ public class Register extends AppCompatActivity {
                     tokobaru.setEmail(stremail);
                     tokobaru.setNama(stremail);
                     tokobaru.setPassword(strpassword);
-
-
-
+                    tokobaru.setDaerahasal("");
+                    tokobaru.setRating(0);
 
                     databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
                     databaseReference_user = FirebaseDatabase.getInstance().getReference().child("ClassUser");

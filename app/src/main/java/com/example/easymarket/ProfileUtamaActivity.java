@@ -129,7 +129,7 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                profile.setBackgroundResource(R.drawable.baseline_person_outline_black_18dp);
+                profile.setBackgroundResource(R.drawable.ic_account_circle_black_24dp);
             }
         });
 
@@ -294,11 +294,10 @@ public class ProfileUtamaActivity extends AppCompatActivity {
             profile.setBackgroundResource(0);
             profile.setImageURI(selected);
         }
-
     }
 
     public void gantiFoto() {
-        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intentCamera, 2);
+        Intent change = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(change,1);
     }
 }
