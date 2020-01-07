@@ -10,7 +10,6 @@
         android:id="@+id/etaddeventname"
         android:layout_width="match_parent"
         android:layout_height="122dp"
-        android:layout_marginTop="36dp"
         android:layout_marginBottom="54dp"
         android:background="@android:color/white"
         android:ems="10"
@@ -18,6 +17,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/tvshowaddeventdesc"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventname" />
 
@@ -25,11 +25,10 @@
         android:id="@+id/tvshowaddeventname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="116dp"
-        android:layout_marginEnd="298dp"
         android:layout_marginBottom="19dp"
         android:text="Nama Event :"
+        android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/etaddeventname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +38,6 @@
         android:id="@+id/etaddeventdesc"
         android:layout_width="match_parent"
         android:layout_height="122dp"
-        android:layout_marginTop="280dp"
         android:layout_marginBottom="194dp"
         android:background="@android:color/white"
         android:ems="10"
@@ -49,16 +47,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventname" />
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventdesc" />
 
     <TextView
         android:id="@+id/tvshowaddeventdesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="298dp"
-        android:layout_marginBottom="100dp"
         android:text="Deskripsi :"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/etaddeventdesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="40dp"
     tools:context=".Home">
 
     <TextView
-        android:id="@+id/tvAdminHome"
+        android:id="@+id/tvtotaluser"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Admin Page (menu di option)"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:color/white" />
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:text="Total User: 0"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvtotaltoko"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Toko: 0"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvtotallelang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lelang Yang Berjalan: 0"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvtotalreqlelang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request Lelang Pending: 0"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvtotalrefund"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refund Pending: 0"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvtotalnota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total Transaksi: 0"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</LinearLayout>

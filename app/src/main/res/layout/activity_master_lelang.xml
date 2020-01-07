@@ -32,12 +32,10 @@
 
     <ListView
         android:id="@+id/lvlelang"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="515dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnInputLelang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

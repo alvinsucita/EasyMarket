@@ -34,6 +34,10 @@ public class HomeAdmin extends AppCompatActivity {
             Intent i = new Intent(HomeAdmin.this,ManageUsers.class);
             startActivity(i);
         }
+        else if(item.getItemId()==R.id.managetoko){
+            Intent i = new Intent(HomeAdmin.this,ManageUsers.class);
+            startActivity(i);
+        }
         else if(item.getItemId()==R.id.closelelang){
             Intent i = new Intent(HomeAdmin.this,ManageCloseLelang.class);
             startActivity(i);

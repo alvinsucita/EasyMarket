@@ -65,7 +65,6 @@ public class ManageUsers extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        Toast.makeText(ManageUsers.this, position + "", Toast.LENGTH_LONG).show();
                         TextView tv = view.findViewById(R.id.layoutjudul);
                         a = tv.getText().toString();
                         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
@@ -75,11 +74,11 @@ public class ManageUsers extends AppCompatActivity {
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                                     if(ds.child("email").getValue().toString().equals(a)){
                                         ClassUser updateuser = new ClassUser();
-                                        updateuser.setDaerahasal(ds.child("daerahasal").getValue().toString());
                                         if(ds.child("aktif").getValue().toString().equals("0")) updateuser.setAktif("1");
                                         else if(ds.child("aktif").getValue().toString().equals("1")) updateuser.setAktif("0");
                                         updateuser.setEmail(ds.child("email").getValue().toString());
                                         updateuser.setGender(ds.child("gender").getValue().toString());
+                                        updateuser.setDaerahasal(ds.child("daerahasal").getValue().toString());
                                         updateuser.setNama(ds.child("nama").getValue().toString());
                                         updateuser.setPassword(ds.child("password").getValue().toString());
                                         updateuser.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
@@ -101,10 +100,8 @@ public class ManageUsers extends AppCompatActivity {
 
                             }
                         });
-
                     }
                 });
-
             }
 
             @Override
