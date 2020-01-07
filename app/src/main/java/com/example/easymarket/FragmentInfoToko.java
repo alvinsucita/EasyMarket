@@ -73,7 +73,7 @@ public class FragmentInfoToko extends Fragment {
         daerahtoko=view.findViewById(R.id.tvDaerahToko);
         rating=view.findViewById(R.id.tvRatingToko);
         transaksi=view.findViewById(R.id.tvTransaksiToko);
-        verifikasi=view.findViewById(R.id.ivVerifikasi);
+        verifikasi=view.findViewById(R.id.ivVerifikasiToko);
 
         FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
