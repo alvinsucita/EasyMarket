@@ -44,7 +44,7 @@ public class HomeAdmin extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                user.setText("Total Toko: "+ (int)dataSnapshot.getChildrenCount());
+                toko.setText("Total Toko: "+ (int)dataSnapshot.getChildrenCount());
             }
 
             @Override
@@ -55,7 +55,7 @@ public class HomeAdmin extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                user.setText("Request Lelang Pending: "+ (int)dataSnapshot.getChildrenCount());
+                req.setText("Request Lelang Pending: "+ (int)dataSnapshot.getChildrenCount());
             }
 
             @Override
@@ -66,7 +66,7 @@ public class HomeAdmin extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("ClassLelang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                user.setText("Lelang Yang Berjalan: "+ (int)dataSnapshot.getChildrenCount());
+                lelang.setText("Lelang Yang Berjalan: "+ (int)dataSnapshot.getChildrenCount());
             }
 
             @Override
@@ -83,7 +83,7 @@ public class HomeAdmin extends AppCompatActivity {
                         ctr++;
                     }
                 }
-                user.setText("Refund Pending: "+ ctr);
+                refund.setText("Refund Pending: "+ ctr);
             }
 
             @Override
@@ -94,7 +94,7 @@ public class HomeAdmin extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                user.setText("Total Nota: "+ (int)dataSnapshot.getChildrenCount());
+                nota.setText("Total Nota: "+ (int)dataSnapshot.getChildrenCount());
             }
 
             @Override
