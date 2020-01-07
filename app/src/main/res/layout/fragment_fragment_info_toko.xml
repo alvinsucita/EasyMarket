@@ -23,14 +23,14 @@
         android:id="@+id/tvNamaToko"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/cabin"
         android:text="Nama Toko Disini"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivGambarToko"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/ivGambarToko" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:text="Daerah Toko : "
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tvNamaToko"
-        app:layout_constraintStart_toStartOf="@+id/tvNamaToko"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/tvNamaToko" />
 
     <TextView
@@ -128,10 +128,9 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="10dp"
         android:src="@drawable/ic_verified_user_black_24dp"
-        app:layout_constraintStart_toEndOf="@+id/textView30"
-        app:layout_constraintTop_toBottomOf="@+id/tvTransaksiToko" />
+        app:layout_constraintStart_toEndOf="@+id/ivGambarToko"
+        app:layout_constraintTop_toTopOf="@+id/ivGambarToko" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
