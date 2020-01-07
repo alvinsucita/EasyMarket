@@ -5,13 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -22,7 +15,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,14 +41,12 @@ public class FragmentHome extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment_home, container, false);
     }
-
 
     Button filter;
     EditText search;
@@ -73,7 +69,6 @@ public class FragmentHome extends Fragment {
         filter = view.findViewById(R.id.btnFilter);
         rv = view.findViewById(R.id.rvhome);
 
-
         databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -95,7 +90,7 @@ public class FragmentHome extends Fragment {
                     listClassBarang.add(semua_Class_barang);
                 }
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                //AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listClassBarang,rvcl);
+//                AdapterMenuBarang adapterMenuBarang= new AdapterMenuBarang(listClassBarang,rvcl);
                 adapterMenuBarang = new AdapterMenuBarang(listClassBarang, new RVClickListener() {
                     @Override
                     public void recyclerViewListBarangClick(View v, int posisi) {
