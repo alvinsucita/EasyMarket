@@ -2,6 +2,7 @@ package com.example.easymarket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -112,6 +113,9 @@ public class HomeToko extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu,menu);
+        if(menu instanceof MenuBuilder){
+            ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
         menu.getItem(0).setVisible(false);
         menu.getItem(1).setVisible(false);
         menu.getItem(2).setVisible(false);
