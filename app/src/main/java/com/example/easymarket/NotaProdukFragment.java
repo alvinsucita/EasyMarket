@@ -85,7 +85,7 @@ public class NotaProdukFragment extends Fragment {
                     semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
                     semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                     semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setToko(ds.child("toko").getValue().toString());
                     semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                     listClassBarang.add(semua_Class_barang);
                 }

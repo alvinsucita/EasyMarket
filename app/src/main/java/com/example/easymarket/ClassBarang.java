@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ClassBarang implements Serializable {
     String idbarang;
-    String namatoko;
+    String toko;
     String namabarang;
     String deskripsi;
     String kategori;
@@ -16,9 +16,9 @@ public class ClassBarang implements Serializable {
 
     public ClassBarang(){}
 
-    public ClassBarang(String idbarang, String namatoko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {
+    public ClassBarang(String idbarang, String toko, String namabarang, String deskripsi, String kategori, int harga, int likes, int dilihat, int dibeli, int stok) {
         this.idbarang = idbarang;
-        this.namatoko = namatoko;
+        this.toko = toko;
         this.namabarang = namabarang;
         this.deskripsi = deskripsi;
         this.kategori = kategori;
@@ -37,12 +37,12 @@ public class ClassBarang implements Serializable {
         this.idbarang = idbarang;
     }
 
-    public String getNamatoko() {
-        return namatoko;
+    public String getToko() {
+        return toko;
     }
 
-    public void setNamatoko(String namatoko) {
-        this.namatoko = namatoko;
+    public void setToko(String toko) {
+        this.toko = toko;
     }
 
     public String getNamabarang() {

@@ -89,7 +89,7 @@ public class FragmentInfoBarang extends Fragment {
                     semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
                     semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                     semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setToko(ds.child("toko").getValue().toString());
                     semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                     listClassBarang.add(semua_Class_barang);
                 }
@@ -196,7 +196,7 @@ public class FragmentInfoBarang extends Fragment {
                                                     updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
                                                     updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString())+1);
                                                     updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
-                                                    updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                                    updatebarang.setToko(ds.child("toko").getValue().toString());
                                                     updatebarang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                                                     FirebaseDatabase.getInstance().getReference().child("ClassBarang").child(ds.getKey()).setValue(updatebarang).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
@@ -218,7 +218,7 @@ public class FragmentInfoBarang extends Fragment {
                                                                         semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
                                                                         semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                                                                         semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                                                                        semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                                                        semua_Class_barang.setToko(ds.child("toko").getValue().toString());
                                                                         semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                                                                         listClassBarang.add(semua_Class_barang);
                                                                     }
@@ -262,7 +262,7 @@ public class FragmentInfoBarang extends Fragment {
                                                     updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
                                                     updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString())-1);
                                                     updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
-                                                    updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                                    updatebarang.setToko(ds.child("toko").getValue().toString());
                                                     updatebarang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                                                     FirebaseDatabase.getInstance().getReference().child("ClassBarang").child(ds.getKey()).setValue(updatebarang).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
@@ -284,7 +284,7 @@ public class FragmentInfoBarang extends Fragment {
                                                                         semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
                                                                         semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                                                                         semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                                                                        semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                                                        semua_Class_barang.setToko(ds.child("toko").getValue().toString());
                                                                         semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                                                                         listClassBarang.add(semua_Class_barang);
                                                                     }

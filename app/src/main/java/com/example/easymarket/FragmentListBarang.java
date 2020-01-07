@@ -141,12 +141,12 @@ public class FragmentListBarang extends Fragment {
                     semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
                     semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                     semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setToko(ds.child("toko").getValue().toString());
                     semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                     listClassBarang.add(semua_Class_barang);
                 }
                 for (int i = 0; i < listClassBarang.size(); i++) {
-                    if(listClassBarang.get(i).namatoko.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                    if(listClassBarang.get(i).toko.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                         filterBarang.add(listClassBarang.get(i));
                     }
                 }
@@ -283,11 +283,11 @@ public class FragmentListBarang extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Boolean cek = true;
                             for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                if(ds.child("namatoko").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                if(ds.child("toko").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                                     ClassBarang updatebarang = new ClassBarang();
                                     updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
                                     updatebarang.setStok(totalstok);
-                                    updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                    updatebarang.setToko(ds.child("toko").getValue().toString());
                                     updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                                     updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
                                     updatebarang.setDeskripsi(ds.child("deskripsi").getValue().toString());
