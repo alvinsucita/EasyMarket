@@ -50,10 +50,6 @@ public class Home extends AppCompatActivity {
                 else if(menuItem.getItemId( )== R.id.itemEvent){
                     changeFragment(new FragmentEvent());
                 }
-                Date a = new Date();
-                SimpleDateFormat time = new SimpleDateFormat("hh:mm aa");
-                Calendar now = Calendar.getInstance();
-                Toast.makeText(Home.this,now.get(Calendar.DAY_OF_MONTH)+"/"+now.get(Calendar.MONTH)+"/"+now.get(Calendar.YEAR)+" - "+time.format(a), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

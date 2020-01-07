@@ -252,7 +252,7 @@ public class FragmentProfileToko extends Fragment {
                     Toast.makeText(FragmentProfileToko.this.getContext(), "Request anda belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    if(tokologin.getRating()<4 && listClassBarang.size()<5){
+                    if(tokologin.getRating()<4 || listClassBarang.size()<5){
                         Toast.makeText(FragmentProfileToko.this.getContext(), "Toko anda harus mempunyai rating minimal 4 dan mempunyai barang minimal 5", Toast.LENGTH_SHORT).show();
                     }
                     else{

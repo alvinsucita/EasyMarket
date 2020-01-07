@@ -69,6 +69,7 @@ public class FragmentListBarang extends Fragment {
     DatabaseReference databaseReference_request;
     boolean notify=false;
     APIService apiService;
+    ClassToko tokologin;
 
     public FragmentListBarang() {
         // Required empty public constructor
@@ -212,62 +213,70 @@ public class FragmentListBarang extends Fragment {
             public void onClick(View v) {
                 //coba notifikasi
 //                sendNotification(FirebaseAuth.getInstance().getCurrentUser().getUid(),"asdasd","sssaaaaa");
-                FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean cek = true;
-                        listClassBarang.clear();
-                        for (DataSnapshot ds:dataSnapshot.getChildren()){
-                            ClassRequestLelang semua_Class_requestLelang =new ClassRequestLelang();
-                            semua_Class_requestLelang.setIdbarang(ds.child("idbarang").getValue().toString());
-                            semua_Class_requestLelang.setMasuklelang(Integer.parseInt(ds.child("masuklelang").getValue().toString()));
-                            requestLelang.add(semua_Class_requestLelang);
-                        }
+                HomeToko homeToko= (HomeToko) getActivity();
+                tokologin=homeToko.listClassToko.get(0);
 
-                        if(requestLelang.size()==0){
-                            ClassRequestLelang requestBaru=new ClassRequestLelang(idbarang,1);
-                            databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
-                            String key=databaseReference_request.push().getKey();
-                            databaseReference_request.child(key).setValue(requestBaru);
-                            Toast.makeText(getContext(), "Barang anda berhasil direquest ke admin untuk dilelang", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            int ctr=0;
-                            for (int i = 0; i < requestLelang.size(); i++) {
-                                if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==1){
-                                    ctr=1;
-                                }
-                                else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==0){
-                                    ctr=0;
-                                }
-                                else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==100){
-                                    ctr=100;
-                                }
-                                else{
-                                    ctr=100;
-                                }
+                if(tokologin.getAktif().equals("2")){
+                    FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            listClassBarang.clear();
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                ClassRequestLelang semua_Class_requestLelang =new ClassRequestLelang();
+                                semua_Class_requestLelang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                semua_Class_requestLelang.setMasuklelang(Integer.parseInt(ds.child("masuklelang").getValue().toString()));
+                                requestLelang.add(semua_Class_requestLelang);
                             }
-                            if(ctr==1){
-                                Toast.makeText(getContext(), "Barang anda masih belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
-                            }
-                            else if(ctr==0){
-                                Toast.makeText(getContext(), "Barang anda sudah ada di lelang", Toast.LENGTH_SHORT).show();
-                            }
-                            else if(ctr==100){
+
+                            if(requestLelang.size()==0){
                                 ClassRequestLelang requestBaru=new ClassRequestLelang(idbarang,1);
                                 databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
                                 String key=databaseReference_request.push().getKey();
                                 databaseReference_request.child(key).setValue(requestBaru);
                                 Toast.makeText(getContext(), "Barang anda berhasil direquest ke admin untuk dilelang", Toast.LENGTH_SHORT).show();
                             }
+                            else{
+                                int ctr=0;
+                                for (int i = 0; i < requestLelang.size(); i++) {
+                                    if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==1){
+                                        ctr=1;
+                                    }
+                                    else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==0){
+                                        ctr=0;
+                                    }
+                                    else if(requestLelang.get(i).idbarang.equals(idbarang)&&requestLelang.get(i).masuklelang==100){
+                                        ctr=100;
+                                    }
+                                    else{
+                                        ctr=100;
+                                    }
+                                }
+                                if(ctr==1){
+                                    Toast.makeText(getContext(), "Barang anda masih belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
+                                }
+                                else if(ctr==0){
+                                    Toast.makeText(getContext(), "Barang anda sudah ada di lelang", Toast.LENGTH_SHORT).show();
+                                }
+                                else if(ctr==100){
+                                    ClassRequestLelang requestBaru=new ClassRequestLelang(idbarang,1);
+                                    databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                    String key=databaseReference_request.push().getKey();
+                                    databaseReference_request.child(key).setValue(requestBaru);
+                                    Toast.makeText(getContext(), "Barang anda berhasil direquest ke admin untuk dilelang", Toast.LENGTH_SHORT).show();
+                                }
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(homeToko, "Toko anda harus diverifikasi terlebih dahulu agar bisa Request Lelang Barang anda", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         tambahstok.setOnClickListener(new View.OnClickListener() {

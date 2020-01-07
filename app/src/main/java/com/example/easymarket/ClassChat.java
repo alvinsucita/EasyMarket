@@ -6,11 +6,14 @@ public class ClassChat implements Serializable {
     String isi;
     String yangkirim;
     String yangdikirim;
+    String waktu;
 
-    public ClassChat(String isi, String yangkirim, String yangdikirim) {
+    public ClassChat(){}
+    public ClassChat(String isi, String yangkirim, String yangdikirim, String waktu) {
         this.isi = isi;
         this.yangkirim = yangkirim;
         this.yangdikirim = yangdikirim;
+        this.waktu = waktu;
     }
 
     public String getIsi() {
@@ -35,5 +38,13 @@ public class ClassChat implements Serializable {
 
     public void setYangdikirim(String yangdikirim) {
         this.yangdikirim = yangdikirim;
+    }
+
+    public String getWaktu() {
+        return waktu;
+    }
+
+    public void setWaktu(String waktu) {
+        this.waktu = waktu;
     }
 }
