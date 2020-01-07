@@ -129,7 +129,7 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                profile.setBackgroundResource(R.drawable.baseline_person_outline_black_18dp);
+                profile.setBackgroundResource(R.drawable.ic_account_circle_black_24dp);
             }
         });
 
