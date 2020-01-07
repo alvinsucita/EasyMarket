@@ -199,10 +199,15 @@ public class InfoBarang extends AppCompatActivity {
     }
 
     public void toChat(View view) {
-        emailtoko=listClassBarang.get(indeks).toko;
-        Intent i = new Intent(InfoBarang.this,ChatRoom.class);
-        i.putExtra("emailtoko",emailtoko);
-        startActivity(i);
+        if(!FirebaseAuth.getInstance().getCurrentUser().getEmail().equals("guest@guest.com")){
+            emailtoko=listClassBarang.get(indeks).toko;
+            Intent i = new Intent(InfoBarang.this,ChatRoom.class);
+            i.putExtra("emailtoko",emailtoko);
+            startActivity(i);
+        }
+        else{
+            Toast.makeText(this, "Login  Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void addwishlist(View view) {
