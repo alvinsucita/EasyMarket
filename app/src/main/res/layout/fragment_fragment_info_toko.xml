@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F1F1F1"
+    android:paddingBottom="10dp"
+    tools:context=".FragmentInfoToko">
+
+
+    <ImageView
+        android:id="@+id/ivGambarToko"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:src="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNamaToko"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/cabin"
+        android:text="Nama Toko Disini"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivGambarToko"
+        app:layout_constraintTop_toTopOf="@+id/ivGambarToko" />
+
+    <TextView
+        android:id="@+id/tvDaerahToko"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Daerah Toko Disini"
+        app:layout_constraintEnd_toEndOf="@+id/tvNamaToko"
+        app:layout_constraintStart_toStartOf="@+id/tvNamaToko"
+        app:layout_constraintTop_toBottomOf="@+id/tvNamaToko" />
+
+    <ImageView
+        android:id="@+id/ivRating1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toStartOf="@+id/tvDaerahToko"
+        app:layout_constraintTop_toBottomOf="@+id/tvDaerahToko" />
+
+    <ImageView
+        android:id="@+id/ivRating2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toEndOf="@+id/ivRating1"
+        app:layout_constraintTop_toTopOf="@+id/ivRating1" />
+
+    <ImageView
+        android:id="@+id/ivRating3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toEndOf="@+id/ivRating2"
+        app:layout_constraintTop_toTopOf="@+id/ivRating2" />
+
+    <ImageView
+        android:id="@+id/ivRating4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toEndOf="@+id/ivRating3"
+        app:layout_constraintTop_toTopOf="@+id/ivRating3" />
+
+    <ImageView
+        android:id="@+id/ivRating5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toEndOf="@+id/ivRating4"
+        app:layout_constraintTop_toTopOf="@+id/ivRating4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

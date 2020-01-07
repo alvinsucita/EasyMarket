@@ -179,6 +179,9 @@ public class InfoBarang extends AppCompatActivity {
                 else if(menuItem.getItemId( )== R.id.commentbarang){
                     changeFragment(new FragmentCommentBarang(getApplicationContext()), listClassBarang, listClassUser);
                 }
+                else if(menuItem.getItemId( )== R.id.infotoko){
+                    changeFragment(new FragmentInfoToko(), listClassBarang, listClassUser);
+                }
                 return true;
             }
         });

@@ -10,4 +10,8 @@
         android:id="@+id/commentbarang"
         android:icon="@drawable/baseline_forum_black_18dp"
         android:title="Comment" />
+    <item
+        android:id="@+id/infotoko"
+        android:icon="@drawable/baseline_store_black_18dp"
+        android:title="Toko" />
 </menu>
