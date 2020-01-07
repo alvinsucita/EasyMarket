@@ -71,7 +71,7 @@ public class MasterToko extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(ds.child("email").getValue().toString().equals(a)){
+                                    if(ds.child("nama").getValue().toString().equals(a)){
                                         ClassToko updatetoko = new ClassToko();
                                         if(ds.child("aktif").getValue().toString().equals("0")) updatetoko.setAktif("1");
                                         else if(!ds.child("aktif").getValue().toString().equals("0")) updatetoko.setAktif("0");

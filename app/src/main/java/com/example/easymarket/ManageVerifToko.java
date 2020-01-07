@@ -36,7 +36,7 @@ public class ManageVerifToko extends AppCompatActivity {
         setContentView(R.layout.activity_manage_verif_toko);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        listView = findViewById(R.id.lvtoko);
+        listView = findViewById(R.id.lvverif);
 
         FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,7 +71,7 @@ public class ManageVerifToko extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(ds.child("email").getValue().toString().equals(a)){
+                                    if(ds.child("nama").getValue().toString().equals(a)){
                                         ClassToko updatetoko = new ClassToko();
                                         if(ds.child("aktif").getValue().toString().equals("100")) updatetoko.setAktif("2");
                                         updatetoko.setEmail(ds.child("email").getValue().toString());
