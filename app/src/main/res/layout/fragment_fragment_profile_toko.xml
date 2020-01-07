@@ -22,80 +22,29 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="700dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSimpan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvJudulProfileToko">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="700dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tvJudulVerifikasi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/cabin"
-                    android:text="Verifikasi : "
-                    app:layout_constraintStart_toStartOf="@+id/tvJudulRating"
-                    app:layout_constraintTop_toBottomOf="@+id/tvJudulRating" />
-
-                <EditText
-                    android:id="@+id/etNamaToko"
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:ems="10"
-                    android:fontFamily="@font/cabin"
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10sp"
-                    android:paddingRight="10sp"
-                    android:text="Nama"
-                    app:layout_constraintStart_toStartOf="@+id/tvJudulNama"
-                    app:layout_constraintTop_toBottomOf="@+id/tvJudulNama" />
-
-                <Spinner
-                    android:id="@+id/spDaerahAsalToko"
-                    android:layout_width="300dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintStart_toStartOf="@+id/tvJudulDaerahAsal"
-                    app:layout_constraintTop_toBottomOf="@+id/tvJudulDaerahAsal" />
-
-                <TextView
-                    android:id="@+id/tvJudulRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/cabin"
-                    android:text="Rating : "
-                    app:layout_constraintStart_toStartOf="@+id/tvJudulEmailToko"
-                    app:layout_constraintTop_toBottomOf="@+id/tvJudulEmailToko" />
-
-                <Button
-                    android:id="@+id/btnSimpan"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="40dp"
-                    android:fontFamily="@font/cabin"
-                    android:text="Simpan"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@+id/tvJudulVerifikasi"
-                    app:layout_constraintTop_toBottomOf="@+id/ivFotoProfilToko" />
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
 
                 <ImageView
                     android:id="@+id/ivFotoProfilToko"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.008"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,12 +52,54 @@
                     android:id="@+id/tvJudulNama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/cabin"
-                    android:text="Nama"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Nama :"
+                    app:layout_constraintStart_toStartOf="@+id/etNamaToko"
                     app:layout_constraintTop_toBottomOf="@+id/ivFotoProfilToko" />
+
+                <EditText
+                    android:id="@+id/etNamaToko"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:fontFamily="@font/cabin"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="10sp"
+                    android:paddingRight="10sp"
+                    android:text="Nama"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJudulNama" />
+
+                <TextView
+                    android:id="@+id/tvJudulDaerahAsal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="Daerah Asal :"
+                    app:layout_constraintStart_toStartOf="@+id/etNamaToko"
+                    app:layout_constraintTop_toBottomOf="@+id/etNamaToko" />
+
+                <Spinner
+                    android:id="@+id/spDaerahAsalToko"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/tvJudulDaerahAsal"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJudulDaerahAsal" />
+
+                <ImageView
+                    android:id="@+id/ivpanah"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/downpoint"
+                    app:layout_constraintBottom_toBottomOf="@+id/spDaerahAsalToko"
+                    app:layout_constraintEnd_toEndOf="@+id/spDaerahAsalToko"
+                    app:layout_constraintTop_toTopOf="@+id/spDaerahAsalToko" />
 
                 <TextView
                     android:id="@+id/tvJudulEmailToko"
@@ -121,29 +112,53 @@
                     app:layout_constraintTop_toBottomOf="@+id/spDaerahAsalToko" />
 
                 <TextView
-                    android:id="@+id/tvJudulDaerahAsal"
+                    android:id="@+id/tvJudulRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/cabin"
-                    android:text="Daerah Asal"
-                    app:layout_constraintStart_toStartOf="@+id/etNamaToko"
-                    app:layout_constraintTop_toBottomOf="@+id/etNamaToko" />
+                    android:text="Rating : "
+                    app:layout_constraintStart_toStartOf="@+id/tvJudulEmailToko"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJudulEmailToko" />
+
+                <TextView
+                    android:id="@+id/tvJudulVerifikasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cabin"
+                    android:text="Verifikasi : "
+                    app:layout_constraintStart_toStartOf="@+id/tvJudulRating"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJudulRating" />
 
                 <Button
                     android:id="@+id/btnRequestVerifikasi"
-                    android:layout_width="150dp"
+                    android:layout_width="300dp"
                     android:layout_height="40dp"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/cabin"
                     android:text="Request Verifikasi"
                     android:textColor="@android:color/white"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/tvJudulVerifikasi"
-                    app:layout_constraintTop_toBottomOf="@+id/spDaerahAsalToko" />
+                    app:layout_constraintStart_toStartOf="@+id/tvJudulVerifikasi"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJudulVerifikasi" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/btnSimpan"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/cabin"
+        android:text="Simpan"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

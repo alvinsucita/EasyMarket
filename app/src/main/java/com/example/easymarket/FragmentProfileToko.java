@@ -3,6 +3,8 @@ package com.example.easymarket;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -87,6 +89,31 @@ public class FragmentProfileToko extends Fragment {
         verif=view.findViewById(R.id.tvJudulVerifikasi);
         email=view.findViewById(R.id.tvJudulEmailToko);
         rating=view.findViewById(R.id.tvJudulRating);
+
+        GradientDrawable drawable = new GradientDrawable();
+        drawable.setShape(GradientDrawable.RECTANGLE);
+        drawable.setCornerRadius(100);
+        drawable.setColor(Color.WHITE);
+        nama.setBackground(drawable);
+
+        GradientDrawable drawable2 = new GradientDrawable();
+        drawable2.setShape(GradientDrawable.RECTANGLE);
+        drawable2.setCornerRadius(100);
+        drawable2.setStroke(8, Color.LTGRAY);
+        drawable2.setColor(Color.WHITE);
+        daerah.setBackground(drawable2);
+
+        GradientDrawable drawable3 = new GradientDrawable();
+        drawable3.setShape(GradientDrawable.RECTANGLE);
+        drawable3.setCornerRadius(100);
+        drawable3.setColor(Color.BLACK);
+        request.setBackground(drawable3);
+
+        GradientDrawable drawable4 = new GradientDrawable();
+        drawable4.setShape(GradientDrawable.RECTANGLE);
+        drawable4.setCornerRadius(100);
+        drawable4.setColor(Color.BLACK);
+        simpan.setBackground(drawable4);
 
         HomeToko homeToko= (HomeToko) getActivity();
         tokologin=homeToko.listClassToko.get(0);
