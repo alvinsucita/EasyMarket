@@ -294,10 +294,11 @@ public class ProfileUtamaActivity extends AppCompatActivity {
             profile.setBackgroundResource(0);
             profile.setImageURI(selected);
         }
+
     }
 
     public void gantiFoto() {
-        Intent change = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(change,1);
+        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intentCamera, 2);
     }
 }

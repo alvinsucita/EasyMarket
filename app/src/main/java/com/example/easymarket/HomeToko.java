@@ -25,11 +25,7 @@ import java.util.ArrayList;
 
 public class HomeToko extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-    ArrayList<ClassUser> listClassUser;
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
-    ArrayList<ClassToko> listClassToko;
-    ArrayList<ClassWishlist> listWishlist;
-    ArrayList<ClassRequestLelang> listRequestLelang = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +66,9 @@ public class HomeToko extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 if(menuItem.getItemId( )== R.id.navListBarang){
                     changeFragment(new FragmentListBarang(), listClassBarang);
+                }
+                else if(menuItem.getItemId()== R.id.navProfile){
+                    changeFragment(new FragmentProfileToko(), listClassBarang);
                 }
                 else if(menuItem.getItemId( )== R.id.navTambah){
                     changeFragment(new FragmentTambahBarang(), listClassBarang);

@@ -8,8 +8,12 @@ public class ClassToko implements Serializable {
     String password;
     String aktif;
     String FirebaseUID;
+    String DaerahAsal;
+    String Verified;
+    String Rating;
 
     public ClassToko(){}
+
     public ClassToko(String nama, String email, String password, String aktif, String firebaseUID) {
         this.nama = nama;
         this.email = email;

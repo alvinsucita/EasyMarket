@@ -41,11 +41,10 @@ public class ManageCloseLelang extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         listView = findViewById(R.id.lvclose);
-        FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("ClassLelang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(Integer.parseInt(ds.child("masuklelang").getValue().toString())==1){
                         ClassLelang semua_Class_lelang = new ClassLelang();
                         semua_Class_lelang.setIdbarang(ds.child("idbarang").getValue().toString());
                         semua_Class_lelang.setIdbarang(ds.child("harganormal").getValue().toString());
@@ -53,7 +52,6 @@ public class ManageCloseLelang extends AppCompatActivity {
                         semua_Class_lelang.setIdbarang(ds.child("hargaawal").getValue().toString());
                         semua_Class_lelang.setIdbarang(ds.child("namabidder").getValue().toString());
                         listClassLelang.add(semua_Class_lelang);
-                    }
                 }
                 for(int a = 0; a < listClassLelang.size(); a++){
                     test.add(listClassLelang.get(a).getIdbarang());

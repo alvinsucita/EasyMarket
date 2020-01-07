@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentProfileToko">
+
+    <TextView
+        android:id="@+id/tvJudulVerifikasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/cabin"
+        android:text="Verifikasi : "
+        app:layout_constraintStart_toStartOf="@+id/tvEmailToko"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulRating" />
+
+    <TextView
+        android:id="@+id/tvJudulRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/cabin"
+        android:text="Rating : "
+        app:layout_constraintStart_toStartOf="@+id/tvEmailToko"
+        app:layout_constraintTop_toBottomOf="@+id/spDaerahAsalToko" />
+
+    <TextView
+        android:id="@+id/tvJudulEmailToko"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Email"
+        app:layout_constraintStart_toStartOf="@+id/etNamaToko"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaToko" />
+
+    <TextView
+        android:id="@+id/tvEmailToko"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="TextView"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvJudulEmailToko"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulEmailToko" />
+
+    <TextView
+        android:id="@+id/tvJudulDaerahAsal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/cabin"
+        android:text="Daerah Asal"
+        app:layout_constraintStart_toStartOf="@+id/tvEmailToko"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailToko" />
+
+    <Spinner
+        android:id="@+id/spDaerahAsalToko"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/tvJudulDaerahAsal"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulDaerahAsal" />
+
+    <EditText
+        android:id="@+id/etNamaToko"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:fontFamily="@font/cabin"
+        android:inputType="textPersonName"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:text="Nama"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulNama" />
+
+    <TextView
+        android:id="@+id/tvJudulNama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/cabin"
+        android:text="Nama"
+        app:layout_constraintStart_toStartOf="@+id/etNamaToko"
+        app:layout_constraintTop_toBottomOf="@id/ivFotoProfilToko" />
+
+    <ImageView
+        android:id="@+id/ivFotoProfilToko"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulProfileToko" />
+
+    <TextView
+        android:id="@+id/tvJudulProfileToko"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/black"
+        android:fontFamily="@font/cabin"
+        android:text="Profile Toko"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
