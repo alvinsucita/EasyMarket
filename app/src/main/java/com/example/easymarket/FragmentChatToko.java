@@ -8,11 +8,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 /**
@@ -34,6 +43,9 @@ public class FragmentChatToko extends Fragment {
     }
 
     RecyclerView rv;
+    ArrayList<ClassChat> listClassChat = new ArrayList<>();
+    ArrayList<ClassChat> listClassChatFilter = new ArrayList<>();
+    AdapterChat adapterChat;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -49,5 +61,30 @@ public class FragmentChatToko extends Fragment {
         drawable.setStroke(8, Color.LTGRAY);
         drawable.setColor(Color.WHITE);
         rv.setBackground(drawable);
+
+        FirebaseDatabase.getInstance().getReference().child("ClassChat").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    if(ds.child("yangdikirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        ClassChat chat =new ClassChat();
+                        chat.setIsi(ds.child("isi").getValue().toString());
+                        chat.setWaktu(ds.child("waktu").getValue().toString());
+                        chat.setYangdikirim(ds.child("yangdikirim").getValue().toString());
+                        chat.setYangkirim(ds.child("yangkirim").getValue().toString());
+                        listClassChat.add(chat);
+                    }
+                }
+                listClassChatFilter.add(listClassChat.get(listClassChat.size()-1));
+                rv.setLayoutManager(new LinearLayoutManager(FragmentChatToko.this.getContext()));
+                adapterChat=new AdapterChat(listClassChatFilter);
+                rv.setAdapter(adapterChat);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

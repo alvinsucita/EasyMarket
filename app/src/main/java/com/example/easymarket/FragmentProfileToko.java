@@ -67,6 +67,7 @@ public class FragmentProfileToko extends Fragment {
     ClassToko tokologin;
     Uri selected;
     public ArrayList<ClassBarang> listClassBarang= new ArrayList<>();
+    ArrayList<ClassRating> listClassRating = new ArrayList<>();
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -121,7 +122,34 @@ public class FragmentProfileToko extends Fragment {
         listClassBarang = (ArrayList<ClassBarang>) getArguments().getSerializable("listClassBarang");
 
         nama.setText(tokologin.getNama());
-        rating.setText("Rating : "+tokologin.getRating()+" / 5");
+
+        FirebaseDatabase.getInstance().getReference().child("ClassRating").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Boolean cek = true;
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                    if(ds.child("toko").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        ClassRating semuaRating =new ClassRating();
+                        semuaRating.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
+                        semuaRating.setToko(ds.child("toko").getValue().toString());
+                        semuaRating.setYangrating(ds.child("yangrating").getValue().toString());
+                        listClassRating.add(semuaRating);
+                    }
+                }
+
+                int jumlahRating =0;
+                for (int i = 0; i < listClassRating.size(); i++) {
+                    jumlahRating=jumlahRating+listClassRating.get(i).rating;
+                }
+                int totalRating = jumlahRating/listClassRating.size();
+                rating.setText("Rating : "+totalRating+" / 5");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         int indexemail=tokologin.getEmail().indexOf("@");
         String tampungemail =tokologin.getEmail().substring(0,2)+"********"+tokologin.getEmail().substring(indexemail);

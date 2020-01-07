@@ -298,7 +298,6 @@ public class FragmentInfoToko extends Fragment {
                             }
                         });
                     }
-
                 }
                 else{
                     Toast.makeText(infoBarang, "Login Terlebih Dahulu", Toast.LENGTH_SHORT).show();
