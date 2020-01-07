@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class HomeAdmin extends AppCompatActivity {
 
     TextView user, toko, req, lelang, refund, nota;
+    Button refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,15 @@ public class HomeAdmin extends AppCompatActivity {
         lelang = findViewById(R.id.tvtotallelang);
         refund = findViewById(R.id.tvtotalrefund);
         nota = findViewById(R.id.tvtotalnota);
+        refresh = findViewById(R.id.btnrefreshadmin);
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
 
         FirebaseDatabase.getInstance().getReference().child("ClassUser").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -55,7 +67,13 @@ public class HomeAdmin extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                req.setText("Request Lelang Pending: "+ (int)dataSnapshot.getChildrenCount());
+                int ctr = 0;
+                for (DataSnapshot ds:dataSnapshot.getChildren()) {
+                    if (Integer.parseInt(ds.child("masuklelang").getValue().toString()) == 1) {
+                        ctr++;
+                    }
+                }
+                refund.setText("Request Lelang Pending: "+ ctr);
             }
 
             @Override
@@ -94,7 +112,7 @@ public class HomeAdmin extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("ClassNota").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                nota.setText("Total Nota: "+ (int)dataSnapshot.getChildrenCount());
+                nota.setText("Total Transaksi: "+ (int)dataSnapshot.getChildrenCount());
             }
 
             @Override
