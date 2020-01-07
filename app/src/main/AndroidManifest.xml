@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityPembayaran"></activity>
+        <activity android:name=".MasterToko"></activity>
+        <activity android:name=".ActivityPembayaran" />
         <activity android:name=".PaymentDetails" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".InfoRequestBarang" />
@@ -23,12 +24,10 @@
         <activity android:name=".HistoryActivity" />
         <activity android:name=".DetailEvent" />
         <activity android:name=".InfoBarangLelang" />
-        <activity android:name=".LelangActivity" />
         <activity android:name=".InfoPengirimanActivity" />
         <activity android:name=".NotaActivity" />
         <activity android:name=".Home" />
         <activity android:name=".ProfileUtamaActivity" />
-        <activity android:name=".UserProfileActivity" />
         <activity android:name=".MasterLelang" />
         <activity android:name=".ManageUsers" />
         <activity android:name=".HomeAdmin" />
@@ -47,12 +46,10 @@
         <activity android:name=".InfoBarang" />
         <activity android:name=".InfoComment" />
         <activity android:name=".Login" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".PreviewActivity" />
         <activity android:name=".PopupEvent" />
         <activity android:name=".RefundActivity" />
         <activity android:name=".Register" />
-        <activity android:name=".TransactionActivity" />
         <activity android:name=".WishList" />
 
         <service

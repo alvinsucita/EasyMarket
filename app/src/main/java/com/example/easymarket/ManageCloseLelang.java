@@ -47,14 +47,14 @@ public class ManageCloseLelang extends AppCompatActivity {
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                         ClassLelang semua_Class_lelang = new ClassLelang();
                         semua_Class_lelang.setIdbarang(ds.child("idbarang").getValue().toString());
-                        semua_Class_lelang.setIdbarang(ds.child("harganormal").getValue().toString());
-                        semua_Class_lelang.setIdbarang(ds.child("hargatertinggi").getValue().toString());
-                        semua_Class_lelang.setIdbarang(ds.child("hargaawal").getValue().toString());
-                        semua_Class_lelang.setIdbarang(ds.child("namabidder").getValue().toString());
+                        semua_Class_lelang.setHarganormal(Integer.valueOf(ds.child("harganormal").getValue().toString()));
+                        semua_Class_lelang.setHargatertinggi(Integer.valueOf(ds.child("hargatertinggi").getValue().toString()));
+                        semua_Class_lelang.setHargaawal(Integer.valueOf(ds.child("hargaawal").getValue().toString()));
+                        semua_Class_lelang.setNamabidder(ds.child("namabidder").getValue().toString());
                         listClassLelang.add(semua_Class_lelang);
                 }
-                for(int a = 0; a < listClassLelang.size(); a++){
-                    test.add(listClassLelang.get(a).getIdbarang());
+                for(int i = 0; i < listClassLelang.size(); i++){
+                    test.add(listClassLelang.get(i).getIdbarang());
                 }
                 user = new String[listClassLelang.size()];
                 user = test.toArray(user);
@@ -75,14 +75,14 @@ public class ManageCloseLelang extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(ManageCloseLelang.this, "berhasil close", Toast.LENGTH_SHORT).show();
-                                                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
-                                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                                db.addListenerForSingleValueEvent(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                         for (DataSnapshot dss:dataSnapshot.getChildren()){
                                                             if(dss.child("idbarang").getValue().toString().equals(a)){
                                                                 ClassRequestLelang updatelelang = new ClassRequestLelang();
-                                                                if(dss.child("masuklelang").getValue().toString().equals("1")) {
+                                                                if(dss.child("masuklelang").getValue().toString().equals("0")) {
                                                                     updatelelang.setMasuklelang(100);
                                                                     updatelelang.setIdbarang(dss.child("idbarang").getValue().toString());
                                                                 }
