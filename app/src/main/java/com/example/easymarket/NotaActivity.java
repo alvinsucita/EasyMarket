@@ -250,7 +250,7 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
                             semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
                             semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                             semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                            semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                            semua_Class_barang.setToko(ds.child("toko").getValue().toString());
                             semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                             listClassBarang.add(semua_Class_barang);
                     }
@@ -273,7 +273,7 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
                                         ClassBarang updatebarang = new ClassBarang();
                                         updatebarang.setNamabarang(ds.child("namabarang").getValue().toString());
                                         updatebarang.setStok(totalstok);
-                                        updatebarang.setNamatoko(ds.child("namatoko").getValue().toString());
+                                        updatebarang.setToko(ds.child("toko").getValue().toString());
                                         updatebarang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                                         updatebarang.setIdbarang(ds.child("idbarang").getValue().toString());
                                         updatebarang.setDeskripsi(ds.child("deskripsi").getValue().toString());

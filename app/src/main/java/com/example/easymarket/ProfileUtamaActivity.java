@@ -1,6 +1,8 @@
 package com.example.easymarket;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -133,7 +135,6 @@ public class ProfileUtamaActivity extends AppCompatActivity {
             }
         });
 
-
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -191,77 +192,112 @@ public class ProfileUtamaActivity extends AppCompatActivity {
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(nama.getText().toString().trim().equals("")){
-                    Toast.makeText(ProfileUtamaActivity.this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    if(Integer.parseInt(tanggal.getText().toString())!=0&&Integer.parseInt(tanggal.getText().toString())>31 ||Integer.parseInt(bulan.getText().toString())!=0&&Integer.parseInt(bulan.getText().toString())>12){
-                        Toast.makeText(ProfileUtamaActivity.this, "Inputan tanggal tidak sesuai", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileUtamaActivity.this);
+
+                // Set a title for alert dialog
+                builder.setTitle("Select your answer.");
+
+                // Ask the final question
+                builder.setMessage("Are you sure to hide?");
+
+                // Set the alert dialog yes button click listener
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do something when user clicked the Yes button
+                        // Set the TextView visibility GONE
+                        Toast.makeText(ProfileUtamaActivity.this, "nikmat", Toast.LENGTH_SHORT).show();
                     }
-                    else {
-                        if(2019-Integer.parseInt(tahun.getText().toString())<18){
-                            Toast.makeText(ProfileUtamaActivity.this, "Umur minimal 18 tahun", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            final int inthari=Integer.parseInt(tanggal.getText().toString());
-                            final int intbulan=Integer.parseInt(bulan.getText().toString());
-                            final int inttahun=Integer.parseInt(tahun.getText().toString());
+                });
 
-                            if(selected!=null){
-                                final ProgressDialog progressDialog = new ProgressDialog(ProfileUtamaActivity.this);
-                                progressDialog.setTitle("Ganti profile...");
-                                progressDialog.show();
-                                FirebaseStorage.getInstance().getReference().child("ProfilePicture/"+ FirebaseAuth.getInstance().getCurrentUser().getEmail()).putFile(selected).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        Toast.makeText(ProfileUtamaActivity.this, "Berhasil ganti profile", Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                                        double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                                        progressDialog.setMessage("Upload profile "+(int)progress+"%");
-                                        if (progress==100){
-                                            progressDialog.dismiss();
-                                        }
-                                    }
-                                });
-                            }
-                            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
-                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    Boolean cek = true;
-                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                        if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                                            ClassUser updateuser = new ClassUser();
-                                            updateuser.setDaerahasal(spDaerah.getSelectedItem().toString());
-                                            updateuser.setAktif("1");
-                                            updateuser.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                                            updateuser.setGender(spGender.getSelectedItem().toString());
-                                            updateuser.setNama(nama.getText().toString());
-                                            updateuser.setPassword(ds.child("password").getValue().toString());
-                                            updateuser.setHari(inthari);
-                                            updateuser.setBulan(intbulan);
-                                            updateuser.setTahun(inttahun);
-                                            databaseReference.child(ds.getKey()).setValue(updateuser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(ProfileUtamaActivity.this, "berhasil update profile", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-                        }
+                // Set the alert dialog no button click listener
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do something when No button clicked
+                        Toast.makeText(ProfileUtamaActivity.this,
+                                "No Button Clicked",Toast.LENGTH_SHORT).show();
                     }
-                }
+                });
+
+                AlertDialog dialog = builder.create();
+                // Display the alert dialog on interface
+                dialog.show();
+
+
+
+//                if(nama.getText().toString().trim().equals("")){
+//                    Toast.makeText(ProfileUtamaActivity.this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    if(Integer.parseInt(tanggal.getText().toString())!=0&&Integer.parseInt(tanggal.getText().toString())>31 ||Integer.parseInt(bulan.getText().toString())!=0&&Integer.parseInt(bulan.getText().toString())>12){
+//                        Toast.makeText(ProfileUtamaActivity.this, "Inputan tanggal tidak sesuai", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else {
+//                        if(2019-Integer.parseInt(tahun.getText().toString())<18){
+//                            Toast.makeText(ProfileUtamaActivity.this, "Umur minimal 18 tahun", Toast.LENGTH_SHORT).show();
+//                        }
+//                        else{
+//                            final int inthari=Integer.parseInt(tanggal.getText().toString());
+//                            final int intbulan=Integer.parseInt(bulan.getText().toString());
+//                            final int inttahun=Integer.parseInt(tahun.getText().toString());
+//
+//                            if(selected!=null){
+//                                final ProgressDialog progressDialog = new ProgressDialog(ProfileUtamaActivity.this);
+//                                progressDialog.setTitle("Ganti profile...");
+//                                progressDialog.show();
+//                                FirebaseStorage.getInstance().getReference().child("ProfilePicture/"+ FirebaseAuth.getInstance().getCurrentUser().getEmail()).putFile(selected).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                                    @Override
+//                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                        Toast.makeText(ProfileUtamaActivity.this, "Berhasil ganti profile", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                                    @Override
+//                                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+//                                        double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+//                                        progressDialog.setMessage("Upload profile "+(int)progress+"%");
+//                                        if (progress==100){
+//                                            progressDialog.dismiss();
+//                                        }
+//                                    }
+//                                });
+//                            }
+//                            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassUser");
+//                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//                                @Override
+//                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                    Boolean cek = true;
+//                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+//                                        if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+//                                            ClassUser updateuser = new ClassUser();
+//                                            updateuser.setDaerahasal(spDaerah.getSelectedItem().toString());
+//                                            updateuser.setAktif("1");
+//                                            updateuser.setEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+//                                            updateuser.setGender(spGender.getSelectedItem().toString());
+//                                            updateuser.setNama(nama.getText().toString());
+//                                            updateuser.setPassword(ds.child("password").getValue().toString());
+//                                            updateuser.setHari(inthari);
+//                                            updateuser.setBulan(intbulan);
+//                                            updateuser.setTahun(inttahun);
+//                                            databaseReference.child(ds.getKey()).setValue(updateuser).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                @Override
+//                                                public void onComplete(@NonNull Task<Void> task) {
+//                                                    Toast.makeText(ProfileUtamaActivity.this, "berhasil update profile", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            });
+//                                        }
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                                }
+//                            });
+//                        }
+//                    }
+//                }
             }
         });
 

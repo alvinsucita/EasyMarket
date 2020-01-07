@@ -85,7 +85,7 @@ public class  FragmentCommentBarang extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final InfoBarang infoBarang = (InfoBarang) getActivity();
-        idtoko = infoBarang.listClassBarang.get(infoBarang.indeks).namatoko;
+        idtoko = infoBarang.listClassBarang.get(infoBarang.indeks).toko;
         rv = view.findViewById(R.id.rvcomment);
         isicomment=view.findViewById(R.id.etEditComment);
         apiService= Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
