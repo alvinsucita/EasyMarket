@@ -77,5 +77,4 @@ public class ClassToko implements Serializable {
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-}
+    }}

@@ -122,7 +122,11 @@ public class HomeAdmin extends AppCompatActivity {
             startActivity(i);
         }
         else if(item.getItemId()==R.id.managetoko){
-            Intent i = new Intent(HomeAdmin.this,ManageUsers.class);
+            Intent i = new Intent(HomeAdmin.this,MasterToko.class);
+            startActivity(i);
+        }
+        else if(item.getItemId()==R.id.veriftoko){
+            Intent i = new Intent(HomeAdmin.this,ManageVerifToko.class);
             startActivity(i);
         }
         else if(item.getItemId()==R.id.closelelang){

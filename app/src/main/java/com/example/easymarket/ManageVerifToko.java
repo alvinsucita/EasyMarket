@@ -21,9 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MasterToko extends AppCompatActivity {
-
-    //2 == power badge?
+public class ManageVerifToko extends AppCompatActivity {
 
     ListView listView;
     ArrayList<ClassToko> listClassToko = new ArrayList<>();
@@ -35,7 +33,7 @@ public class MasterToko extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_master_toko);
+        setContentView(R.layout.activity_manage_verif_toko);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         listView = findViewById(R.id.lvtoko);
@@ -44,22 +42,24 @@ public class MasterToko extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    ClassToko semua_Class_toko = new ClassToko();
-                    semua_Class_toko.setEmail(ds.child("email").getValue().toString());
-                    semua_Class_toko.setNama(ds.child("nama").getValue().toString());
-                    semua_Class_toko.setPassword(ds.child("password").getValue().toString());
-                    semua_Class_toko.setDaerahasal(ds.child("daerahasal").getValue().toString());
-                    semua_Class_toko.setRating(Integer.valueOf(ds.child("rating").getValue().toString()));
-                    semua_Class_toko.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
-                    semua_Class_toko.setAktif(ds.child("aktif").getValue().toString());
-                    listClassToko.add(semua_Class_toko);
+                    if(ds.child("aktif").getValue().toString().equals("100")) {
+                        ClassToko semua_Class_toko = new ClassToko();
+                        semua_Class_toko.setEmail(ds.child("email").getValue().toString());
+                        semua_Class_toko.setNama(ds.child("nama").getValue().toString());
+                        semua_Class_toko.setDaerahasal(ds.child("daerahasal").getValue().toString());
+                        semua_Class_toko.setRating(Integer.valueOf(ds.child("rating").getValue().toString()));
+                        semua_Class_toko.setPassword(ds.child("password").getValue().toString());
+                        semua_Class_toko.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
+                        semua_Class_toko.setAktif(ds.child("aktif").getValue().toString());
+                        listClassToko.add(semua_Class_toko);
+                    }
                 }
                 for(int a = 0; a< listClassToko.size(); a++){
                     test.add(listClassToko.get(a).getNama());
                 }
                 user = new String[listClassToko.size()];
                 user = test.toArray(user);
-                AdapterMenuAdmin ama = new AdapterMenuAdmin(MasterToko.this, user);
+                AdapterMenuAdmin ama = new AdapterMenuAdmin(ManageVerifToko.this, user);
                 listView.setAdapter(ama);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                     @Override
@@ -73,8 +73,7 @@ public class MasterToko extends AppCompatActivity {
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
                                     if(ds.child("email").getValue().toString().equals(a)){
                                         ClassToko updatetoko = new ClassToko();
-                                        if(ds.child("aktif").getValue().toString().equals("0")) updatetoko.setAktif("1");
-                                        else if(!ds.child("aktif").getValue().toString().equals("0")) updatetoko.setAktif("0");
+                                        if(ds.child("aktif").getValue().toString().equals("100")) updatetoko.setAktif("2");
                                         updatetoko.setEmail(ds.child("email").getValue().toString());
                                         updatetoko.setNama(ds.child("nama").getValue().toString());
                                         updatetoko.setDaerahasal(ds.child("daerahasal").getValue().toString());
@@ -84,7 +83,7 @@ public class MasterToko extends AppCompatActivity {
                                         databaseReference.child(ds.getKey()).setValue(updatetoko).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(MasterToko.this, "berhasil update", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ManageVerifToko.this, "berhasil update", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
