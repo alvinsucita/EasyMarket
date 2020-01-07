@@ -91,9 +91,6 @@ public class HomeToko extends AppCompatActivity {
                         else if(menuItem.getItemId( )== R.id.navTambah){
                             changeFragment(new FragmentTambahBarang(), listClassBarang);
                         }
-                        else if(menuItem.getItemId( )== R.id.navInbox){
-                            changeFragment(new FragmentInbox(), listClassBarang);
-                        }
                         else if(menuItem.getItemId( )== R.id.navChat){
                             changeFragment(new FragmentChatToko(), listClassBarang);
                         }
@@ -121,6 +118,7 @@ public class HomeToko extends AppCompatActivity {
         menu.getItem(2).setVisible(false);
         menu.getItem(3).setVisible(false);
         menu.getItem(4).setVisible(true);
+        menu.getItem(5).setVisible(true);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -131,6 +129,9 @@ public class HomeToko extends AppCompatActivity {
             FirebaseAuth.getInstance().signInWithEmailAndPassword("guest@guest.com","guest123");
             Intent i = new Intent(HomeToko.this,Login.class);
             startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemInbox){
+            changeFragment(new FragmentInbox(), listClassBarang);
         }
         return super.onOptionsItemSelected(item);
     }
