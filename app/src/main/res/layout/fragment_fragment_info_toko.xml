@@ -37,30 +37,47 @@
         android:id="@+id/tvDaerahToko"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/cabin"
-        android:text="Daerah Toko Disini"
+        android:text="Daerah Toko : "
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/tvNamaToko"
         app:layout_constraintStart_toStartOf="@+id/tvNamaToko"
         app:layout_constraintTop_toBottomOf="@+id/tvNamaToko" />
 
-    <ImageView
-        android:id="@+id/ivRating1"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tvRatingToko"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_star_border_black_24dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/cabin"
+        android:text="Rating : "
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tvDaerahToko"
         app:layout_constraintStart_toStartOf="@+id/tvDaerahToko"
         app:layout_constraintTop_toBottomOf="@+id/tvDaerahToko" />
 
-    <ImageView
-        android:id="@+id/ivRating2"
+    <TextView
+        android:id="@+id/tvTransaksiToko"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/cabin"
+        android:text="Transaksi Berhasil :"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tvRatingToko"
+        app:layout_constraintStart_toStartOf="@+id/tvRatingToko"
+        app:layout_constraintTop_toBottomOf="@+id/tvRatingToko" />
+
+    <TextView
+        android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:src="@drawable/ic_star_border_black_24dp"
-        app:layout_constraintStart_toEndOf="@+id/ivRating1"
-        app:layout_constraintTop_toTopOf="@+id/ivRating1" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Rating yang ingin anda berikan : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTransaksiToko" />
 
     <ImageView
         android:id="@+id/ivRating3"
@@ -88,5 +105,23 @@
         android:src="@drawable/ic_star_border_black_24dp"
         app:layout_constraintStart_toEndOf="@+id/ivRating4"
         app:layout_constraintTop_toTopOf="@+id/ivRating4" />
+
+    <ImageView
+        android:id="@+id/ivRating2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toEndOf="@+id/ivRating1"
+        app:layout_constraintTop_toTopOf="@+id/ivRating1" />
+
+    <ImageView
+        android:id="@+id/ivRating1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_star_border_black_24dp"
+        app:layout_constraintStart_toStartOf="@+id/textView30"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
