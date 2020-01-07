@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,10 +23,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
@@ -143,10 +153,114 @@ public class FragmentProfileToko extends Fragment {
             }
         });
 
+
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(nama.getText().toString().trim().equals("")){
+                    Toast.makeText(FragmentProfileToko.this.getContext(), "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if(selected!=null){
+                        final ProgressDialog progressDialog = new ProgressDialog(FragmentProfileToko.this.getContext());
+                        progressDialog.setTitle("Ganti profile...");
+                        progressDialog.show();
+                        FirebaseStorage.getInstance().getReference().child("ProfilePicture/"+ FirebaseAuth.getInstance().getCurrentUser().getEmail()).putFile(selected).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(FragmentProfileToko.this.getContext(), "Berhasil ganti profile", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                                progressDialog.setMessage("Upload profile "+(int)progress+"%");
+                                if (progress==100){
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassToko");
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean cek = true;
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                    ClassToko updatetoko = new ClassToko();
+                                    updatetoko.setDaerahasal(daerah.getSelectedItem().toString());
+                                    updatetoko.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
+                                    updatetoko.setAktif(ds.child("aktif").getValue().toString());
+                                    updatetoko.setEmail(ds.child("email").getValue().toString());
+                                    updatetoko.setNama(nama.getText().toString());
+                                    updatetoko.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
+                                    updatetoko.setPassword(ds.child("password").getValue().toString());
+                                    databaseReference.child(ds.getKey()).setValue(updatetoko).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(FragmentProfileToko.this.getContext(), "berhasil update profile", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tokologin.getAktif().equals("2")){
+                    Toast.makeText(FragmentProfileToko.this.getContext(), "Toko anda telah terverifikasi", Toast.LENGTH_SHORT).show();
+                }
+                else if(tokologin.getAktif().equals("100")){
+                    Toast.makeText(FragmentProfileToko.this.getContext(), "Request anda belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if(tokologin.getRating()<4 && listClassBarang.size()<5){
+                        Toast.makeText(FragmentProfileToko.this.getContext(), "Toko anda harus mempunyai rating minimal 4 dan mempunyai barang minimal 5", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassToko");
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Boolean cek = true;
+                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                    if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                        ClassToko updatetoko = new ClassToko();
+                                        updatetoko.setDaerahasal(ds.child("daerahasal").getValue().toString());
+                                        updatetoko.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
+                                        updatetoko.setAktif("100");
+                                        updatetoko.setEmail(ds.child("email").getValue().toString());
+                                        updatetoko.setNama(ds.child("nama").getValue().toString());
+                                        updatetoko.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
+                                        updatetoko.setPassword(ds.child("password").getValue().toString());
+                                        databaseReference.child(ds.getKey()).setValue(updatetoko).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(FragmentProfileToko.this.getContext(), "Toko anda sudah direquest untuk diverifikasi, tunggu konfirmasi dari admin", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
             }
         });
 
