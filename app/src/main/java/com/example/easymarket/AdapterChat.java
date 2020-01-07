@@ -1,5 +1,7 @@
 package com.example.easymarket;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +52,13 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.listViewHolder
             super(itemView);
             nama=itemView.findViewById(R.id.tvnamauser);
             isi=itemView.findViewById(R.id.tvchat);
+
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setShape(GradientDrawable.RECTANGLE);
+            drawable.setCornerRadius(100);
+            drawable.setStroke(8, Color.LTGRAY);
+            drawable.setColor(Color.WHITE);
+            isi.setBackground(drawable);
         }
     }
 }
