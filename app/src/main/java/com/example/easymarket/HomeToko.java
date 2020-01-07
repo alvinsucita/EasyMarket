@@ -2,6 +2,7 @@ package com.example.easymarket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -90,9 +91,6 @@ public class HomeToko extends AppCompatActivity {
                         else if(menuItem.getItemId( )== R.id.navTambah){
                             changeFragment(new FragmentTambahBarang(), listClassBarang);
                         }
-                        else if(menuItem.getItemId( )== R.id.navInbox){
-                            changeFragment(new FragmentInbox(), listClassBarang);
-                        }
                         else if(menuItem.getItemId( )== R.id.navChat){
                             changeFragment(new FragmentChatToko(), listClassBarang);
                         }
@@ -112,11 +110,15 @@ public class HomeToko extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu,menu);
+        if(menu instanceof MenuBuilder){
+            ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
         menu.getItem(0).setVisible(false);
         menu.getItem(1).setVisible(false);
         menu.getItem(2).setVisible(false);
         menu.getItem(3).setVisible(false);
         menu.getItem(4).setVisible(true);
+        menu.getItem(5).setVisible(true);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -127,6 +129,9 @@ public class HomeToko extends AppCompatActivity {
             FirebaseAuth.getInstance().signInWithEmailAndPassword("guest@guest.com","guest123");
             Intent i = new Intent(HomeToko.this,Login.class);
             startActivity(i);
+        }
+        else if(item.getItemId()==R.id.itemInbox){
+            changeFragment(new FragmentInbox(), listClassBarang);
         }
         return super.onOptionsItemSelected(item);
     }
