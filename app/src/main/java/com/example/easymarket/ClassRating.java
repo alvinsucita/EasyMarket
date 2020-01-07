@@ -7,6 +7,7 @@ public class ClassRating implements Serializable {
     String toko;
     int rating;
 
+    public  ClassRating(){}
     public ClassRating(String yangrating, String toko, int rating) {
         this.yangrating = yangrating;
         this.toko = toko;
