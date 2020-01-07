@@ -139,7 +139,7 @@ public class WishList extends AppCompatActivity {
                     semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
                     semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
                     semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                    semua_Class_barang.setNamatoko(ds.child("namatoko").getValue().toString());
+                    semua_Class_barang.setToko(ds.child("toko").getValue().toString());
                     semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
                     listClassBarang.add(semua_Class_barang);
                 }
@@ -245,7 +245,7 @@ public class WishList extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Boolean cek = true;
                     for (DataSnapshot ds:dataSnapshot.getChildren()) {
-                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(0).namatoko)){
+                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(0).toko)){
                             String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
                             String idbarang=filterClassBarang.get(0).idbarang;
                             int harga=filterClassBarang.get(0).harga;
@@ -275,7 +275,7 @@ public class WishList extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Boolean cek = true;
                     for (DataSnapshot ds:dataSnapshot.getChildren()) {
-                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(1).namatoko)){
+                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(1).toko)){
                             String akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
                             String idbarang=filterClassBarang.get(1).idbarang;
                             int harga=filterClassBarang.get(1).harga;
@@ -305,7 +305,7 @@ public class WishList extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Boolean cek = true;
                     for (DataSnapshot ds:dataSnapshot.getChildren()) {
-                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(0).namatoko)){
+                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(0).toko)){
                             akunyangbeli=FirebaseAuth.getInstance().getCurrentUser().getEmail();
                             idbarang=filterClassBarang.get(0).idbarang;
                             jumlahtampung = intjumlah;
@@ -326,7 +326,7 @@ public class WishList extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Boolean cek = true;
                     for (DataSnapshot ds:dataSnapshot.getChildren()) {
-                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(1).namatoko)){
+                        if(ds.child("email").getValue().toString().equals(filterClassBarang.get(1).toko)){
                             idbarang2=filterClassBarang.get(1).idbarang;
                             jumlahtampung2 = intjumlah2;
                             intharga2=filterClassBarang.get(1).harga;
