@@ -25,14 +25,12 @@ public class ManageCloseLelang extends AppCompatActivity {
 
     ListView listView;
     ArrayList<ClassLelang> listClassLelang = new ArrayList<>();
-    ArrayList<ClassRequestLelang> listClassReq = new ArrayList<>();
-    DatabaseReference dbreftemp;
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassBarang> listFilterClassBarang = new ArrayList<>();
 
     ArrayList<String> test = new ArrayList<>();
     String[] user;
     String a;
-
-    //requestlelang 100
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,67 +43,91 @@ public class ManageCloseLelang extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                        ClassLelang semua_Class_lelang = new ClassLelang();
-                        semua_Class_lelang.setIdbarang(ds.child("idbarang").getValue().toString());
-                        semua_Class_lelang.setHarganormal(Integer.valueOf(ds.child("harganormal").getValue().toString()));
-                        semua_Class_lelang.setHargatertinggi(Integer.valueOf(ds.child("hargatertinggi").getValue().toString()));
-                        semua_Class_lelang.setHargaawal(Integer.valueOf(ds.child("hargaawal").getValue().toString()));
-                        semua_Class_lelang.setNamabidder(ds.child("namabidder").getValue().toString());
-                        listClassLelang.add(semua_Class_lelang);
+                    ClassLelang semua_Class_lelang = new ClassLelang();
+                    semua_Class_lelang.setIdbarang(ds.child("idbarang").getValue().toString());
+                    semua_Class_lelang.setHarganormal(Integer.valueOf(ds.child("harganormal").getValue().toString()));
+                    semua_Class_lelang.setHargatertinggi(Integer.valueOf(ds.child("hargatertinggi").getValue().toString()));
+                    semua_Class_lelang.setHargaawal(Integer.valueOf(ds.child("hargaawal").getValue().toString()));
+                    semua_Class_lelang.setNamabidder(ds.child("namabidder").getValue().toString());
+                    listClassLelang.add(semua_Class_lelang);
                 }
-                for(int i = 0; i < listClassLelang.size(); i++){
-                    test.add(listClassLelang.get(i).getIdbarang());
-                }
-                user = new String[listClassLelang.size()];
-                user = test.toArray(user);
-                AdapterMenuAdmin ama = new AdapterMenuAdmin(ManageCloseLelang.this, user);
-                listView.setAdapter(ama);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        TextView tv = findViewById(R.id.layoutjudul);
-                        a = tv.getText().toString();
-                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
-                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean cek = true;
+                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                            ClassBarang semua_Class_barang =new ClassBarang();
+                            semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                            semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                            listClassBarang.add(semua_Class_barang);
+                        }
+                        for (int i = 0; i < listClassLelang.size(); i++) {
+                            for (int j = 0; j < listClassBarang.size(); j++) {
+                                if(listClassBarang.get(j).idbarang.equals(listClassLelang.get(i).idbarang)){
+                                    listFilterClassBarang.add(listClassBarang.get(j));
+                                }
+                            }
+                        }
+                        for(int i = 0; i < listFilterClassBarang.size(); i++){
+                            test.add(listFilterClassBarang.get(i).getNamabarang());
+                        }
+                        user = new String[listFilterClassBarang.size()];
+                        user = test.toArray(user);
+                        AdapterMenuAdmin ama = new AdapterMenuAdmin(ManageCloseLelang.this, user);
+                        listView.setAdapter(ama);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(ds.child("idbarang").getValue().toString().equals(a)){
-                                        ds.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(ManageCloseLelang.this, "berhasil close", Toast.LENGTH_SHORT).show();
-                                                final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
-                                                db.addListenerForSingleValueEvent(new ValueEventListener() {
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                TextView tv = findViewById(R.id.layoutjudul);
+                                a = tv.getText().toString();
+                                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
+                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                            if(ds.child("idbarang").getValue().toString().equals(a)){
+                                                ds.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
-                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                        for (DataSnapshot dss:dataSnapshot.getChildren()){
-                                                            if(dss.child("idbarang").getValue().toString().equals(a)){
-                                                                ClassRequestLelang updatelelang = new ClassRequestLelang();
-                                                                if(dss.child("masuklelang").getValue().toString().equals("0")) {
-                                                                    updatelelang.setMasuklelang(100);
-                                                                    updatelelang.setIdbarang(dss.child("idbarang").getValue().toString());
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(ManageCloseLelang.this, "berhasil close", Toast.LENGTH_SHORT).show();
+                                                        final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                                        db.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                for (DataSnapshot dss:dataSnapshot.getChildren()){
+                                                                    if(dss.child("idbarang").getValue().toString().equals(a)){
+                                                                        ClassRequestLelang updatelelang = new ClassRequestLelang();
+                                                                        if(dss.child("masuklelang").getValue().toString().equals("0")) {
+                                                                            updatelelang.setMasuklelang(100);
+                                                                            updatelelang.setIdbarang(dss.child("idbarang").getValue().toString());
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
-                                                        }
-                                                    }
 
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                                            }
+                                                        });
                                                     }
                                                 });
                                             }
-                                        });
+                                        }
                                     }
-                                }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                    }
+                                });
                             }
                         });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
             }

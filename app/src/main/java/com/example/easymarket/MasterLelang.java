@@ -26,6 +26,8 @@ public class MasterLelang extends AppCompatActivity {
 
     ListView listView;
     ArrayList<ClassRequestLelang> listClassReq = new ArrayList<>();
+    ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
+    ArrayList<ClassBarang> listFilterClassBarang = new ArrayList<>();
     DatabaseReference dbreftemp;
 
     ArrayList<String> test = new ArrayList<>();
@@ -84,8 +86,6 @@ public class MasterLelang extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
-
-
             }
         });
 
@@ -100,44 +100,67 @@ public class MasterLelang extends AppCompatActivity {
                         listClassReq.add(semua_Class_req);
                     }
                 }
-                for(int a = 0; a < listClassReq.size(); a++){
-                    test.add(listClassReq.get(a).getIdbarang());
-                }
-                user = new String[listClassReq.size()];
-                user = test.toArray(user);
-                AdapterMenuAdmin ama = new AdapterMenuAdmin(MasterLelang.this, user);
-                listView.setAdapter(ama);
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        TextView tv = view.findViewById(R.id.layoutjudul);
-                        a = tv.getText().toString();
-                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
-                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(ds.child("idbarang").getValue().toString().equals(a)){
-                                        ClassRequestLelang updatelelang = new ClassRequestLelang();
-                                        if(ds.child("masuklelang").getValue().toString().equals("1")) {
-                                            updatelelang.setMasuklelang(0);
-                                            updatelelang.setIdbarang(ds.child("idbarang").getValue().toString());
-                                        }
-                                        databaseReference.child(ds.getKey()).setValue(updatelelang).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(MasterLelang.this, "berhasil approve", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    }
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                            ClassBarang semua_Class_barang =new ClassBarang();
+                            semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                            semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                            listClassBarang.add(semua_Class_barang);
+                        }
+                        for (int i = 0; i < listClassReq.size(); i++) {
+                            for (int j = 0; j < listClassBarang.size(); j++) {
+                                if(listClassBarang.get(j).idbarang.equals(listClassReq.get(i).idbarang)){
+                                    listFilterClassBarang.add(listClassBarang.get(j));
                                 }
                             }
-
+                        }
+                        for(int a = 0; a < listFilterClassBarang.size(); a++){
+                            test.add(listFilterClassBarang.get(a).getNamabarang());
+                        }
+                        user = new String[listFilterClassBarang.size()];
+                        user = test.toArray(user);
+                        AdapterMenuAdmin ama = new AdapterMenuAdmin(MasterLelang.this, user);
+                        listView.setAdapter(ama);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                             @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                TextView tv = view.findViewById(R.id.layoutjudul);
+                                a = tv.getText().toString();
+                                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                            if(ds.child("idbarang").getValue().toString().equals(a)){
+                                                ClassRequestLelang updatelelang = new ClassRequestLelang();
+                                                if(ds.child("masuklelang").getValue().toString().equals("1")) {
+                                                    updatelelang.setMasuklelang(0);
+                                                    updatelelang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                                }
+                                                databaseReference.child(ds.getKey()).setValue(updatelelang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(MasterLelang.this, "berhasil approve", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
 
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
                             }
                         });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
             }

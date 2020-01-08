@@ -23,8 +23,6 @@ import java.util.ArrayList;
 
 public class MasterToko extends AppCompatActivity {
 
-    //2 == power badge?
-
     ListView listView;
     ArrayList<ClassToko> listClassToko = new ArrayList<>();
 
