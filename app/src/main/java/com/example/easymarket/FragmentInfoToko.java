@@ -124,8 +124,13 @@ public class FragmentInfoToko extends Fragment {
                 for (int i = 0; i < listClassRating.size(); i++) {
                     jumlahRating=jumlahRating+listClassRating.get(i).rating;
                 }
-                int totalRating = jumlahRating/listClassRating.size();
-                rating.setText("Rating : "+totalRating+" / 5");
+                if(listClassRating.size()!=0){
+                    int totalRating = jumlahRating/listClassRating.size();
+                    rating.setText("Rating : "+totalRating+" / 5");
+                }
+                else{
+                    rating.setText("Rating : 0 / 5");
+                }
 
                 int ratingDariUser=0;
                 for (int i = 0; i < listClassRating.size(); i++) {
