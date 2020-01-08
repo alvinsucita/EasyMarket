@@ -251,6 +251,7 @@ public class ProfileUtamaActivity extends AppCompatActivity {
                                                     updateuser.setGender(spGender.getSelectedItem().toString());
                                                     updateuser.setNama(nama.getText().toString());
                                                     updateuser.setPassword(ds.child("password").getValue().toString());
+                                                    updateuser.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
                                                     updateuser.setHari(inthari);
                                                     updateuser.setBulan(intbulan);
                                                     updateuser.setTahun(inttahun);
