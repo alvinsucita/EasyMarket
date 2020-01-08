@@ -1,7 +1,9 @@
 package com.example.easymarket;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -165,86 +167,38 @@ public class FragmentTambahBarang extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String strnama = namabarang.getText().toString();
-                final String strharga = harga.getText().toString();
-                final String strdeskripsi = deskripsi.getText().toString();
-                final String strstok = stok.getText().toString();
-                final String strkategori = sp.getSelectedItem().toString();
-                String strid = "";
-                int ctr=0;
+                AlertDialog.Builder builder = new AlertDialog.Builder(FragmentTambahBarang.this.getContext());
 
-                databaseReference_barang.addListenerForSingleValueEvent(new ValueEventListener() {
+                builder.setMessage("Apakah semua data barang yang akan anda tambahkan sudah tepat dan benar ?");
+
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean cek = true;
-                        for (DataSnapshot ds:dataSnapshot.getChildren()){
-                            ClassBarang semua_Class_barang =new ClassBarang();
-                            semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
-                            semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
-                            semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
-                            semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
-                            semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
-                            semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
-                            semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
-                            semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
-                            semua_Class_barang.setToko(ds.child("toko").getValue().toString());
-                            semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
-                            listClassBarang.add(semua_Class_barang);
-                        }
-                    }
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String strnama = namabarang.getText().toString();
+                        final String strharga = harga.getText().toString();
+                        final String strdeskripsi = deskripsi.getText().toString();
+                        final String strstok = stok.getText().toString();
+                        final String strkategori = sp.getSelectedItem().toString();
+                        String strid = "";
+                        int ctr=0;
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-                for (int i = 0; i < listClassBarang.size(); i++) {
-                    if(listClassBarang.get(i).kategori.equals(strkategori)){
-                        ctr++;
-                    }
-                }
-
-                if(ctr>=0&&ctr<9){
-                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"0000"+(ctr+1);
-                }else if(ctr>=9&&ctr<99){
-                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"000"+(ctr+1);
-                }else if(ctr>=99&&ctr<999){
-                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"00"+(ctr+1);
-                }else if(ctr>=999&&ctr<9999){
-                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"0"+(ctr+1);
-                }else if(ctr>=9999&&ctr<99999){
-                    strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+(ctr+1);
-                }
-
-                if(!strnama.equals("") && !strharga.equals("") && !strdeskripsi.equals("") && !strstok.equals("")){
-                    if(selected!=null){
-                        databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
-                        final String finalStrid = strid;
-                        databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
+                        databaseReference_barang.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 Boolean cek = true;
                                 for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                    if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                                        String emailtoko = ds.child("email").getValue().toString();
-
-                                        FirebaseStorage.getInstance().getReference().child("GambarBarang/"+ finalStrid).putFile(selected);
-                                        ClassBarang barangbaru=new ClassBarang(finalStrid,emailtoko,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok));
-                                        databaseReference_barang = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
-                                        String key=databaseReference_barang.push().getKey();
-                                        databaseReference_barang.child(key).setValue(barangbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                Toast.makeText(getContext(), "Barang baru berhasil ditambahkan", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                        namabarang.setText("");
-                                        harga.setText("");
-                                        deskripsi.setText("");
-                                        stok.setText("");
-                                        foto.setBackgroundResource(0);
-                                    }
+                                    ClassBarang semua_Class_barang =new ClassBarang();
+                                    semua_Class_barang.setDeskripsi(ds.child("deskripsi").getValue().toString());
+                                    semua_Class_barang.setDibeli(Integer.parseInt(ds.child("dibeli").getValue().toString()));
+                                    semua_Class_barang.setDilihat(Integer.parseInt(ds.child("dilihat").getValue().toString()));
+                                    semua_Class_barang.setHarga(Integer.parseInt(ds.child("harga").getValue().toString()));
+                                    semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                    semua_Class_barang.setKategori(ds.child("kategori").getValue().toString());
+                                    semua_Class_barang.setLikes(Integer.parseInt(ds.child("likes").getValue().toString()));
+                                    semua_Class_barang.setNamabarang(ds.child("namabarang").getValue().toString());
+                                    semua_Class_barang.setToko(ds.child("toko").getValue().toString());
+                                    semua_Class_barang.setStok(Integer.parseInt(ds.child("stok").getValue().toString()));
+                                    listClassBarang.add(semua_Class_barang);
                                 }
                             }
 
@@ -253,14 +207,79 @@ public class FragmentTambahBarang extends Fragment {
 
                             }
                         });
+
+                        for (int i = 0; i < listClassBarang.size(); i++) {
+                            if(listClassBarang.get(i).kategori.equals(strkategori)){
+                                ctr++;
+                            }
+                        }
+
+                        if(ctr>=0&&ctr<9){
+                            strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"0000"+(ctr+1);
+                        }else if(ctr>=9&&ctr<99){
+                            strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"000"+(ctr+1);
+                        }else if(ctr>=99&&ctr<999){
+                            strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"00"+(ctr+1);
+                        }else if(ctr>=999&&ctr<9999){
+                            strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+"0"+(ctr+1);
+                        }else if(ctr>=9999&&ctr<99999){
+                            strid=strkategori.toUpperCase().substring(0,1)+strkategori.toUpperCase().substring(1,2)+(ctr+1);
+                        }
+
+                        if(!strnama.equals("") && !strharga.equals("") && !strdeskripsi.equals("") && !strstok.equals("")){
+                            if(selected!=null){
+                                databaseReference_toko = FirebaseDatabase.getInstance().getReference().child("ClassToko");
+                                final String finalStrid = strid;
+                                databaseReference_toko.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        Boolean cek = true;
+                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                            if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                                String emailtoko = ds.child("email").getValue().toString();
+
+                                                FirebaseStorage.getInstance().getReference().child("GambarBarang/"+ finalStrid).putFile(selected);
+                                                ClassBarang barangbaru=new ClassBarang(finalStrid,emailtoko,strnama,strdeskripsi,strkategori,Integer.parseInt(strharga),0,0,0,Integer.parseInt(strstok));
+                                                databaseReference_barang = FirebaseDatabase.getInstance().getReference().child("ClassBarang");
+                                                String key=databaseReference_barang.push().getKey();
+                                                databaseReference_barang.child(key).setValue(barangbaru).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(getContext(), "Barang baru berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                                namabarang.setText("");
+                                                harga.setText("");
+                                                deskripsi.setText("");
+                                                stok.setText("");
+                                                foto.setBackgroundResource(0);
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                            else{
+                                Toast.makeText(homeToko, "Masukkan foto barang", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(homeToko, "Isi semua field terlebih dahulu", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else{
-                        Toast.makeText(homeToko, "Masukkan foto barang", Toast.LENGTH_SHORT).show();
+                });
+                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                     }
-                }
-                else{
-                    Toast.makeText(homeToko, "Isi semua field terlebih dahulu", Toast.LENGTH_SHORT).show();
-                }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 

@@ -1,6 +1,9 @@
 package com.example.easymarket;
 
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -42,6 +45,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
@@ -229,11 +234,28 @@ public class FragmentListBarang extends Fragment {
                             }
 
                             if(requestLelang.size()==0){
-                                ClassRequestLelang requestBaru=new ClassRequestLelang(idbarang,1);
-                                databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
-                                String key=databaseReference_request.push().getKey();
-                                databaseReference_request.child(key).setValue(requestBaru);
-                                Toast.makeText(getContext(), "Barang anda berhasil direquest ke admin untuk dilelang", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(FragmentListBarang.this.getContext());
+
+                                builder.setMessage("Apakah anda yakin untuk request barang ini ke admin untuk dilelang ?");
+
+                                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ClassRequestLelang requestBaru=new ClassRequestLelang(idbarang,1);
+                                        databaseReference_request = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                        String key=databaseReference_request.push().getKey();
+                                        databaseReference_request.child(key).setValue(requestBaru);
+                                        Toast.makeText(getContext(), "Barang anda berhasil direquest ke admin untuk dilelang", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
                             }
                             else{
                                 int ctr=0;

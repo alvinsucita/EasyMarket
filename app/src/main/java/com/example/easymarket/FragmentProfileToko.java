@@ -1,7 +1,9 @@
 package com.example.easymarket;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -141,8 +143,13 @@ public class FragmentProfileToko extends Fragment {
                 for (int i = 0; i < listClassRating.size(); i++) {
                     jumlahRating=jumlahRating+listClassRating.get(i).rating;
                 }
-                int totalRating = jumlahRating/listClassRating.size();
-                rating.setText("Rating : "+totalRating+" / 5");
+                if(listClassRating.size()!=0){
+                    int totalRating = jumlahRating/listClassRating.size();
+                    rating.setText("Rating : "+totalRating+" / 5");
+                }
+                else{
+                    rating.setText("Rating : 0 / 5");
+                }
             }
 
             @Override
@@ -216,56 +223,73 @@ public class FragmentProfileToko extends Fragment {
                     Toast.makeText(FragmentProfileToko.this.getContext(), "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    if(selected!=null){
-                        final ProgressDialog progressDialog = new ProgressDialog(FragmentProfileToko.this.getContext());
-                        progressDialog.setTitle("Ganti profile...");
-                        progressDialog.show();
-                        FirebaseStorage.getInstance().getReference().child("ProfilePicture/"+ FirebaseAuth.getInstance().getCurrentUser().getEmail()).putFile(selected).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(FragmentProfileToko.this.getContext(), "Berhasil ganti profile", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                                double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                                progressDialog.setMessage("Upload profile "+(int)progress+"%");
-                                if (progress==100){
-                                    progressDialog.dismiss();
-                                }
-                            }
-                        });
-                    }
-                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassToko");
-                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FragmentProfileToko.this.getContext());
+
+                    builder.setMessage("Apakah anda yakin untuk mengganti profile toko anda ?");
+
+                    builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Boolean cek = true;
-                            for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                                    ClassToko updatetoko = new ClassToko();
-                                    updatetoko.setDaerahasal(daerah.getSelectedItem().toString());
-                                    updatetoko.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
-                                    updatetoko.setAktif(ds.child("aktif").getValue().toString());
-                                    updatetoko.setEmail(ds.child("email").getValue().toString());
-                                    updatetoko.setNama(nama.getText().toString());
-                                    updatetoko.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
-                                    updatetoko.setPassword(ds.child("password").getValue().toString());
-                                    databaseReference.child(ds.getKey()).setValue(updatetoko).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(FragmentProfileToko.this.getContext(), "berhasil update profile", Toast.LENGTH_SHORT).show();
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(selected!=null){
+                                final ProgressDialog progressDialog = new ProgressDialog(FragmentProfileToko.this.getContext());
+                                progressDialog.setTitle("Ganti profile...");
+                                progressDialog.show();
+                                FirebaseStorage.getInstance().getReference().child("ProfilePicture/"+ FirebaseAuth.getInstance().getCurrentUser().getEmail()).putFile(selected).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Toast.makeText(FragmentProfileToko.this.getContext(), "Berhasil ganti profile", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                                        double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
+                                        progressDialog.setMessage("Upload profile "+(int)progress+"%");
+                                        if (progress==100){
+                                            progressDialog.dismiss();
                                         }
-                                    });
-                                }
+                                    }
+                                });
                             }
-                        }
+                            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassToko");
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    Boolean cek = true;
+                                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                        if(ds.child("email").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                            ClassToko updatetoko = new ClassToko();
+                                            updatetoko.setDaerahasal(daerah.getSelectedItem().toString());
+                                            updatetoko.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
+                                            updatetoko.setAktif(ds.child("aktif").getValue().toString());
+                                            updatetoko.setEmail(ds.child("email").getValue().toString());
+                                            updatetoko.setNama(nama.getText().toString());
+                                            updatetoko.setFirebaseUID(ds.child("firebaseUID").getValue().toString());
+                                            updatetoko.setPassword(ds.child("password").getValue().toString());
+                                            databaseReference.child(ds.getKey()).setValue(updatetoko).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Toast.makeText(FragmentProfileToko.this.getContext(), "berhasil update profile", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                }
+                            });
                         }
                     });
+                    builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             }
         });

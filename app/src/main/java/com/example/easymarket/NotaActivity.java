@@ -1,5 +1,7 @@
 package com.example.easymarket;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -352,43 +354,60 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
             });
         }
         else if(cekliat==2){
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassNota");
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds:dataSnapshot.getChildren()){
-                        if(listClassNota.get(indeks).getIdnota().equals(ds.child("idnota").getValue().toString())){
-                            ClassNota updatenota = new ClassNota();
-                            updatenota.setIdnota(ds.child("idnota").getValue().toString());
-                            updatenota.setNamatoko(ds.child("namatoko").getValue().toString());
-                            updatenota.setIdbarang(ds.child("idbarang").getValue().toString());
-                            updatenota.setPosisi(9);
-                            updatenota.setNamauser(ds.child("namauser").getValue().toString());
-                            updatenota.setAlamat(ds.child("alamat").getValue().toString());
-                            updatenota.setPembayaran(ds.child("pembayaran").getValue().toString());
-                            updatenota.setJenispengiriman(ds.child("jenispengiriman").getValue().toString());
-                            updatenota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
-                            updatenota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
-                            updatenota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
-                            updatenota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+            AlertDialog.Builder builder = new AlertDialog.Builder(NotaActivity.this);
 
-                            databaseReference.child(ds.getKey()).setValue(updatenota).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(NotaActivity.this, "Transaksi ini telah anda minta untuk refund, tunggu konfirmasi selanjutnya dari admin", Toast.LENGTH_SHORT).show();
+            builder.setMessage("Apakah anda yakin untuk melakukan refund untuk transaksi ini  ?");
+
+            builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(listClassNota.get(indeks).getIdnota().equals(ds.child("idnota").getValue().toString())){
+                                    ClassNota updatenota = new ClassNota();
+                                    updatenota.setIdnota(ds.child("idnota").getValue().toString());
+                                    updatenota.setNamatoko(ds.child("namatoko").getValue().toString());
+                                    updatenota.setIdbarang(ds.child("idbarang").getValue().toString());
+                                    updatenota.setPosisi(9);
+                                    updatenota.setNamauser(ds.child("namauser").getValue().toString());
+                                    updatenota.setAlamat(ds.child("alamat").getValue().toString());
+                                    updatenota.setPembayaran(ds.child("pembayaran").getValue().toString());
+                                    updatenota.setJenispengiriman(ds.child("jenispengiriman").getValue().toString());
+                                    updatenota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
+                                    updatenota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
+                                    updatenota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
+                                    updatenota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+
+                                    databaseReference.child(ds.getKey()).setValue(updatenota).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(NotaActivity.this, "Transaksi ini telah anda minta untuk refund, tunggu konfirmasi selanjutnya dari admin", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
-                            });
+                            }
+                            Intent i = new Intent(NotaActivity.this,HistoryActivity.class);
+                            startActivity(i);
                         }
-                    }
-                    Intent i = new Intent(NotaActivity.this,HistoryActivity.class);
-                    startActivity(i);
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                        }
+                    });
                 }
             });
+            builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
         else{
             Intent i = new Intent(NotaActivity.this,ActivityPembayaran.class);
@@ -403,49 +422,66 @@ public class NotaActivity extends AppCompatActivity implements NotaProdukFragmen
             startActivity(i);
         }
         else{
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassNota");
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot ds:dataSnapshot.getChildren()){
-                        if(listClassNota.get(indeks).getIdnota().equals(ds.child("idnota").getValue().toString())){
-                            ClassNota updatenota = new ClassNota();
-                            updatenota.setIdnota(ds.child("idnota").getValue().toString());
-                            updatenota.setNamatoko(ds.child("namatoko").getValue().toString());
-                            updatenota.setIdbarang(ds.child("idbarang").getValue().toString());
-                            updatenota.setPosisi(4);
-                            updatenota.setNamauser(ds.child("namauser").getValue().toString());
-                            updatenota.setAlamat(ds.child("alamat").getValue().toString());
-                            updatenota.setPembayaran(ds.child("pembayaran").getValue().toString());
-                            updatenota.setJenispengiriman(ds.child("jenispengiriman").getValue().toString());
-                            updatenota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
-                            updatenota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
-                            updatenota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
-                            updatenota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+            AlertDialog.Builder builder = new AlertDialog.Builder(NotaActivity.this);
 
-                            databaseReference.child(ds.getKey()).setValue(updatenota).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(NotaActivity.this, "Transaksi ini telah anda batalkan", Toast.LENGTH_SHORT).show();
+            builder.setMessage("Apakah anda yakin untuk membatalkan transaksi ini  ?");
+
+            builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassNota");
+                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(listClassNota.get(indeks).getIdnota().equals(ds.child("idnota").getValue().toString())){
+                                    ClassNota updatenota = new ClassNota();
+                                    updatenota.setIdnota(ds.child("idnota").getValue().toString());
+                                    updatenota.setNamatoko(ds.child("namatoko").getValue().toString());
+                                    updatenota.setIdbarang(ds.child("idbarang").getValue().toString());
+                                    updatenota.setPosisi(4);
+                                    updatenota.setNamauser(ds.child("namauser").getValue().toString());
+                                    updatenota.setAlamat(ds.child("alamat").getValue().toString());
+                                    updatenota.setPembayaran(ds.child("pembayaran").getValue().toString());
+                                    updatenota.setJenispengiriman(ds.child("jenispengiriman").getValue().toString());
+                                    updatenota.setHargabarang(Integer.parseInt(ds.child("hargabarang").getValue().toString()));
+                                    updatenota.setJumlahbarang(Integer.parseInt(ds.child("jumlahbarang").getValue().toString()));
+                                    updatenota.setHargapengiriman(Integer.parseInt(ds.child("hargapengiriman").getValue().toString()));
+                                    updatenota.setTotal(Integer.parseInt(ds.child("total").getValue().toString()));
+
+                                    databaseReference.child(ds.getKey()).setValue(updatenota).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(NotaActivity.this, "Transaksi ini telah anda batalkan", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
-                            });
+                            }
+                            if(cekliat==5){
+                                Intent i = new Intent(NotaActivity.this,HomeToko.class);
+                                startActivity(i);
+                            }
+                            else{
+                                Intent i = new Intent(NotaActivity.this,HistoryActivity.class);
+                                startActivity(i);
+                            }
                         }
-                    }
-                    if(cekliat==5){
-                        Intent i = new Intent(NotaActivity.this,HomeToko.class);
-                        startActivity(i);
-                    }
-                    else{
-                        Intent i = new Intent(NotaActivity.this,HistoryActivity.class);
-                        startActivity(i);
-                    }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                        }
+                    });
                 }
             });
+            builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
 }

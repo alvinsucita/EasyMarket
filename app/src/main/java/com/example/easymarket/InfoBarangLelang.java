@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -189,35 +191,52 @@ public class InfoBarangLelang extends AppCompatActivity {
         hargayangdimasukkan=Integer.parseInt(hargabid.getText().toString());
         if(hargayangdimasukkan>hargaminim){
             if(hargayangdimasukkan>hargatertinggi){
-                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(InfoBarangLelang.this);
+
+                builder.setMessage("Apakah anda yakin untuk melakukan bid untuk barang ini  ?");
+
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean cek = true;
-                        for (DataSnapshot ds:dataSnapshot.getChildren()){
-                            if(ds.child("idbarang").getValue().toString().equals(listClassBarang.get(indeks).idbarang)){
-                                ClassLelang updatelelang = new ClassLelang();
-                                updatelelang.setIdbarang(ds.child("idbarang").getValue().toString());
-                                updatelelang.setHargaawal(Integer.parseInt(ds.child("hargaawal").getValue().toString()));
-                                updatelelang.setHargatertinggi(hargayangdimasukkan);
-                                updatelelang.setHarganormal(Integer.parseInt(ds.child("harganormal").getValue().toString()));
-                                updatelelang.setNamabidder(yangbid);
-                                databaseReference.child(ds.getKey()).setValue(updatelelang).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Toast.makeText(InfoBarangLelang.this, "Bid anda berhasil dimasukkan, tunggu konfirmasi selanjutnya", Toast.LENGTH_SHORT).show();
+                    public void onClick(DialogInterface dialog, int which) {
+                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Boolean cek = true;
+                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                    if(ds.child("idbarang").getValue().toString().equals(listClassBarang.get(indeks).idbarang)){
+                                        ClassLelang updatelelang = new ClassLelang();
+                                        updatelelang.setIdbarang(ds.child("idbarang").getValue().toString());
+                                        updatelelang.setHargaawal(Integer.parseInt(ds.child("hargaawal").getValue().toString()));
+                                        updatelelang.setHargatertinggi(hargayangdimasukkan);
+                                        updatelelang.setHarganormal(Integer.parseInt(ds.child("harganormal").getValue().toString()));
+                                        updatelelang.setNamabidder(yangbid);
+                                        databaseReference.child(ds.getKey()).setValue(updatelelang).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(InfoBarangLelang.this, "Bid anda berhasil dimasukkan, tunggu konfirmasi selanjutnya", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                     }
-                                });
+                                }
+                                hargabid.setText("");
                             }
-                        }
-                        hargabid.setText("");
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                            }
+                        });
                     }
                 });
+                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
             else if(hargayangdimasukkan<hargatertinggi){
                 Toast.makeText(this, "Bid anda berhasil dimasukkan, tunggu konfirmasi selanjutnya", Toast.LENGTH_SHORT).show();
