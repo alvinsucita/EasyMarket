@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.easymarket">
 
     <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
@@ -12,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ManageVerifToko"></activity>
+        <activity android:name=".ManageVerifToko" />
         <activity android:name=".MasterToko" />
         <activity android:name=".ActivityPembayaran" />
         <activity android:name=".PaymentDetails" />
@@ -52,7 +53,6 @@
         <activity android:name=".RefundActivity" />
         <activity android:name=".Register" />
         <activity android:name=".WishList" />
-
         <service
             android:name=".Notifications.MyFirebaseIdService"
             android:enabled="true"
@@ -68,7 +68,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
