@@ -23,27 +23,14 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/cabin"
         android:text="Nama"
         android:textColor="@android:color/black"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvIsiChatToko"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="15dp"
-        android:fontFamily="@font/cabin"
-        android:text="Isi Chat"
-        app:layout_constraintBottom_toTopOf="@+id/ivGaris20"
-        app:layout_constraintEnd_toEndOf="@+id/tvNamaChatToko"
-        app:layout_constraintStart_toStartOf="@+id/tvNamaChatToko"
-        app:layout_constraintTop_toBottomOf="@+id/tvNamaChatToko" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

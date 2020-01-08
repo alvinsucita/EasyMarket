@@ -202,7 +202,7 @@ public class InfoBarang extends AppCompatActivity {
         if(!FirebaseAuth.getInstance().getCurrentUser().getEmail().equals("guest@guest.com")){
             emailtoko=listClassBarang.get(indeks).toko;
             Intent i = new Intent(InfoBarang.this,ChatRoom.class);
-            i.putExtra("emailtoko",emailtoko);
+            i.putExtra("user",emailtoko);
             startActivity(i);
         }
         else{

@@ -37,8 +37,9 @@ public class ChatRoom extends AppCompatActivity {
     Button send;
     EditText pesan;
     RecyclerView rvChat;
-    String emailtoko;
+    String emailtoko,emailuser;
     ArrayList<ClassToko> listClassToko = new ArrayList<>();
+    ArrayList<ClassUser> listClassUser = new ArrayList<>();
     ArrayList<ClassChat> listClassChat = new ArrayList<>();
     AdapterChat adapterChat;
 
@@ -59,61 +60,108 @@ public class ChatRoom extends AppCompatActivity {
         drawable.setColor(Color.WHITE);
         pesan.setBackground(drawable);
 
-
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         Intent i = getIntent();
-        emailtoko=i.getStringExtra("emailtoko");
+        if(i.hasExtra("user")){
+            emailtoko=i.getStringExtra("user");
 
-        FirebaseDatabase.getInstance().getReference().child("ClassChat").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(ds.child("yangdikirim").getValue().toString().equals(emailtoko) && ds.child("yangkirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                        ClassChat chat =new ClassChat();
-                        chat.setIsi(ds.child("isi").getValue().toString());
-                        chat.setWaktu(ds.child("waktu").getValue().toString());
-                        chat.setYangdikirim(ds.child("yangdikirim").getValue().toString());
-                        chat.setYangkirim(ds.child("yangkirim").getValue().toString());
-                        listClassChat.add(chat);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            FirebaseDatabase.getInstance().getReference().child("ClassChat").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                        if(ds.child("yangdikirim").getValue().toString().equals(emailtoko) && ds.child("yangkirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())||ds.child("yangkirim").getValue().toString().equals(emailtoko) && ds.child("yangdikirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                            ClassChat chat =new ClassChat();
+                            chat.setIsi(ds.child("isi").getValue().toString());
+                            chat.setWaktu(ds.child("waktu").getValue().toString());
+                            chat.setYangdikirim(ds.child("yangdikirim").getValue().toString());
+                            chat.setYangkirim(ds.child("yangkirim").getValue().toString());
+                            listClassChat.add(chat);
+                        }
                     }
+                    rvChat.setLayoutManager(new LinearLayoutManager(ChatRoom.this));
+                    adapterChat=new AdapterChat(listClassChat);
+                    rvChat.setAdapter(adapterChat);
                 }
-                rvChat.setLayoutManager(new LinearLayoutManager(ChatRoom.this));
-                adapterChat=new AdapterChat(listClassChat);
-                rvChat.setAdapter(adapterChat);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
-        FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean cek = true;
-                for (DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(ds.child("email").getValue().toString().equals(emailtoko)){
-                        ClassToko semua_Class_Toko =new ClassToko();
-                        semua_Class_Toko.setDaerahasal(ds.child("daerahasal").getValue().toString());
-                        semua_Class_Toko.setNama(ds.child("nama").getValue().toString());
-                        semua_Class_Toko.setEmail(ds.child("email").getValue().toString());
-                        semua_Class_Toko.setAktif(ds.child("aktif").getValue().toString());
-                        semua_Class_Toko.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
-                        listClassToko.add(semua_Class_Toko);
+            FirebaseDatabase.getInstance().getReference().child("ClassToko").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                        if(ds.child("email").getValue().toString().equals(emailtoko)){
+                            ClassToko semua_Class_Toko =new ClassToko();
+                            semua_Class_Toko.setDaerahasal(ds.child("daerahasal").getValue().toString());
+                            semua_Class_Toko.setNama(ds.child("nama").getValue().toString());
+                            semua_Class_Toko.setEmail(ds.child("email").getValue().toString());
+                            semua_Class_Toko.setAktif(ds.child("aktif").getValue().toString());
+                            semua_Class_Toko.setRating(Integer.parseInt(ds.child("rating").getValue().toString()));
+                            listClassToko.add(semua_Class_Toko);
+                        }
                     }
+                    nama.setText(listClassToko.get(0).nama);
                 }
-                nama.setText(listClassToko.get(0).nama);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
+        else if(i.hasExtra("toko")){
+            emailuser=i.getStringExtra("toko");
+            FirebaseDatabase.getInstance().getReference().child("ClassChat").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                        if(ds.child("yangdikirim").getValue().toString().equals(emailuser) && ds.child("yangkirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())||ds.child("yangkirim").getValue().toString().equals(emailuser) && ds.child("yangdikirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                            ClassChat chat =new ClassChat();
+                            chat.setIsi(ds.child("isi").getValue().toString());
+                            chat.setWaktu(ds.child("waktu").getValue().toString());
+                            chat.setYangdikirim(ds.child("yangdikirim").getValue().toString());
+                            chat.setYangkirim(ds.child("yangkirim").getValue().toString());
+                            listClassChat.add(chat);
+                        }
+                    }
+                    rvChat.setLayoutManager(new LinearLayoutManager(ChatRoom.this));
+                    adapterChat=new AdapterChat(listClassChat);
+                    rvChat.setAdapter(adapterChat);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            FirebaseDatabase.getInstance().getReference().child("ClassUser").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Boolean cek = true;
+                    for (DataSnapshot ds:dataSnapshot.getChildren()){
+                        if(ds.child("email").getValue().toString().equals(emailuser)){
+                            ClassUser semua_Class_User =new ClassUser();
+                            semua_Class_User.setNama(ds.child("nama").getValue().toString());
+                            semua_Class_User.setEmail(ds.child("email").getValue().toString());
+                            listClassUser.add(semua_Class_User);
+                        }
+                    }
+                    nama.setText(listClassUser.get(0).nama);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,37 +171,71 @@ public class ChatRoom extends AppCompatActivity {
                 Calendar now = Calendar.getInstance();
                 String waktu =now.get(Calendar.DAY_OF_MONTH)+"/01/"+now.get(Calendar.YEAR)+" - "+time.format(a);
 
-                ClassChat chat = new ClassChat(pesan.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),emailtoko,waktu);
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassChat");
-                final String key=databaseReference.push().getKey();
-                databaseReference.child(key).setValue(chat);
+                Intent i = getIntent();
+                if(i.hasExtra("user")){
+                    ClassChat chat = new ClassChat(pesan.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),emailtoko,waktu);
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassChat");
+                    final String key=databaseReference.push().getKey();
+                    databaseReference.child(key).setValue(chat);
+
+                    listClassChat.clear();
+                    FirebaseDatabase.getInstance().getReference().child("ClassChat").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(ds.child("yangdikirim").getValue().toString().equals(emailtoko) && ds.child("yangkirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())||ds.child("yangkirim").getValue().toString().equals(emailtoko) && ds.child("yangdikirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                    ClassChat chat =new ClassChat();
+                                    chat.setIsi(ds.child("isi").getValue().toString());
+                                    chat.setWaktu(ds.child("waktu").getValue().toString());
+                                    chat.setYangdikirim(ds.child("yangdikirim").getValue().toString());
+                                    chat.setYangkirim(ds.child("yangkirim").getValue().toString());
+                                    listClassChat.add(chat);
+                                }
+                            }
+                            rvChat.setLayoutManager(new LinearLayoutManager(ChatRoom.this));
+                            adapterChat=new AdapterChat(listClassChat);
+                            rvChat.setAdapter(adapterChat);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else if(i.hasExtra("toko")){
+                    ClassChat chat = new ClassChat(pesan.getText().toString(),FirebaseAuth.getInstance().getCurrentUser().getEmail(),emailuser,waktu);
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassChat");
+                    final String key=databaseReference.push().getKey();
+                    databaseReference.child(key).setValue(chat);
+
+                    listClassChat.clear();
+                    FirebaseDatabase.getInstance().getReference().child("ClassChat").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                if(ds.child("yangdikirim").getValue().toString().equals(emailuser) && ds.child("yangkirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())||ds.child("yangkirim").getValue().toString().equals(emailuser) && ds.child("yangdikirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                    ClassChat chat =new ClassChat();
+                                    chat.setIsi(ds.child("isi").getValue().toString());
+                                    chat.setWaktu(ds.child("waktu").getValue().toString());
+                                    chat.setYangdikirim(ds.child("yangdikirim").getValue().toString());
+                                    chat.setYangkirim(ds.child("yangkirim").getValue().toString());
+                                    listClassChat.add(chat);
+                                }
+                            }
+                            rvChat.setLayoutManager(new LinearLayoutManager(ChatRoom.this));
+                            adapterChat=new AdapterChat(listClassChat);
+                            rvChat.setAdapter(adapterChat);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
 
                 pesan.setText("");
-
-                listClassChat.clear();
-                FirebaseDatabase.getInstance().getReference().child("ClassChat").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot ds:dataSnapshot.getChildren()){
-                            if(ds.child("yangdikirim").getValue().toString().equals(emailtoko) && ds.child("yangkirim").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
-                                ClassChat chat =new ClassChat();
-                                chat.setIsi(ds.child("isi").getValue().toString());
-                                chat.setWaktu(ds.child("waktu").getValue().toString());
-                                chat.setYangdikirim(ds.child("yangdikirim").getValue().toString());
-                                chat.setYangkirim(ds.child("yangkirim").getValue().toString());
-                                listClassChat.add(chat);
-                            }
-                        }
-                        rvChat.setLayoutManager(new LinearLayoutManager(ChatRoom.this));
-                        adapterChat=new AdapterChat(listClassChat);
-                        rvChat.setAdapter(adapterChat);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
         });
     }

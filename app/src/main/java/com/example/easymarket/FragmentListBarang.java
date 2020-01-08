@@ -156,7 +156,6 @@ public class FragmentListBarang extends Fragment {
                 for (int i = 0; i < filterBarang.size(); i++) {
                     listspinner.add(filterBarang.get(i).namabarang);
                 }
-
                 if(listspinner.size()!=0){
                     ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,listspinner);
                     dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

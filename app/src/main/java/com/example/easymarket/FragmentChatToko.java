@@ -1,6 +1,7 @@
 package com.example.easymarket;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,8 +46,9 @@ public class FragmentChatToko extends Fragment {
 
     RecyclerView rv;
     ArrayList<ClassChat> listClassChat = new ArrayList<>();
-    ArrayList<ClassChat> listClassChatFilter = new ArrayList<>();
-    AdapterChat adapterChat;
+    AdapterChatToko adapterChatToko;
+    ArrayList<String> namaOrang = new ArrayList<>();
+    ArrayList<String> namaOrangFilter = new ArrayList<>();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -75,10 +78,30 @@ public class FragmentChatToko extends Fragment {
                         listClassChat.add(chat);
                     }
                 }
-                listClassChatFilter.add(listClassChat.get(listClassChat.size()-1));
+
+                for (int i = 0; i < listClassChat.size(); i++) {
+                    if(namaOrang.size()==0){
+                        namaOrang.add(listClassChat.get(i).yangkirim);
+                    }
+                    else{
+                        for (int j = 0; j < namaOrang.size(); j++) {
+                            if(!listClassChat.get(i).yangkirim.equals(namaOrang.get(j))){
+                                namaOrang.add(listClassChat.get(i).yangkirim);
+                            }
+                        }
+                    }
+                }
+
                 rv.setLayoutManager(new LinearLayoutManager(FragmentChatToko.this.getContext()));
-                adapterChat=new AdapterChat(listClassChatFilter);
-                rv.setAdapter(adapterChat);
+                adapterChatToko=new AdapterChatToko(namaOrang, new RVClickListener() {
+                    @Override
+                    public void recyclerViewListBarangClick(View v, int posisi) {
+                        Intent i = new Intent(FragmentChatToko.this.getContext(),ChatRoom.class);
+                        i.putExtra("toko",namaOrang.get(posisi));
+                        startActivity(i);
+                    }
+                });
+                rv.setAdapter(adapterChatToko);
             }
 
             @Override

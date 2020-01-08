@@ -16,9 +16,15 @@ import java.util.ArrayList;
 
 public class AdapterChat extends RecyclerView.Adapter<AdapterChat.listViewHolder> {
     ArrayList<ClassChat> listClassChat;
+    private static RVClickListener mylistener;
 
     public AdapterChat( ArrayList<ClassChat> listClassChat){
         this.listClassChat = listClassChat;
+    }
+
+    public AdapterChat( ArrayList<ClassChat> listClassChat,RVClickListener rvcl){
+        this.listClassChat = listClassChat;
+        mylistener=rvcl;
     }
     @NonNull
     @Override
@@ -30,12 +36,14 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.listViewHolder
     @Override
     public void onBindViewHolder(@NonNull listViewHolder holder, int position) {
         if(FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(listClassChat.get(position).yangkirim)){
-            holder.nama.setText("Anda"+" "+listClassChat.get(position).waktu);;
+            holder.nama.setText("Anda");
+            holder.tanggal.setText(listClassChat.get(position).waktu);
             holder.isi.setText(listClassChat.get(position).isi);
             holder.isi.setTextAlignment(holder.isi.TEXT_ALIGNMENT_VIEW_END);
         }
         else{
-            holder.nama.setText(listClassChat.get(position).yangkirim+" "+listClassChat.get(position).waktu);
+            holder.nama.setText(listClassChat.get(position).yangkirim);
+            holder.tanggal.setText(listClassChat.get(position).waktu);
             holder.isi.setText(listClassChat.get(position).isi);
             holder.isi.setTextAlignment(holder.isi.TEXT_ALIGNMENT_VIEW_START);
         }
@@ -47,11 +55,12 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.listViewHolder
     }
 
     public class listViewHolder extends RecyclerView.ViewHolder {
-        TextView nama,isi;
+        TextView nama,isi,tanggal;
         public listViewHolder(@NonNull View itemView) {
             super(itemView);
             nama=itemView.findViewById(R.id.tvnamauser);
             isi=itemView.findViewById(R.id.tvchat);
+            tanggal=itemView.findViewById(R.id.tvtanggalchat);
 
             GradientDrawable drawable = new GradientDrawable();
             drawable.setShape(GradientDrawable.RECTANGLE);
@@ -59,6 +68,12 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.listViewHolder
             drawable.setStroke(8, Color.LTGRAY);
             drawable.setColor(Color.WHITE);
             isi.setBackground(drawable);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mylistener.recyclerViewListBarangClick(v, AdapterChat.listViewHolder.this.getLayoutPosition());
+                }
+            });
         }
     }
 }
