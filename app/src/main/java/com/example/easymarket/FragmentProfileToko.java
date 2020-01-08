@@ -67,6 +67,7 @@ public class FragmentProfileToko extends Fragment {
     Spinner daerah;
     Button request,simpan;
     ClassToko tokologin;
+    int totalRating;
     Uri selected;
     public ArrayList<ClassBarang> listClassBarang= new ArrayList<>();
     ArrayList<ClassRating> listClassRating = new ArrayList<>();
@@ -144,7 +145,7 @@ public class FragmentProfileToko extends Fragment {
                     jumlahRating=jumlahRating+listClassRating.get(i).rating;
                 }
                 if(listClassRating.size()!=0){
-                    int totalRating = jumlahRating/listClassRating.size();
+                    totalRating = jumlahRating/listClassRating.size();
                     rating.setText("Rating : "+totalRating+" / 5");
                 }
                 else{
@@ -304,7 +305,7 @@ public class FragmentProfileToko extends Fragment {
                     Toast.makeText(FragmentProfileToko.this.getContext(), "Request anda belum dikonfirmasi oleh admin", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    if(tokologin.getRating()<4 || listClassBarang.size()<5){
+                    if(totalRating<4 || listClassBarang.size()<5){
                         Toast.makeText(FragmentProfileToko.this.getContext(), "Toko anda harus mempunyai rating minimal 4 dan mempunyai barang minimal 5", Toast.LENGTH_SHORT).show();
                     }
                     else{
