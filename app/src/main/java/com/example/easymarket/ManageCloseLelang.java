@@ -54,7 +54,6 @@ public class ManageCloseLelang extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference().child("ClassBarang").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean cek = true;
                         for (DataSnapshot ds:dataSnapshot.getChildren()){
                             ClassBarang semua_Class_barang =new ClassBarang();
                             semua_Class_barang.setIdbarang(ds.child("idbarang").getValue().toString());

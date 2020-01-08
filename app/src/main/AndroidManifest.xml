@@ -49,7 +49,6 @@
         <activity android:name=".InfoComment" />
         <activity android:name=".Login" />
         <activity android:name=".PreviewActivity" />
-        <activity android:name=".PopupEvent" />
         <activity android:name=".RefundActivity" />
         <activity android:name=".Register" />
         <activity android:name=".WishList" />
