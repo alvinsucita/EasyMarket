@@ -6,53 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".InputEvent">
 
-    <EditText
-        android:id="@+id/etaddeventname"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:hint="Nama Event"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventname" />
-
     <TextView
         android:id="@+id/tvshowaddeventname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="19dp"
         android:text="Nama Event :"
         android:textColor="@android:color/black"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/etaddeventname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etaddeventdesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:background="@android:color/white"
-        android:ems="10"
-        android:hint="Deskripsi"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventdesc" />
 
     <TextView
         android:id="@+id/tvshowaddeventdesc"
@@ -75,4 +39,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etaddeventname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Nama"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventname" />
+
+    <EditText
+        android:id="@+id/etaddeventdesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@android:color/white"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Deskripsi"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvshowaddeventdesc" />
 </androidx.constraintlayout.widget.ConstraintLayout>
