@@ -9,7 +9,7 @@
     <item
         android:id="@+id/itemMenunggu"
         android:icon="@drawable/baseline_hourglass_empty_black_18dp"
-        android:title="Menunggu" />
+        android:title="Sudah DIbayar" />
     <item
         android:id="@+id/itemTerkirim"
         android:icon="@drawable/baseline_send_black_18dp"
