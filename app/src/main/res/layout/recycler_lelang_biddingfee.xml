@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/biddingFee_imageView"
+        android:layout_width="244dp"
+        android:layout_height="221dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/biddingFee_textView_namaBrg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="nama barang"
+        app:layout_constraintStart_toStartOf="@+id/biddingFee_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/biddingFee_textView_sisaWaktu" />
+
+    <TextView
+        android:id="@+id/biddingFee_textView_hrgRetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="harga retail"
+        app:layout_constraintStart_toStartOf="@+id/biddingFee_textView_namaBrg"
+        app:layout_constraintTop_toBottomOf="@+id/biddingFee_textView_namaBrg" />
+
+    <TextView
+        android:id="@+id/biddingFee_textView_sisaWaktu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sisa waktu"
+        app:layout_constraintEnd_toEndOf="@+id/biddingFee_imageView"
+        app:layout_constraintStart_toStartOf="@+id/biddingFee_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/biddingFee_imageView" />
+
+    <TextView
+        android:id="@+id/biddingFee_textView_bidTertinggi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="bid tertinggi"
+        app:layout_constraintStart_toStartOf="@+id/biddingFee_textView_hrgRetail"
+        app:layout_constraintTop_toBottomOf="@+id/biddingFee_textView_hrgRetail" />
+
+    <Button
+        android:id="@+id/biddingFee_button_placeBid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:fontFamily="@font/cabin"
+        android:paddingLeft="10dp"
+        android:text="Place Bid"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/biddingFee_imageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/biddingFee_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/biddingFee_textView_owner" />
+
+    <TextView
+        android:id="@+id/biddingFee_textView_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="owner"
+        app:layout_constraintStart_toStartOf="@+id/biddingFee_textView_bidTertinggi"
+        app:layout_constraintTop_toBottomOf="@+id/biddingFee_textView_bidTertinggi" />
+</androidx.constraintlayout.widget.ConstraintLayout>

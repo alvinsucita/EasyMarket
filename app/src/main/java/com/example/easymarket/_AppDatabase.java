@@ -1,0 +1,9 @@
+package com.example.easymarket;
+
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
+
+@Database(entities = {_BarangBF.class},version=1, exportSchema = false)
+public abstract class _AppDatabase extends RoomDatabase {
+    public abstract BarangDAO barangDAO();
+}

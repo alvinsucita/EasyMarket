@@ -10,6 +10,10 @@
         android:icon="@drawable/baseline_gavel_black_18dp"
         android:title="Lelang" />
     <item
+        android:id="@+id/itemBiddingFee"
+        android:icon="@drawable/baseline_gavel_black_18dp"
+        android:title="Bidding Fee" />
+    <item
         android:id="@+id/itemEvent"
         android:icon="@drawable/baseline_event_black_18dp"
         android:title="Event" />

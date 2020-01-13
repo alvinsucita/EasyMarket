@@ -47,6 +47,9 @@ public class Home extends AppCompatActivity {
                 else if(menuItem.getItemId( )== R.id.itemLelang){
                     changeFragment(new FragmentLelang());
                 }
+                else if(menuItem.getItemId( )== R.id.itemBiddingFee){
+                    changeFragment(new FragmentBiddingFee());
+                }
                 else if(menuItem.getItemId( )== R.id.itemEvent){
                     changeFragment(new FragmentEvent());
                 }

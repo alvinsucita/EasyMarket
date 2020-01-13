@@ -94,6 +94,9 @@ public class HomeToko extends AppCompatActivity {
                         else if(menuItem.getItemId( )== R.id.navChat){
                             changeFragment(new FragmentChatToko(), listClassBarang);
                         }
+                        else if(menuItem.getItemId( )== R.id.menu_item_bidding){
+                            changeFragment(new FragmentTokoBF(), listClassBarang);
+                        }
                         return true;
                     }
                 });

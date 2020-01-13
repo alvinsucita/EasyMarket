@@ -17,6 +17,10 @@
         android:title="Tambah Barang" />
 
     <item
+        android:id="@+id/menu_item_bidding"
+        android:icon="@drawable/baseline_gavel_black_18dp"
+        android:title="Bid Barang" />
+    <item
         android:id="@+id/navChat"
         android:icon="@drawable/baseline_chat_black_18dp"
         android:title="Chat" />
