@@ -1,5 +1,7 @@
 package com.example.easymarket;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,7 @@ public class ManageCloseLelang extends AppCompatActivity {
     ArrayList<ClassLelang> listClassLelang = new ArrayList<>();
     ArrayList<ClassBarang> listClassBarang = new ArrayList<>();
     ArrayList<ClassBarang> listFilterClassBarang = new ArrayList<>();
+    ArrayList<ClassLelang> listFilterClassLelang = new ArrayList<>();
 
     ArrayList<String> test = new ArrayList<>();
     String[] user;
@@ -64,6 +67,7 @@ public class ManageCloseLelang extends AppCompatActivity {
                             for (int j = 0; j < listClassBarang.size(); j++) {
                                 if(listClassBarang.get(j).idbarang.equals(listClassLelang.get(i).idbarang)){
                                     listFilterClassBarang.add(listClassBarang.get(j));
+                                    listFilterClassLelang.add(listClassLelang.get(i));
                                 }
                             }
                         }
@@ -79,47 +83,64 @@ public class ManageCloseLelang extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 TextView tv = findViewById(R.id.layoutjudul);
                                 a = tv.getText().toString();
-                                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
-                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ManageCloseLelang.this);
+                                builder.setMessage("Apakah anda yakin untuk menutup lelang ini?" +
+                                        "\nBid Tertinggi: Rp " + listFilterClassLelang.get(0).getHargatertinggi() + ",-" +
+                                        "\nNama Bidder: Rp " + listFilterClassLelang.get(0).getNamabidder()
+                                );
+                                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot ds:dataSnapshot.getChildren()){
-                                            if(ds.child("idbarang").getValue().toString().equals(a)){
-                                                ds.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        Toast.makeText(ManageCloseLelang.this, "berhasil close", Toast.LENGTH_SHORT).show();
-                                                        final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
-                                                        db.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("ClassLelang");
+                                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                for (DataSnapshot ds:dataSnapshot.getChildren()){
+                                                    if(ds.child("idbarang").getValue().toString().equals(a)){
+                                                        ds.getRef().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
-                                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                for (DataSnapshot dss:dataSnapshot.getChildren()){
-                                                                    if(dss.child("idbarang").getValue().toString().equals(a)){
-                                                                        ClassRequestLelang updatelelang = new ClassRequestLelang();
-                                                                        if(dss.child("masuklelang").getValue().toString().equals("0")) {
-                                                                            updatelelang.setMasuklelang(100);
-                                                                            updatelelang.setIdbarang(dss.child("idbarang").getValue().toString());
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                Toast.makeText(ManageCloseLelang.this, "berhasil close", Toast.LENGTH_SHORT).show();
+                                                                final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("ClassRequestLelang");
+                                                                db.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                                        for (DataSnapshot dss:dataSnapshot.getChildren()){
+                                                                            if(dss.child("idbarang").getValue().toString().equals(a)){
+                                                                                ClassRequestLelang updatelelang = new ClassRequestLelang();
+                                                                                if(dss.child("masuklelang").getValue().toString().equals("0")) {
+                                                                                    updatelelang.setMasuklelang(100);
+                                                                                    updatelelang.setIdbarang(dss.child("idbarang").getValue().toString());
+                                                                                }
+                                                                            }
                                                                         }
                                                                     }
-                                                                }
-                                                            }
 
-                                                            @Override
-                                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                                    @Override
+                                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                                                    }
+                                                                });
                                                             }
                                                         });
                                                     }
-                                                });
+                                                }
                                             }
-                                        }
-                                    }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                            }
+                                        });
                                     }
                                 });
+                                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
                             }
                         });
                     }

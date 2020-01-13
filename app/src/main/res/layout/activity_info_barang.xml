@@ -156,7 +156,7 @@
         android:onClick="addwishlist"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Add to Wishlist"
+        android:text="Add to Cart"
         android:textColor="@android:color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
